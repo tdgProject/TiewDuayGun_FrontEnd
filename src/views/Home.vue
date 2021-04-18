@@ -19,15 +19,14 @@
     
   </div>
   </StyleBg>
-<Footer>
-</Footer>
+<foot>
+</foot>
 </template>
 
 <script>
 import StyleBg from '@/components/StyleBg.vue'
 import NavBar from '@/components/NavBar.vue'
 import Slide from '@/components/Slide.vue'
-import Footer from '@/components/Footer.vue'
 
 
 
@@ -38,7 +37,6 @@ export default {
     StyleBg,
     NavBar,
     Slide,
-    Footer
 
   }
 }
