@@ -4,9 +4,14 @@
     <div class="w-full h-full">
      <nav-bar>
      </nav-bar>
+     <div class="">
+
       <slide>
       </slide>
+
+     </div>
       
+
 
     </div>
     <div>
