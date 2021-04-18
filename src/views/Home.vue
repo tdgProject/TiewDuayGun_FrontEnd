@@ -6,6 +6,7 @@
      </nav-bar>
       <slide>
       </slide>
+      
 
     </div>
     <div>
