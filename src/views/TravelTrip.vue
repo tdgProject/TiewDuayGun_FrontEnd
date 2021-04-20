@@ -14,7 +14,7 @@
                 <label class="label" for="name">Enter your  NAME:</label>
                 <input
                   class="input"
-                  :class="{ 'bg-red-50': invalidNameInput }"
+                  :class="{ 'bg-red-50': ErrorName }"
                   id="name"
                   type="text"
                   v-model.trim="enteredName"
@@ -23,7 +23,7 @@
                 />
 
                 <p
-                  v-if="invalidNameInput"
+                  v-if="ErrorName"
                   class="text-red-500"
                 >Enter Your name</p>
               </card>
@@ -181,7 +181,7 @@ export default {
       editId: "",
       url: "http://localhost:5000/TravelList",
       enteredName: "",
-      invalidNameInput: false,
+      ErrorName: false,
       answer1: null,
       answer2: null,
       answer3: null,
@@ -193,8 +193,8 @@ export default {
   },
   methods: {
     submitForm() {
-      this.invalidNameInput = this.enteredName === "" ? true : false;
-        if ((!this.invalidNameInput)) {
+      this.ErrorName = this.enteredName === "" ? true : false;
+        if ((!this.ErrorName)) {
       {
         if (this.isEdit) {
           this.editTravel({
@@ -229,8 +229,8 @@ export default {
       this.answer6 = null;
     },
     validateName() {
-      this.invalidNameInput = this.enteredName === '' ? true : false
-      console.log(`name: ${this.invalidNameInput}`)
+      this.ErrorName = this.enteredName === '' ? true : false
+      console.log(`name: ${this.ErrorName}`)
     },
     showData(oldTravel) {
       this.isEdit = true
