@@ -1,12 +1,19 @@
 <template>
-<nav class="font-sans flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
-  <div class="mb-2 sm:mb-0">
-    <a href="/" class="text-2xl no-underline text-grey-darkest hover:text-blue-dark">Home</a>
-  </div>
-  <div>
-    <a href="/About" class="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">About</a>
-  </div>
-  
+<nav class="bg-white px-8 pt-2 shadow-md">
+     <div class="-mb-px flex justify-center">
+         <a class="no-underline text-teal-dark border-b-2 border-teal-dark uppercase tracking-wide font-bold text-xs py-3 mr-8" href="/">
+             Home
+         </a>
+         <a class="no-underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-xs py-3 mr-8" href="/Product">
+             Products
+         </a>
+         <a class="no-underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-xs py-3 mr-8" href="/About">
+              Shopping Cart
+         </a>
+         <a class="no-underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-xs py-3" href="#">
+             Abouts
+         </a>
+     </div>
 </nav>
 </template>
 
