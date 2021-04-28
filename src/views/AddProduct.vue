@@ -23,23 +23,22 @@
                 >**</p>
 
 
-                    <input
-                  class="input border p-2  w-1/2"
-                  :class="{ 'bg-red-50': ErrorType }"
-                  id="ProductType"
-                  type="text"
-                  v-model.trim="enteredType"
-                  @blur="validateType"
-                  placeholder="Your ProDuctType"
-                />
+   
+<select class="block appearance-none border p-2  w-1/2 bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Brand" >
+          <option>Uniqlo</option>
+          <option>H&M</option>
+        </select>
 
-                <p
-                  v-if="ErrorType"
-                  class="text-red-500"
-                >**</p>
+
+    
                 </div>
                 
-                <textarea name="" id="" cols="10" rows="3" placeholder="Tell us about desired property" class="border p-2 mt-3 w-full"></textarea>
+                <textarea name="description" id="ProductDescription" cols="10" rows="3" v-model.trim="enteredDescription"  @blur="validateDescription"  placeholder="Tell us about desired property" class="border p-2 mt-3 w-full"></textarea>
+               
+                <p
+                  v-if="ErrorDescription"
+                  class="text-red-500"
+                >**</p>
                 <p class="font-bold text-sm mt-3">Details</p>
             <div class="-mx-3 md:flex mb-2">
     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
@@ -66,33 +65,25 @@
         Size
       </label>
       <div class="relative">
-        <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
+
+
+          <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Size" >
           <option>Size S</option>
           <option>Size M</option>
           <option>Size L</option>
           <option>Size XL</option>
         </select>
+       
         
       </div>
     </div>
     <div class="md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
-        Product Id
+        Product Color
       </label>
-      <input
-                  class="input border p-2  w-1/2"
-                  :class="{ 'bg-red-50': ErrorId }"
-                  id="ProductId"
-                  type="text"
-                  v-model.trim="enteredId"
-                  @blur="validateId"
-                  placeholder="P1000"
-                />
-
-                <p
-                  v-if="ErrorId"
-                  class="text-red-500"
-                >Enter Your ProductId</p>
+    <input type="checkbox" name="options[]" value="White"/> White<br/>
+    <input type="checkbox" name="options[]" value="Black"/> Black<br/>
+    <input type="checkbox" name="options[]" value="Gray "/> Gray<br/>
       
     </div>
   </div>
@@ -117,46 +108,53 @@ export default {
       url: "http://localhost:3000/TravelList",
       enteredName: "",
       ErrorName: false,
-      enteredType: "",
-      ErrorType: false,
       enteredPrice: "",
       ErrorPrice: false,
       TravelList: [],
       ErrorId: false,
       enteredId: "",
+      Brand: null,
+      Size: null,
+      theDate: null,
     };
   },
   methods: {
     submitForm() {
       this.ErrorName = this.enteredName === "" ? true : false;
-      this.ErrorType = this.enteredType === "" ? true : false;
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
       this.ErrorId = this.enteredId === "" ? true : false;
-        if ((!this.ErrorName&&!this.ErrorType&&!this.ErrorPrice&&!this.ErrorId)) {
+        if ((!this.ErrorName&&!this.ErrorPrice&&!this.ErrorId)) {
       {
         if (this.isEdit) {
           this.editTravel({
             id: this.editId,
             ProductName: this.enteredName,
-            ProductType: this.enteredType,
             ProductPrice: this.enteredPrice,
             ProductId: this.enteredId,
+            Brand: this.Brand,
+            Size:  this.Size,
+            theDate: this.theDate
+            
           });
         } else {
           this.addNewTravel({
             ProductName: this.enteredName,
-            ProductType :this.enteredType,
             ProductPrice: this.enteredPrice,
             ProductId: this.enteredId,
+            Brand: this.Brand,
+            Size: this.Size,
+            theDate: this.theDate
 
           });
         }
       }
     }
       this.enteredName = "";
-      this.enteredType = "";
       this.enteredPrice = "";
       this.enteredId ="";
+      this.Brand = null;
+      this.Size = null;
+      this.theDate = null;
 
     },
     validateName() {
@@ -179,9 +177,11 @@ export default {
       this.isEdit = true
       this.editId = oldTravel.id
       this.enteredName = oldTravel.ProductName
-      this.enteredType = oldTravel.ProductType
       this.enteredPrice = oldTravel.ProductPrice
       this.enteredId = oldTravel.ProductId
+      this.Brand = oldTravel.Brand
+      this.Size = oldTravel.Size
+      this.theDate = oldTravel.theDate
     },
     async editTravel(editingTravel) {
       try {
@@ -192,9 +192,11 @@ export default {
           },
           body: JSON.stringify({
             ProductName: editingTravel.ProductName,
-            ProductType: editingTravel.ProductType,
             ProductPrice: editingTravel.ProductPrice,
-            ProductId: editingTravel.ProductId
+            ProductId: editingTravel.ProductId,
+            Brand: editingTravel.Brand,
+            Size: editingTravel.Size,
+            theDate: editingTravel.theDate
           })
         })
         const data = await res.json()
@@ -202,18 +204,22 @@ export default {
           Travel.id === editingTravel.id
             ? {
               ...Travel, name: data.name,  ProductName: data.ProductName,
-              ProductType: data.ProductType,
               ProductPrice: data.ProductPrice,
-              ProductId: data.ProductId        
+              ProductId: data.ProductId,
+              Brand: data.Brand,
+              Size: data.Size,
+              theDate: data.theDate        
 }
             : Travel
         )
         this.isEdit = false
         this.editId = ''
         this.enteredName = ''
-        this.enteredType = ''
         this.enteredPrice = ''
         this.enteredId =''
+        this.Brand = null
+        this.Size = null
+        this.theDate = null
 
       } catch (error) {
         console.log(`Could not edit! ${error}`)
@@ -250,9 +256,11 @@ export default {
           },
           body: JSON.stringify({
             ProductName: newTravel.ProductName,
-            ProductType: newTravel.ProductType,
             ProductPrice: newTravel.ProductPrice,
             ProductId: newTravel.ProductId,
+            Brand: newTravel.Brand,
+            Size: newTravel.Size,
+            theDate: newTravel.theDate
  
             
           })

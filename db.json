@@ -6,28 +6,13 @@
       "id": 1
     },
     {
-      "ProductName": "asdas",
-      "ProductType": "asd",
+      "ProductName": "dasdsad",
+      "ProductPrice": "asxsac",
+      "ProductId": "1150sac",
+      "Brand": "Uniqlo",
+      "Size": "Size M",
+      "theDate": "2021-03-29",
       "id": 2
-    },
-    {
-      "ProductName": "fdggfd",
-      "ProductType": "dfgfdfdgd",
-      "ProductPrice": "dfdgfdg",
-      "id": 3
-    },
-    {
-      "ProductName": "sdfsdf",
-      "ProductType": "sdsdfsdf",
-      "ProductPrice": "fdfsdf",
-      "id": 4
-    },
-    {
-      "ProductName": "adasdsa",
-      "ProductType": "sadasdsad",
-      "ProductPrice": "asdasd",
-      "ProductId": "asdsadsa",
-      "id": 5
     }
   ]
 }
