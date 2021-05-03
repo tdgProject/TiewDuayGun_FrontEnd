@@ -1,18 +1,3 @@
 {
-  "TravelList": [
-    {
-      "ProductName": "efwfe",
-      "ProductType": "wwefewf",
-      "id": 1
-    },
-    {
-      "ProductName": "dasdsad",
-      "ProductPrice": "asxsac",
-      "ProductId": "1150sac",
-      "Brand": "Uniqlo",
-      "Size": "Size M",
-      "theDate": "2021-03-29",
-      "id": 2
-    }
-  ]
+  "TravelList": []
 }
