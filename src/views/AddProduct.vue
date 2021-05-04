@@ -26,11 +26,17 @@
 
 
    
-<select class="block appearance-none border p-2  w-1/2 bg-grey-lighter border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Brand" >
+<select class="block appearance-none border p-2  w-1/2 bg-grey-lighter border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Brand" 
+:class="{ 'bg-red-50': ErrorBrand }"
+>
           <option id="b-1">Uniqlo</option>
           <option id="b-2">H&M</option>
         </select>
 
+<p
+                  v-if="ErrorBrand"
+                  class="text-red-500"
+                >**</p>
 
     
                 </div>
@@ -78,13 +84,18 @@
       <div class="relative">
 
 
-          <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Size" >
+          <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Size" 
+          :class="{ 'bg-red-50': ErrorSize }"
+          @blur="validateSize">
           <option>Size S</option>
           <option>Size M</option>
           <option>Size L</option>
           <option>Size XL</option>
         </select>
-       
+        <p
+                  v-if="ErrorSize"
+                  class="text-red-500"
+                >**</p>
         
       </div>
     </div>
@@ -109,11 +120,35 @@
       v-model="colors"
       value="gray"/>
     </div>
+    <p
+                  v-if="ErrorColor"
+                  class="text-red-500"
+                >**</p>
   </div>
       <input type="date" v-model="theDate" />
       
+
+<div class="form-group">
+          <label for="Imgfile">Select Image</label>
+          <input type="file" accept="image/*" @change="previewImage" class="form-control-file" id="Imgfile">
+    
+          <div class="border p-2 mt-3">
+            <p>Preview Here:</p>
+            <template v-if="preview">
+              <img :src="preview" class="img-fluid" />
+              <p class="mb-0">file name: {{ image.name }}</p>
+              <p class="mb-0">size: {{ image.size/1024 }}KB</p>
+            </template>
+          </div>
+        </div>
+        Reset input file <button @click="reset">Clear All</button>
+    
+
+      
                 <input type="submit" value="Submit" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold p-3">
                 
+                
+
                 
             </form>
 
@@ -126,7 +161,7 @@ export default {
   components: {
  
       },
-      
+      el: "#app",
        data() {
     return {
       isEdit: false,
@@ -143,15 +178,42 @@ export default {
       colors: [],
       ErrorDescription: false,
       enteredDescription: "",
+      preview: null,
+      image: null,
+      ErrorBrand: false,
+      ErrorSize: false,
+      ErrorColor: false,
+      Imgfile: '',
+
       
     };
   },
+  
   methods: {
+
+  previewImage: function(event) {
+      var input = event.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+        }
+        this.image=input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+        reset: function() {
+      this.image = null;
+      this.preview = null;
+    },
     submitForm() {
       this.ErrorName = this.enteredName === "" ? true : false;
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
-        if ((!this.ErrorName&&!this.ErrorPrice&&!this.ErrorDescription)) {
+      this.ErrorBrand = this.Brand === null ? true : false;
+      this.ErrorSize =this.Brand === null ? true : false ;
+      this.ErrorColor = this.colors === null ? true : false;
+        if ((!this.ErrorName&&!this.ErrorPrice&&!this.ErrorDescription&&!this.ErrorBrand&&!this.ErrorSize&&!this.ErrorColor)) {
       {
         if (this.isEdit) {
           this.editTravel({
@@ -163,6 +225,9 @@ export default {
             theDate: this.theDate,
             colors: this.colors,
             ProductDescription: this.enteredDescription,
+            preview: this.preview,
+            image: this.image
+            
             
           });
         } else {
@@ -174,6 +239,9 @@ export default {
             theDate: this.theDate,
             colors: this.colors,
             ProductDescription: this.enteredDescription,
+            preview: this.preview,
+            Imgfile: this.Imgfile,
+            image: this.preview
            
 
           });
@@ -187,6 +255,8 @@ export default {
       this.theDate = null;
       this.colors = null;
       this.enteredDescription = "";
+      this.preview = null;
+      this.image = null;
 
     },
     validateName() {
@@ -205,6 +275,10 @@ export default {
       this.ErrorDescription = this.enteredDescription === '' ? true : false
       console.log(`name: ${this.ErrorDescription}`)
     },
+       validateSize() {
+      this.ErrorSize = this.Size === null ? true : false
+      console.log(`name: ${this.ErrorSize}`)
+    },
     showData(oldTravel) {
       this.isEdit = true
       this.editId = oldTravel.id
@@ -215,6 +289,9 @@ export default {
       this.theDate = oldTravel.theDate
       this.colors = oldTravel.colors
       this.enteredDescription = oldTravel.enteredDescription
+      this.preview = oldTravel.preview
+      this.Imgfile = oldTravel.Imgfile
+      this.image = oldTravel.image
     },
     async editTravel(editingTravel) {
       try {
@@ -230,7 +307,11 @@ export default {
             Size: editingTravel.Size,
             theDate: editingTravel.theDate,
             colors : editingTravel.colors,
-            ProductDescription : editingTravel.ProductDescription
+            ProductDescription : editingTravel.ProductDescription,
+            preview : editingTravel.preview,
+            Imgfile : editingTravel.Imgfile,
+            image : editingTravel.image
+
           })
         })
         const data = await res.json()
@@ -243,7 +324,10 @@ export default {
               Size: data.Size,
               theDate: data.theDate,
               colors: data.colors,
-              ProductDescription: data.ProductDescription        
+              ProductDescription: data.ProductDescription ,
+              preview: data.preview,
+              Imgfile: data.Imgfile,
+              image: data.image,      
 }
             : Travel
         )
@@ -256,6 +340,9 @@ export default {
         this.theDate = null
         this.colors = null
         this.enteredDescription = ''
+        this.preview = ''
+        this.Imgfile = ''
+        this.image = null
 
       } catch (error) {
         console.log(`Could not edit! ${error}`)
@@ -298,6 +385,9 @@ export default {
             theDate: newTravel.theDate,
             colors: newTravel.colors,
             ProductDescription: newTravel.ProductDescription,
+            preview: newTravel.preview,
+            Imgfile: newTravel.Imgfile,
+            image: newTravel.image
             
             
  
@@ -318,7 +408,7 @@ export default {
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
     }
-}
+};
 
 
 
@@ -343,6 +433,7 @@ export default {
   
   
   <style>
+  
   .icon::after{
   content: '';
   display: block;
@@ -352,5 +443,6 @@ export default {
   border-left: 12px solid #3182ce;
   left: 100%;
   top: 0;
+  
 }
   </style>
