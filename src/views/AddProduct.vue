@@ -79,23 +79,12 @@
     </div>
     <div class="md:w-1/2 px-3">
       <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-        Size
+        Date
       </label>
       <div class="relative">
 
 
-          <select class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="Size" 
-          :class="{ 'bg-red-50': ErrorSize }"
-          @blur="validateSize">
-          <option>Size S</option>
-          <option>Size M</option>
-          <option>Size L</option>
-          <option>Size XL</option>
-        </select>
-        <p
-                  v-if="ErrorSize"
-                  class="text-red-500"
-                >**</p>
+ <input type="date" v-model="theDate" />
         
       </div>
     </div>
@@ -125,7 +114,7 @@
                   class="text-red-500"
                 >**</p>
   </div>
-      <input type="date" v-model="theDate" />
+     
       
 
 <div class="form-group">
@@ -166,14 +155,13 @@ export default {
     return {
       isEdit: false,
       editId: "",
-      url: "http://localhost:3000/TravelList",
+      url: "http://localhost",
       enteredName: "",
       ErrorName: false,
       enteredPrice: "",
       ErrorPrice: false,
       TravelList: [],
       Brand: null,
-      Size: null,
       theDate: null,
       colors: [],
       ErrorDescription: false,
@@ -211,7 +199,6 @@ export default {
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
       this.ErrorBrand = this.Brand === null ? true : false;
-      this.ErrorSize =this.Brand === null ? true : false ;
       this.ErrorColor = this.colors === null ? true : false;
         if ((!this.ErrorName&&!this.ErrorPrice&&!this.ErrorDescription&&!this.ErrorBrand&&!this.ErrorSize&&!this.ErrorColor)) {
       {
@@ -221,7 +208,6 @@ export default {
             ProductName: this.enteredName,
             ProductPrice: this.enteredPrice,
             Brand: this.Brand,
-            Size:  this.Size,
             theDate: this.theDate,
             colors: this.colors,
             ProductDescription: this.enteredDescription,
@@ -235,13 +221,12 @@ export default {
             ProductName: this.enteredName,
             ProductPrice: this.enteredPrice,
             Brand: this.Brand,
-            Size: this.Size,
             theDate: this.theDate,
             colors: this.colors,
             ProductDescription: this.enteredDescription,
             preview: this.preview,
-            Imgfile: this.Imgfile,
-            image: this.preview
+            
+
            
 
           });
@@ -251,7 +236,6 @@ export default {
       this.enteredName = "";
       this.enteredPrice = "";
       this.Brand = null;
-      this.Size = null;
       this.theDate = null;
       this.colors = null;
       this.enteredDescription = "";
@@ -275,23 +259,17 @@ export default {
       this.ErrorDescription = this.enteredDescription === '' ? true : false
       console.log(`name: ${this.ErrorDescription}`)
     },
-       validateSize() {
-      this.ErrorSize = this.Size === null ? true : false
-      console.log(`name: ${this.ErrorSize}`)
-    },
+
     showData(oldTravel) {
       this.isEdit = true
       this.editId = oldTravel.id
       this.enteredName = oldTravel.ProductName
       this.enteredPrice = oldTravel.ProductPrice
       this.Brand = oldTravel.Brand
-      this.Size = oldTravel.Size
       this.theDate = oldTravel.theDate
       this.colors = oldTravel.colors
       this.enteredDescription = oldTravel.enteredDescription
       this.preview = oldTravel.preview
-      this.Imgfile = oldTravel.Imgfile
-      this.image = oldTravel.image
     },
     async editTravel(editingTravel) {
       try {
@@ -304,13 +282,10 @@ export default {
             ProductName: editingTravel.ProductName,
             ProductPrice: editingTravel.ProductPrice,
             Brand: editingTravel.Brand,
-            Size: editingTravel.Size,
             theDate: editingTravel.theDate,
             colors : editingTravel.colors,
             ProductDescription : editingTravel.ProductDescription,
             preview : editingTravel.preview,
-            Imgfile : editingTravel.Imgfile,
-            image : editingTravel.image
 
           })
         })
@@ -321,13 +296,11 @@ export default {
               ...Travel, name: data.name,  ProductName: data.ProductName,
               ProductPrice: data.ProductPrice,
               Brand: data.Brand,
-              Size: data.Size,
               theDate: data.theDate,
               colors: data.colors,
               ProductDescription: data.ProductDescription ,
               preview: data.preview,
-              Imgfile: data.Imgfile,
-              image: data.image,      
+     
 }
             : Travel
         )
@@ -336,13 +309,11 @@ export default {
         this.enteredName = ''
         this.enteredPrice = ''
         this.Brand = null
-        this.Size = null
         this.theDate = null
         this.colors = null
         this.enteredDescription = ''
         this.preview = ''
-        this.Imgfile = ''
-        this.image = null
+
 
       } catch (error) {
         console.log(`Could not edit! ${error}`)
@@ -381,13 +352,11 @@ export default {
             ProductName: newTravel.ProductName,
             ProductPrice: newTravel.ProductPrice,
             Brand: newTravel.Brand,
-            Size: newTravel.Size,
             theDate: newTravel.theDate,
             colors: newTravel.colors,
             ProductDescription: newTravel.ProductDescription,
             preview: newTravel.preview,
-            Imgfile: newTravel.Imgfile,
-            image: newTravel.image
+
             
             
  

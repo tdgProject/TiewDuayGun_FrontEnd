@@ -2,19 +2,15 @@
   "TravelList": [
     {
       "ProductName": "MEN Sweat Shirt (Unisex)",
-      "ProductPrice": "790",
+      "ProductPrice": "105550",
       "Brand": "Uniqlo",
-      "Size": "Size M",
-      "theDate": "2021-05-15",
+      "theDate": "2021-04-27",
       "colors": [
         "White",
-        "gray",
-        "black"
+        "gray"
       ],
-      "ProductDescription": "New contoured, 3D design. Updated with a more natural fit for easier movement.",
+      "ProductDescription": "หดหกดกหออ",
       "preview": null,
-      "Imgfile": "",
-      "image": null,
       "id": 1
     }
   ]
