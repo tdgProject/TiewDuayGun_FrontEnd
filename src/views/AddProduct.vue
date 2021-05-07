@@ -21,7 +21,6 @@
         @blur="validateName"
         placeholder="Your productName"
       />
-
       <p v-if="ErrorName" class="text-red-500">**</p>
 
       <select
@@ -80,7 +79,9 @@
           Date
         </label>
         <div class="relative">
-          <input type="date" v-model="theDate" />
+          <input type="date" v-model="productDate" @blur="validateDate" />
+
+          <p v-if="ErrorDate" class="text-red-500">Enter Your Date</p>
         </div>
       </div>
 
@@ -94,45 +95,26 @@
         <input
           type="checkbox"
           class="ml-1 bg-white rounded-full w-6 h-6 focus-outline-black"
-          v-model="colors"
+          v-model="productColors"
           :value="Colorlist.Black"
         />
         <input
           type="checkbox"
           class="ml-1 bg-black rounded-full w-6 h-6 focus-outline-black"
-          v-model="colors"
+          v-model="productColors"
           :value="Colorlist.White"
         />
         <input
           type="checkbox"
           class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
-          v-model="colors"
+          v-model="productColors"
           :value="Colorlist.Gray"
         />
       </div>
       <p v-if="ErrorColor" class="text-red-500">**</p>
     </div>
 
-    <div class="form-group">
-      <label for="Imgfile">Select Image</label>
-      <input
-        type="file"
-        accept="image/*"
-        @change="previewImage"
-        class="form-control-file"
-        id="Imgfile"
-      />
-
-      <div class="border p-2 mt-3">
-        <p>Preview Here:</p>
-        <template v-if="preview">
-          <img :src="preview" class="img-fluid" />
-          <p class="mb-0">file name: {{ image.name }}</p>
-          <p class="mb-0">size: {{ image.size / 1024 }}KB</p>
-        </template>
-      </div>
-    </div>
-    Reset input file <button @click="reset">Clear All</button>
+    <input type="file" id="image" name="image" accept="image/*," />
 
     <input
       type="submit"
@@ -152,15 +134,15 @@ export default {
     return {
       isEdit: false,
       editId: "",
-      url: "http://localhost",
+      url: "http://localhost:8081",
       enteredName: "",
       ErrorName: false,
       enteredPrice: "",
       ErrorPrice: false,
       ProductList: [],
       brand: null,
-      theDate: null,
-      colors: [],
+      productDate: null,
+      productColors: [],
       ErrorDescription: false,
       enteredDescription: "",
       preview: null,
@@ -168,64 +150,56 @@ export default {
       Errorbrand: false,
       ErrorSize: false,
       ErrorColor: false,
-      Imgfile: "",
+      ErrorDate: false,
       Colorlist: {
         Black: {
-        colorId:1,
-        colorName:'Black'
+          color: {
+            colorId: 1,
+            colorName: "Black",
+          },
+        },
+        White: {
+          color: {
+            colorId: 2,
+            colorName: "White",
+          },
+        },
+        Gray: {
+          color: {
+            colorId: 3,
+            colorName: "Gray",
+          },
+        },
       },
-      White: {
-        colorId:2,
-        colorName:'White'
-      },
-      Gray: {
-        colorId:3,
-        colorName:'Gray'
-      }},
       BrandList: {
         UNIQLO: {
-          brandId:'B01',
-          brandName:'UNIQLO'
+          brandId: "B01",
+          brandName: "UNIQLO",
         },
         HM: {
-          brandId:'B02',
-          brandName:'H&M'
-        }
-      }
-    }
-    
-      
+          brandId: "B02",
+          brandName: "H&M",
+        },
+      },
+    };
   },
 
   methods: {
-    previewImage: function (event) {
-      var input = event.target;
-      if (input.files) {
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          this.preview = e.target.result;
-        };
-        this.image = input.files[0];
-        reader.readAsDataURL(input.files[0]);
-      }
-    },
-    reset: function () {
-      this.image = null;
-      this.preview = null;
-    },
     submitForm() {
       this.ErrorName = this.enteredName === "" ? true : false;
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
       this.Errorbrand = this.brand === null ? true : false;
-      this.ErrorColor = this.colors === null ? true : false;
+      this.ErrorColor = this.productColors === null ? true : false;
+      this.ErrorDate = this.productDate === null ? true : false;
       if (
         !this.ErrorName &&
         !this.ErrorPrice &&
         !this.ErrorDescription &&
         !this.Errorbrand &&
         !this.ErrorSize &&
-        !this.ErrorColor
+        !this.ErrorColor &&
+        !this.ErrorDate
       ) {
         {
           if (this.isEdit) {
@@ -234,22 +208,23 @@ export default {
               productName: this.enteredName,
               productCost: this.enteredPrice,
               brand: this.brand,
-              theDate: this.theDate,
-              colors: this.colors,
+              productDate: this.productDate,
+              productColors: this.productColors,
               productDescription: this.enteredDescription,
               preview: this.preview,
               image: this.image,
             });
           } else {
             this.newProduct();
+            
           }
         }
       }
       this.enteredName = "";
       this.enteredPrice = "";
       this.brand = null;
-      this.theDate = null;
-      this.colors = null;
+      this.productDate = null;
+      this.productColors = null;
       this.enteredDescription = "";
       this.preview = null;
       this.image = null;
@@ -271,6 +246,10 @@ export default {
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
       console.log(`name: ${this.ErrorDescription}`);
     },
+    validateDate() {
+      this.ErrorDate = this.productDate === null ? true : false;
+      console.log(`name: ${this.ErrorDate}`);
+    },
 
     showData(oldProduct) {
       this.isEdit = true;
@@ -278,8 +257,8 @@ export default {
       this.enteredName = oldProduct.productName;
       this.enteredPrice = oldProduct.productCost;
       this.brand = oldProduct.brand;
-      this.theDate = oldProduct.theDate;
-      this.colors = oldProduct.colors;
+      this.productDate = oldProduct.productDate;
+      this.productColors = oldProduct.productColors;
       this.enteredDescription = oldProduct.enteredDescription;
       this.preview = oldProduct.preview;
     },
@@ -294,8 +273,8 @@ export default {
             productName: editingProduct.productName,
             productCost: editingProduct.productCost,
             brand: editingProduct.brand,
-            theDate: editingProduct.theDate,
-            colors: editingProduct.colors,
+            productDate: editingProduct.productDate,
+            productColors: editingProduct.productColors,
             productDescription: editingProduct.productDescription,
             preview: editingProduct.preview,
           }),
@@ -309,8 +288,8 @@ export default {
                 productName: data.productName,
                 productCost: data.productCost,
                 brand: data.brand,
-                theDate: data.theDate,
-                colors: data.colors,
+                productDate: data.productDate,
+                productColors: data.productColors,
                 productDescription: data.productDescription,
                 preview: data.preview,
               }
@@ -321,8 +300,8 @@ export default {
         this.enteredName = "";
         this.enteredPrice = "";
         this.brand = null;
-        this.theDate = null;
-        this.colors = null;
+        this.productDate = null;
+        this.productColors = null;
         this.enteredDescription = "";
         this.preview = "";
       } catch (error) {
@@ -354,28 +333,28 @@ export default {
     newProduct() {
       {
         let product = {
-          productId : 0,
+          productId: 0,
           productName: this.enteredName,
           productCost: this.enteredPrice,
           productDescription: this.enteredDescription,
-          theDate: this.theDate,
-          image: "",
+          productDate: this.productDate,
+          image: this.image,
           brand: this.brand,
-          colors: [],
+          productColors: [],
         };
-        for(const color of this.colors) {
-         product.colors.push(color);
+        for (const color of this.productColors) {
+          product.productColors.push(color);
         }
-        // this.colors.forEach((c) => {
+        // this.productColors.forEach((c) => {
         //   let color = { colorid: c.id,
         //   colorName:c.name } ;
-        //   product.colors.push(color);
+        //   product.productColors.push(color);
         // });
-console.log(product.productid)
-console.log(this.id)
- 
+        console.log(product.productid);
+        console.log(this.id);
+
         const jsonProduct = JSON.stringify(product);
-        console.log(jsonProduct)
+        console.log(jsonProduct);
         const blob = new Blob([jsonProduct], {
           type: "application/json",
         });
@@ -408,23 +387,6 @@ console.log(this.id)
   },
 };
 </script>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   <style>
