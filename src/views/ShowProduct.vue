@@ -3,30 +3,30 @@
 
     <div class="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-10 ">
       
-  <div class="px-4 py-2 "  v-for="Travel in TravelList" :key="Travel.id">
-    <h1 class="text-gray-900 font-bold text-3xl uppercase">{{Travel.productName}}</h1>
-    <p class="text-gray-600 text-sm mt-1">{{Travel.productDescription}}</p>
+  <div class="px-4 py-2 "  v-for="Product in ProductList" :key="Product.id">
+    <h1 class="text-gray-900 font-bold text-3xl uppercase">{{Product.productName}}</h1>
+    <p class="text-gray-600 text-sm mt-1">{{Product.productDescription}}</p>
   
   <img class="h-56 w-full object-cover mt-2" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="NIKE AIR">
   <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
-    <h1 class="text-gray-200 font-bold text-xl">${{Travel.productCost}}</h1>
-    <p class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">{{Travel.brand.brandName}}</p>
+    <h1 class="text-gray-200 font-bold text-xl">${{Product.productCost}}</h1>
+    <p class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">{{Product.brand.brandName}}</p>
   </div>
   <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
-    <h1 class="text-gray-200 font-bold text-xl">{{Travel.theDate}}</h1>
+    <h1 class="text-gray-200 font-bold text-xl">{{Product.theDate}}</h1>
     
-    <p class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">{{Travel.colors.colorName}}</p>
+    <p class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">{{Product.colors.colorName}}</p>
 
   </div>
   
 <div class="flex items-center justify-center px-4 py-2 bg-gray-900">
-               <div class="flex" v-for="color in Travel.colors" :key="color.id">
+               <div class="flex" v-for="color in Product.colors" :key="color.id">
       <button class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-100" v-if='color == "White"'></button>
       <button class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-black" v-if='color == "black"'></button>
       <button class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-500" v-if='color == "gray"'></button>
     </div>
 </div>
-                  <button @click="showData(Travel)">
+                  <button @click="showData(Product)">
                     <svg  href="/AddProduct"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -38,7 +38,7 @@
                       />
                     </svg>
                   </button>
-                  <button @click="deleteTravel(Travel.id)">
+                  <button @click="deleteProduct(Product.productId)">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -51,6 +51,7 @@
                     </svg>
                   </button>
                   </div>
+                  
                   </div>
             
       
@@ -77,7 +78,7 @@ export default {
       ErrorName: false,
       enteredPrice: "",
       ErrorPrice: false,
-      TravelList: [],
+      ProductList: [],
       Brand: null,
       Size: null,
       theDate: null,
@@ -96,7 +97,7 @@ export default {
         if ((!this.ErrorName&&!this.ErrorPrice)) {
       {
         if (this.isEdit) {
-          this.editTravel({
+          this.editProduct({
             id: this.editId,
             ProductName: this.enteredName,
             ProductPrice: this.enteredPrice,
@@ -108,7 +109,7 @@ export default {
             
           });
         } else {
-          this.addNewTravel({
+          this.addNewProduct({
             ProductName: this.enteredName,
             ProductPrice: this.enteredPrice,
             Brand: this.Brand,
@@ -142,39 +143,39 @@ export default {
       this.ErrorPrice = this.enteredPrice === '' ? true : false
       console.log(`name: ${this.ErrorPrice}`)
     },
-    showData(oldTravel) {
+    showData(oldProduct) {
       this.isEdit = true
-      this.editId = oldTravel.id
-      this.enteredName = oldTravel.ProductName
-      this.enteredPrice = oldTravel.ProductPrice
-      this.Brand = oldTravel.Brand
-      this.Size = oldTravel.Size
-      this.theDate = oldTravel.theDate
-      this.colors = oldTravel.colors
-      this.enteredDes = oldTravel.enteredDes
+      this.editId = oldProduct.id
+      this.enteredName = oldProduct.ProductName
+      this.enteredPrice = oldProduct.ProductPrice
+      this.Brand = oldProduct.Brand
+      this.Size = oldProduct.Size
+      this.theDate = oldProduct.theDate
+      this.colors = oldProduct.colors
+      this.enteredDes = oldProduct.enteredDes
     },
-    async editTravel(editingTravel) {
+    async editProduct(editingProduct) {
       try {
-        const res = await fetch(`${this.url}/${editingTravel.id}`, {
+        const res = await fetch(`${this.url}/${editingProduct.id}`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'
           },
           body: JSON.stringify({
-            ProductName: editingTravel.ProductName,
-            ProductPrice: editingTravel.ProductPrice,
-            Brand: editingTravel.Brand,
-            Size: editingTravel.Size,
-            theDate: editingTravel.theDate,
-            colors : editingTravel.colors,
-            ProductDes : editingTravel.ProductDes
+            ProductName: editingProduct.ProductName,
+            ProductPrice: editingProduct.ProductPrice,
+            Brand: editingProduct.Brand,
+            Size: editingProduct.Size,
+            theDate: editingProduct.theDate,
+            colors : editingProduct.colors,
+            ProductDes : editingProduct.ProductDes
           })
         })
         const data = await res.json()
-        this.TravelList = this.TravelList.map((Travel) =>
-          Travel.id === editingTravel.id
+        this.ProductList = this.ProductList.map((Product) =>
+          Product.id === editingProduct.id
             ? {
-              ...Travel, name: data.name,  ProductName: data.ProductName,
+              ...Product, name: data.name,  ProductName: data.ProductName,
               ProductPrice: data.ProductPrice,
               Brand: data.Brand,
               Size: data.Size,
@@ -182,7 +183,7 @@ export default {
               colors: data.colors,
               ProductDes: data.ProductDes        
 }
-            : Travel
+            : Product
         )
         this.isEdit = false
         this.editId = ''
@@ -198,7 +199,7 @@ export default {
         console.log(`Could not edit! ${error}`)
       }
     },
-    async getTravelList() {
+    async getProductList() {
       try {
         const res = await fetch(this.url)
         const data = await res.json()
@@ -207,20 +208,20 @@ export default {
         console.log(`Could not get! ${error}`)
       }
     },
-    async deleteTravel(deleteId) {
+    async deleteProduct(deleteId) {
       try {
         await fetch(`${this.url}/${deleteId}`, {
           method: 'DELETE'
         })
         //filter - higher order function
-        this.TravelList = this.TravelList.filter(
-          (Travel) => Travel.id !== deleteId
+        this.ProductList = this.ProductList.filter(
+          (Product) => Product.productId !== deleteId
         )
       } catch (error) {
         console.log(`Could not delete! ${error}`)
       }
     },
-    async addNewTravel(newTravel) {
+    async addNewProduct(newProduct) {
       try {
         const res = await fetch(this.url, {
           method: 'POST',
@@ -228,26 +229,27 @@ export default {
             'content-type': 'application/json'
           },
           body: JSON.stringify({
-            ProductName: newTravel.ProductName,
-            ProductPrice: newTravel.ProductPrice,
-            Brand: newTravel.Brand,
-            Size: newTravel.Size,
-            theDate: newTravel.theDate,
-            colors: newTravel.colors,
-            ProductDes: newTravel.ProductDes
+            ProductName: newProduct.ProductName,
+            ProductPrice: newProduct.ProductPrice,
+            Brand: newProduct.Brand,
+            Size: newProduct.Size,
+            theDate: newProduct.theDate,
+            colors: newProduct.colors,
+            ProductDes: newProduct.ProductDes
  
             
           })
         })
+
         const data = await res.json()
-        this.TravelList = [...this.TravelList, data]
+        this.ProductList = [...this.ProductList, data]
       } catch (error) {
         console.log(`Could not save! ${error}`)
       }
     }
   },
   async created() {
-    this.TravelList = await this.getTravelList()
+    this.ProductList = await this.getProductList()
   },
       onFileChange(e) {
       const file = e.target.files[0];
