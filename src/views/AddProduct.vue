@@ -114,7 +114,7 @@
       <p v-if="ErrorColor" class="text-red-500">**</p>
     </div>
 
-    <input type="file" id="image" name="image" accept="image/*," />
+    <input type="file" id="image" name="image" accept="image/*," @change="upfile"/>
 
     <input
       type="submit"
@@ -145,8 +145,7 @@ export default {
       productColors: [],
       ErrorDescription: false,
       enteredDescription: "",
-      preview: null,
-      image: null,
+      image: "",
       Errorbrand: false,
       ErrorSize: false,
       ErrorColor: false,
@@ -211,7 +210,6 @@ export default {
               productDate: this.productDate,
               productColors: this.productColors,
               productDescription: this.enteredDescription,
-              preview: this.preview,
               image: this.image,
             });
           } else {
@@ -228,6 +226,15 @@ export default {
       this.enteredDescription = "";
       this.preview = null;
       this.image = null;
+    },
+    upfile(e){
+      let file = e.target.files[0];
+      let data = new FormData();
+      data.append("file",file, file.name);
+      this.upfile = data.get("file")
+      this.image = URL.createObjectURL(this.upfile);
+
+
     },
 
     validateName() {
@@ -345,11 +352,6 @@ export default {
         for (const color of this.productColors) {
           product.productColors.push(color);
         }
-        // this.productColors.forEach((c) => {
-        //   let color = { colorid: c.id,
-        //   colorName:c.name } ;
-        //   product.productColors.push(color);
-        // });
         console.log(product.productid);
         console.log(this.id);
 
@@ -360,7 +362,7 @@ export default {
         });
         const formdata = new FormData();
         formdata.append("newProduct", blob);
-        //formdata.append("image", image);
+        formdata.append("image", this.upfile);
         this.makeDataForm(formdata);
       }
     },
