@@ -172,7 +172,7 @@ export default {
       preview: null,
       isEdit: false,
       editId: "",
-      url:"172.69.0.4:8081",
+      url:"40.76.71.12:8081",
       enteredName: "",
       ErrorName: false,
       enteredPrice: "",
