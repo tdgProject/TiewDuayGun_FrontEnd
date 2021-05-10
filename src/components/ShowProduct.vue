@@ -240,7 +240,7 @@ export default {
     return {
        isEdit: false,
       editId: "",
-      url:"้http://40.76.71.12:8081",
+      url:"http://40.76.71.12:8081",    
       enteredName: "",
       ErrorName: false,
       enteredPrice: "",
