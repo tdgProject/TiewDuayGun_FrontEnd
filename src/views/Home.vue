@@ -2,131 +2,127 @@
 <nav-bar>
 </nav-bar>
 
-<div class="relative ">
-            <div class="sliderAx h-4/5">
-                <div id="slider-1" class="mx-auto">
-                    
-                    <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill" style="background-image: url(https://images.unsplash.com/photo-1544427920-c49ccfb85579?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1422&q=80)">
-                        
-                        <p class="font-bold text-sm uppercase">Clothing Shop</p>
-                        <p class="text-3xl font-bold">StyleByMe</p>
-                        <p class="text-2xl mb-10 leading-none">A new Trend Fashion</p>
-                        <a href="/Product" target="_blank" class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">See Ours Product</a>
-                         
-                    </div> <!-- container -->
-                    <br>
-                </div>
-          
-                <div id="slider-2" class=" mx-auto">
-                    <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill" style="background-image: url(https://images.unsplash.com/photo-1544144433-d50aff500b91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)"> 
-                        <p class="font-bold text-sm uppercase">Clothing Shop</p>
-                        <p class="text-3xl font-bold">StyleByMe</p>
-                        <p class="text-2xl mb-10 leading-none">A new Trend Fashion</p>
-                        <a href="/Productvvvvvvvvvvvv" target="_blank" class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact us</a>
-                    </div> <!-- container -->
-                    <br>
+<!DOCTYPE html>
+<html>
+
+
+
+<body>
+    <div class="bg-local md:bg-fixed" style="background-image: url(https://images.unsplash.com/photo-1602519095267-53c956c8cf74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80)">
+        
+            <div class="flex justify-between items-center py-4 px-6">
+                
+                
+                <div class="flex space-x-2 space-x-10 block sm:hidden">
+                    <a href="#"
+                        class="flex items-center bg-gradient-to-b from-black-400 to-gray-500  text-white font-bold py-2 px-4 rounded-full uppercase text-sm  shadow-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </a>
                 </div>
             </div>
-            
-        </div>
-
-        <div class="container mx-auto">
-            <h1 class="text-center text-black-800 py-6 text-5xl ">
-                ABOUT
-            </h1> 
-            <div class="text-gray-900">
-                <div class="grid grid-cols-6 mb-20">
-                    <div class="col-span-1 text-center text-6xl py-4"><i class="fa fa-gift" aria-hidden="true"></i></div>
-                    <div class="col-span-5">
-                        <h3 class="text-gray-700 ">
-                            StylebyMe is a clothing apparel company, which was originally founded in Yamaguchi, Japan in 1949 as a textiles manufacturer. Now it is a global brand with over 1000 stores around the world. Redefining clothing, with a focus on quality and textiles which has been unwavered since the company’s origins in 1949.
-                        </h3>
+        
+        <!-- Title -->
+        <section class="h-screen px-12 sm:px-24 flex items-center relative">
+            <div class="grid grid-cols-12 gap-6 ">
+                <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-8 xxl:col-span-12">
+                    <div class="w-full">
+                        <h1 class="text-7xl sm:text-8xl lg:text-8xl xl:text-9xl text-white font-bold my-8">Style Your<br>
+                            Style <span class="text-blue-400">Kmutt</span></h1>
+                        <p class="text-xl text-white font-semibold ">Become the best in your industry!<br> Start today
+                            our universal quik start program</p>
                     </div>
                 </div>
-            </div>   
-        </div>
-      <div class="grid grid-cols-4 p-8">
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/200/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
+                <div class="absolute bottom-0 left-0 py-6 px-6">
+                    <div class="flex space-x-2">
+          
+                    </div>
+                </div>
+                <div class="absolute bottom-0 py-6 px-6 right-0">
+                    <div class="flex space-x-6">
+                        <i class="fa fa-dribbble text-white fa-lg"></i>
+                        <i class="fa fa-twitter text-white fa-lg"></i>
+                        <i class="fa fa-facebook text-white fa-lg"></i>
+                        <i class="fa fa-instagram text-white fa-lg"></i>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/201/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
+        </section>
+        <!-- WE CREATE -->
+        <section class="h-full bg-gray-900">
+            <div class="relative  px-8 py-8">
+                <div>
+                    <h1 class="text-white text-white text-6xl font-bold">
+                        <span class="bg-blue-400 py-4 px-4 rounded-full text-5xl">WE</span>CREATE
+                    </h1>
                 </div>
             </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/202/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
+            <div class="grid grid-cols-12 gap-6 px-8 py-8">
+                <div class="col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-5 xxl:col-span-5">
+                    <div class="py-4">
+                        <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">01-</span>
+                            OPTIMIZED <span class="font-bold">USER EXPERIENCES</span></p>
+                        <p class="text-blue-900 text-sm pl-8">Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
+                            the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                            type specimen book.
+                        </p>
+                    </div>
+                    <div class="py-4">
+                        <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">02-</span>
+                            ELEGENT <span class="font-bold">USER INTERFACES</span></p>
+                    </div>
+                    <div class="py-4">
+                        <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">03-</span>
+                            BEAUTIFUL <span class="font-bold">GRAPHIC DESIGNS</span></p>
+                    </div>
+                    <div class="py-4">
+                        <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">04-</span>
+                            TACTICAL <span class="font-bold">DIGITAL MARKETING</span></p>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-7 xxl:col-span-7 flex justify-center">
+                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/male-employee-looking-at-customer-review-2937682-2426381.png"
+                        class="w-auto" />
                 </div>
             </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/203/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
+        </section>
+        <!-- Grow With Us -->
+        <section class="h-full bg-yellow-300">
+            <div class="grid grid-cols-12 gap-0">
+                <div
+                    class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-6 xxl:col-span-6 bg-red-500 h-full px-16 py-6">
+                    <div>
+                        <img src="https://superscene.pro/img/constructor/06.png" class="w-40 -ml-4" />
+                        <h1 class="text-white font-semibold text-7xl">Grow With Us</h1>
+                        <button
+                            class="my-6 bg-gradient-to-b from-yellow-400 to-yellow-500  text-white font-bold py-2 px-4 rounded-lg uppercase text-sm  shadow-xl">
+                            Hire Us
+                        </button>
+                    </div>
+                </div>
+                <div
+                    class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-6 xxl:col-span-6 bg-blue-400 h-full px-16 py-6">
+                    <div>
+                        <img src="https://assets.materialup.com/uploads/641e0e0f-eddf-4d2c-b0ee-c6f55300bb1b/preview.png"
+                            class="w-52 -ml-10" />
+                        <h1 class="text-white font-semibold text-7xl">Say Hello</h1>
+                        <button
+                            class="my-6 bg-gradient-to-b from-red-400 to-red-500  text-white font-bold py-2 px-4 rounded-lg uppercase text-sm  shadow-xl">
+                            Hello@123.com
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/204/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
-                </div>
-            </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/208/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
-                </div>
-            </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/206/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
-                </div>
-            </div>
-            <div class="col-span-1 py-6">
-                <div class="relative">
-                    <a href="http://tradydaddy.com/" target="_blank">
-                    
-                        <img src="https://picsum.photos/id/209/400/400" alt="" class="rounded-2xl relative">                     
-                        <div class="absolute bottom-0 left-0 text-xl p-4 w-full text-white font-bold"><p>Absolute child</p></div>
-                        
-                    </a>
-                </div>
-            </div>
-        </div>
+        </section>
+
+        
+      
+    </div>
+</body>
+</html>
     
   <foot>
   </foot>

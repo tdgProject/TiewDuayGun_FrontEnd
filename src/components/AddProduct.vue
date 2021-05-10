@@ -97,6 +97,7 @@
           class="ml-1 bg-white rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Black"
+          @blur="validateColors"
         />
         <input
           type="checkbox"
@@ -110,25 +111,52 @@
           v-model="productColors"
           :value="Colorlist.Gray"
         />
+        <input
+          type="checkbox"
+          class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.Navy"
+        />
+        <input
+          type="checkbox"
+          class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.Beige"
+        />
       </div>
-      <p v-if="ErrorColor" class="text-red-500">**</p>
     </div>
 
+ <div class="form-group">
     <input
       type="file"
       id="image"
       name="image"
       accept="image/*,"
       @change="upfile"
-      @blur="validateimage"
     />
-<p v-if="Errorimage" class="text-red-500">**</p>
+   <div class="border p-2 mt-3">
+            <p>Preview Here:</p>
+            <template v-if="preview">
+              <div class="h-56 w-56 object-cover mt-2 rounded-2xl6">
+              <img :src="preview" class="img-fluid" />
+              </div>
+            </template>
+           
+          </div>
+         
+ </div>
+
+
     <input
       type="submit"
       value="Submit"
       class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold p-3"
     />
   </form>
+
+  
+   <button @click="reset">Clear All</button>
+ 
 </template>
 
 
@@ -141,6 +169,7 @@ export default {
   
   data() {
     return {
+      preview: null,
       isEdit: false,
       editId: "",
       url: "http://localhost:8081",
@@ -154,12 +183,11 @@ export default {
       productColors: [],
       ErrorDescription: false,
       enteredDescription: "",
-      image: "",
+      image: null,
       Errorbrand: false,
       ErrorSize: false,
-      ErrorColor: false,
       ErrorDate: false,
-      Errorimage: false,
+      pic: null,
       Colorlist: {
         Black: {
           color: {
@@ -177,6 +205,19 @@ export default {
           color: {
             colorId: 3,
             colorName: "Gray",
+          },
+          
+        },
+        Navy: {
+          color: {
+            colorId: 4,
+            colorName: "Navy",
+          },
+        },
+           Beige: {
+          color: {
+            colorId: 5,
+            colorName: "Beige",
           },
         },
       },
@@ -198,25 +239,24 @@ export default {
   },
 
   methods: {
-    show(){
-      console.log("asdsad");
+    reset: function() {
+      this.preview = null;
+      this.pic = null;
 
     },
+
     submitForm() {
       this.ErrorName = this.enteredName === "" ? true : false;
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
       this.Errorbrand = this.brand === null ? true : false;
-      this.ErrorColor = this.Colorlist === "" ? true : false;
       this.ErrorDate = this.productDate === null ? true : false;
-      this.Errorimage = this.image ===null ? true : false;
       if (
         !this.ErrorName &&
         !this.ErrorPrice &&
         !this.ErrorDescription &&
         !this.Errorbrand &&
         !this.ErrorSize &&
-        !this.ErrorColor &&
         !this.ErrorDate &&
         !this.Errorimage
       ) {
@@ -235,8 +275,10 @@ export default {
       this.productDate = null;
       this.productColors = null;
       this.enteredDescription = "";
-      this.preview = null;
       this.image = null;
+      this.preview = null;
+      this.pic = null;
+      //setTimeout(location.reload.bind(location), 2000);
     },
     upfile(e) {
       let file = e.target.files[0];
@@ -244,6 +286,16 @@ export default {
       data.append("file", file, file.name);
       this.upfile = data.get("file");
       this.image = URL.createObjectURL(this.upfile);
+      
+      var input = e.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+        }
+        this.pic=input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
     },
 
     validateName() {
@@ -266,59 +318,13 @@ export default {
       this.ErrorDate = this.productDate === null ? true : false;
       console.log(`name: ${this.ErrorDate}`);
     },
-    validateimage(){
-      this.Errorimage = this.image === null ? true : false;
-      console.log(`name: ${this.Errorimage}`);
-    },
+
 
 
     
-    async editProduct(editingProduct) {
-      try {
-        const res = await fetch(`${this.url}/${editingProduct.id}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            productName: editingProduct.productName,
-            productCost: editingProduct.productCost,
-            brand: editingProduct.brand,
-            productDate: editingProduct.productDate,
-            productColors: editingProduct.productColors,
-            productDescription: editingProduct.productDescription,
-            preview: editingProduct.preview,
-          }),
-        });
-        const data = await res.json();
-        this.ProductList = this.ProductList.map((Product) =>
-          Product.id === editingProduct.id
-            ? {
-                ...Product,
-                name: data.name,
-                productName: data.productName,
-                productCost: data.productCost,
-                brand: data.brand,
-                productDate: data.productDate,
-                productColors: data.productColors,
-                productDescription: data.productDescription,
-                preview: data.preview,
-              }
-            : Product
-        );
-        this.isEdit = false;
-        this.editId = "";
-        this.enteredName = "";
-        this.enteredPrice = "";
-        this.brand = null;
-        this.productDate = null;
-        this.productColors = null;
-        this.enteredDescription = "";
-        this.preview = "";
-      } catch (error) {
-        console.log(`Could not edit! ${error}`);
-      }
-    },
+    
+      
+    
     async getProduct(id) {
       try {
         const res = await fetch(`${this.url}/${id}`);
@@ -373,20 +379,7 @@ export default {
         
       }
     },
-    async makeEditForm(formdata) {
-      try {
-        const res = await fetch(`${this.url}/edit`, {
-          method: "PUT",
-          body: formdata,
-        });
-        if (res.status != 200) {
-          alert("An Unexpected Error Occured. Response Status: " + res.status);
-        }
-      } catch (error) {
-        console.log(`Could not save! ${error}`);
-      }
-      this.isEdit = false;
-    },
+  
     async makeDataForm(formdata) {
       try {
         const res = await fetch(this.url, {

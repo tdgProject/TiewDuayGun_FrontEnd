@@ -12,7 +12,7 @@
         :src="getimage(Product.image)" 
         alt="NIKE AIR" >
         
-      />
+     
       <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
         <h1 class="text-gray-200 font-bold text-xl">
           ${{ Product.productCost }}
@@ -49,6 +49,14 @@
             class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-500"
             v-if="color.color.colorName == 'Gray'"
           ></button>
+           <button
+            class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-500"
+            v-if="color.color.colorName == 'Navy'"
+          ></button>
+           <button
+            class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-500"
+            v-if="color.color.colorName == 'Beige'"
+          ></button>
         </div>
       </div>
       <button @click="showData(Product)">
@@ -64,7 +72,7 @@
           />
         </svg>
       </button>
-      <button @click="deleteProduct(Product.productId)">
+      <button @click="deleteProduct(Product.productId)" >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -78,8 +86,8 @@
       </button>
     </div>
   </div>
-  <div v-if="this.isEdit">
-  <form @submit.prevent="submitForm">
+ <div v-if="this.isEdit">
+   <form @submit.prevent="submitForm">
     <div
       class="icon bg-blue-600 text-white w-6 h-6 absolute flex items-center justify-center p-5"
       style="left: -40px"
@@ -188,6 +196,18 @@
           v-model="productColors"
           :value="Colorlist.Gray"
         />
+        <input
+          type="checkbox"
+          class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.Navy"
+        />
+        <input
+          type="checkbox"
+          class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.Beige"
+        />
       </div>
       <p v-if="ErrorColor" class="text-red-500">**</p>
     </div>
@@ -206,7 +226,7 @@
       class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold p-3"
     />
   </form>
-  </div>
+ </div>
 </template>
 
 
@@ -253,6 +273,18 @@ export default {
           color: {
             colorId: 3,
             colorName: "Gray",
+          },
+        },
+         Navy: {
+          color: {
+            colorId: 4,
+            colorName: "Navy",
+          },
+        },
+           Beige: {
+          color: {
+            colorId: 5,
+            colorName: "Beige",
           },
         },
       },
@@ -313,9 +345,28 @@ export default {
       this.enteredDescription = "";
       this.preview = null;
       this.image = null;
-      location.reload();
+      setTimeout(location.reload.bind(location), 3000);
     },
-    
+    validateName() {
+      this.ErrorName = this.enteredName === "" ? true : false;
+      console.log(`name: ${this.ErrorName}`);
+    },
+    validateType() {
+      this.ErrorType = this.enteredType === "" ? true : false;
+      console.log(`name: ${this.ErrorType}`);
+    },
+    validatePrice() {
+      this.ErrorPrice = this.enteredPrice === "" ? true : false;
+      console.log(`name: ${this.ErrorPrice}`);
+    },
+    validateDescription() {
+      this.ErrorDescription = this.enteredDescription === "" ? true : false;
+      console.log(`name: ${this.ErrorDescription}`);
+    },
+    validateDate() {
+      this.ErrorDate = this.productDate === null ? true : false;
+      console.log(`name: ${this.ErrorDate}`);
+    },
     showData(Product) {
       this.isEdit = true;
       this.editId = Product.productId;

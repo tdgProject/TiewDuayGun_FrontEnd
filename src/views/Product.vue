@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import AddProduct from "@/views/AddProduct";
-import ShowProduct from "@/views/ShowProduct";
+import AddProduct from "@/components/AddProduct";
+import ShowProduct from "@/components/ShowProduct";
 
 export default {
   data() {
