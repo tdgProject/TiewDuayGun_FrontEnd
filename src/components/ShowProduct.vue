@@ -393,7 +393,7 @@ export default {
       this.enteredDescription = "";
       this.preview = null;
       this.image = null;
-      setTimeout(location.href="http://localhost:8080", 3000);
+      setTimeout(location.href="http://40.76.71.12:8080", 3000);
     },
     
     validateName() {
