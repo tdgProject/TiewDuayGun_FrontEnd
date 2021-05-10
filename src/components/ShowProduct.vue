@@ -449,9 +449,6 @@ export default {
   async created() {
     this.ProductList = await this.getProductList();
   },
-  onFileChange(e) {
-    const file = e.target.files[0];
-    this.url = URL.createObjectURL(file);
-  },
+  
 };
 </script>
