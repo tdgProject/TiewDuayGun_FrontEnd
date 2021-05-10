@@ -8,11 +8,9 @@
              Products
          </a>
          <a class="no-underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-xs py-3 mr-8" href="/About">
-              Shopping Cart
+              About
          </a>
-         <a class="no-underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-xs py-3" href="#">
-             Abouts
-         </a>
+
      </div>
 </nav>
 </template>

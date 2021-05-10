@@ -1,5 +1,5 @@
 <template>
-  <!-- This is an example component -->
+  
 
   <form @submit.prevent="submitForm">
     <div
@@ -114,8 +114,15 @@
       <p v-if="ErrorColor" class="text-red-500">**</p>
     </div>
 
-    <input type="file" id="image" name="image" accept="image/*," @change="upfile"/>
-
+    <input
+      type="file"
+      id="image"
+      name="image"
+      accept="image/*,"
+      @change="upfile"
+      @blur="validateimage"
+    />
+<p v-if="Errorimage" class="text-red-500">**</p>
     <input
       type="submit"
       value="Submit"
@@ -130,6 +137,8 @@ export default {
   name: "AddProduct",
   components: {},
   el: "#app",
+
+  
   data() {
     return {
       isEdit: false,
@@ -150,6 +159,7 @@ export default {
       ErrorSize: false,
       ErrorColor: false,
       ErrorDate: false,
+      Errorimage: false,
       Colorlist: {
         Black: {
           color: {
@@ -180,17 +190,26 @@ export default {
           brandName: "H&M",
         },
       },
+      prop: {
+        Product: Object,
+        edit: Boolean,
+      },
     };
   },
 
   methods: {
+    show(){
+      console.log("asdsad");
+
+    },
     submitForm() {
       this.ErrorName = this.enteredName === "" ? true : false;
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
       this.Errorbrand = this.brand === null ? true : false;
-      this.ErrorColor = this.productColors === null ? true : false;
+      this.ErrorColor = this.Colorlist === "" ? true : false;
       this.ErrorDate = this.productDate === null ? true : false;
+      this.Errorimage = this.image ===null ? true : false;
       if (
         !this.ErrorName &&
         !this.ErrorPrice &&
@@ -198,26 +217,18 @@ export default {
         !this.Errorbrand &&
         !this.ErrorSize &&
         !this.ErrorColor &&
-        !this.ErrorDate
+        !this.ErrorDate &&
+        !this.Errorimage
       ) {
         {
           if (this.isEdit) {
-            this.editProduct({
-              id: this.editId,
-              productName: this.enteredName,
-              productCost: this.enteredPrice,
-              brand: this.brand,
-              productDate: this.productDate,
-              productColors: this.productColors,
-              productDescription: this.enteredDescription,
-              image: this.image,
-            });
+            this.showData();
           } else {
             this.newProduct();
-            
           }
         }
       }
+      this.isEdit = false;
       this.enteredName = "";
       this.enteredPrice = "";
       this.brand = null;
@@ -227,14 +238,12 @@ export default {
       this.preview = null;
       this.image = null;
     },
-    upfile(e){
+    upfile(e) {
       let file = e.target.files[0];
       let data = new FormData();
-      data.append("file",file, file.name);
-      this.upfile = data.get("file")
+      data.append("file", file, file.name);
+      this.upfile = data.get("file");
       this.image = URL.createObjectURL(this.upfile);
-
-
     },
 
     validateName() {
@@ -257,18 +266,13 @@ export default {
       this.ErrorDate = this.productDate === null ? true : false;
       console.log(`name: ${this.ErrorDate}`);
     },
-
-    showData(oldProduct) {
-      this.isEdit = true;
-      this.editId = oldProduct.id;
-      this.enteredName = oldProduct.productName;
-      this.enteredPrice = oldProduct.productCost;
-      this.brand = oldProduct.brand;
-      this.productDate = oldProduct.productDate;
-      this.productColors = oldProduct.productColors;
-      this.enteredDescription = oldProduct.enteredDescription;
-      this.preview = oldProduct.preview;
+    validateimage(){
+      this.Errorimage = this.image === null ? true : false;
+      console.log(`name: ${this.Errorimage}`);
     },
+
+
+    
     async editProduct(editingProduct) {
       try {
         const res = await fetch(`${this.url}/${editingProduct.id}`, {
@@ -315,9 +319,9 @@ export default {
         console.log(`Could not edit! ${error}`);
       }
     },
-    async getProductList() {
+    async getProduct(id) {
       try {
-        const res = await fetch(this.url);
+        const res = await fetch(`${this.url}/${id}`);
         const data = await res.json();
         return data;
       } catch (error) {
@@ -363,8 +367,25 @@ export default {
         const formdata = new FormData();
         formdata.append("newProduct", blob);
         formdata.append("image", this.upfile);
-        this.makeDataForm(formdata);
+
+
+          this.makeDataForm(formdata);
+        
       }
+    },
+    async makeEditForm(formdata) {
+      try {
+        const res = await fetch(`${this.url}/edit`, {
+          method: "PUT",
+          body: formdata,
+        });
+        if (res.status != 200) {
+          alert("An Unexpected Error Occured. Response Status: " + res.status);
+        }
+      } catch (error) {
+        console.log(`Could not save! ${error}`);
+      }
+      this.isEdit = false;
     },
     async makeDataForm(formdata) {
       try {
@@ -380,9 +401,7 @@ export default {
       }
     },
   },
-  async created() {
-    this.ProductList = await this.getProductList();
-  },
+ 
   onFileChange(e) {
     const file = e.target.files[0];
     this.url = URL.createObjectURL(file);

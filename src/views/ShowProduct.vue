@@ -1,5 +1,6 @@
 <template>
-  <div class="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-10">
+
+  <div class="lg:flex items-center container mx-auto my-auto grid grid-cols-3">
     <div class="px-4 py-2" v-for="Product in ProductList" :key="Product.id">
       <h1 class="text-gray-900 font-bold text-3xl uppercase">
         {{ Product.productName }}
@@ -7,8 +8,9 @@
       <p class="text-gray-600 text-sm mt-1">{{ Product.productDescription }}</p>
 
       <img
-        class="h-56 w-full object-cover mt-2"
-        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="NIKE AIR">
+        class="h-56 w-56 object-cover mt-2 rounded-2xl "
+        :src="getimage(Product.image)" 
+        alt="NIKE AIR" >
         
       />
       <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
@@ -51,7 +53,7 @@
       </div>
       <button @click="showData(Product)">
         <svg
-          href="/AddProduct"
+          
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -76,6 +78,135 @@
       </button>
     </div>
   </div>
+  <div v-if="this.isEdit">
+  <form @submit.prevent="submitForm">
+    <div
+      class="icon bg-blue-600 text-white w-6 h-6 absolute flex items-center justify-center p-5"
+      style="left: -40px"
+    >
+      <i class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"></i>
+    </div>
+    <h3 class="text-2xl text-gray-900 font-semibold">StyleByMe</h3>
+    <p class="text-gray-600">Insert Your Details</p>
+    <div class="flex space-x-5 mt-3">
+      <input
+        class="input border p-2 w-1/2"
+        :class="{ 'bg-red-50': ErrorName }"
+        id="productName"
+        name="productName"
+        type="text"
+        v-model.trim="enteredName"
+        @blur="validateName"
+        placeholder="Your productName"
+      />
+      <p v-if="ErrorName" class="text-red-500">**</p>
+
+      <select
+        class="block appearance-none border p-2 w-1/2 bg-grey-lighter border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
+        v-model="brand"
+        :class="{ 'bg-red-50': Errorbrand }"
+      >
+        <option id="b-1" name="Uniqlo" :value="BrandList.UNIQLO">Uniqlo</option>
+        <option id="b-2" name="H&M" :value="BrandList.HM">H&M</option>
+      </select>
+
+      <p v-if="Errorbrand" class="text-red-500">**</p>
+    </div>
+
+    <textarea
+      id="productDescription"
+      cols="10"
+      rows="3"
+      class="border p-2 mt-3 w-full"
+      :class="{ 'bg-red-50': ErrorDescription }"
+      v-model.trim="enteredDescription"
+      @blur="validateDescription"
+      placeholder="Your productDescription"
+    ></textarea>
+    <p v-if="ErrorDescription" class="text-red-500">**</p>
+
+    <p class="font-bold text-sm mt-3">Details</p>
+    <div class="-mx-3 md:flex mb-2">
+      <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+        <label
+          class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+          for="grid-city"
+        >
+          Price
+        </label>
+        <input
+          class="input border p-2 w-1/2"
+          :class="{ 'bg-red-50': ErrorPrice }"
+          id="productCost"
+          type="number"
+          step="0.01"
+          min="0"
+          max="99999"
+          v-model.trim="enteredPrice"
+          @blur="validatePrice"
+          placeholder="10000.00"
+        />
+
+        <p v-if="ErrorPrice" class="text-red-500">Enter Your productCost</p>
+      </div>
+      <div class="md:w-1/2 px-3">
+        <label
+          class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+          for="grid-state"
+        >
+          Date
+        </label>
+        <div class="relative">
+          <input type="date" v-model="productDate" @blur="validateDate" />
+
+          <p v-if="ErrorDate" class="text-red-500">Enter Your Date</p>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 px-3">
+        <label
+          class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+          for="grid-zip"
+        >
+          Product Color
+        </label>
+        <input
+          type="checkbox"
+          class="ml-1 bg-white rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.Black"
+        />
+        <input
+          type="checkbox"
+          class="ml-1 bg-black rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.White"
+        />
+        <input
+          type="checkbox"
+          class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
+          v-model="productColors"
+          :value="Colorlist.Gray"
+        />
+      </div>
+      <p v-if="ErrorColor" class="text-red-500">**</p>
+    </div>
+
+    <input
+      type="file"
+      id="image"
+      name="image"
+      accept="image/*,"
+      @change="upfile"
+    />
+
+    <input
+      type="submit"
+      value="Submit"
+      class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold p-3"
+    />
+  </form>
+  </div>
 </template>
 
 
@@ -87,7 +218,7 @@ export default {
 
   data() {
     return {
-      isEdit: false,
+       isEdit: false,
       editId: "",
       url: "http://localhost:8081",
       enteredName: "",
@@ -95,127 +226,109 @@ export default {
       enteredPrice: "",
       ErrorPrice: false,
       ProductList: [],
-      Brand: null,
-      Size: null,
+      brand: null,
       productDate: null,
       productColors: [],
-      enteredDes: "",
-      Backend: [],
-      image:""
+      ErrorDescription: false,
+      enteredDescription: "",
+      image: "",
+      Errorbrand: false,
+      ErrorSize: false,
+      ErrorColor: false,
+      ErrorDate: false,
+           Colorlist: {
+        Black: {
+          color: {
+            colorId: 1,
+            colorName: "Black",
+          },
+        },
+        White: {
+          color: {
+            colorId: 2,
+            colorName: "White",
+          },
+        },
+        Gray: {
+          color: {
+            colorId: 3,
+            colorName: "Gray",
+          },
+        },
+      },
+      BrandList: {
+        UNIQLO: {
+          brandId: "B01",
+          brandName: "UNIQLO",
+        },
+        HM: {
+          brandId: "B02",
+          brandName: "H&M",
+        },
+      },
     };
   },
   methods: {
+      upfile(e) {
+      let file = e.target.files[0];
+      let data = new FormData();
+      data.append("file", file, file.name);
+      this.upfile = data.get("file");
+      this.image = URL.createObjectURL(this.upfile);
+    },
+    getimage(image){
+      return `${this.url}/image/${image}`
+    },
+
     submitForm() {
       this.ErrorName = this.enteredName === "" ? true : false;
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
-      if (!this.ErrorName && !this.ErrorPrice) {
+      this.ErrorDescription = this.enteredDescription === "" ? true : false;
+      this.Errorbrand = this.brand === null ? true : false;
+      this.ErrorColor = this.productColors === null ? true : false;
+      this.ErrorDate = this.productDate === null ? true : false;
+      if (
+        !this.ErrorName &&
+        !this.ErrorPrice &&
+        !this.ErrorDescription &&
+        !this.Errorbrand &&
+        !this.ErrorSize &&
+        !this.ErrorColor &&
+        !this.ErrorDate
+      ) {
         {
           if (this.isEdit) {
-            this.editProduct({
-              id: this.editId,
-              ProductName: this.enteredName,
-              ProductPrice: this.enteredPrice,
-              Brand: this.Brand,
-              Size: this.Size,
-              productDate: this.productDate,
-              productColors: this.productColors,
-              ProductDes: this.ProductDes,
-            });
+            this.editProduct();
           } else {
-            this.addNewProduct({
-              ProductName: this.enteredName,
-              ProductPrice: this.enteredPrice,
-              Brand: this.Brand,
-              Size: this.Size,
-              productDate: this.productDate,
-              productColors: this.productColors,
-              ProductDes: this.ProductDes,
-            });
+            this.newProduct();
           }
         }
       }
+      this.isEdit = false;
       this.enteredName = "";
       this.enteredPrice = "";
-      this.Brand = null;
-      this.Size = null;
+      this.brand = null;
       this.productDate = null;
       this.productColors = null;
-      this.enteredDes = "";
+      this.enteredDescription = "";
+      this.preview = null;
+      this.image = null;
+      location.reload();
     },
-    //getimage(image){
-      //return `${image}`
-
-    //},
-
-    validateName() {
-      this.ErrorName = this.enteredName === "" ? true : false;
-      console.log(`name: ${this.ErrorName}`);
-    },
-    validateType() {
-      this.ErrorType = this.enteredType === "" ? true : false;
-      console.log(`name: ${this.ErrorType}`);
-    },
-    validatePrice() {
-      this.ErrorPrice = this.enteredPrice === "" ? true : false;
-      console.log(`name: ${this.ErrorPrice}`);
-    },
-    showData(oldProduct) {
+    
+    showData(Product) {
       this.isEdit = true;
-      this.editId = oldProduct.id;
-      this.enteredName = oldProduct.ProductName;
-      this.enteredPrice = oldProduct.ProductPrice;
-      this.Brand = oldProduct.Brand;
-      this.Size = oldProduct.Size;
-      this.productDate = oldProduct.productDate;
-      this.productColors = oldProduct.productColors;
-      this.enteredDes = oldProduct.enteredDes;
+      this.editId = Product.productId;
+      this.enteredName = Product.productName;
+      this.enteredPrice = Product.productCost;
+      this.brand = Product.brand;
+      this.productDate = Product.productDate;
+      this.productColors = Product.productColors;
+      this.enteredDescription = Product.productDescription;
+      this.image = Product.image;
+
     },
-    async editProduct(editingProduct) {
-      try {
-        const res = await fetch(`${this.url}/${editingProduct.id}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            ProductName: editingProduct.ProductName,
-            ProductPrice: editingProduct.ProductPrice,
-            Brand: editingProduct.Brand,
-            Size: editingProduct.Size,
-            productDate: editingProduct.productDate,
-            productColors: editingProduct.productColors,
-            ProductDes: editingProduct.ProductDes,
-          }),
-        });
-        const data = await res.json();
-        this.ProductList = this.ProductList.map((Product) =>
-          Product.id === editingProduct.id
-            ? {
-                ...Product,
-                name: data.name,
-                ProductName: data.ProductName,
-                ProductPrice: data.ProductPrice,
-                Brand: data.Brand,
-                Size: data.Size,
-                productDate: data.productDate,
-                productColors: data.productColors,
-                ProductDes: data.ProductDes,
-              }
-            : Product
-        );
-        this.isEdit = false;
-        this.editId = "";
-        this.enteredName = "";
-        this.enteredPrice = "";
-        this.Brand = null;
-        this.Size = null;
-        this.productDate = null;
-        this.productColors = null;
-        this.enteredDes = "";
-      } catch (error) {
-        console.log(`Could not edit! ${error}`);
-      }
-    },
+
     async getProductList() {
       try {
         const res = await fetch(this.url);
@@ -230,7 +343,7 @@ export default {
         await fetch(`${this.url}/${deleteId}`, {
           method: "DELETE",
         });
-        //filter - higher order function
+       
         this.ProductList = this.ProductList.filter(
           (Product) => Product.productId !== deleteId
         );
@@ -238,29 +351,48 @@ export default {
         console.log(`Could not delete! ${error}`);
       }
     },
-    async addNewProduct(newProduct) {
-      try {
-        const res = await fetch(this.url, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            ProductName: newProduct.ProductName,
-            ProductPrice: newProduct.ProductPrice,
-            Brand: newProduct.Brand,
-            Size: newProduct.Size,
-            productDate: newProduct.productDate,
-            productColors: newProduct.productColors,
-            ProductDes: newProduct.ProductDes,
-          }),
+    editProduct() {
+      {
+        let product = {
+          productId: 0,
+          productName: this.enteredName,
+          productCost: this.enteredPrice,
+          productDescription: this.enteredDescription,
+          productDate: this.productDate,
+          image: this.image,
+          brand: this.brand,
+          productColors: [],
+        };
+        for (const color of this.productColors) {
+          product.productColors.push(color);
+        }
+    
+        const jsonProduct = JSON.stringify(product);
+        console.log(jsonProduct);
+        const blob = new Blob([jsonProduct], {
+          type: "application/json",
         });
-
-        const data = await res.json();
-        this.ProductList = [...this.ProductList, data];
+        console.log(blob)
+        const formdata = new FormData();
+        formdata.append("newProduct", blob);
+        formdata.append("image", this.upfile);
+          this.makeEditForm(formdata);
+        
+      }
+    },
+    async makeEditForm(formdata) {
+      try {
+        const res = await fetch(`${this.url}/edit/${this.editId}`, {
+          method: "PUT",
+          body: formdata,
+        });
+        if (res.status != 200) {
+          alert("An Unexpected Error Occured. Response Status: " + res.status);
+        }
       } catch (error) {
         console.log(`Could not save! ${error}`);
       }
+      
     },
   },
   async created() {

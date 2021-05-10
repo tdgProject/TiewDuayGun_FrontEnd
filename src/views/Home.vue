@@ -1,9 +1,11 @@
 <template>
 <nav-bar>
 </nav-bar>
+
 <div class="relative ">
             <div class="sliderAx h-4/5">
                 <div id="slider-1" class="mx-auto">
+                    
                     <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill" style="background-image: url(https://images.unsplash.com/photo-1544427920-c49ccfb85579?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1422&q=80)">
                         
                         <p class="font-bold text-sm uppercase">Clothing Shop</p>

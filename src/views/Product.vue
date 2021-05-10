@@ -1,37 +1,36 @@
 <template>
-
-  <nav-bar>
-     </nav-bar>
+  <nav-bar> </nav-bar>
   <div class="pb-96 p-8">
-    <button v-for="tab in tabs" :key="tab" @click="selected = tab;">
+     <button v-for="tab in tabs" :key="tab" @click="selected = tab">
       {{ tab }}
     </button>
-
-    <component :is="selected"></component>
+    <component :is="selected">></component>
+    
   </div>
 
-   <foot>
-  </foot>
-
-
+  <foot> </foot>
 </template>
 
 <script>
 import AddProduct from "@/views/AddProduct";
 import ShowProduct from "@/views/ShowProduct";
 
-
 export default {
   data() {
     return {
       tabs: ["AddProduct", "ShowProduct"],
-      selected: "AddProduct"
+      selected: "ShowProduct",
+      isedit: false,
+      
     };
   },
   components: {
     AddProduct,
-    ShowProduct
-   
-  }
+    ShowProduct,
+  },
+  methods: {
+ 
+ 
+  },
 };
 </script>
