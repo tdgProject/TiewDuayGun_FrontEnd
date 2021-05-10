@@ -349,15 +349,15 @@ export default {
     },
     validateName() {
       this.ErrorName = this.enteredName === "" ? true : false;
-      console.log(`name: ${this.ErrorName}`);
+      
     },
     validateType() {
       this.ErrorType = this.enteredType === "" ? true : false;
-      console.log(`name: ${this.ErrorType}`);
+     
     },
     validatePrice() {
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
-      console.log(`name: ${this.ErrorPrice}`);
+     
     },
     validateDescription() {
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
