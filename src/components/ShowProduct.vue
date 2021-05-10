@@ -361,11 +361,11 @@ export default {
     },
     validateDescription() {
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
-      console.log(`name: ${this.ErrorDescription}`);
+      
     },
     validateDate() {
       this.ErrorDate = this.productDate === null ? true : false;
-      console.log(`name: ${this.ErrorDate}`);
+      
     },
     showData(Product) {
       this.isEdit = true;
@@ -386,7 +386,7 @@ export default {
         const data = await res.json();
         return data;
       } catch (error) {
-        console.log(`Could not get! ${error}`);
+        
       }
     },
     async deleteProduct(deleteId) {
@@ -399,7 +399,7 @@ export default {
           (Product) => Product.productId !== deleteId
         );
       } catch (error) {
-        console.log(`Could not delete! ${error}`);
+        
       }
     },
     editProduct() {
@@ -419,11 +419,11 @@ export default {
         }
     
         const jsonProduct = JSON.stringify(product);
-        console.log(jsonProduct);
+        
         const blob = new Blob([jsonProduct], {
           type: "application/json",
         });
-        console.log(blob)
+       
         const formdata = new FormData();
         formdata.append("newProduct", blob);
         formdata.append("image", this.upfile);
@@ -441,7 +441,7 @@ export default {
           alert("An Unexpected Error Occured. Response Status: " + res.status);
         }
       } catch (error) {
-        console.log(`Could not save! ${error}`);
+        
       }
       
     },
