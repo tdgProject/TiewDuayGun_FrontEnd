@@ -386,7 +386,7 @@ export default {
         const data = await res.json();
         return data;
       } catch (error) {
-        
+        console.log(`Could not get! ${error}`);
       }
     },
     async deleteProduct(deleteId) {
@@ -399,7 +399,7 @@ export default {
           (Product) => Product.productId !== deleteId
         );
       } catch (error) {
-        
+        console.log(`Could not delete! ${error}`);
       }
     },
     editProduct() {
@@ -423,7 +423,7 @@ export default {
         const blob = new Blob([jsonProduct], {
           type: "application/json",
         });
-       
+        
         const formdata = new FormData();
         formdata.append("newProduct", blob);
         formdata.append("image", this.upfile);
@@ -441,7 +441,7 @@ export default {
           alert("An Unexpected Error Occured. Response Status: " + res.status);
         }
       } catch (error) {
-        
+        console.log(`Could not save! ${error}`);
       }
       
     },
