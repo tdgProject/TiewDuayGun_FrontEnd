@@ -300,23 +300,23 @@ export default {
 
     validateName() {
       this.ErrorName = this.enteredName === "" ? true : false;
-      
+      console.log(`name: ${this.ErrorName}`);
     },
     validateType() {
       this.ErrorType = this.enteredType === "" ? true : false;
-      
+      console.log(`name: ${this.ErrorType}`);
     },
     validatePrice() {
       this.ErrorPrice = this.enteredPrice === "" ? true : false;
-      
+      console.log(`name: ${this.ErrorPrice}`);
     },
     validateDescription() {
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
-   
+      console.log(`name: ${this.ErrorDescription}`);
     },
     validateDate() {
       this.ErrorDate = this.productDate === null ? true : false;
-      
+      console.log(`name: ${this.ErrorDate}`);
     },
 
 
@@ -331,7 +331,7 @@ export default {
         const data = await res.json();
         return data;
       } catch (error) {
-        (`Could not get! ${error}`);
+        console.log(`Could not get! ${error}`);
       }
     },
     async deleteProduct(deleteId) {
@@ -344,7 +344,7 @@ export default {
           (Product) => Product.id !== deleteId
         );
       } catch (error) {
-        (`Could not delete! ${error}`);
+        console.log(`Could not delete! ${error}`);
       }
     },
     newProduct() {
@@ -362,10 +362,11 @@ export default {
         for (const color of this.productColors) {
           product.productColors.push(color);
         }
-      
+        console.log(product.productid);
+        console.log(this.id);
 
         const jsonProduct = JSON.stringify(product);
-        
+        console.log(jsonProduct);
         const blob = new Blob([jsonProduct], {
           type: "application/json",
         });
@@ -389,7 +390,7 @@ export default {
           alert("An Unexpected Error Occured. Response Status: " + res.status);
         }
       } catch (error) {
-        (`Could not save! ${error}`);
+        console.log(`Could not save! ${error}`);
       }
     },
   },
