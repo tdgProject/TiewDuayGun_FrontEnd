@@ -386,7 +386,7 @@ export default {
         const data = await res.json();
         return data;
       } catch (error) {
-        console.log(`Could not get! ${error}`);
+        (`Could not get! ${error}`);
       }
     },
     async deleteProduct(deleteId) {
@@ -399,7 +399,7 @@ export default {
           (Product) => Product.productId !== deleteId
         );
       } catch (error) {
-        console.log(`Could not delete! ${error}`);
+        (`Could not delete! ${error}`);
       }
     },
     editProduct() {
@@ -441,7 +441,7 @@ export default {
           alert("An Unexpected Error Occured. Response Status: " + res.status);
         }
       } catch (error) {
-        console.log(`Could not save! ${error}`);
+        (`Could not save! ${error}`);
       }
       
     },
