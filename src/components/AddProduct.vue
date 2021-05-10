@@ -2,6 +2,7 @@
   
 
   <form @submit.prevent="submitForm">
+    
     <div
       class="icon bg-blue-600 text-white w-6 h-6 absolute flex items-center justify-center p-5"
       style="left: -40px"
@@ -92,37 +93,52 @@
         >
           Product Color
         </label>
+        <div class="grid grid-cols-5">
+        <div class="bg-black w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-white rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Black"
-          @blur="validateColors"
+          @blur="validateColor"
         />
+         </div>
+         <div class="bg-gray-100 w-12  pt-3 pb-2 pr-1">
+           
         <input
           type="checkbox"
           class="ml-1 bg-black rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.White"
         />
+        </div>
+        <div class="bg-gray-600 w-12  pt-3 pb-2 pr-1 ">
         <input
+        
           type="checkbox"
           class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Gray"
         />
+        </div>
+        <div class="bg-blue-600 w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
-          class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
+          class="ml-1 bg-gray-900 rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Navy"
         />
+        </div>
+        <div class="bg-yellow-200 w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Beige"
         />
+        </div>
+        </div>
+        <p v-if="ErrorColor" class="text-red-500">**</p>
       </div>
     </div>
 
@@ -132,6 +148,7 @@
       id="image"
       name="image"
       accept="image/*,"
+      @blur="validatePreview"
       @change="upfile"
     />
    <div class="border p-2 mt-3">
@@ -140,6 +157,7 @@
               <div class="h-56 w-56 object-cover mt-2 rounded-2xl6">
               <img :src="preview" class="img-fluid" />
               </div>
+              <p v-if="ErrorPreview" class="text-red-500">Enter Your pic</p>
             </template>
            
           </div>
@@ -152,6 +170,7 @@
       value="Submit"
       class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold p-3"
     />
+
   </form>
 
   
@@ -187,7 +206,9 @@ export default {
       Errorbrand: false,
       ErrorSize: false,
       ErrorDate: false,
+      ErrorPreview: false,
       pic: null,
+      ErrorColor: false,
       Colorlist: {
         Black: {
           color: {
@@ -251,6 +272,8 @@ export default {
       this.ErrorDescription = this.enteredDescription === "" ? true : false;
       this.Errorbrand = this.brand === null ? true : false;
       this.ErrorDate = this.productDate === null ? true : false;
+      this.ErrorPreview = this.preview === null ? true : false;
+      this.ErrorColor = this.productColors === "" ? true :false;
       if (
         !this.ErrorName &&
         !this.ErrorPrice &&
@@ -258,7 +281,9 @@ export default {
         !this.Errorbrand &&
         !this.ErrorSize &&
         !this.ErrorDate &&
-        !this.Errorimage
+        !this.Errorimage&&
+        !this.ErrorPreview&&
+        !this.ErrorColor
       ) {
         {
           if (this.isEdit) {
@@ -317,6 +342,14 @@ export default {
     validateDate() {
       this.ErrorDate = this.productDate === null ? true : false;
       console.log(`name: ${this.ErrorDate}`);
+    },
+    validatePreview() {
+      this.ErrorPreview = this.preview === null ? true : false;
+      console.log(`name: ${this.ErrorPreview}`);
+    },
+    validateColor(){
+      this.ErrorColor = this.productColors === "" ? true : false;
+      console.log(`name: ${this.ErrorColor}`)
     },
 
 

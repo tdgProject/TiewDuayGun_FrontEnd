@@ -1,29 +1,29 @@
 <template>
 
-  <div class="lg:flex items-center container mx-auto my-auto grid grid-cols-3">
-    <div class="px-4 py-2" v-for="Product in ProductList" :key="Product.id">
-      <h1 class="text-gray-900 font-bold text-3xl uppercase">
+  <div class="grid grid-cols-3 mt-12 md:w-full">
+    <div class="px-4 py-2 md:w-full" v-for="Product in ProductList" :key="Product.id">
+      <h1 class="text-gray-900 font-bold text-3xl uppercase ">
         {{ Product.productName }}
       </h1>
       <p class="text-gray-600 text-sm mt-1">{{ Product.productDescription }}</p>
 
       <img
-        class="h-56 w-56 object-cover mt-2 rounded-2xl "
+        class=" object-cover mt-2 rounded-2xl md:w-full  "
         :src="getimage(Product.image)" 
         alt="NIKE AIR" >
         
      
-      <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+      <div class="flex items-center justify-between px-4 py-2 bg-gray-900 md:w-full">
         <h1 class="text-gray-200 font-bold text-xl">
           ${{ Product.productCost }}
         </h1>
         <p
-          class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded"
+          class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded md:w-1/2"
         >
           {{ Product.brand.brandName }}
         </p>
       </div>
-      <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+      <div class="flex items-center justify-between px-4 py-2 bg-gray-900 md:w-full">
         <h1 class="text-gray-200 font-bold text-xl">
           {{ Product.productDate }}
         </h1>
@@ -35,7 +35,7 @@
         </p>
       </div>
 
-      <div class="flex items-center justify-center px-4 py-2 bg-gray-900">
+      <div class="flex items-center justify-center px-4 py-2 bg-gray-900 md:w-full">
         <div class="flex" v-for="color in Product.productColors" :key="color.id">
           <button
             class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-100"
@@ -50,11 +50,11 @@
             v-if="color.color.colorName == 'Gray'"
           ></button>
            <button
-            class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-500"
+            class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-blue-900"
             v-if="color.color.colorName == 'Navy'"
           ></button>
            <button
-            class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-gray-500"
+            class="ml-1 rounded-full w-6 h-6 focus:outline-none bg-yellow-100"
             v-if="color.color.colorName == 'Beige'"
           ></button>
         </div>
@@ -178,47 +178,74 @@
         >
           Product Color
         </label>
+        <div class="grid grid-cols-5">
+        <div class="bg-black w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-white rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Black"
+          @blur="validateColor"
         />
+        </div>
+        <div class="bg-gray-100 w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-black rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.White"
         />
+        </div>
+        <div class="bg-gray-500 w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Gray"
         />
+        </div>
+        <div class="bg-blue-900 w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Navy"
         />
+        </div>
+        <div class="bg-yellow-100 w-12  pt-3 pb-2 pr-1">
         <input
           type="checkbox"
           class="ml-1 bg-gray-500 rounded-full w-6 h-6 focus-outline-black"
           v-model="productColors"
           :value="Colorlist.Beige"
         />
+        </div>
+      </div>
       </div>
       <p v-if="ErrorColor" class="text-red-500">**</p>
     </div>
 
+    <div class="form-group">
     <input
       type="file"
       id="image"
       name="image"
       accept="image/*,"
+      @blur="validatePreview"
       @change="upfile"
     />
+   <div class="border p-2 mt-3">
+            <p>Preview Here:</p>
+            <template v-if="preview">
+              <div class="h-56 w-56 object-cover mt-2 rounded-2xl6">
+              <img :src="preview" class="img-fluid" />
+              </div>
+              
+            </template>
+           
+          </div>
+         
+ </div>
 
     <input
       type="submit"
@@ -227,6 +254,8 @@
     />
   </form>
  </div>
+
+ <button @click="reset">Clear All</button>
 </template>
 
 
@@ -238,6 +267,8 @@ export default {
 
   data() {
     return {
+      preview: null,
+      pic : null,
        isEdit: false,
       editId: "",
       url:"http://40.76.71.12:8081",    
@@ -301,12 +332,29 @@ export default {
     };
   },
   methods: {
+    
+    reset: function() {
+      this.preview = null;
+      this.pic = null;
+
+    },
       upfile(e) {
       let file = e.target.files[0];
       let data = new FormData();
       data.append("file", file, file.name);
       this.upfile = data.get("file");
       this.image = URL.createObjectURL(this.upfile);
+
+      var input = e.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+        }
+        this.pic=input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
+    
     },
     getimage(image){
       return `${this.url}/image/${image}`
@@ -345,8 +393,9 @@ export default {
       this.enteredDescription = "";
       this.preview = null;
       this.image = null;
-      setTimeout(location.reload.bind(location), 3000);
+      setTimeout(location.href="http://localhost:8080", 3000);
     },
+    
     validateName() {
       this.ErrorName = this.enteredName === "" ? true : false;
       console.log(`name: ${this.ErrorName}`);
@@ -367,6 +416,11 @@ export default {
       this.ErrorDate = this.productDate === null ? true : false;
       console.log(`name: ${this.ErrorDate}`);
     },
+    validateColor(){
+      this.ErrorColor = this.productColors === null ? true : false;
+      console.log(`name: ${this.ErrorColor}`)
+    },
+
     showData(Product) {
       this.isEdit = true;
       this.editId = Product.productId;

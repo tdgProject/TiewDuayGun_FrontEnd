@@ -23,15 +23,15 @@
                 </div>
             </div>
         
-        <!-- Title -->
+        
         <section class="h-screen px-12 sm:px-24 flex items-center relative">
             <div class="grid grid-cols-12 gap-6 ">
                 <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-8 xxl:col-span-12">
                     <div class="w-full">
                         <h1 class="text-7xl sm:text-8xl lg:text-8xl xl:text-9xl text-white font-bold my-8">Style Your<br>
                             Style <span class="text-blue-400">Kmutt</span></h1>
-                        <p class="text-xl text-white font-semibold ">Become the best in your industry!<br> Start today
-                            our universal quik start program</p>
+                        <p class="text-xl text-white font-semibold ">Become the best fashion in this World!<br> StylebyMe
+                            StylebyYou</p>
                     </div>
                 </div>
                 <div class="absolute bottom-0 left-0 py-6 px-6">
@@ -50,12 +50,11 @@
                 </div>
             </div>
         </section>
-        <!-- WE CREATE -->
         <section class="h-full bg-gray-900">
             <div class="relative  px-8 py-8">
                 <div>
                     <h1 class="text-white text-white text-6xl font-bold">
-                        <span class="bg-blue-400 py-4 px-4 rounded-full text-5xl">WE</span>CREATE
+                        <span class="bg-blue-400 py-4 px-4 rounded-full text-5xl">2U</span>BRAND
                     </h1>
                 </div>
             </div>
@@ -63,56 +62,44 @@
                 <div class="col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-5 xxl:col-span-5">
                     <div class="py-4">
                         <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">01-</span>
-                            OPTIMIZED <span class="font-bold">USER EXPERIENCES</span></p>
-                        <p class="text-blue-900 text-sm pl-8">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
-                            the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                            type specimen book.
+                            THE NEXT FASHION <span class="font-bold">UNIQLO</span></p>
+                        <p class="text-white text-sm pl-8">A Yamaguchi-based company, Ogori Shōji (which, until then, had been operating men's clothing shops called "Men's Shop OS") was founded in March 1949 in Ube, Yamaguchi.[4]
+
+In May 1984, it opened a unisex casual wear store in Fukuro-machi, Naka-ku, Hiroshima, under the name "Unique Clothing Warehouse".[5] Initially, the brand was going to be registered as a shortened contraction of "unique clothing".[6] However, in 1988, during administration work in Hong Kong for registering the brand, staff in charge of registration misread the "C" as "Q", and that is how the brand name was born.[7] Tadashi Yanai then changed the store name to "uniqlo" across Japan.[8] In September 1991, the name of the company was changed from "Ogori Shōji" to "Fast Retailing", and by April 1994, there were over 100 Uniqlo stores operating throughout Japan
                         </p>
                     </div>
                     <div class="py-4">
                         <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">02-</span>
-                            ELEGENT <span class="font-bold">USER INTERFACES</span></p>
+                            THE NEXT TREND <span class="font-bold">H&M</span></p>
                     </div>
-                    <div class="py-4">
-                        <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">03-</span>
-                            BEAUTIFUL <span class="font-bold">GRAPHIC DESIGNS</span></p>
-                    </div>
-                    <div class="py-4">
-                        <p class="text-lg font-semibold text-blue-900"><span class="text-red-400 font-bold">04-</span>
-                            TACTICAL <span class="font-bold">DIGITAL MARKETING</span></p>
-                    </div>
+                   <p class="text-white text-sm pl-8">
+                       Hennes and Mauritz AB (Swedish pronunciation: [ˈhɛ̂nːɛs ɔ ˈmǎʊrɪts]; H&M [ˈhôːɛm]) is a Swedish multinational clothing-retail company known for its fast-fashion clothing for men, women, teenagers, and children. As of November 2019, H&M operates in 74 countries with over 5,000 stores under the various company brands, with 126,000 full-time equivalent positions.[2] It is the second-largest global clothing retailer, behind Spain-based Inditex (parent company of Zara).[8] Founded by Erling Persson and run by his son Stefan Persson and Helena Helmersson, the company makes its online shopping available in 33 countries.[9][10]
+                   </p>
                 </div>
                 <div class="col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-7 xxl:col-span-7 flex justify-center">
-                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/male-employee-looking-at-customer-review-2937682-2426381.png"
+                    <img src="https://www.alamanda.com.my/wp-content/uploads/2017/10/d-2.png"
                         class="w-auto" />
                 </div>
             </div>
         </section>
         <!-- Grow With Us -->
-        <section class="h-full bg-yellow-300">
+        <section class="h-full bg-white">
             <div class="grid grid-cols-12 gap-0">
                 <div
-                    class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-6 xxl:col-span-6 bg-red-500 h-full px-16 py-6">
+                    class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-6 xxl:col-span-6 bg-gray-500 h-full px-16 py-6">
                     <div>
-                        <img src="https://superscene.pro/img/constructor/06.png" class="w-40 -ml-4" />
-                        <h1 class="text-white font-semibold text-7xl">Grow With Us</h1>
-                        <button
-                            class="my-6 bg-gradient-to-b from-yellow-400 to-yellow-500  text-white font-bold py-2 px-4 rounded-lg uppercase text-sm  shadow-xl">
-                            Hire Us
-                        </button>
+                        <img src="https://ev.runlah.com/api/1/images/e-BkgrKvP6f-banner.png?size=xl" class="w-40 -ml-4" />
+                        <h1 class="text-black font-semibold text-7xl font-serif">UNIQLO</h1>
+                      
                     </div>
                 </div>
                 <div
                     class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-6 xxl:col-span-6 bg-blue-400 h-full px-16 py-6">
                     <div>
-                        <img src="https://assets.materialup.com/uploads/641e0e0f-eddf-4d2c-b0ee-c6f55300bb1b/preview.png"
+                        <img src="http://1.bp.blogspot.com/-QVP23wSg3HU/USZZ4H8dv1I/AAAAAAAAAAM/NvcsBVgj-QE/s1600/H%2526M_logo.png"
                             class="w-52 -ml-10" />
-                        <h1 class="text-white font-semibold text-7xl">Say Hello</h1>
-                        <button
-                            class="my-6 bg-gradient-to-b from-red-400 to-red-500  text-white font-bold py-2 px-4 rounded-lg uppercase text-sm  shadow-xl">
-                            Hello@123.com
-                        </button>
+                        <h1 class="text-white font-semibold text-7xl font-serif">H&M</h1>
+                        
                     </div>
                 </div>
             </div>
