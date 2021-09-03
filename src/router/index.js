@@ -1,31 +1,60 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory
+} from 'vue-router'
 import Home from '../views/Home.vue'
+import Tag from '../views/Tag.vue'
+import Signup from '../views/Signup.vue'
+import Addplace from '../views/Addplace.vue'
+import Business from '../views/Business.vue'
+import List from '../views/List.vue'
+import Placeinfo from '../views/Placeinfo.vue'
+import Profile from '../views/Profile.vue'
 
 
-const routes = [
-  {
+
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/Tag',
+    name: 'Tag',
+    component: Tag
   },
   {
-    path: '/Product',
-    name: 'Product',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Product.vue')
+    path: '/Signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/Addplace',
+    name: 'Addplace',
+    component: Addplace
+  },
+  {
+    path: '/Business',
+    name: 'Business',
+    component: Business
+  },
+  {
+    path: '/List',
+    name: 'List',
+    component: List
+  },
+  {
+    path: '/Placeinfo',
+    name: 'Placeinfo',
+    component: Placeinfo
+  },
+  {
+    path: '/Profile',
+    name: 'Profile',
+    component: Profile
   },
 
-  
+
 ]
 
 const router = createRouter({
