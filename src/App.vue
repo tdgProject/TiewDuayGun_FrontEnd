@@ -3,8 +3,8 @@
     <router-link to="/" id="home">Home</router-link>
     <router-link to="/all" id="all">All</router-link>
     <router-link to="/tag" id="tag">Tag</router-link>
-    <router-link to="/profile" id="profile">Abour us</router-link>
-    <router-link to="/login" id="login">Login</router-link> 
+    <router-link to="/Profile" id="profile">Abour us</router-link>
+    <router-link to="/Signup" id="login">Login</router-link> 
   </div>
   <router-view />
 </template>
