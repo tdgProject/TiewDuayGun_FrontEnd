@@ -1,6 +1,12 @@
 <template>
- 
-  <router-view/>
+  <div id="nav" class="text-center bg-gray-500 h-12">
+    <router-link to="/" id="home">Home</router-link>
+    <router-link to="/all" id="all">All</router-link>
+    <router-link to="/tag" id="tag">Tag</router-link>
+    <router-link to="/profile" id="profile">Abour us</router-link>
+    <router-link to="/login" id="login">Login</router-link> 
+  </div>
+  <router-view />
 </template>
 
 <style>
@@ -12,16 +18,19 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+#home{
+  padding: 50px;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+#all{
+  padding: 50px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#tag{
+  padding: 50px;
+}
+#profile{
+  padding: 50px;
+}
+#login{
+  padding: 50px;
 }
 </style>
