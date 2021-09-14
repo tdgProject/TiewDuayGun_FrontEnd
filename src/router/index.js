@@ -14,7 +14,7 @@ import Profile from '../views/Profile.vue'
 
 
 const routes = [{
-    path: '/',
+    path: '',
     name: 'Home',
     component: Home
   },
