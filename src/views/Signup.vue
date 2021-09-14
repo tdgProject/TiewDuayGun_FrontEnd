@@ -5,8 +5,8 @@
     <form class="mt-6">
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
-          <label for="firstname" class="block text-xs font-semibold text-gray-600 uppercase">Id</label>
-          <input id="firstname" type="text" name="firstname" placeholder="John" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+          <label for="firstname" class="block text-xs font-semibold text-gray-600 uppercase">Email</label>
+          <input id="Email" type="Email" name="Email" placeholder="Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
         </span>
         <span class="w-1/2">
           <label for="lastname" class="block text-xs font-semibold text-gray-600 uppercase">Password</label>
@@ -15,8 +15,6 @@
       </div>
       <label for="email" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Username</label>
       <input id="text" type="text" name="text" placeholder="Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-      <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Email</label>
-      <input id="email" type="email" name="email" placeholder="email" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
       <label for="password-confirm" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Tel.</label>
       <input id="password-confirm" type="text" name="text" placeholder="Your Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
       <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
