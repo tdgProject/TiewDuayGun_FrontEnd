@@ -1,37 +1,30 @@
 <template>
-<div class="container">
-
-<div class="row" style="margin-top:20px">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-		<form role="form">
-			<fieldset>
-				<h2>Please Sign In</h2>
-				<hr class="colorgraph">
-				<div class="form-group">
-                    <input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username">
-				</div>
-				<div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
-				</div>
-				<span class="button-checkbox">
-					<button type="button" class="btn" data-color="info">Remember Me</button>
-                    <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
-					<a href="" class="btn btn-link pull-right">Forgot Password?</a>
-				</span>
-				<hr class="colorgraph">
-				<div class="row">
-					<div class="col-xs-6 col-sm-6 col-md-6">
-                        <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<a href="" class="btn btn-lg btn-primary btn-block">Register</a>
-					</div>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-</div>
-
+<div class="grid min-h-screen place-items-center">
+  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+    <h1 class="text-xl font-semibold">Hello there 👋, <span class="font-normal">please fill in your information to continue</span></h1>
+    <form class="mt-6">
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <label for="firstname" class="block text-xs font-semibold text-gray-600 uppercase">Id</label>
+          <input id="firstname" type="text" name="firstname" placeholder="John" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+        <span class="w-1/2">
+          <label for="lastname" class="block text-xs font-semibold text-gray-600 uppercase">Password</label>
+        <input id="password" type="password" name="password" placeholder="password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+      </div>
+      <label for="email" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Username</label>
+      <input id="text" type="text" name="text" placeholder="Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Email</label>
+      <input id="email" type="email" name="email" placeholder="email" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      <label for="password-confirm" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Tel.</label>
+      <input id="password-confirm" type="text" name="text" placeholder="Your Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+        Sign up
+      </button>
+      <p class="flex justify-between inline-block mt-4 text-xs text-gray-500 cursor-pointer hover:text-black" a href="/Signin">Already registered?</p>
+    </form>
+  </div>
 </div>
 </template>
 <script>
