@@ -1,6 +1,6 @@
 <template>
-    <div class="d-flex w-screen h-screen bg-warning">
-    <div class="container contact-form align-self-center">
+    <div class="d-flex w-screen h-screen bg-secondary">
+    <div class="container contact-form align-self-center rounded-pill">
         <div class="contact-image d-flex justify-content-center">
             <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
         </div>
