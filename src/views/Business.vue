@@ -52,7 +52,6 @@
 <style scoped>
 .contact-form{
     background: #fff;
-    margin-top: 10%;
     margin-bottom: 5%;
     width: 70%;
 }
