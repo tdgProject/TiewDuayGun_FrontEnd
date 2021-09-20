@@ -8,7 +8,7 @@ export default createStore({
     places: [],
   },
   mutations: {
-      listPlace(state, places) {
+      setPlace(state, places) {
           state.places = places
       }
     // addCartItem(state, item) {
@@ -42,7 +42,7 @@ export default createStore({
     //   }
         async listPlace({commit}){
             const response = await axios.get(resource_uri);
-            commit('listPlace',response.data);
+            commit('setPlace',response.data);
         }
   }
 });

@@ -11,7 +11,7 @@
   <div class="grid grid-cols-3 mt-12 md:w-full">
     <div class="px-4 py-2 md:w-full" v-for="place in places" :key="place.placeId">
       <h1 class="text-gray-900 font-bold text-3xl uppercase ">
-        1.{{ place.placeName }}
+        1.{{ place.placeName}}
       </h1>
       
 
@@ -28,7 +28,7 @@
 
 
 <script>
-import {computed} from 'vue';
+import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -38,13 +38,16 @@ export default {
   setup(){
     const store = useStore();
 
+    store.dispatch('listPlace');
+
     let places = computed(function () {
       return store.state.places
     });
 
-    return {
+    return{
       places
     }
+
   },
 
   // data() {
