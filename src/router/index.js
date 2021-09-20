@@ -4,7 +4,7 @@ import {
 } from 'vue-router'
 import Home from '../views/Home.vue'
 import Tag from '../views/Tag.vue'
-import Signin from '../views/Signin.vue'
+import SignIn from '../views/SignIn.vue'
 import Signup from '../views/Signup.vue'
 import Addplace from '../views/Addplace.vue'
 import Business from '../views/Business.vue'
@@ -25,9 +25,9 @@ const routes = [{
     component: Tag
   },
   {
-    path: '/Signin',
-    name: 'Signin',
-    component: Signin
+    path: '/SignIn',
+    name: 'SignIn',
+    component: SignIn
   },
   {
     path: '/Signup',
