@@ -1,16 +1,20 @@
 import { createStore } from "vuex";
 import axios from "axios";
 
-const resource_uri = "http://localhost:8081/place/";
+const resource_uri = "http://localhost:8081/";
 
 export default createStore({
   state: {
     places: [],
+    types: [],
   },
   mutations: {
       setPlace(state, places) {
           state.places = places
-      }
+      },
+      listTag(state, types) {
+        state.types = types
+    }
     // addCartItem(state, item) {
     //   item.quantity = 1;
     //   state.cart.push(item);
@@ -41,8 +45,12 @@ export default createStore({
     //       commit('removeCartItem',item)
     //   }
         async listPlace({commit}){
-            const response = await axios.get(resource_uri);
+            const response = await axios.get(`${resource_uri}place`);
             commit('setPlace',response.data);
+        },
+        async listTag({commit}){
+            const response = await axios.get(`${resource_uri}types`);
+            commit('listTag',response.data);
         }
   }
 });
