@@ -1,5 +1,5 @@
 <template>
-<!-- <div class="border-8 border-red-500 rounded-full bg-white shadow flex w-full">
+<div class="border-8 border-red-500 rounded-full bg-white shadow flex ">
             <input
                 type="text"
                 placeholder="Search Your Place....'"
@@ -7,21 +7,50 @@
             <button class="bg-yellow-300 rounded-tr-full rounded-br-full hover:bg-red-300 py-2 px-4" href="/List">
                 <p class="font-semibold text-base uppercase">Search</p>
             </button>
-</div> -->
-  <div class="grid grid-cols-3 mt-12 md:w-full">
-    <div class="px-4 py-2 md:w-full" v-for="place in places" :key="place.placeId">
-      <h1 class="text-gray-900 font-bold text-3xl uppercase ">
+            
+</div>
+
+
+    
+        <div class="container ">
+            <h2 class="mt-4 mb-4">List All</h2>
+        </div>
+        <div class=" d-flex flex-wrap ">
+            <!-- Bootstrap 5 card box -->
+            <div class="px-4 py-2 w-1/3 " v-for="place in places" :key="place.placeId">
+            <div class="card-box">
+                <div class="card-thumbnail w-auto">
+                    <img src="https://7greens.tourismthailand.org/wp-content/uploads/2020/03/shutterstock_267973889-1-scaled.jpg" class="img-fluid" alt="">
+                </div>
+                <h1 class="text-black font-bold text-xl ">
         {{ place.placeName}}
       </h1>
+                      <h2 class="text-black-200 font-bold text-xl flex  px-4">Tag:
+        <div v-for="tag in place.tags" :key="tag.tag.tagid">
+           {{ tag.tag.tagName}},
+        </div>
+      </h2>
+      <h3 class="text-black-200 font-bold text-xl flex px-4">Rating:
+        {{ place.placeRating}}
+      </h3>
+                <a href="/Placeinfo" class="btn btn-sm btn-danger float-right">Read more >></a>
+            </div>
+        </div>
+    
+
+</div>
+
+ 
       
 
+  
+    
       <!-- <img
         class=" object-cover mt-2 rounded-2xl md:w-full  "
         :src="getimage(place.image)" 
         alt="Place" > -->
 
-    </div>
-  </div>
+  
 
 </template>
 
@@ -30,6 +59,8 @@
 <script>
 import {computed} from "vue";
 import {useStore} from "vuex";
+
+
 
 export default {
   name: "List",
@@ -81,4 +112,5 @@ export default {
   // },
   
 };
+
 </script>
