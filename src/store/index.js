@@ -7,6 +7,7 @@ export default createStore({
   state: {
     places: [],
     types: [],
+    place: null,
   },
   mutations: {
       setPlace(state, places) {
@@ -14,7 +15,10 @@ export default createStore({
       },
       listTag(state, types) {
         state.types = types
-    }
+      },
+      getPlace(state, place) {
+        state.place = place
+      }
     // addCartItem(state, item) {
     //   item.quantity = 1;
     //   state.cart.push(item);
@@ -47,6 +51,10 @@ export default createStore({
         async listPlace({commit}){
             const response = await axios.get(`${resource_uri}place`);
             commit('setPlace',response.data);
+        },
+        async getPlaceById({commit}, pid){
+          const response = await axios.get(`${resource_uri}place/${pid}`);
+          commit('getPlace',response.data);
         },
         async listTag({commit}){
             const response = await axios.get(`${resource_uri}types`);
