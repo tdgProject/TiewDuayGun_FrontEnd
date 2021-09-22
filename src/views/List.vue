@@ -27,11 +27,13 @@
       </h1>
                       <h2 class="text-black-200 font-bold text-xl flex  px-4">Tag:
         <div v-for="tag in place.tags" :key="tag.tag.tagid">
-           {{ tag.tag.tagName}},
+          
+          <a href="/List">{{ tag.tag.tagName}},</a>
+          
         </div>
       </h2>
       <h3 class="text-black-200 font-bold text-xl flex px-4">Rating:
-        {{ place.placeRating}}
+        {{ place.placeRating}}/5
       </h3>
                 <a href="/Placeinfo" class="btn btn-sm btn-danger float-right">Read more >></a>
             </div>
