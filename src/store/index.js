@@ -7,7 +7,10 @@ export default createStore({
   state: {
     places: [],
     types: [],
-    place: null,
+    hotels: [],
+    reviews: [],
+
+    
   },
   mutations: {
       setPlace(state, places) {
@@ -18,6 +21,15 @@ export default createStore({
       },
       getPlace(state, place) {
         state.place = place
+      },
+      setHotel(state, hotels) {
+        state.hotels = hotels
+      },
+      getHotel(state, hotels) {
+        state.hotels = hotels
+      },
+      listReview(state, reviews) {
+        state.reviews = reviews
       }
     // addCartItem(state, item) {
     //   item.quantity = 1;
@@ -49,7 +61,7 @@ export default createStore({
     //       commit('removeCartItem',item)
     //   }
         async listPlace({commit}){
-            const response = await axios.get(`${resource_uri}place`);
+            const response = await axios.get(`${resource_uri}places`);
             commit('setPlace',response.data);
         },
         async getPlaceById({commit}, pid){
@@ -59,6 +71,15 @@ export default createStore({
         async listTag({commit}){
             const response = await axios.get(`${resource_uri}types`);
             commit('listTag',response.data);
+        },
+        async getHotelById({commit}, pid){
+          const response = await axios.get(`${resource_uri}hotel/${pid}`);
+          commit('getHotel',response.data);
+        },
+        async listReview({commit}, pid){
+            const response = await axios.get(`${resource_uri}review/${pid}`);
+            commit('listReview', response.data);
         }
+          
   }
 });
