@@ -4,7 +4,7 @@ import {
 } from 'vue-router'
 import Home from '../views/Home.vue'
 import Tag from '../views/Tag.vue'
-import SignIn from '../views/Signin.vue'
+import SignIn from '../views/SignIn.vue'
 import Signup from '../views/Signup.vue'
 import Addplace from '../views/Addplace.vue'
 import Business from '../views/Business.vue'
@@ -47,12 +47,13 @@ const routes = [{
   {
     path: '/List',
     name: 'List',
-    component: List
+    component: List,
   },
   {
     path: '/Placeinfo',
     name: 'Placeinfo',
-    component: Placeinfo
+    props: true,
+    component: Placeinfo,
   },
   {
     path: '/Profile',
