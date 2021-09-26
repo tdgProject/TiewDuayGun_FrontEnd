@@ -11,7 +11,10 @@ export default createStore({
   state: {
     places: [],
     types: [],
-    place: null,
+    hotels: [],
+    reviews: [],
+
+    
   },
   mutations: {
     setPlace(state, places) {

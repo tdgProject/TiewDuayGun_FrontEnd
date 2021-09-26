@@ -50,7 +50,7 @@ const routes = [{
     component: List,
   },
   {
-    path: '/Placeinfo',
+    path: '/Placeinfo/:pid',
     name: 'Placeinfo',
     props: true,
     component: Placeinfo,
