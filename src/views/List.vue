@@ -54,14 +54,11 @@
       </div>
     </div>
   </div>
-
   <!-- <img
         class=" object-cover mt-2 rounded-2xl md:w-full  "
         :src="getimage(place.image)" 
         alt="Place" > -->
 </template>
-
-
 
 <script>
 import { computed } from "vue";
