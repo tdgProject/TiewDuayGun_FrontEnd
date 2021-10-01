@@ -60,6 +60,9 @@ export default createStore({
     //   removeCartItem({commit}, item){
     //       commit('removeCartItem',item)
     //   }
+        async onstart(){
+        await axios.get(`${resource_uri}onstart`);
+        },
         async listPlace({commit}){
             const response = await axios.get(`${resource_uri}places`);
             commit('setPlace',response.data);

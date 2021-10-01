@@ -21,11 +21,17 @@
 </template>
 
 <script>
-// import { defineComponent } from '@vue/composition-api'
+import { useStore } from "vuex";
 
-// export default defineComponent({
-//     setup() {
-        
-//     },
-// })
+export default {
+  name: "Home",
+  components: {},
+
+  setup() {
+    const store = useStore();
+
+    store.dispatch("onstart");
+
+  }
+}
 </script>
