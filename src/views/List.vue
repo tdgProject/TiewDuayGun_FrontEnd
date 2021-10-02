@@ -35,10 +35,8 @@
           />
         </div>
         <h1 class="text-black font-bold text-xl">
-          <router-link
-            :to="{ name: 'Placeinfo', params: { pid: place.placeId } }"
-            >{{ place.placeName }}</router-link
-          >
+         
+            {{ place.placeName }}
         </h1>
         <h2 class="text-black-200 font-bold text-xl flex px-4">
           Tag:
@@ -49,9 +47,11 @@
         <h3 class="text-black-200 font-bold text-xl flex px-4">
           Rating: {{ place.placeRating }}/5
         </h3>
-        <a href="/Placeinfo" class="btn btn-sm btn-danger float-right"
-          >Read more >></a
-        >
+          <router-link class="btn btn-sm btn-danger float-right"
+            :to="{ name: 'Placeinfo', params: { pid: place.placeId } }"
+            >Read mores</router-link
+          >
+
       </div>
     </div>
   </div>
