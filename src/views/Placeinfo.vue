@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-6">
           <div class="h-100 p-5 bg-light border rounded-3">
-            <form @submit.prevent="addReview()">
+            <form @submit="addReview()">
               <h3>Your Review and Rating</h3>
               <fieldset
                 class="rating d-flex flex-row-reverse justify-content-center"

@@ -88,6 +88,7 @@ export default createStore({
         },
         async addReview({commit}, formData){
           const response = await axios.post(`${resource_uri}review/add/${formData.pid}`,formData.data);
+          await axios.get(`${resource_uri}onstart`);
           commit('addNewReview',response.data);
         },    
   }
