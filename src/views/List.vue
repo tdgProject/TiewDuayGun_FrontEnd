@@ -1,5 +1,6 @@
 <template>
-  <div class="border-8 border-red-500 rounded-full bg-white shadow flex">
+<div class=""  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://f.ptcdn.info/566/062/000/pn6aeu4qgnV1qeQRhhv4-o.jpg')">
+  <div class="border-8 border-red-500 rounded-full bg-white shadow flex ">
     <input
       type="text"
       placeholder="Search Place's Name"
@@ -11,7 +12,7 @@
       class="
         bg-yellow-300
         rounded-tr-full rounded-br-full
-        hover:bg-red-300
+        hover:bg-red-blue
         py-2
         px-4
       ">
@@ -25,8 +26,8 @@
   </div>
   <div class="d-flex flex-wrap">
     <!-- Bootstrap 5 card box -->
-    <div class="px-4 py-2 w-1/3" v-for="place in places" :key="place.placeId">
-      <div class="card-box">
+    <div class="px-4 py-2 w-1/3 " v-for="place in places" :key="place.placeId">
+      <div class="card-box bg-gray-300">
         <div class="card-thumbnail w-auto">
           <img
             src="https://7greens.tourismthailand.org/wp-content/uploads/2020/03/shutterstock_267973889-1-scaled.jpg"
@@ -55,6 +56,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-- <img
         class=" object-cover mt-2 rounded-2xl md:w-full  "
         :src="getimage(place.image)" 
