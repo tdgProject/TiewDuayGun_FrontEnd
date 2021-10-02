@@ -11,6 +11,7 @@ import Business from '../views/Business.vue'
 import List from '../views/List.vue'
 import Placeinfo from '../views/Placeinfo.vue'
 import Profile from '../views/Profile.vue'
+import Aboutus from '../views/Aboutus.vue'
 
 
 
@@ -23,6 +24,11 @@ const routes = [{
     path: '/Tag',
     name: 'Tag',
     component: Tag
+  },
+  {
+    path: '/Aboutus',
+    name: 'Aboutus',
+    component: Aboutus
   },
   {
     path: '/Signin',
