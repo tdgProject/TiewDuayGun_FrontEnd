@@ -1,12 +1,14 @@
 <template>
+
   <div class="bg-gray-400">
     <div class="container py-4">
+      <div class="pt-4 mt-4 text-muted border-top"></div>
       <header class="pb-3 mb-4 border-bottom">
         <a
           href="/"
           class="d-flex align-items-center text-dark text-decoration-none"
         >
-          <i class='bx bxs-been-here display-6 mr-2' ></i>
+          <i class="bx bxs-been-here display-6 mr-2"></i>
           <span class="fs-4">{{ place.placeName }}</span>
         </a>
       </header>
@@ -59,7 +61,7 @@
               <fieldset
                 class="rating d-flex flex-row-reverse justify-content-center"
               >
-                <input type="radio" id="star5" v-model="rating" :value="5"/>
+                <input type="radio" id="star5" v-model="rating" :value="5" />
                 <label
                   class="full m-0 p-0"
                   for="star5"
@@ -154,7 +156,7 @@
                   rating
                 }}</span>
               </fieldset>
-              
+
               <div class="form-group">
                 <textarea
                   name="review"
@@ -178,55 +180,69 @@
       </div>
 
       <div class="pt-4 mt-4 text-muted border-top"></div>
-        <!-- list review -->
-      <div class="d-flex comment-row m-t-0 justify-content-center mt-100 mb-100"  >
-        <div class="col-lg-6" >
-          <div class="card">
-            <div class="card-body text-center">
-              <h4 class="card-title">Reviews</h4>
-            </div>
-            <div class="comment-widgets text-left">
-              <!-- Comment Row -->
-              <div class="d-flex flex-row comment-row m-t-0">
-                <div class="p-2">
+      <header class="pb-3 mb-4 border-bottom">
+        <a
+          class="d-flex align-items-center text-dark text-decoration-none"
+        >
+          <svg
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+          >
+            <path
+              d="M20 9.999v-2h4v12.001h-3v4l-5.333-4h-7.667v-4h12v-6.001zm-2 4.001h-9.667l-5.333 4v-4h-3v-14.001h18v14.001z"
+            />
+          </svg>
+          <span class="fs-4 p-2">Reviews</span>
+        </a>
+      </header>
+      <!-- list review -->
+      <div class="card bg">
+        <div class="comment-widgets text-left">
+          <!-- Comment Row -->
+          <div class="flex-row comment-row m-t-0">
+            <div>
+              <div
+                class="comment-text w-200 border-8 bg-white shadow-2xl  "
+                v-for="review in reviews"
+                :key="review.userId"
+              >
+                <div class="d-flex p-5">
                   <img
                     src="https://i.imgur.com/Ur43esv.jpg"
                     alt="user"
                     width="50"
                     class="rounded-circle"
                   />
+
+                  <h6 class="font-medium font-bold mt-4 ml-4">
+                    {{ review.user.username }}
+                  </h6>
                 </div>
-                 <div>
-                <div class=" comment-text w-200" v-for="review in reviews" :key="review.userId">
-                  <h6 class="font-medium font-bold mt-4">{{ review.user.username}}</h6>
-                  <span class="m-b-15 d-block">{{ review.review}}</span>
-                  <div class="comment-footer">
-                    <button type="button" class="btn btn-cyan btn-sm">
-                      Edit
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm ">
-                      Submit
-                    </button>
-                    <button type="button" class="btn btn-danger btn-sm ml-3">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-                </div>
+                <span class="m-b-15 d-block text-left ml-28 mb-10 text-lg">{{
+                  review.review
+                }}</span>
+                <div class="comment-footer text-right mr-5">
+                <button type="button" class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.473 7.196c-.425-.439-.401-1.127.035-1.552l4.461-4.326c.218-.211.498-.318.775-.318.282 0 .563.11.776.331l-6.047 5.865zm-7.334 11.021c-.092.089-.139.208-.139.327 0 .25.204.456.456.456.114 0 .229-.042.317-.128l.749-.729-.633-.654-.75.728zm6.33-8.425l-2.564 2.485c-1.378 1.336-2.081 2.63-2.73 4.437l1.132 1.169c1.825-.593 3.14-1.255 4.518-2.591l2.563-2.486-2.919-3.014zm7.477-7.659l-6.604 6.405 3.326 3.434 6.604-6.403c.485-.469.728-1.093.728-1.718 0-2.088-2.53-3.196-4.054-1.718zm-1.946 11.333v7.534h-16v-12h8.013l2.058-2h-12.071v16h20v-11.473l-2 1.939z"/></svg></button>
+                <button type="button" class=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg></button> 
+              </div>
               </div>
             </div>
-            <!-- Card -->
           </div>
+          <!-- Card -->
         </div>
       </div>
- <!-- list review -->
+      <!-- list review -->
+
       <!-- hotel -->
+      <div class="pt-4 mt-4 text-muted border-top"></div>
       <header class="pb-3 mb-4 border-bottom">
         <a
-          href="/"
           class="d-flex align-items-center text-dark text-decoration-none"
         >
-          <i class='bx bxs-hotel display-6 mr-2' ></i>
+          <i class="bx bxs-hotel display-6 mr-2"></i>
           <span class="fs-4">Hotel</span>
         </a>
       </header>
@@ -234,7 +250,11 @@
         <div class="row">
           <div class="d-flex flex-wrap justify-content-start">
             <!-- Bootstrap 5 card box -->
-            <div class="w-96 me-auto " v-for="hotel in hotels" :key="hotel.hotelId">
+            <div
+              class="w-96 me-auto"
+              v-for="hotel in hotels"
+              :key="hotel.hotelId"
+            >
               <div class="card-box">
                 <div class="card-thumbnail">
                   <img
@@ -243,7 +263,9 @@
                     alt=""
                   />
                 </div>
-                <h1 class="text-black font-bold text-xl"> {{ hotel.hotel.hotelName }} </h1>
+                <h1 class="text-black font-bold text-xl">
+                  {{ hotel.hotel.hotelName }}
+                </h1>
 
                 <a href="#" class="btn btn-sm btn-danger float-right"
                   >Read more ></a
@@ -316,7 +338,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "Tag",
-  props: ['pid'],
+  props: ["pid"],
   data() {
     return {
       rating: 0,
@@ -327,7 +349,7 @@ export default {
     };
   },
   components: {},
-   methods: {
+  methods: {
     // validateReview() {
     //   this.ErrorReview = this.review === "" ? true : false;
     //   console.log(`Review: ${this.ErrorReview}`);
@@ -337,36 +359,36 @@ export default {
     //   console.log(`Rating: ${this.ErrorRating}`);
     // },
     addReview() {
-        const store = useStore();
-        let newReview = {
-          user: { userId: 2},
-          review: this.review,
-          rating: this.rating
-        };
-        console.log(this.rating);
-        console.log(this.review);
-        const jsonProduct = JSON.stringify(newReview);
-        console.log(jsonProduct);
-        const blob = new Blob([jsonProduct], {
-          type: "application/json",
-        });
-        const formdata = new FormData();
-        formdata.append("newReview", blob);
-        store.dispatch("addReview", {data:formdata,pid:this.pid});
-        location.reload();
-    },
-    deleteReview(){
       const store = useStore();
-      console.log('work');
-      store.dispatch("removeReview", ({uid:2,pid:this.pid}));
+      let newReview = {
+        user: { userId: 2 },
+        review: this.review,
+        rating: this.rating,
+      };
+      console.log(this.rating);
+      console.log(this.review);
+      const jsonProduct = JSON.stringify(newReview);
+      console.log(jsonProduct);
+      const blob = new Blob([jsonProduct], {
+        type: "application/json",
+      });
+      const formdata = new FormData();
+      formdata.append("newReview", blob);
+      store.dispatch("addReview", { data: formdata, pid: this.pid });
       location.reload();
-    }
-   },
+    },
+    deleteReview() {
+      const store = useStore();
+      console.log("work");
+      store.dispatch("removeReview", { uid: 2, pid: this.pid });
+      location.reload();
+    },
+  },
   setup(props) {
     const store = useStore();
-    store.dispatch("getPlaceById", props.pid), 
-    store.dispatch("getHotelById", props.pid),
-    store.dispatch("listReview", props.pid);
+    store.dispatch("getPlaceById", props.pid),
+      store.dispatch("getHotelById", props.pid),
+      store.dispatch("listReview", props.pid);
     let place = computed(function () {
       return store.state.place;
     });
@@ -376,7 +398,7 @@ export default {
     let reviews = computed(function () {
       return store.state.reviews;
     });
-    
+
     return {
       place,
       hotels,
