@@ -54,12 +54,12 @@
         </div>
         <div class="col-md-6">
           <div class="h-100 p-5 bg-light border rounded-3">
-            <form>
+            <form @submit.prevent="addReview()">
               <h3>Your Review and Rating</h3>
               <fieldset
                 class="rating d-flex flex-row-reverse justify-content-center"
               >
-                <input type="radio" id="star5" v-model="rating" :value="5" />
+                <input type="radio" id="star5" v-model="rating" :value="5"/>
                 <label
                   class="full m-0 p-0"
                   for="star5"
@@ -154,11 +154,13 @@
                   rating
                 }}</span>
               </fieldset>
+              
               <div class="form-group">
                 <textarea
                   name="review"
                   class="form-control"
                   placeholder="Your Review*"
+                  v-model="review"
                   style="width: 100%; height: 150px"
                 ></textarea>
               </div>
@@ -317,10 +319,42 @@ export default {
   props: ['pid'],
   data() {
     return {
-      rating: 5,
+      rating: 0,
+      review: "",
+      ErrorReview: false,
+      ErrorRating: false,
+      edit: false,
     };
   },
   components: {},
+   methods: {
+    // validateReview() {
+    //   this.ErrorReview = this.review === "" ? true : false;
+    //   console.log(`Review: ${this.ErrorReview}`);
+    // },
+    // validateRating() {
+    //   this.ErrorRating = this.rating === 0 ? true : false;
+    //   console.log(`Rating: ${this.ErrorRating}`);
+    // },
+    addReview() {
+        const store = useStore();
+        let newReview = {
+          user: { userId: 2},
+          review: this.review,
+          rating: this.rating
+        };
+        console.log(this.rating);
+        console.log(this.review);
+        const jsonProduct = JSON.stringify(newReview);
+        console.log(jsonProduct);
+        const blob = new Blob([jsonProduct], {
+          type: "application/json",
+        });
+        const formdata = new FormData();
+        formdata.append("newReview", blob);
+        store.dispatch("addReview", {data:formdata,pid:this.pid});
+    }
+   },
   setup(props) {
     const store = useStore();
     store.dispatch("getPlaceById", props.pid), 
@@ -335,10 +369,11 @@ export default {
     let reviews = computed(function () {
       return store.state.reviews;
     });
+    
     return {
       place,
       hotels,
-      reviews
+      reviews,
     };
   },
 };

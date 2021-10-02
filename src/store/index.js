@@ -30,6 +30,9 @@ export default createStore({
       },
       listReview(state, reviews) {
         state.reviews = reviews
+      },
+      addNewReview(state, review) {
+        state.reviews.push(review)
       }
     // addCartItem(state, item) {
     //   item.quantity = 1;
@@ -82,7 +85,10 @@ export default createStore({
         async listReview({commit}, pid){
             const response = await axios.get(`${resource_uri}review/${pid}`);
             commit('listReview', response.data);
-        }
-          
+        },
+        async addReview({commit}, formData){
+          const response = await axios.post(`${resource_uri}review/add/${formData.pid}`,formData.data);
+          commit('addNewReview',response.data);
+        },    
   }
 });
