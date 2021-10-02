@@ -11,7 +11,7 @@
 
         <div class="hidden sm:flex sm:items-center">
           <a href="/" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">Home</a>
-          <a href="/List" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">List</a>
+          <a href="/List/All/1" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">List</a>
           <a href="/Tag" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">Tag</a>
           <a href="/Aboutus" class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">About Us</a>
           

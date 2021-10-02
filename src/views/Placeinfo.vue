@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-6">
           <div class="h-100 p-5 bg-light border rounded-3">
-            <form @submit="addReview()">
+            <form @submit.prevent="addReview()">
               <h3>Your Review and Rating</h3>
               <fieldset
                 class="rating d-flex flex-row-reverse justify-content-center"
@@ -353,6 +353,13 @@ export default {
         const formdata = new FormData();
         formdata.append("newReview", blob);
         store.dispatch("addReview", {data:formdata,pid:this.pid});
+        location.reload();
+    },
+    deleteReview(){
+      const store = useStore();
+      console.log('work');
+      store.dispatch("removeReview", ({uid:2,pid:this.pid}));
+      location.reload();
     }
    },
   setup(props) {

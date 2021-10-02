@@ -2,9 +2,11 @@
   <div class="border-8 border-red-500 rounded-full bg-white shadow flex">
     <input
       type="text"
-      placeholder="Search Your Place....'"
+      placeholder="Search Place's Name"
       class="w-full rounded-tl-full rounded-bl-full py-2 px-4"
+      v-model="searchValue"
     />
+    <a :href="$router.resolve({name: 'List', params: { filter: 'Name',var: this.searchValue}}).href">
     <button
       class="
         bg-yellow-300
@@ -12,11 +14,10 @@
         hover:bg-red-300
         py-2
         px-4
-      "
-      href="/List"
-    >
+      ">
       <p class="font-semibold text-base uppercase">Search</p>
     </button>
+    </a>
   </div>
 
   <div class="container">
@@ -67,12 +68,30 @@ import { useStore } from "vuex";
 export default {
   name: "List",
   components: {},
-  props: ["place"],
+  props: ['filter','var'],
+  data(){
+    return{
+      searchValue: null,
+    }
+  },
 
-  setup() {
+  setup(props) {
     const store = useStore();
 
-    store.dispatch("listPlace");
+    switch(props.filter){
+      case 'All':
+        store.dispatch("listPlace");
+        break;
+      case 'Tag':
+        store.dispatch("listPlaceByTag",props.var);
+        break;
+      case 'Name':
+        store.dispatch("listPlaceByName",props.var);
+        break;
+      default:
+        break;
+    }
+    
 
     let places = computed(function () {
       return store.state.places;

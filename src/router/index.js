@@ -45,8 +45,9 @@ const routes = [{
     component: Business
   },
   {
-    path: '/List',
+    path: '/List/:filter/:var',
     name: 'List',
+    props: true,
     component: List,
   },
   {

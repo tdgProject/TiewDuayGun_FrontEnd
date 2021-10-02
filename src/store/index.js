@@ -33,6 +33,9 @@ export default createStore({
       },
       addNewReview(state, review) {
         state.reviews.push(review)
+      },
+      deleteReview(state,uid){
+        state.reviews = state.reviews.filter(r => r.user.userId !== uid)
       }
     // addCartItem(state, item) {
     //   item.quantity = 1;
@@ -90,6 +93,19 @@ export default createStore({
           const response = await axios.post(`${resource_uri}review/add/${formData.pid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);
           commit('addNewReview',response.data);
-        },    
+        },
+        async listPlaceByTag({commit},value){
+          const response = await axios.get(`${resource_uri}place/tag/${value}`);
+          commit('setPlace',response.data);
+        },
+        async listPlaceByName({commit},value){
+          const response = await axios.get(`${resource_uri}place/name/${value}`);
+          commit('setPlace',response.data);
+        },
+        async removeReview({commit},deleted){
+          await axios.delete(`${resource_uri}review/delete/${deleted.pid}/${deleted.uid}`);
+          await axios.get(`${resource_uri}onstart`);
+          commit('deleteReview',deleted.uid);
+        },
   }
 });
