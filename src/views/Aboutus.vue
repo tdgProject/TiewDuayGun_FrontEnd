@@ -64,7 +64,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 :root {
   --gradient: linear-gradient(to left top, #dd2476 10%, #ff512f 90%) !important;
 }
