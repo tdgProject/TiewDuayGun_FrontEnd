@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<!-- BUY ME A PIZZA AND HELP SUPPORT OPEN-SOURCE RESOURCES -->
+
 
 
 </template>

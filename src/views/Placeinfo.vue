@@ -49,9 +49,13 @@
 
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
-          <div class="h-100 p-5 text-white bg-dark rounded-3">
-            <h2>Rating : {{ place.placeRating }}</h2>
+                    <div class="h-100 p-2 text-white bg-dark rounded-3">
+            <h2>Rating : {{ place.placeRating }}/5.00</h2>
+            <div class="ml-2">
+<iframe width="600" height="350" src="https://www.youtube.com/embed/A30IuIjQYYg?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+            </div>
           </div>
+        
         </div>
         <div class="col-md-6">
           <div class="h-100 p-5 bg-light border rounded-3">
@@ -201,7 +205,9 @@
                       @click="deleteReview(review.user.userId)"
                       type="button"
                       class=""
+                      
                     >
+                    
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -314,9 +320,11 @@ export default {
       location.reload();
     },
     deleteReview(uid) {
+      
       const store = useStore();
       store.dispatch("removeReview", { uid: uid, pid: this.pid });
       location.reload();
+      
     },
     editReview(uid, rev) {
       const store = useStore();
