@@ -124,7 +124,7 @@
                     </h6>
                     </div>
                     <div class="w-1/6">
-                      <label for="StarRange" class="container text-center">{{uRating}}</label>
+                      <label for="StarRange" class="container text-center font-bold">Your Rating : {{uRating}}</label>
                       <input type="range" class="form-range" min="0" max="5" step="0.5" v-model="uRating" id="StarRange">
                     </div>
                   </div>
