@@ -3,7 +3,7 @@
 <div class="flex items-center justify-center w-screen h-screen bg-gray-800"  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://f.ptcdn.info/566/062/000/pn6aeu4qgnV1qeQRhhv4-o.jpg')">
     <div class="space-y-5 mb-11 ml-6">
       <p class="text-white font-bold text-5xl flex flex-col items-center">
-        <span>TiewDuayGun <br /></span>
+        <span class="ml-3">TiewDuayGun <br /></span>
         <span>----------- <br /></span>
         <span> Search And Travel </span>
       </p>

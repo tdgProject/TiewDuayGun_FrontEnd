@@ -22,7 +22,7 @@
   </div>
 
   <div class="container">
-    <h2 class="mt-4 mb-4">List All</h2>
+    <h2 class="mt-4 mb-4"></h2>
   </div>
   <div class="d-flex flex-wrap">
     <!-- Bootstrap 5 card box -->
@@ -56,11 +56,8 @@
       </div>
     </div>
   </div>
+
 </div>
-  <!-- <img
-        class=" object-cover mt-2 rounded-2xl md:w-full  "
-        :src="getimage(place.image)" 
-        alt="Place" > -->
 </template>
 
 <script>
