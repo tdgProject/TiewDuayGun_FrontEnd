@@ -387,131 +387,16 @@
                       {{ review.user.username }}
                     </h6>
                     </div>
-                    <fieldset
-                      class="
-                        rating
-                        d-flex
-                        flex-row-reverse
-                        justify-content-center
-                      "
-                    >
-                      <input
-                        type="radio"
-                        id="s5"
-                        v-model="review.rating"
-                        :value="5"
-                      />
-                      <label
-                        class="full m-0 p-0"
-                        for="s5"
-                        title="Awesome - 5 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s4half"
-                        v-model="review.rating"
-                        :value="4.5"
-                      />
-                      <label
-                        class="half m-0 p-0"
-                        for="s4half"
-                        title="Pretty good - 4.5 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s4"
-                        v-model="review.rating"
-                        :value="4"
-                      />
-                      <label
-                        class="full m-0 p-0"
-                        for="s4"
-                        title="Pretty good - 4 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s3half"
-                        v-model="review.rating"
-                        :value="3.5"
-                      />
-                      <label
-                        class="half m-0 p-0"
-                        for="s3half"
-                        title="Meh - 3.5 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s3"
-                        v-model="review.rating"
-                        :value="3"
-                      />
-                      <label
-                        class="full m-0 p-0"
-                        for="s3"
-                        title="Meh - 3 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s2half"
-                        v-model="review.rating"
-                        :value="2.5"
-                      />
-                      <label
-                        class="half m-0 p-0"
-                        for="s2half"
-                        title="Kinda bad - 2.5 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s2"
-                        v-model="review.rating"
-                        :value="2"
-                      />
-                      <label
-                        class="full m-0 p-0"
-                        for="s2"
-                        title="Kinda bad - 2 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s1half"
-                        v-model="review.rating"
-                        :value="1.5"
-                      />
-                      <label
-                        class="half m-0 p-0"
-                        for="s1half"
-                        title="Meh - 1.5 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="s1"
-                        v-model="review.rating"
-                        :value="1"
-                      />
-                      <label
-                        class="full m-0 p-0"
-                        for="s1"
-                        title="Sucks big time - 1 star"
-                      ></label>
-                      <input
-                        type="radio"
-                        id="shalf"
-                        v-model="review.rating"
-                        :value="0.5"
-                      />
-                      <label
-                        class="half m-0 p-0"
-                        for="shalf"
-                        title="Sucks big time - 0.5 stars"
-                      ></label>
-                      <input
-                        type="radio"
-                        class="reset-option"
-                        v-model="review.rating"
-                        :value="reset"
-                      />
-                    </fieldset>
+                    <div>
+                      <ul class="d-flex justify-content-start">
+                          <li v-for="x in calStar(review.rating)[0]" :key="x">
+                            <i class='bx bxs-star text-3xl'></i>
+                          </li>
+                          <li v-for="y in calStar(review.rating)[1]" :key="y">
+                            <i class='bx bxs-star-half text-3xl' ></i>
+                          </li>
+                      </ul>
+                    </div>
                   </div>
                   <span
                     class="m-auto w-5/6 d-block text-left ml-28 mb-10 text-lg"
@@ -678,6 +563,7 @@ export default {
       ErrorReview: false,
       ErrorRating: false,
       edit: false,
+      
     };
   },
   components: {},
@@ -731,6 +617,11 @@ export default {
       this.uRating = rating;
       this.edit = !this.edit;
     },
+    calStar(rating){
+      let floor= Math.floor(rating);
+      let half = rating-floor;
+      return [floor,Math.ceil(half)];
+    }
   },
   setup(props) {
     const store = useStore();
