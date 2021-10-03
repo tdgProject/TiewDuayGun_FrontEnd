@@ -1,5 +1,7 @@
 <template>
-<div class=""  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://f.ptcdn.info/566/062/000/pn6aeu4qgnV1qeQRhhv4-o.jpg')">
+
+
+ <div class=""  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://f.ptcdn.info/566/062/000/pn6aeu4qgnV1qeQRhhv4-o.jpg')">
   <div class="border-8 border-red-500 rounded-full bg-white shadow flex ">
     <input
       type="text"
@@ -42,7 +44,8 @@
         <h2 class="text-black-200 font-bold text-xl flex px-4">
           Tag:
           <div v-for="tag in place.tags" :key="tag.tag.tagid">
-            <a href="/List">{{ tag.tag.tagName }},</a>
+            <router-link onclick="window.location.reload(true)"   :to="{ name: 'List', params: { filter: 'Tag',var: tag.tag.tagId } }">{{ tag.tag.tagName }},</router-link>
+            
           </div>
         </h2>
         <h3 class="text-black-200 font-bold text-xl flex px-4">
@@ -57,7 +60,7 @@
     </div>
   </div>
 
-</div>
+ </div>
 </template>
 
 <script>
@@ -73,6 +76,8 @@ export default {
       searchValue: null,
     }
   },
+ 
+    
 
   setup(props) {
     const store = useStore();
