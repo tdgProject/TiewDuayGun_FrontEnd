@@ -209,7 +209,128 @@
                 v-for="review in reviews"
                 :key="review.userId"
               >
-                <div class="d-flex p-5">
+              <div v-if="edit == true">
+                  <div class="d-flex pt-4 pb-3 px-5">
+                    <img
+                      src="https://i.imgur.com/Ur43esv.jpg"
+                      alt="user"
+                      width="50"
+                      class="rounded-circle"
+                    />
+
+                    <h6 class="font-medium font-bold mt-4 ml-4">
+                      {{ review.user.username }}
+                    </h6>
+                    <!--Star-->
+                    <fieldset
+                class="rating d-flex flex-row-reverse justify-content-center"
+              >
+                <input type="radio" id="s5" v-model="uRating" :value="5" />
+                <label
+                  class="full m-0 p-0"
+                  for="s5"
+                  title="Awesome - 5 stars"
+                ></label>
+                <input
+                  type="radio"
+                  id="s4half"
+                  v-model="uRating"
+                  :value="4.5"
+                />
+                <label
+                  class="half m-0 p-0"
+                  for="s4half"
+                  title="Pretty good - 4.5 stars"
+                ></label>
+                <input type="radio" id="s4" v-model="uRating" :value="4" />
+                <label
+                  class="full m-0 p-0"
+                  for="s4"
+                  title="Pretty good - 4 stars"
+                ></label>
+                <input
+                  type="radio"
+                  id="s3half"
+                  v-model="uRating"
+                  :value="3.5"
+                />
+                <label
+                  class="half m-0 p-0"
+                  for="s3half"
+                  title="Meh - 3.5 stars"
+                ></label>
+                <input type="radio" id="s3" v-model="uRating" :value="3" />
+                <label
+                  class="full m-0 p-0"
+                  for="s3"
+                  title="Meh - 3 stars"
+                ></label>
+                <input
+                  type="radio"
+                  id="s2half"
+                  v-model="uRating"
+                  :value="2.5"
+                />
+                <label
+                  class="half m-0 p-0"
+                  for="s2half"
+                  title="Kinda bad - 2.5 stars"
+                ></label>
+                <input type="radio" id="s2" v-model="uRating" :value="2" />
+                <label
+                  class="full m-0 p-0"
+                  for="s2"
+                  title="Kinda bad - 2 stars"
+                ></label>
+                <input
+                  type="radio"
+                  id="s1half"
+                  v-model="uRating"
+                  :value="1.5"
+                />
+                <label
+                  class="half m-0 p-0"
+                  for="s1half"
+                  title="Meh - 1.5 stars"
+                ></label>
+                <input type="radio" id="s1" v-model="uRating" :value="1" />
+                <label
+                  class="full m-0 p-0"
+                  for="s1"
+                  title="Sucks big time - 1 star"
+                ></label>
+                <input
+                  type="radio"
+                  id="shalf"
+                  v-model="uRating"
+                  :value="0.5"
+                />
+                <label
+                  class="half m-0 p-0"
+                  for="shalf"
+                  title="Sucks big time - 0.5 stars"
+                ></label>
+                <input
+                  type="radio"
+                  class="reset-option"
+                  v-model="uRating"
+                  :value="reset"
+                />
+                <span class="h-auto display-6 d-flex align-items-center mx-2">{{
+                  uRating
+                }}</span>
+              </fieldset>
+                  <!--Star-->
+                  </div>
+                  <div class="m-auto w-5/6">
+                    <textarea class="w-full d-block text-left text-lg border-2 p-2" rows="2" v-model="review.review"></textarea>
+                    <div class="comment-footer text-right">
+                      <button class="w-20 h-8 rounded-lg bg-secondary text-white border-3 my-2" @click="editReview(review.user.userId,review.review)">Confirm</button> 
+                    </div>
+                  </div>
+                </div>
+              <div v-else>
+                <div class="d-flex pt-4 pb-3 px-5">
                   <img
                     src="https://i.imgur.com/Ur43esv.jpg"
                     alt="user"
@@ -220,14 +341,19 @@
                   <h6 class="font-medium font-bold mt-4 ml-4">
                     {{ review.user.username }}
                   </h6>
+                  <div>
+                    
+                   </div>
                 </div>
-                <span class="m-b-15 d-block text-left ml-28 mb-10 text-lg">{{
+                <span class="m-auto w-5/6 d-block text-left ml-28 mb-10 text-lg">{{
                   review.review
                 }}</span>
                 <div class="comment-footer text-right mr-5">
-                <button type="button" class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.473 7.196c-.425-.439-.401-1.127.035-1.552l4.461-4.326c.218-.211.498-.318.775-.318.282 0 .563.11.776.331l-6.047 5.865zm-7.334 11.021c-.092.089-.139.208-.139.327 0 .25.204.456.456.456.114 0 .229-.042.317-.128l.749-.729-.633-.654-.75.728zm6.33-8.425l-2.564 2.485c-1.378 1.336-2.081 2.63-2.73 4.437l1.132 1.169c1.825-.593 3.14-1.255 4.518-2.591l2.563-2.486-2.919-3.014zm7.477-7.659l-6.604 6.405 3.326 3.434 6.604-6.403c.485-.469.728-1.093.728-1.718 0-2.088-2.53-3.196-4.054-1.718zm-1.946 11.333v7.534h-16v-12h8.013l2.058-2h-12.071v16h20v-11.473l-2 1.939z"/></svg></button>
-                <button  @click="deleteReview" type="button"  class=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg></button> 
+                <button type="button" class="mr-2" @click="editSwitch(review.rating)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.473 7.196c-.425-.439-.401-1.127.035-1.552l4.461-4.326c.218-.211.498-.318.775-.318.282 0 .563.11.776.331l-6.047 5.865zm-7.334 11.021c-.092.089-.139.208-.139.327 0 .25.204.456.456.456.114 0 .229-.042.317-.128l.749-.729-.633-.654-.75.728zm6.33-8.425l-2.564 2.485c-1.378 1.336-2.081 2.63-2.73 4.437l1.132 1.169c1.825-.593 3.14-1.255 4.518-2.591l2.563-2.486-2.919-3.014zm7.477-7.659l-6.604 6.405 3.326 3.434 6.604-6.403c.485-.469.728-1.093.728-1.718 0-2.088-2.53-3.196-4.054-1.718zm-1.946 11.333v7.534h-16v-12h8.013l2.058-2h-12.071v16h20v-11.473l-2 1.939z"/></svg></button>
+                <button  @click="deleteReview(review.user.userId)" type="button"  class=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg></button> 
               </div>
+              </div>
+                
               </div>
             </div>
           </div>
@@ -298,6 +424,9 @@
 .rating > [id^="star"] {
   display: none;
 }
+.rating > [id^="s"] {
+  display: none;
+}
 .rating > label:before {
   margin: 5px;
   font-size: 2.25em;
@@ -314,14 +443,20 @@
   float: right;
 }
 .rating > [id^="star"]:checked ~ label,
+.rating > [id^="s"]:checked ~ label,
 .rating:not(:checked) > label:hover,
 .rating:not(:checked) > label:hover ~ label {
   color: #ffd700;
 }
 .rating > [id^="star"]:checked + label:hover,
 .rating > [id^="star"]:checked ~ label:hover,
+.rating > [id^="s"]:checked + label:hover,
+.rating > [id^="s"]:checked ~ label:hover,
 .rating > label:hover ~ [id^="star"]:checked ~ label,
 .rating > [id^="star"]:checked ~ label:hover ~ label {
+  color: #ffed85;
+}
+.rating > [id^="s"]:checked ~ label:hover ~ label {
   color: #ffed85;
 }
 .reset-option {
@@ -342,6 +477,7 @@ export default {
   data() {
     return {
       rating: 0,
+      uRating: 0,
       review: "",
       ErrorReview: false,
       ErrorRating: false,
@@ -365,10 +501,7 @@ export default {
         review: this.review,
         rating: this.rating,
       };
-      console.log(this.rating);
-      console.log(this.review);
       const jsonProduct = JSON.stringify(newReview);
-      console.log(jsonProduct);
       const blob = new Blob([jsonProduct], {
         type: "application/json",
       });
@@ -377,12 +510,32 @@ export default {
       store.dispatch("addReview", { data: formdata, pid: this.pid });
       location.reload();
     },
-    deleteReview() {
+    deleteReview(uid) {
       const store = useStore();
-      console.log("work");
-      store.dispatch("removeReview", { uid: 2, pid: this.pid });
+      store.dispatch("removeReview", { uid: uid, pid: this.pid });
       location.reload();
     },
+    editReview(uid,rev) {
+      const store = useStore();
+      let newReview = {
+        user: { userId: uid },
+        review: rev,
+        rating: this.uRating,
+      };
+      const jsonProduct = JSON.stringify(newReview);
+      const blob = new Blob([jsonProduct], {
+        type: "application/json",
+      });
+      const formdata = new FormData();
+      formdata.append("newReview", blob);
+      store.dispatch("editReview", { data: formdata, pid: this.pid });
+      location.reload();
+    },
+    editSwitch(rating){
+      this.uRating =rating;
+      this.edit = !this.edit;
+     
+    }
   },
   setup(props) {
     const store = useStore();

@@ -36,6 +36,12 @@ export default createStore({
       },
       deleteReview(state,uid){
         state.reviews = state.reviews.filter(r => r.user.userId !== uid)
+      },
+      editReview(state,review){
+        const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
+        if(index !== -1){
+          state.reviews = state.reviews.splice(index,1,review);
+        }
       }
     // addCartItem(state, item) {
     //   item.quantity = 1;
@@ -71,10 +77,12 @@ export default createStore({
         },
         async listPlace({commit}){
             const response = await axios.get(`${resource_uri}places`);
+            await axios.get(`${resource_uri}onstart`);
             commit('setPlace',response.data);
         },
         async getPlaceById({commit}, pid){
           const response = await axios.get(`${resource_uri}place/${pid}`);
+          await axios.get(`${resource_uri}onstart`);
           commit('getPlace',response.data);
         },
         async listTag({commit}){
@@ -96,16 +104,23 @@ export default createStore({
         },
         async listPlaceByTag({commit},value){
           const response = await axios.get(`${resource_uri}place/tag/${value}`);
+          await axios.get(`${resource_uri}onstart`);
           commit('setPlace',response.data);
         },
         async listPlaceByName({commit},value){
           const response = await axios.get(`${resource_uri}place/name/${value}`);
+          await axios.get(`${resource_uri}onstart`);
           commit('setPlace',response.data);
         },
         async removeReview({commit},deleted){
           await axios.delete(`${resource_uri}review/delete/${deleted.pid}/${deleted.uid}`);
           await axios.get(`${resource_uri}onstart`);
           commit('deleteReview',deleted.uid);
+        },
+        async editReview({commit}, formData){
+          const response = await axios.put(`${resource_uri}review/edit/${formData.pid}`,formData.data);
+          await axios.get(`${resource_uri}onstart`);
+          commit('editReview',response.data);
         },
   }
 });

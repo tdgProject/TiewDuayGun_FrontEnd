@@ -5,13 +5,13 @@ import {
 import Home from '../views/Home.vue'
 import Tag from '../views/Tag.vue'
 import Signup from '../views/Signup.vue'
-import SignIn from '../views/SignIn.vue'
 import Addplace from '../views/Addplace.vue'
 import Business from '../views/Business.vue'
 import List from '../views/List.vue'
 import Placeinfo from '../views/Placeinfo.vue'
 import Profile from '../views/Profile.vue'
 import Aboutus from '../views/Aboutus.vue'
+import SignIn from '../views/Signin.vue'
 
 
 
