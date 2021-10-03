@@ -1,16 +1,15 @@
 <template>
 <!-- component -->
-<div class="flex items-center justify-center w-screen h-screen bg-gray-800"  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://f.ptcdn.info/566/062/000/pn6aeu4qgnV1qeQRhhv4-o.jpg')">
-    <div class="space-y-5 mb-11 ml-6">
-      <p class="text-white font-bold text-5xl flex flex-col items-center">
-        <span class="ml-3">TiewDuayGun <br /></span>
-        <span>----------- <br /></span>
-        <span> Search And Travel </span>
-      </p>
-      <p class="text-white font-semibold text-3xl flex flex-col items-center">Nice Trip. Nice Life.</p>
-      
-    </div>
-    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+
+<div class="flex items-center justify-center w-screen h-screen bg-gray-800"  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')">
+<div class="card-thumbnail w-auto">
+          <img
+            src="https://www.graphicsprings.com/filestorage/stencils/687abebf7d05bc6f1a807ae8ccf81c63.png?width=500&height=500"
+            class="img-fluid opacity-75"
+            alt=""
+          />
+        </div>
+    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between mr-5">
         <div class="border-8 border-red-blue rounded-full bg-white shadow flex w-full">
              <input
       type="text"
