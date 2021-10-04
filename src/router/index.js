@@ -11,7 +11,7 @@ import List from '../views/List.vue'
 import Placeinfo from '../views/Placeinfo.vue'
 import Profile from '../views/Profile.vue'
 import Aboutus from '../views/Aboutus.vue'
-import SignIn from '../views/SignIn.vue'
+import SignIn from '../views/Signin.vue'
 
 
 

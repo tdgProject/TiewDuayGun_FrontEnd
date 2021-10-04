@@ -49,10 +49,10 @@
 
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
-                    <div class="h-100 p-2 text-white bg-dark rounded-3">
-            <h2>Rating : {{ place.placeRating }}/5.00</h2>
-            <div class="ml-2">
-<iframe width="600" height="350" src="https://www.youtube.com/embed/A30IuIjQYYg?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+                    <div class="h-100 p-4 text-white bg-dark rounded-3">
+            <h2 class="mb-3"><i class='bx bxs-star text-3xl'></i> Rating : {{ place.placeRating }} </h2>
+            <div class="vid-container" >
+              <iframe class="responsive-iframe" src="https://www.youtube.com/embed/A30IuIjQYYg?autoplay=1" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
         
@@ -113,7 +113,7 @@
                 v-for="review in reviews"
                 :key="review.userId"
               >
-                <div v-if="edit == true">
+                <div v-if="edit == true && review.user.userId == editId">
                   <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="d-flex">
                     <img
@@ -149,14 +149,14 @@
                           border-3
                           my-2
                         "
-                        @click="editReview(review.user.userId, review.review)"
+                        @click="editReview(review.review)"
                       >
                         Confirm
                       </button>
                     </div>
                   </div>
                 </div>
-                <div v-else>
+                <div v-else-if="review.user.userId !== editId">
                   <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="flex">
                     <img
@@ -188,7 +188,7 @@
                     <button
                       type="button"
                       class="mr-2"
-                      @click="editSwitch(review.rating)"
+                      @click="editSwitch(review.rating,review.user.userId)"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -257,10 +257,6 @@
                 <h1 class="text-black font-bold text-xl">
                   {{ hotel.hotel.hotelName }}
                 </h1>
-
-                <a href="#" class="btn btn-sm btn-danger float-right"
-                  >Read more ></a
-                >
               </div>
             </div>
           </div>
@@ -291,6 +287,7 @@ export default {
       ErrorReview: false,
       ErrorRating: false,
       edit: false,
+      editId: 0,
       
     };
   },
@@ -326,10 +323,10 @@ export default {
       location.reload();
       
     },
-    editReview(uid, rev) {
+    editReview(rev) {
       const store = useStore();
       let newReview = {
-        user: { userId: uid },
+        user: { userId: this.editId },
         review: rev,
         rating: this.uRating,
       };
@@ -342,8 +339,9 @@ export default {
       store.dispatch("editReview", { data: formdata, pid: this.pid });
       location.reload();
     },
-    editSwitch(rating) {
+    editSwitch(rating,uid) {
       this.uRating = rating;
+      this.editId = uid;
       this.edit = !this.edit;
     },
     calStar(rating){
@@ -378,3 +376,20 @@ export default {
   },
 };
 </script>
+<style scoped>
+.vid-container{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%;
+}
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
