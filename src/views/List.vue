@@ -32,7 +32,7 @@
       <div class="card-box bg-gray-300 opacity-80">
         <div class="card-thumbnail w-auto">
           <img
-            src="https://7greens.tourismthailand.org/wp-content/uploads/2020/03/shutterstock_267973889-1-scaled.jpg"
+            :src="getimage(place.image)"
             class="img-fluid"
             alt=""
           />
@@ -76,7 +76,11 @@ export default {
       searchValue: null,
     }
   },
- 
+  methods:{
+    getimage(image){
+      return `${this.$store.state.url}image/place/${image}`
+    },
+  }, 
     
 
   setup(props) {
@@ -102,7 +106,7 @@ export default {
     });
 
     return {
-      places,
+      places
     };
   },
 

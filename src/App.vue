@@ -15,7 +15,6 @@
     </nav>
 </div>
 <router-view />
-      git push
       <div class="footer-dark">
     <footer>
         <div class="container">

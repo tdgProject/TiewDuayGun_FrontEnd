@@ -12,14 +12,9 @@
         </a>
       </header>
 
-      <div
+      <div onload="getPlaceImage" id="banner"
         class="p-5 pb-1 mb-4 bg-light rounded-3"
-        style="
-          background-image: url('https://tatapi.tourismthailand.org/tatfs/image/CustomPOI/Picture/P03006069_1.jpeg');
-          background-position: center;
-          background-size: cover;
-        "
-      >
+        style="background-position: center; background-size: cover;">
         <div class="container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
           <div
@@ -117,7 +112,7 @@
                   <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="d-flex">
                     <img
-                      src="https://i.imgur.com/Ur43esv.jpg"
+                      :src="getUserImage(review.user.image)"
                       alt="user"
                       width="50"
                       class="rounded-circle"
@@ -160,7 +155,7 @@
                   <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="flex">
                     <img
-                      src="https://i.imgur.com/Ur43esv.jpg"
+                      :src="getUserImage(review.user.image)"
                       alt="user"
                       width="50"
                       class="rounded-circle"
@@ -242,12 +237,12 @@
           <div class="">
             <!-- Bootstrap 5 card box -->
             <div class="bg-red" v-for="hotel in hotels" :key="hotel.hotelId">
-              <div class="card-box flex justify-center w-100">
-                <div class="card-thumbnail">
+              <div class="card-box flex justify-center w-100 ">
+                <div class="card-thumbnail h-100">
                   <img
-                    src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/71829844.jpg?k=3d674fca31bc34c7af3dbb2b259aada28c54c2df9519ccf1cc84783ca7302e91&o="
-                    class="img-fluid "
-                    alt=""
+                    :src="getHotelImage(hotel.hotel.image)"
+                    class="img-fluid crop"
+                    alt="hotel-image"
                   />
                 </div>
                 <div class="w-2/5 text-left text-xs  bg-dark rounded-xl bg-opacity-70 text-white mx-2 px-4 pb-1 pt-11">
@@ -288,8 +283,11 @@ export default {
       ErrorRating: false,
       edit: false,
       editId: 0,
-      
     };
+  },
+  mounted(){
+    let pimage = this.$store.state.url+'image/place/'+this.$store.state.place.image;
+    document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
   },
   methods: {
     // validateReview() {
@@ -349,6 +347,14 @@ export default {
     updateStar(value){
       this.rating = value;
     },
+    getUserImage(image){
+      return `${this.$store.state.url}image/user/${image}`
+    },
+    getHotelImage(image){
+      return `${this.$store.state.url}image/hotel/${image}`
+    }
+    
+    
   },
   setup(props) {
     const store = useStore();
