@@ -314,7 +314,6 @@ export default {
     //   console.log(`Rating: ${this.ErrorRating}`);
     // },
     addReview() {
-      const store = useStore();
       let newReview = {
         user: { userId: 2 },
         review: this.review,
@@ -326,19 +325,16 @@ export default {
       });
       const formdata = new FormData();
       formdata.append("newReview", blob);
-      store.dispatch("addReview", { data: formdata, pid: this.pid });
+      this.$store.dispatch("addReview", { data: formdata, pid: this.pid });
       window.location.reload();
     },
     deleteReview(uid) {
       if(confirm("Do you really want to remove the product?")){
-        
-      const store = useStore();
-      store.dispatch("removeReview", { uid: uid, pid: this.pid });
+      this.$store.dispatch("removeReview", { uid: uid, pid: this.pid });
       location.reload();
       }
     },
     editReview(rev) {
-      const store = useStore();
       let newReview = {
         user: { userId: this.editId },
         review: rev,
@@ -350,7 +346,7 @@ export default {
       });
       const formdata = new FormData();
       formdata.append("newReview", blob);
-      store.dispatch("editReview", { data: formdata, pid: this.pid });
+      this.$store.dispatch("editReview", { data: formdata, pid: this.pid });
       window.location.reload();
     },
     editSwitch(rating,uid) {
