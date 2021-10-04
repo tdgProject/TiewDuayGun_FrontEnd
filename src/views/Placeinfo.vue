@@ -225,37 +225,23 @@
       <!-- list review -->
 
       <!-- hotel -->
-      <div class="pt-4 mt-4 text-muted border-top"></div>
-      <header class="pb-3 mb-4 border-bottom">
-        <a class="d-flex align-items-center text-dark text-decoration-none">
-          <i class="bx bxs-hotel display-6 mr-2"></i>
-          <span class="fs-4">Hotel</span>
-        </a>
-      </header>
-      <div class="container">
-        <div class="row">
-          <div class="">
-            <!-- Bootstrap 5 card box -->
-            <div class="bg-red" v-for="hotel in hotels" :key="hotel.hotelId">
-              <div class="card-box flex justify-center w-100 ">
-                <div class="card-thumbnail h-100">
-                  <img
-                    :src="getHotelImage(hotel.hotel.image)"
-                    class="img-fluid crop"
-                    alt="hotel-image"
-                  />
-                </div>
-                <div class="w-2/5 text-left text-xs  bg-dark rounded-xl bg-opacity-70 text-white mx-2 px-4 pb-1 pt-11">
-                  <p class="">Name: {{ hotel.hotel.hotelName }}</p>
+<div class="container mt-10">
+    <div class="row">
+    <div class="col-lg-4 mb-4 " v-for="hotel in hotels" :key="hotel.hotelId" >
+    <div class="card">
+      <img :src="getHotelImage(hotel.hotel.image)" alt="" class="card-img-top" height="">
+      <div class="card-body">
+       <p class="">Name: {{ hotel.hotel.hotelName }}</p>
                   <p class="">Address: {{ hotel.hotel.address }}</p>
                   <p class="">Email: {{ hotel.hotel.email }}</p>
                   <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+     </div>
+    </div>
+    </div>
+</div>
+ 
+      
       <!-- hotel -->
     </div>
 
@@ -263,6 +249,7 @@
   </div>
 </template>
 <script>
+
 import { computed } from "vue";
 import { useStore } from "vuex";
 
