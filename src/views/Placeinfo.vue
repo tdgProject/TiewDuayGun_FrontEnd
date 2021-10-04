@@ -314,7 +314,7 @@ export default {
       const formdata = new FormData();
       formdata.append("newReview", blob);
       store.dispatch("addReview", { data: formdata, pid: this.pid });
-      location.reload();
+      window.location.reload();
     },
     deleteReview(uid) {
       if(confirm("Do you really want to remove the product?")){
@@ -338,7 +338,7 @@ export default {
       const formdata = new FormData();
       formdata.append("newReview", blob);
       store.dispatch("editReview", { data: formdata, pid: this.pid });
-      location.reload();
+      window.location.reload();
     },
     editSwitch(rating,uid) {
       this.uRating = rating;
