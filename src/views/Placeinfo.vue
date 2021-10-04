@@ -242,7 +242,7 @@
           <div class="">
             <!-- Bootstrap 5 card box -->
             <div class="bg-red" v-for="hotel in hotels" :key="hotel.hotelId">
-              <div class="card-box flex justify-center">
+              <div class="card-box flex justify-center w-100">
                 <div class="card-thumbnail">
                   <img
                     src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/71829844.jpg?k=3d674fca31bc34c7af3dbb2b259aada28c54c2df9519ccf1cc84783ca7302e91&o="
@@ -250,13 +250,11 @@
                     alt=""
                   />
                 </div>
-                <div class="text-left text-xs  bg-dark rounded-xl bg-opacity-70 text-white mx-2 px-4 py-1">
-                 <div class="mt-10">
+                <div class="w-2/5 text-left text-xs  bg-dark rounded-xl bg-opacity-70 text-white mx-2 px-4 pb-1 pt-11">
                   <p class="">Name: {{ hotel.hotel.hotelName }}</p>
                   <p class="">Address: {{ hotel.hotel.address }}</p>
                   <p class="">Email: {{ hotel.hotel.email }}</p>
                   <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
-                </div>
                 </div>
               </div>
             </div>
