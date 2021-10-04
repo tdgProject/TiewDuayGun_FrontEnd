@@ -14,7 +14,7 @@
 
       <div
         class="p-5 pb-1 mb-4 bg-light rounded-3"
-        style="background-position: center; background-size: cover;">
+        v-bind:style="{ backgroundImage: 'url(' + placeImage + ')' }">
         
         <div class=" container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
@@ -41,7 +41,6 @@
             </button>
           </div>
         </div>
-        <img class="bgImg" :src="getPlaceImage(place.image)"/>
       </div>
 
       <div class="row align-items-md-stretch">
@@ -355,10 +354,14 @@ export default {
   setup(props) {
     const store = useStore();
     store.dispatch("getPlaceById", props.pid),
-      store.dispatch("getHotelById", props.pid),
-      store.dispatch("listReview", props.pid);
+    store.dispatch("getHotelById", props.pid),
+    store.dispatch("listReview", props.pid);
+    
     let place = computed(function () {
       return store.state.place;
+    });
+    let placeImage = computed(function () {
+      return store.state.url+'image/place/'+store.state.place.image;
     });
     let hotels = computed(function () {
       return store.state.hotels;
@@ -366,11 +369,12 @@ export default {
     let reviews = computed(function () {
       return store.state.reviews;
     });
-
+    
     return {
       place,
       hotels,
       reviews,
+      placeImage
     };
   },
 };
@@ -394,7 +398,7 @@ export default {
 .bgImg{
   position: inherit;
   left: 0;
-  top: 0;
+  top: -50;
   z-index: -1;
 }
 </style>
