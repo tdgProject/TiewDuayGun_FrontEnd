@@ -241,34 +241,22 @@
         <div class="row">
           <div class="">
             <!-- Bootstrap 5 card box -->
-            <div class="w-96 me-auto" v-for="hotel in hotels" :key="hotel.hotelId">
-              <div class="card-box w-max ml-44">
+            <div class="bg-red" v-for="hotel in hotels" :key="hotel.hotelId">
+              <div class="card-box flex justify-center">
                 <div class="card-thumbnail">
                   <img
                     src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/71829844.jpg?k=3d674fca31bc34c7af3dbb2b259aada28c54c2df9519ccf1cc84783ca7302e91&o="
-                    class="img-fluid rounded-sm"
+                    class="img-fluid "
                     alt=""
                   />
                 </div>
-                <div
-                  class="
-                    lh-sm
-                    text-left text-black text-xs
-                    mt-4
-                    mx-2
-                    px-4
-                    py-1
-                    bg-dark
-                    rounded-xl
-                    bg-opacity-70
-                    text-white
-
-                  "
-                >
-                  <p class="fs-4">Name: {{ hotel.hotel.hotelName }}</p>
-                  <p class="fs-4">Address: {{ hotel.hotel.address }}</p>
-                  <p class="fs-4">Email: {{ hotel.hotel.email }}</p>
-                  <p class="fs-4">Tel: {{ hotel.hotel.telNumber }}</p>
+                <div class="text-left text-xs  bg-dark rounded-xl bg-opacity-70 text-white mx-2 px-4 py-1">
+                 <div class="mt-10">
+                  <p class="">Name: {{ hotel.hotel.hotelName }}</p>
+                  <p class="">Address: {{ hotel.hotel.address }}</p>
+                  <p class="">Email: {{ hotel.hotel.email }}</p>
+                  <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
+                </div>
                 </div>
               </div>
             </div>
@@ -284,6 +272,7 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+
 import Star from "../component/Star.vue"
 export default {
   name: "Tag",
