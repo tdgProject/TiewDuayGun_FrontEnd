@@ -320,11 +320,12 @@ export default {
       location.reload();
     },
     deleteReview(uid) {
-      
+      if(confirm("Do you really want to remove the product?")){
+        
       const store = useStore();
       store.dispatch("removeReview", { uid: uid, pid: this.pid });
       location.reload();
-      
+      }
     },
     editReview(uid, rev) {
       const store = useStore();
