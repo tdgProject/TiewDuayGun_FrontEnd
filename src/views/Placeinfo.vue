@@ -281,6 +281,7 @@ export default {
     };
   },
   mounted(){
+    this.$store.dispatch("getPlaceById", this.pid)
     let pimage = this.$store.state.url+'image/place/'+this.$store.state.place.image;
     document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
   },
