@@ -52,7 +52,7 @@
           Rating: {{ place.placeRating }}/5
         </h3>
           <router-link class="btn btn-sm btn-danger float-right"
-            :to="{ name: 'Placeinfo', params: { pid: place.placeId } }"
+            :to="{ name: 'Placeinfo', params: { pid: place.placeId,pImg: place.image} }"
             >Read mores</router-link
           >
 

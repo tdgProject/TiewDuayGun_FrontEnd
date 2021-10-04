@@ -264,7 +264,7 @@ import { useStore } from "vuex";
 import Star from "../component/Star.vue"
 export default {
   name: "Tag",
-  props: ["pid"],
+  props: ["pid","pimg"],
   components : {
     Star
   },
@@ -281,7 +281,7 @@ export default {
     };
   },
   mounted(){
-    this.$store.dispatch("getPlaceById", this.pid)
+    this.$store.state.pimage.pimage=this.pimg
     let pimage = this.$store.state.url+'image/place/'+this.$store.state.place.image;
     document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
   },
