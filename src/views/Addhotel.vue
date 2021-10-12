@@ -174,6 +174,7 @@ export default {
         address: this.address,
         email: this.email,
         image: this.image,
+        owner: {"userId": 2}
       };
       const jsonProduct = JSON.stringify(newHotel);
       const blob = new Blob([jsonProduct], {
