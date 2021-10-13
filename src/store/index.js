@@ -45,6 +45,9 @@ export default createStore({
       deleteReview(state,uid){
         state.reviews = state.reviews.filter(r => r.user.userId !== uid)
       },
+      deletePlace(state,pid){
+        state.places = state.place.filter(r => r.place.placeId !== pid)
+      },
       editReview(state,review){
         const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
         if(index !== -1){
@@ -133,6 +136,11 @@ export default createStore({
           await axios.delete(`${resource_uri}review/delete/${deleted.pid}/${deleted.uid}`);
           await axios.get(`${resource_uri}onstart`);
           commit('deleteReview',deleted.uid);
+        },
+        async removePlace({commit},deleted){
+          await axios.delete(`${resource_uri}place/delete/${deleted.pid}`);
+          await axios.get(`${resource_uri}onstart`);
+          commit('deletePlace',deleted.pid);
         },
         
         async editReview({commit}, formData){
