@@ -83,7 +83,7 @@
 
 </template>
 <script>
-import axios from "axios";
+//import axios from "axios";
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
@@ -139,8 +139,8 @@ export default {
       console.log(blob);
       console.log(newPlace);
       console.log(formdata);
-      // this.$store.dispatch("addPlace",  formdata );
-      axios.post(`${this.resource_uri}place/add`, formdata);
+      this.$store.dispatch("addPlace",  formdata );
+      //axios.post(`${this.resource_uri}place/add`, formdata);
     },
   },
   setup() {
