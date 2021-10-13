@@ -226,9 +226,17 @@
       <!-- hotel -->
       <div class="pt-4 mt-4 text-muted border-top"></div>
       <header class="pb-3 mb-4 border-bottom">
-        <a class="d-flex align-items-center text-dark text-decoration-none">
-          <i class="bx bxs-hotel display-6 mr-2"></i>
-          <span class="fs-4">Hotel</span>
+        <a class="d-flex align-items-center text-dark text-decoration-none justify-content-between">
+          <div class="d-flex align-items-center">
+            <i class="bx bxs-hotel display-6 mr-2"></i>
+            <span class="fs-4">Hotel</span>
+          </div>
+          <div>
+            <button class="d-flex align-items-center"  v-if="showAddHotel" @click="addMyHotel">
+            <i class="bx bxs-add-to-queue text-4xl" ></i><span class="text-lg">Add Your Hotel</span>
+            </button>
+          </div>
+          
         </a>
       </header>
 <div class="container mt-10 d-flex flex-wrap justify-content-start">
@@ -242,6 +250,11 @@
                   <p class="">Email: {{ hotel.hotel.email }}</p>
                   <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
      
+      </div>
+      <div class="text-end" v-if="hotel.hotel.owner.userId===me.userId">
+        <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
+          <i class="bx bxs-trash text-end p-2 display-6"></i>
+        </button>
       </div>
      </div>
     </div>
@@ -277,6 +290,7 @@ export default {
       ErrorRating: false,
       edit: false,
       editId: 0,
+      showAddHotel: true, //this.checkHotel(),
       resource_uri: "http://localhost:8081/",
     };
   },
@@ -285,14 +299,37 @@ export default {
     document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
   },
   methods: {
-    // validateReview() {
-    //   this.ErrorReview = this.review === "" ? true : false;
-    //   console.log(`Review: ${this.ErrorReview}`);
+    // checkHotel(){
+    //   console.log(this.myHotel[0]);
+    //   let show = true;
+    //   for(const h in this.$store.state.hotels){
+    //     console.log(h)
+    //     if(this.myHotel[0].hotelId == h.hotel.hotelId){
+    //     console.log(this.myHotel[0].hotelId)
+    //     console.log(h.hotel.hotelId)
+    //     show = false;
+    //     }
+    //   }
+    //   console.log(show)
+    //   return show;
     // },
-    // validateRating() {
-    //   this.ErrorRating = this.rating === 0 ? true : false;
-    //   console.log(`Rating: ${this.ErrorRating}`);
-    // },
+    addMyHotel(){
+      let nearBy = {
+        hotel: { hotelId: this.myHotel[0].hotelId}
+      }
+      const jsonProduct = JSON.stringify(nearBy);
+      const blob = new Blob([jsonProduct], {
+        type: "application/json",
+      });
+      const formdata = new FormData();
+      formdata.append("newNearBy", blob);
+      this.$store.dispatch("addNearBy", { data: formdata, pid: this.pid });
+      window.location.reload();
+    },
+    deleteMyHotel(hid){
+      this.$store.dispatch("deleteNearby",{pid: this.pid, hid: hid });
+      window.location.reload();
+    },
     addReview() {
       let newReview = {
         user: { userId: 2 },
@@ -354,8 +391,9 @@ export default {
   setup(props) {
     const store = useStore();
     store.dispatch("getPlaceById", props.pid),
-      store.dispatch("getHotelById", props.pid),
-      store.dispatch("listReview", props.pid);
+    store.dispatch("getHotelById", props.pid),
+    store.dispatch("listReview", props.pid);
+    store.dispatch("getMyHotel", store.state.user.userId);
     let place = computed(function () {
       return store.state.place;
     });
@@ -365,11 +403,18 @@ export default {
     let reviews = computed(function () {
       return store.state.reviews;
     });
-
+    let myHotel = computed(function () {
+      return store.state.myHotel;
+    });
+    let me = computed(function () {
+      return store.state.user;
+    });
     return {
       place,
       hotels,
       reviews,
+      myHotel,
+      me
     };
   },
 };

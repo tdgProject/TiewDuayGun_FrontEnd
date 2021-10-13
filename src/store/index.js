@@ -11,6 +11,10 @@ export default createStore({
     reviews: [],
     provinces: [],
     etc: [],
+    user: {
+      userId: 2
+    },
+    myHotel: [],
     url: resource_uri
 
     
@@ -37,6 +41,9 @@ export default createStore({
       setHotel(state, hotels) {
         state.hotels = hotels
       },
+      setMyHotel(state, myHotel) {
+        state.myHotel = myHotel
+      },
       getHotel(state, hotels) {
         state.hotels = hotels
       },
@@ -53,7 +60,13 @@ export default createStore({
         state.reviews = state.reviews.filter(r => r.user.userId !== uid)
       },
       deletePlace(state,pid){
-        state.places = state.place.filter(r => r.place.placeId !== pid)
+        state.places = state.place.filter(p => p.place.placeId !== pid)
+      },
+      deleteNearByHotel(state,hid){
+        state.hotels = state.hotels.filter(h => h.hotel.hotelId !== hid)
+      },
+      addNearByHotel(state, nearby){
+        state.hotels.push(nearby.hotel)
       },
       editReview(state,review){
         const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
@@ -157,11 +170,22 @@ export default createStore({
           await axios.get(`${resource_uri}onstart`);
           commit('deletePlace',deleted.pid);
         },
-        
         async editReview({commit}, formData){
           const response = await axios.put(`${resource_uri}review/edit/${formData.pid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);
           commit('editReview',response.data);
         },
-  }
+        async getMyHotel({commit}, userId){
+          const response = await axios.get(`${resource_uri}hotel/user/${userId}`);
+          commit('setMyHotel',response.data);
+        },
+        async addNearBy({commit}, formData){
+          const response = await axios.post(`${resource_uri}nearby/add/${formData.pid}`,formData.data);
+          commit('addNearByHotel',response.data);
+       },
+       async deleteNearby({commit}, value){
+        const response = await axios.delete(`${resource_uri}nearby/delete/${value.pid}/${value.hid}`);
+        commit('deleteNearByHotel',response.data);
+     },
+}
 });
