@@ -19,7 +19,7 @@
           id="image"
           name="image"
           accept="image/*,"
-          @change="upfile"
+          @change = "upfile"
         />
         <div class="border p-2 mt-3 object-center ">
           
@@ -30,18 +30,16 @@
           </template>
         </div>
       </div>
-      
-      <select class="form-control" v-model="ptag">
-     
-        
-          <option v-for="tag in tags" :key="tag.tagId" :value="tag.tagId">
-            {{ tag.tagName }}
-          </option>
-          
-          
-        </select>
-      
- <p class="">Insert Your Type</p>
+      <div class="container">
+        <div class="my-3 w-50 d-flex align-items-center">
+        <p class="my-auto">Province</p>
+        <select class="form-control" v-model="ptag">
+            <option v-for="tag in tags" :key="tag.tagId" :value="tag.tagId">
+              {{ tag.tagName }}
+            </option>
+          </select>
+          </div>
+      </div>
       <div class="flex space-x-5 mt-3">
         <input
           type="text"
@@ -92,7 +90,6 @@ export default {
     return {
       preview: null,
       image: null,
-      pic: null,
       placename: "",
       placeDescription: "",
       enteredplaceName: "",
@@ -108,16 +105,13 @@ export default {
       let file = e.target.files[0];
       let data = new FormData();
       data.append("file", file, file.name);
-      this.upfile = data.get("file");
-      this.image = URL.createObjectURL(this.upfile);
-
+      this.image = data.get("file");
       var input = e.target;
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (e) => {
           this.preview = e.target.result;
         };
-        this.pic = input.files[0];
         reader.readAsDataURL(input.files[0]);
       }
     },
@@ -126,7 +120,7 @@ export default {
         placeId: 0,
         placeName: this.enteredplaceName,
         placeDescription: this.enteredplaceDescription,
-        image: this.image,
+        image: "",
         tags:[],
       };
       const jsonProduct = JSON.stringify(newPlace);
@@ -135,7 +129,7 @@ export default {
       });
       let formdata = new FormData();
       formdata.append("newPlace", blob);
-      formdata.append("image", this.upfile);
+      formdata.append("image", this.image);
       console.log(blob);
       console.log(newPlace);
       console.log(formdata);
