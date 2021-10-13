@@ -140,6 +140,7 @@ export default {
       console.log(newPlace);
       console.log(formdata);
       this.$store.dispatch("addPlace",  formdata );
+      setTimeout(location.href="http://localhost:8080/List/All/1", 3000);
       //axios.post(`${this.resource_uri}place/add`, formdata);
     },
   },
