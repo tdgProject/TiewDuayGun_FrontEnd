@@ -6,6 +6,7 @@ import Home from '../views/Home.vue'
 import Tag from '../views/Tag.vue'
 import Signup from '../views/Signup.vue'
 import Addplace from '../views/Addplace.vue'
+import Addhotel from '../views/Addhotel.vue'
 import Business from '../views/Business.vue'
 import List from '../views/List.vue'
 import Placeinfo from '../views/Placeinfo.vue'
@@ -44,6 +45,11 @@ const routes = [{
     path: '/Addplace',
     name: 'Addplace',
     component: Addplace
+  },
+  {
+    path: '/Addhotel',
+    name: 'Addhotel',
+    component: Addhotel
   },
   {
     path: '/Business',
