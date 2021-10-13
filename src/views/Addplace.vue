@@ -24,7 +24,7 @@
         <div class="border p-2 mt-3 object-center ">
           
           <template v-if="preview">
-            <div class="h-56 w-56  ml-96">
+            <div class="h-full w-full ">
               <img :src="preview" class="img-fluid" />
             </div>
           </template>
