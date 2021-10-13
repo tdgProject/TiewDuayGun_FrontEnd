@@ -29,7 +29,7 @@ export default {
   setup(){
     const store = useStore();
 
-    store.dispatch('listTag');
+    store.dispatch('listType');
 
     let types = computed(function () {
       return store.state.types

@@ -17,9 +17,13 @@ export default createStore({
       setPlace(state, places) {
           state.places = places
       },
-      listTag(state, types) {
+      listType(state, types) {
         state.types = types
       },
+      listTag(state, tags) {
+        state.tags = tags
+      },
+
       getPlace(state, place) {
         state.place = place
       },
@@ -34,6 +38,9 @@ export default createStore({
       },
       addNewReview(state, review) {
         state.reviews.push(review)
+      },
+      addNewPlace(state, place) {
+        state.places.push(place)
       },
       deleteReview(state,uid){
         state.reviews = state.reviews.filter(r => r.user.userId !== uid)
@@ -86,10 +93,14 @@ export default createStore({
           await axios.get(`${resource_uri}onstart`);
           commit('getPlace',response.data);
         },
-        async listTag({commit}){
+        async listType({commit}){
             const response = await axios.get(`${resource_uri}types`);
-            commit('listTag',response.data);
+            commit('listType',response.data);
         },
+        async listTag({commit}){
+          const response = await axios.get(`${resource_uri}tags`);
+          commit('listTag',response.data);
+      },
         async getHotelById({commit}, pid){
           const response = await axios.get(`${resource_uri}hotel/${pid}`);
           commit('getHotel',response.data);
@@ -102,6 +113,11 @@ export default createStore({
           const response = await axios.post(`${resource_uri}review/add/${formData.pid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);
           commit('addNewReview',response.data);
+        },
+        async addPlace({commit},formData){
+          const response = await axios.post(`${resource_uri}place/add/${formData.this.pid}`,formData.data);
+          await axios.get(`${resource_uri}onstart`);
+          commit('addNewPlace',response.data);
         },
         async listPlaceByTag({commit},value){
           const response = await axios.get(`${resource_uri}place/tag/${value}`);
@@ -118,6 +134,7 @@ export default createStore({
           await axios.get(`${resource_uri}onstart`);
           commit('deleteReview',deleted.uid);
         },
+        
         async editReview({commit}, formData){
           const response = await axios.put(`${resource_uri}review/edit/${formData.pid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);

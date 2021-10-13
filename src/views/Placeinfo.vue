@@ -11,12 +11,10 @@
           <span class="fs-4">{{ place.placeName }}</span>
         </a>
       </header>
-
-      <div
+      <div onload="getPlaceImage" id="banner"
         class="p-5 pb-1 mb-4 bg-light rounded-3"
-        v-bind:style="{ backgroundImage: 'url(' + placeImage + ')' }">
-        
-        <div class=" container-fluid py-5">
+        style="background-position: center; background-size: cover;">
+        <div class="container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
           <div
             class="col-md-8 bg-black bg-opacity-50 p-4 rounded-lg text-white"
@@ -279,7 +277,12 @@ export default {
       ErrorRating: false,
       edit: false,
       editId: 0,
+      resource_uri: "http://localhost:8081/",
     };
+  },
+  mounted(){
+    let pimage = this.$store.state.url+'image/place/'+this.$store.state.place.image;
+    document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
   },
   methods: {
     // validateReview() {
@@ -344,9 +347,6 @@ export default {
     },
     getHotelImage(image){
       return `${this.$store.state.url}image/hotel/${image}`
-    },
-    getPlaceImage(image){
-      return `${this.$store.state.url}image/place/${image}`
     }
     
     
@@ -354,14 +354,10 @@ export default {
   setup(props) {
     const store = useStore();
     store.dispatch("getPlaceById", props.pid),
-    store.dispatch("getHotelById", props.pid),
-    store.dispatch("listReview", props.pid);
-    
+      store.dispatch("getHotelById", props.pid),
+      store.dispatch("listReview", props.pid);
     let place = computed(function () {
       return store.state.place;
-    });
-    let placeImage = computed(function () {
-      return store.state.url+'image/place/'+store.state.place.image;
     });
     let hotels = computed(function () {
       return store.state.hotels;
@@ -369,12 +365,11 @@ export default {
     let reviews = computed(function () {
       return store.state.reviews;
     });
-    
+
     return {
       place,
       hotels,
       reviews,
-      placeImage
     };
   },
 };
@@ -394,11 +389,5 @@ export default {
   right: 0;
   width: 100%;
   height: 100%;
-}
-.bgImg{
-  position: inherit;
-  left: 0;
-  top: -50;
-  z-index: -1;
 }
 </style>
