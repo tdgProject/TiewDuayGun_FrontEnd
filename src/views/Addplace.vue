@@ -1,4 +1,6 @@
 <template>
+  <div class="grid min-h-screen place-items-center">
+    <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
   <form @submit.prevent="addPlace()">
     <div class="mx-20 w-100 h-3/4">
       <div
@@ -20,7 +22,7 @@
           @change="upfile"
         />
         <div class="border p-2 mt-3 object-center ">
-          <p class="text-white bg-black">Preview Here:</p>
+          
           <template v-if="preview">
             <div class="h-56 w-56  ml-96">
               <img :src="preview" class="img-fluid" />
@@ -28,7 +30,7 @@
           </template>
         </div>
       </div>
-      <p class="text-white bg-black">Preview</p>
+      
       <select class="form-control" v-model="ptag">
      
         
@@ -76,6 +78,8 @@
       />
     </div>
   </form>
+    </div>
+  </div>
 
 </template>
 <script>
