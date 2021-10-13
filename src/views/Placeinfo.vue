@@ -290,7 +290,7 @@ export default {
       ErrorRating: false,
       edit: false,
       editId: 0,
-      showAddHotel: true, //this.checkHotel(),
+      // showAddHotel: this.checkHotel(),
       resource_uri: "http://localhost:8081/",
     };
   },
@@ -300,10 +300,8 @@ export default {
   },
   methods: {
     // checkHotel(){
-    //   console.log(this.myHotel[0]);
     //   let show = true;
-    //   for(const h in this.$store.state.hotels){
-    //     console.log(h)
+    //   for(const h of this.hotels){
     //     if(this.myHotel[0].hotelId == h.hotel.hotelId){
     //     console.log(this.myHotel[0].hotelId)
     //     console.log(h.hotel.hotelId)
@@ -387,6 +385,18 @@ export default {
     }
     
     
+  },
+  computed: {
+    showAddHotel: function () {
+      let show = true;
+      for(const h of this.hotels){
+        if(this.myHotel[0].hotelId == h.hotel.hotelId){
+        show = false;
+        }
+      }
+      console.log(show)
+      return show;
+    }
   },
   setup(props) {
     const store = useStore();
