@@ -115,7 +115,7 @@ export default createStore({
           commit('addNewReview',response.data);
         },
         async addPlace({commit},formData){
-          const response = await axios.post(`${resource_uri}place/add/${formData.this.pid}`,formData.data);
+          const response = await axios.post(`${resource_uri}place/add`,formData);
           await axios.get(`${resource_uri}onstart`);
           commit('addNewPlace',response.data);
         },
