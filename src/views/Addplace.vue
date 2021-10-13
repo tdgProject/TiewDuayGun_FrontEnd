@@ -1,5 +1,5 @@
 <template>
-  <div class="grid min-h-screen place-items-center">
+  <div class="grid min-h-screen place-items-center mr-48 ">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
   <form @submit.prevent="addPlace()">
     <div class="mx-20 w-100 h-3/4">
