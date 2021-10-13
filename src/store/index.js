@@ -9,6 +9,8 @@ export default createStore({
     types: [],
     hotels: [],
     reviews: [],
+    provinces: [],
+    etc: [],
     url: resource_uri
 
     
@@ -23,7 +25,12 @@ export default createStore({
       listTag(state, tags) {
         state.tags = tags
       },
-
+      listProvince(state, provinces) {
+        state.provinces = provinces
+      },
+      listEtc(state, etc) {
+        state.etc = etc
+      },
       getPlace(state, place) {
         state.place = place
       },
@@ -103,7 +110,15 @@ export default createStore({
         async listTag({commit}){
           const response = await axios.get(`${resource_uri}tags`);
           commit('listTag',response.data);
-      },
+        },
+        async listProvinceTag({commit}){
+          const response = await axios.get(`${resource_uri}tags/province`);
+          commit('listProvince',response.data);
+        },
+        async listEtcTag({commit}){
+          const response = await axios.get(`${resource_uri}tags/etc`);
+          commit('listEtc',response.data);
+        },
         async getHotelById({commit}, pid){
           const response = await axios.get(`${resource_uri}hotel/${pid}`);
           commit('getHotel',response.data);
