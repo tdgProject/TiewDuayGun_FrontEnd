@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-400">
-    <div class="container py-4">
+    <div class="container py-4" v-if="place">
       <div class="pt-4 mt-4 text-muted border-top"></div>
       <header class="pb-3 mb-4 border-bottom">
         <a
@@ -373,12 +373,13 @@ export default {
   computed: {
     showAddHotel: function () {
       let show = true;
-      for(const h of this.hotels){
-        if(this.myHotel[0].hotelId == h.hotel.hotelId){
-        show = false;
+      if (this.hotels && this.myHotel[0]) {
+        for(const h of this.hotels){
+          if(this.myHotel[0].hotelId == h.hotel.hotelId){
+          show = false;
+          }
         }
       }
-      console.log(show)
       return show;
     }
   },
