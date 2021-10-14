@@ -299,18 +299,6 @@ export default {
     document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
   },
   methods: {
-    // checkHotel(){
-    //   let show = true;
-    //   for(const h of this.hotels){
-    //     if(this.myHotel[0].hotelId == h.hotel.hotelId){
-    //     console.log(this.myHotel[0].hotelId)
-    //     console.log(h.hotel.hotelId)
-    //     show = false;
-    //     }
-    //   }
-    //   console.log(show)
-    //   return show;
-    // },
     addMyHotel(){
       let nearBy = {
         hotel: { hotelId: this.myHotel[0].hotelId}
