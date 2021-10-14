@@ -11,9 +11,9 @@
           <span class="fs-4">{{ place.placeName }}</span>
         </a>
       </header>
-      <div onload="getPlaceImage" id="banner"
+      <div
         class="p-5 pb-1 mb-4 bg-light rounded-3"
-        style="background-position: center; background-size: cover;">
+        v-bind:style="{ backgroundImage: 'url(' + placeImage + ')' }">
         <div class="container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
           <div
@@ -294,10 +294,6 @@ export default {
       resource_uri: "http://localhost:8081/",
     };
   },
-  mounted(){
-    let pimage = this.$store.state.url+'image/place/'+this.$store.state.place.image;
-    document.getElementById("banner").style.backgroundImage="url('"+pimage+"')";
-  },
   methods: {
     addMyHotel(){
       let nearBy = {
@@ -407,12 +403,16 @@ export default {
     let me = computed(function () {
       return store.state.user;
     });
+    let placeImage = computed(function () {
+      return store.state.url+'image/place/'+store.state.place.image;
+    });
     return {
       place,
       hotels,
       reviews,
       myHotel,
-      me
+      me,
+      placeImage
     };
   },
 };
