@@ -190,16 +190,13 @@ export default {
       let file = e.target.files[0];
       let data = new FormData();
       data.append("file", file, file.name);
-      this.upfile = data.get("file");
-      this.image = URL.createObjectURL(this.upfile);
-
+      this.image = data.get("file");
       var input = e.target;
       if (input.files) {
         var reader = new FileReader();
         reader.onload = (e) => {
           this.preview = e.target.result;
         };
-        this.pic = input.files[0];
         reader.readAsDataURL(input.files[0]);
       }
     },

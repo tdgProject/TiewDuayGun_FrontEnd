@@ -23,17 +23,17 @@
     </a>
   </div>
 
-  <div class="container">
+  <div class="">
     <h2 class="mt-4 mb-4"></h2>
-  </div>
+ 
   <div class="d-flex flex-wrap">
     <!-- Bootstrap 5 card box -->
-    <div class="px-4 py-2 w-1/3 " v-for="place in places" :key="place.placeId">
-      <div class="card-box bg-gray-300 opacity-80">
+    <div class="px-4 py-2 w-1/3 d-flex flex-wrap" v-for="place in places" :key="place.placeId">
+      <div class="w-full bg-white bg-opacity-50 rounded-lg p-12 flex flex-col justify-center items-center border">
         <div class="card-thumbnail w-auto">
           <img
             :src="getimage(place.image)"
-            class="img-fluid"
+            class="img-fluid border-5"
             alt=""
           />
         </div>
@@ -43,7 +43,7 @@
         </h1>
         <h2 class="text-black-200 font-bold text-xl flex px-4">
           Tag:
-          <div v-for="tag in place.tags" :key="tag.tag.tagid">
+          <div v-for="tag in place.tags" :key="tag.tag.tagid" class="">
             <router-link onclick="window.location.reload(true)"   :to="{ name: 'List', params: { filter: 'Tag',var: tag.tag.tagId } }">{{ tag.tag.tagName }},</router-link>
             
           </div>
@@ -73,9 +73,11 @@
                         />
                       </svg>
                     </button>
+                    
 
       </div>
     </div>
+  </div>
   </div>
 
  </div>
