@@ -105,6 +105,7 @@
       />
     </div>
   </form>
+   
     </div>
   </div>
 
@@ -114,6 +115,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
+  
   name: "Addplace",
   data() {
     return {
@@ -125,7 +127,8 @@ export default {
       enteredplaceDescription: "",
       ptag: "",
       etag: [],
-      resource_uri: "http://localhost:8081/",
+      resource_uri: "http://localhost:8081",
+      editId: "",
       
     };
   },
@@ -145,6 +148,7 @@ export default {
       }
     },
     addPlace() {
+      console.log(this.image)
       let allTag = [{ tag: { tagId : this.ptag}}]
       for(let t of this.etag){
         let newTag = { tag: { tagId : t}};
@@ -165,15 +169,22 @@ export default {
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
       this.$store.dispatch("addPlace",  formdata );
-       setTimeout(location.href="http://localhost:8080/List/All/1", 3000);
+      // setTimeout(location.href="http://localhost:8080/List/All/1", 3000);
       //axios.post(`${this.resource_uri}place/add`, formdata);
+      
     },
+
   },
   setup() {
     const store = useStore();
-
     store.dispatch("listProvinceTag");
     store.dispatch("listEtcTag");
+    
+    
+
+        let place = computed(function () {
+      return store.state.place;
+    });
 
     let provinces = computed(function () {
       return store.state.provinces;
@@ -186,7 +197,8 @@ export default {
 
     return {
       provinces,
-      etc
+      etc,
+      place
     };
   },
 };

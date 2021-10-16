@@ -13,6 +13,7 @@ import Placeinfo from '../views/Placeinfo.vue'
 import Profile from '../views/Profile.vue'
 import Aboutus from '../views/Aboutus.vue'
 import SignIn from '../views/SignIn.vue'
+import Editplace from '../views/Editplace'
 
 
 
@@ -44,6 +45,7 @@ const routes = [{
   {
     path: '/Addplace',
     name: 'Addplace',
+    props: true,
     component: Addplace
   },
   {
@@ -55,6 +57,12 @@ const routes = [{
     path: '/Business',
     name: 'Business',
     component: Business
+  },
+  {
+    path: '/Edit/:pid',
+    name: 'Editplace',
+    component: Editplace,
+    props:true
   },
   {
     path: '/List/:filter/:var',
