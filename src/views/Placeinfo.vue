@@ -348,7 +348,7 @@ export default {
   methods: {
     addMyHotel() {
       let nearBy = {
-        hotel: { hotelId: this.myHotel[0].hotelId },
+        hotel: { hotelId: this.myHotel.hotelId },
       };
       const jsonProduct = JSON.stringify(nearBy);
       const blob = new Blob([jsonProduct], {
@@ -422,9 +422,9 @@ export default {
   computed: {
     showAddHotel: function () {
       let show = true;
-      if (this.hotels && this.myHotel[0]) {
+      if (this.hotels && this.myHotel) {
         for (const h of this.hotels) {
-          if (this.myHotel[0].hotelId == h.hotel.hotelId) {
+          if (this.myHotel.hotelId == h.hotel.hotelId) {
             show = false;
           }
         }
