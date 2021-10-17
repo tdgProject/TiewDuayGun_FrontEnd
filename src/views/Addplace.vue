@@ -33,8 +33,11 @@
       <div class="container d-flex align-items-center">
         <div class="my-3 w-50 align-items-center">
         <p class="my-auto">Province</p>
-        <select class="form-control" v-model="ptag">
-            <option v-for="tagp in provinces" :key="tagp.tagId" :value="tagp.tagId">
+        <select class="form-control select" v-model="ptag">
+            <option class="text-center" value="" disabled>
+              Select Province
+            </option>
+            <option class="text-center" v-for="tagp in provinces" :key="tagp.tagId" :value="tagp.tagId">
               {{ tagp.tagName }}
             </option>
           </select>
@@ -105,6 +108,7 @@
       />
     </div>
   </form>
+   
     </div>
   </div>
 
@@ -114,6 +118,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
+  
   name: "Addplace",
   data() {
     return {
@@ -125,7 +130,8 @@ export default {
       enteredplaceDescription: "",
       ptag: "",
       etag: [],
-      resource_uri: "http://localhost:8081/",
+      resource_uri: "http://localhost:8081",
+      editId: "",
       
     };
   },
@@ -145,6 +151,7 @@ export default {
       }
     },
     addPlace() {
+      console.log(this.image)
       let allTag = [{ tag: { tagId : this.ptag}}]
       for(let t of this.etag){
         let newTag = { tag: { tagId : t}};
@@ -165,15 +172,22 @@ export default {
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
       this.$store.dispatch("addPlace",  formdata );
-       setTimeout(location.href="http://localhost:8080/List/All/1", 3000);
+      // setTimeout(location.href="http://localhost:8080/List/All/1", 3000);
       //axios.post(`${this.resource_uri}place/add`, formdata);
+      
     },
+
   },
   setup() {
     const store = useStore();
-
     store.dispatch("listProvinceTag");
     store.dispatch("listEtcTag");
+    
+    
+
+        let place = computed(function () {
+      return store.state.place;
+    });
 
     let provinces = computed(function () {
       return store.state.provinces;
@@ -186,7 +200,8 @@ export default {
 
     return {
       provinces,
-      etc
+      etc,
+      place
     };
   },
 };

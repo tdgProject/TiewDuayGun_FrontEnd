@@ -71,11 +71,16 @@ export default createStore({
       addNearByHotel(state, nearby){
         state.hotels.push(nearby.hotel)
       },
+      editPlace(state, place){
+        state.place.push(place)
+      },
       editReview(state,review){
         const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
         if(index !== -1){
           state.reviews = state.reviews.splice(index,1,review);
         }
+
+        
       }
     // addCartItem(state, item) {
     //   item.quantity = 1;
@@ -182,6 +187,11 @@ export default createStore({
           const response = await axios.put(`${resource_uri}review/edit/${formData.pid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);
           commit('editReview',response.data);
+        },
+        async editPlace({commit}, formData){
+          const response = await axios.put(`${resource_uri}place/edit/${formData.pid}`,formData);
+          await axios.get(`${resource_uri}onstart`);
+          commit('editPlace',response.data);
         },
         async getMyHotel({commit}, userId){
           const response = await axios.get(`${resource_uri}hotel/user/${userId}`);
