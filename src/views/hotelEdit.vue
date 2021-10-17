@@ -2,18 +2,19 @@
   <div class="grid min-h-screen place-items-center">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
       <h1 class="text-xl font-semibold">Register Your Business</h1>
-      <form class="mt-6" @submit.prevent="addHotel()">
+      <form class="mt-6" @submit.prevent="editHotel()">
         <label
           for="hotelname"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Hotel Name</label
         >
+        
         <input
           id="text"
           type="text"
           name="text"
-          placeholder="enter name"
-          v-model="name"
+          placeholder=""
+          v-model="hotel.hotelName"
           class="
             block
             w-full
@@ -22,9 +23,7 @@
             text-gray-700
             bg-gray-200
             appearance-none
-            focus:outline-none
-            focus:bg-gray-300
-            focus:shadow-inner
+            focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
           required
         />
@@ -39,7 +38,7 @@
           type="text"
           name="text"
           placeholder=""
-          v-model="address"
+          v-model="hotel.address"
           class="
             block
             w-full
@@ -48,9 +47,7 @@
             text-gray-700
             bg-gray-200
             appearance-none
-            focus:outline-none
-            focus:bg-gray-300
-            focus:shadow-inner
+            focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
           required
         />
@@ -65,7 +62,7 @@
           type="Email"
           name="Email"
           placeholder=""
-          v-model="email"
+          v-model="hotel.email"
           class="
             block
             w-full
@@ -74,9 +71,7 @@
             text-gray-700
             bg-gray-200
             appearance-none
-            focus:outline-none
-            focus:bg-gray-300
-            focus:shadow-inner
+            focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
           required
         />
@@ -91,7 +86,7 @@
           type="text"
           name="text"
           placeholder=""
-          v-model="tel"
+          v-model="hotel.telNumber"
           class="
             block
             w-full
@@ -100,9 +95,7 @@
             text-gray-700
             bg-gray-200
             appearance-none
-            focus:outline-none
-            focus:bg-gray-300
-            focus:shadow-inner
+            focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
           required
         />
@@ -113,12 +106,13 @@
               id="image"
               name="image"
               accept="image/*,"
-              @change= "upfile"
+              @change="upfile"
             />
-            <div class="object-center">
+            <div class="b object-center">
+              
               <template v-if="preview">
-                <div class="h-56 w-56 object-cover mt-2 rounded-2xl6 ">
-                  <img :src="preview" class="img-fluid" />
+                <div class="h-56 w-56 object-cover mt-2 rounded-2xl6">
+                  <img :src="getHotelimage(hotel.image)" class="img-fluid" />
                 </div>
               </template>
             </div>
@@ -137,8 +131,7 @@
             bg-black
             shadow-lg
             focus:outline-none
-            hover:bg-gray-900
-            hover:shadow-none
+            hover:bg-gray-900 hover:shadow-none
           "
         >
           Submit
@@ -149,9 +142,12 @@
 </template>
 
 <script>
-
+import axios from "axios";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-  name: "Addhotel",
+  name: "hotelEdit",
+  props: ["hid"],
   data() {
     return {
       name: "",
@@ -165,7 +161,7 @@ export default {
     };
   },
   methods: {
-    addHotel() {
+    editHotel() {
       let newHotel = {
         hotelId: 0,
         hotelName: this.name,
@@ -173,7 +169,7 @@ export default {
         address: this.address,
         email: this.email,
         image: "",
-        owner: {"userId": 2}
+        owner: { userId: 2 },
       };
       const jsonProduct = JSON.stringify(newHotel);
       const blob = new Blob([jsonProduct], {
@@ -182,8 +178,9 @@ export default {
       let formdata = new FormData();
       formdata.append("newHotel", blob);
       formdata.append("image", this.image);
-      this.$store.dispatch("addHotel",  formdata );
+      this.$store.dispatch("addHotel", formdata);
       alert("successfully added!");
+      axios.post(`${this.resource_uri}hotel/edit`, formdata);
       window.location.reload();
     },
     upfile(e) {
@@ -200,6 +197,21 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
+    getHotelImage(image) {
+      return `${this.$store.state.url}image/hotel/${image}`;
+    },
+  },
+  setup(props) {
+    const store = useStore();
+    store.dispatch("getHotelById", props.pid);
+
+    let hotels = computed(function () {
+      return store.state.hotels;
+    });
+
+    return {
+    hotels
+    };
   },
 };
 </script>

@@ -14,7 +14,7 @@ export default createStore({
     user: {
       userId: 2
     },
-    myHotel: [],
+    myHotel: null,
     url: resource_uri
 
     
