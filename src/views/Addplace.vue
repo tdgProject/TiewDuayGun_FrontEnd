@@ -33,8 +33,11 @@
       <div class="container d-flex align-items-center">
         <div class="my-3 w-50 align-items-center">
         <p class="my-auto">Province</p>
-        <select class="form-control" v-model="ptag">
-            <option v-for="tagp in provinces" :key="tagp.tagId" :value="tagp.tagId">
+        <select class="form-control select" v-model="ptag">
+            <option class="text-center" value="" disabled>
+              Select Province
+            </option>
+            <option class="text-center" v-for="tagp in provinces" :key="tagp.tagId" :value="tagp.tagId">
               {{ tagp.tagName }}
             </option>
           </select>

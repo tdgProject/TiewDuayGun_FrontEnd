@@ -32,10 +32,15 @@
               <p class="my-auto">Province</p>
               <select class="form-control" v-model="ptag">
                 <option
+                  v-for="tp in place.tags"
+                  :key="tp.tag.tagId"
+                  v-show="tp.tag.tagId <= 77"
+                  value=""
+                >{{tp.tag.tagName}}</option>
+                <option
                   v-for="tagp in provinces"
                   :key="tagp.tagId"
                   :value="tagp.tagId"
-                  
                 >
                   {{ tagp.tagName }}
                 </option>
@@ -48,6 +53,7 @@
                 class="w-full btn btn-secondary"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
+                @click="setTag()"
               >
                 Select Tag
               </button>
@@ -76,6 +82,7 @@
                     </div>
                     <div class="modal-body">
                       <h3>Selecting Tags</h3>
+                      <p v-show="false">{{etag}}</p>
                       <div class="container d-flex flex-wrap">
                         <div
                           class="w-1/2 justify-content-between"
@@ -86,7 +93,7 @@
                             class="invisible"
                             :id="tage.tagName"
                             type="checkbox"
-                            :value="tage.tagId"
+                            :value="tage"
                             v-model="etag"
                           />
                           <label
@@ -182,9 +189,22 @@ export default {
       resource_uri: "http://localhost:8081/",
       editId: "",
       isLocal: false,
+      isSet: false
     };
   },
   methods: {
+    setTag(){
+      if(!this.isSet){
+        if(this.place){
+          for(let t of this.place.tags){
+                if(t.tag.tagId > 77){
+                  this.etag.push(t.tag)
+                }
+            }
+        }
+        this.isSet = true;
+      }
+    },
     getimage(image) {
       return `${this.$store.state.url}image/place/${image}`;
     },
@@ -206,10 +226,34 @@ export default {
       }
     },
     EditPlace() {
-      let allTag = [{ tag: { tagId: this.ptag } }];
-      for (let t of this.etag) {
-        let newTag = { tag: { tagId: t } };
+      let allTag = null;
+      if(this.ptag != ""){
+        allTag = [{ tag: { tagId: this.ptag } }];
+      }else{
+        if(this.place){
+          let tName = "";
+          for(let tp of this.place.tags){
+            if(tp.tag.tagId <= 77){
+              tName = tp.tag.tagId
+            }
+          }
+          allTag = [{ tag: { tagId: tName } }];
+        }
+      }
+      if(this.etag.length != 0){
+        for (let t of this.etag) {
+        let newTag = { tag: { tagId: t.tagId } };
         allTag.push(newTag);
+        }
+      }else{
+        if(this.place){
+          for(let tp of this.place.tags){
+            if(tp.tag.tagId > 77){
+              let newTag = { tag: { tagId: tp.tag.tagId } };
+              allTag.push(newTag);
+            }
+          }
+        }
       }
       let newPlace = {
         placeId: 0,
