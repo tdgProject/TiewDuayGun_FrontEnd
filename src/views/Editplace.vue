@@ -13,18 +13,18 @@
           <div class="form-group">
             <input
               type="file"
-              id="imagex"
+              id="image"
               name="image"
               accept="image/*,"
               @change="upfile"
               
             />
             <div class="border p-2 mt-3 object-center">
-              <!-- <template v-if="getimage(place.image)"> -->
+              <template v-if="getimage(place.image)">
                 <div class="h-full w-full">
                   <img :src="getimage(place.image)" class="img-fluid" />
                 </div>
-              <!-- </template> -->
+              </template>
             </div>
           </div>
           <div class="container d-flex align-items-center">
@@ -169,7 +169,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
@@ -209,7 +209,6 @@ export default {
       return `${this.$store.state.url}image/place/${image}`;
     },
     upfile(e) {
-      this.isLocal = true;
       let file = e.target.files[0];
       let data = new FormData();
       data.append("file", file, file.name);
@@ -269,10 +268,10 @@ export default {
       let formdata = new FormData();
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
-      //this.$store.dispatch("editPlace", formdata);
-      axios.post(`${this.resource_uri}place/edit`, formdata);
+      this.$store.dispatch("editPlace", { data: formdata, pid: this.pid });
+      
       //setTimeout((location.href = "http://localhost:8080/List/All/1"), 3000);
-      //axios.post(`${this.resource_uri}place/edit`, formdata);
+      
     },
   },
   setup(props) {

@@ -1,11 +1,5 @@
 <template>
-  <div
-    class=""
-    style="
-      background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)),
-        url('https://images.pexels.com/photos/4100130/pexels-photo-4100130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
-    "
-  >
+
     <div class="border-4 border-red-blue rounded-full bg-white shadow flex">
       <input
         type="text"
@@ -34,40 +28,17 @@
         </button>
       </a>
     </div>
-
-    <div class="">
-      <h2 class="mt-4 mb-4"></h2>
-
-      <div class="d-flex flex-wrap">
-        <!-- Bootstrap 5 card box -->
-        <div
-          class="px-4 py-2 w-1/3 d-flex flex-wrap"
-          v-for="place in places"
-          :key="place.placeId"
-        >
-          <div
-            class="
-              w-full
-              bg-white bg-opacity-50
-              rounded-lg
-              p-12
-              flex flex-col
-              justify-center
-              items-center
-              border
-            "
-          >
-            <div class="card-thumbnail w-auto">
-              <img
-                :src="getimage(place.image)"
-                class="img-fluid border-5"
-                alt=""
-              />
-            </div>
-            <h1 class="text-black font-bold text-xl">
-              {{ place.placeName }}
-            </h1>
-            <h2 class="text-black-200 font-bold text-xl flex px-4">
+  <div class="container-fluid px-1 py-5 mx-auto row justify-content-center">
+    <div class="col-xl-9 col-lg-10 col-sm-11 p-2 " v-for="place in places"
+          :key="place.placeId">
+        <div class="card pl-4 pl-md-5 pr-3 grid grid-cols-2 bg-opacity-95">
+            <div class="row">
+                <div class="left-side col-md-6">
+                    <p class="pt-5 mb-0 flex">สถานที่ท่องเที่ยว</p>
+                    <h3 class="pb-3  flex">{{ place.placeName }}</h3> 
+                    <h3 class="pb-3  flex">{{ place.placeRating }}/5</h3> 
+                    
+                          <h2 class=" flex text-xl">
               Tag:
               <div v-for="tag in place.tags" :key="tag.tag.tagid" class="">
                 <router-link
@@ -80,18 +51,7 @@
                 >
               </div>
             </h2>
-            <h3 class="text-black-200 font-bold text-xl flex px-4">
-              Rating: {{ place.placeRating }}/5
-            </h3>
-            <router-link
-              class="btn btn-sm btn-danger float-right"
-              :to="{
-                name: 'Placeinfo',
-                params: { pid: place.placeId, pImg: place.image },
-              }"
-              >Read mores</router-link
-            >
-            <button @click="deletePlace(place.placeId)" type="button" class="">
+                        <button @click="deletePlace(place.placeId)" type="button" class="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -103,20 +63,30 @@
                 />
               </svg>
             </button>
-            <button>
+             <button>
+               
    <router-link
               class=""
               :to="{
                 name: 'Editplace',
                 params: {pid:place.placeId,pimage:place.image},
               }"
-              >EditPlace</router-link
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.424 12.282l4.402 4.399-5.826 1.319 1.424-5.718zm15.576-6.748l-9.689 9.804-4.536-4.536 9.689-9.802 4.536 4.534zm-6 8.916v6.55h-16v-12h6.743l1.978-2h-10.721v16h20v-10.573l-2 2.023z"/></svg></router-link
             >
               </button>
             
-          </div>
+                     <router-link
+              class="btn btn-sm btn-danger float-right"
+              :to="{
+                name: 'Placeinfo',
+                params: { pid: place.placeId, pImg: place.image },
+              }"
+              >Read mores</router-link
+            >
+                </div>
+                <div class="right-side col-md-6"> <img class="shoe-img pl-5 pl-md-0" :src="getimage(place.image)"> </div>
+            </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -201,4 +171,5 @@ export default {
   //   this.PlaceList = await this.getPlaceList();
   // },
 };
+
 </script>
