@@ -14,7 +14,7 @@
           type="text"
           name="text"
           placeholder=""
-          v-model="hotel.hotelName"
+          v-model="hotels.hotelName"
           class="
             block
             w-full
@@ -38,7 +38,7 @@
           type="text"
           name="text"
           placeholder=""
-          v-model="hotel.address"
+          v-model="hotels.address"
           class="
             block
             w-full
@@ -62,7 +62,7 @@
           type="Email"
           name="Email"
           placeholder=""
-          v-model="hotel.email"
+          v-model="hotels.email"
           class="
             block
             w-full
@@ -86,7 +86,7 @@
           type="text"
           name="text"
           placeholder=""
-          v-model="hotel.telNumber"
+          v-model="hotels.telNumber"
           class="
             block
             w-full
@@ -100,23 +100,23 @@
           required
         />
         <div class="d-flex flex-column mt-2">
-          <div class="form-group">
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/*,"
-              @change="upfile"
-            />
-            <div class="b object-center">
-              
-              <template v-if="preview">
-                <div class="h-56 w-56 object-cover mt-2 rounded-2xl6">
-                  <img :src="getHotelimage(hotel.image)" class="img-fluid" />
-                </div>
-              </template>
+           <div class="form-group">
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*,"
+          @change = "upfile"
+        />
+        <div class="border p-2 mt-3 object-center ">
+          
+          <template v-if="preview">
+            <div class="h-full w-full ">
+              <img :src="getHotelimage(hotels.image)" class="img-fluid" />
             </div>
-          </div>
+          </template>
+        </div>
+      </div>
         </div>
         <button
           type="submit"
@@ -142,12 +142,12 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "hotelEdit",
-  props: ["hid"],
+  props: ["uid"],
   data() {
     return {
       name: "",
@@ -163,11 +163,11 @@ export default {
   methods: {
     editHotel() {
       let newHotel = {
-        hotelId: 0,
-        hotelName: this.name,
-        telNumber: this.tel,
-        address: this.address,
-        email: this.email,
+        hotelId: this.hotels.hotelId,
+        hotelName: this.hotels.hotelName,
+        telNumber: this.hotels.telNumber,
+        address: this.hotels.address,
+        email: this.hotels.email,
         image: "",
         owner: { userId: 2 },
       };
@@ -178,10 +178,10 @@ export default {
       let formdata = new FormData();
       formdata.append("newHotel", blob);
       formdata.append("image", this.image);
-      this.$store.dispatch("addHotel", formdata);
-      alert("successfully added!");
-      axios.post(`${this.resource_uri}hotel/edit`, formdata);
-      window.location.reload();
+      this.$store.dispatch("editHotel", { data: formdata, hid: this.hotels.hotelId});
+      console.log(newHotel);
+      alert("successfully Edited!");
+      // axios.post(`${this.resource_uri}hotel/edit`, formdata);
     },
     upfile(e) {
       let file = e.target.files[0];
@@ -203,10 +203,9 @@ export default {
   },
   setup(props) {
     const store = useStore();
-    store.dispatch("getHotelById", props.pid);
-
+    store.dispatch("getMyHotel", props.uid);
     let hotels = computed(function () {
-      return store.state.hotels;
+      return store.state.myHotel;
     });
 
     return {

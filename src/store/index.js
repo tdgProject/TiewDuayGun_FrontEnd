@@ -74,6 +74,9 @@ export default createStore({
       editPlace(state, place){
         state.places.push(place)
       },
+      editHotel(state, hotel){
+        state.hotels.push(hotel)
+      },
       editReview(state,review){
         const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
         if(index !== -1){
@@ -192,6 +195,11 @@ export default createStore({
           const response = await axios.put(`${resource_uri}place/edit/${formData.pid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);
           commit('editPlace',response.data);
+        },
+        async editHotel({commit}, formData){
+          const response = await axios.put(`${resource_uri}hotel/edit/${formData.hid}`,formData.data);
+          await axios.get(`${resource_uri}onstart`);
+          commit('editHotel',response.data);
         },
         async getMyHotel({commit}, userId){
           const response = await axios.get(`${resource_uri}hotel/user/${userId}`);

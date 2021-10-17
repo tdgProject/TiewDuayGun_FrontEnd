@@ -15,7 +15,7 @@ import Aboutus from '../views/Aboutus.vue'
 import SignIn from '../views/SignIn.vue'
 import Editplace from '../views/Editplace.vue'
 import hotelEdit from '../views/hotelEdit.vue'
-
+import Listhotel from '../views/Listhotel.vue'
 
 
 
@@ -72,7 +72,23 @@ const routes = [{
     component: Editplace,
     props:true
   },
-
+  {
+    path: '/hotelEdit/:uid',
+    name: 'hotelEdit',
+    component: hotelEdit,
+    props:true
+  },
+  {
+    path: '/List/:filter/:var',
+    name: 'List',
+    props: true,
+    component: List,
+  },
+  {
+    path: '/Listhotel',
+    name: 'Listhotel',
+    component: Listhotel,
+  },
   {
     path: '/List/:filter/:var',
     name: 'List',
