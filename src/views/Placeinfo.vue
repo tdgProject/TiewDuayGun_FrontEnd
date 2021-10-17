@@ -13,7 +13,8 @@
       </header>
       <div
         class="p-5 pb-1 mb-4 bg-light rounded-3"
-        v-bind:style="{ backgroundImage: 'url(' + placeImage + ')' }">
+        v-bind:style="{ backgroundImage: 'url(' + placeImage + ')' }"
+      >
         <div class="container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
           <div
@@ -43,19 +44,27 @@
 
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
-                    <div class="h-100 p-4 text-white bg-dark rounded-3">
-            <h2 class="mb-3"><i class='bx bxs-star text-3xl'></i> Rating : {{ place.placeRating }} </h2>
-            <div class="vid-container" >
-              <iframe class="responsive-iframe" src="https://www.youtube.com/embed/A30IuIjQYYg?autoplay=1" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+          <div class="h-100 p-4 text-white bg-dark rounded-3">
+            <h2 class="mb-3">
+              <i class="bx bxs-star text-3xl"></i> Rating :
+              {{ place.placeRating }}
+            </h2>
+            <div class="vid-container">
+              <iframe
+                class="responsive-iframe"
+                src="https://www.youtube.com/embed/A30IuIjQYYg?autoplay=1"
+                title="YouTube video player"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
-        
         </div>
         <div class="col-md-6">
           <div class="h-100 p-5 bg-light border rounded-3">
             <form @submit.prevent="addReview()">
               <h3>Your Review and Rating</h3>
-              <Star :rating="rating" @selected="updateStar"/>
+              <Star :rating="rating" @selected="updateStar" />
 
               <div class="form-group">
                 <textarea
@@ -110,20 +119,32 @@
                 <div v-if="edit == true && review.user.userId == editId">
                   <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="d-flex">
-                    <img
-                      :src="getUserImage(review.user.image)"
-                      alt="user"
-                      width="50"
-                      class="rounded-circle"
-                    />
+                      <img
+                        :src="getUserImage(review.user.image)"
+                        alt="user"
+                        width="50"
+                        class="rounded-circle"
+                      />
 
-                    <h6 class="font-medium font-bold mt-4 ml-4">
-                      {{ review.user.username }}
-                    </h6>
+                      <h6 class="font-medium font-bold mt-4 ml-4">
+                        {{ review.user.username }}
+                      </h6>
                     </div>
                     <div class="w-1/6">
-                      <label for="StarRange" class="container text-center font-bold">Your Rating : {{uRating}}</label>
-                      <input type="range" class="form-range" min="0" max="5" step="0.5" v-model="uRating" id="StarRange">
+                      <label
+                        for="StarRange"
+                        class="container text-center font-bold"
+                        >Your Rating : {{ uRating }}</label
+                      >
+                      <input
+                        type="range"
+                        class="form-range"
+                        min="0"
+                        max="5"
+                        step="0.5"
+                        v-model="uRating"
+                        id="StarRange"
+                      />
                     </div>
                   </div>
                   <div class="m-auto w-5/6">
@@ -153,24 +174,24 @@
                 <div v-else-if="review.user.userId !== editId">
                   <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="flex">
-                    <img
-                      :src="getUserImage(review.user.image)"
-                      alt="user"
-                      width="50"
-                      class="rounded-circle"
-                    />
-                    <h6 class="font-medium font-bold mt-4 ml-4">
-                      {{ review.user.username }}
-                    </h6>
+                      <img
+                        :src="getUserImage(review.user.image)"
+                        alt="user"
+                        width="50"
+                        class="rounded-circle"
+                      />
+                      <h6 class="font-medium font-bold mt-4 ml-4">
+                        {{ review.user.username }}
+                      </h6>
                     </div>
                     <div>
                       <ul class="d-flex justify-content-start">
-                          <li v-for="x in calStar(review.rating)[0]" :key="x">
-                            <i class='bx bxs-star text-3xl'></i>
-                          </li>
-                          <li v-for="y in calStar(review.rating)[1]" :key="y">
-                            <i class='bx bxs-star-half text-3xl' ></i>
-                          </li>
+                        <li v-for="x in calStar(review.rating)[0]" :key="x">
+                          <i class="bx bxs-star text-3xl"></i>
+                        </li>
+                        <li v-for="y in calStar(review.rating)[1]" :key="y">
+                          <i class="bx bxs-star-half text-3xl"></i>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -182,7 +203,7 @@
                     <button
                       type="button"
                       class="mr-2"
-                      @click="editSwitch(review.rating,review.user.userId)"
+                      @click="editSwitch(review.rating, review.user.userId)"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -199,9 +220,7 @@
                       @click="deleteReview(review.user.userId)"
                       type="button"
                       class=""
-                      
                     >
-                    
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -226,42 +245,57 @@
       <!-- hotel -->
       <div class="pt-4 mt-4 text-muted border-top"></div>
       <header class="pb-3 mb-4 border-bottom">
-        <a class="d-flex align-items-center text-dark text-decoration-none justify-content-between">
+        <a
+          class="
+            d-flex
+            align-items-center
+            text-dark text-decoration-none
+            justify-content-between
+          "
+        >
           <div class="d-flex align-items-center">
             <i class="bx bxs-hotel display-6 mr-2"></i>
             <span class="fs-4">Hotel</span>
           </div>
           <div>
-            <button class="d-flex align-items-center"  v-if="showAddHotel" @click="addMyHotel">
-            <i class="bx bxs-add-to-queue text-4xl" ></i><span class="text-lg">Add Your Hotel</span>
+            <button
+              class="d-flex align-items-center"
+              v-if="showAddHotel"
+              @click="addMyHotel"
+            >
+              <i class="bx bxs-add-to-queue text-4xl"></i
+              ><span class="text-lg">Add Your Hotel</span>
             </button>
           </div>
-          
         </a>
       </header>
-<div class="container mt-10 d-flex flex-wrap justify-content-start">
-  
-    <div class="col-lg-4 d-flex flex-wrap p-1" v-for="hotel in hotels" :key="hotel.hotelId" >
-    <div class="card  ">
-      <img :src="getHotelImage(hotel.hotel.image)" alt="" class="card-img-top h-1/2">
-      <div class="card-body">
-       <p class="">Name: {{ hotel.hotel.hotelName }}</p>
-                  <p class="">Address: {{ hotel.hotel.address }}</p>
-                  <p class="">Email: {{ hotel.hotel.email }}</p>
-                  <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
-     
+      <div class="container mt-10 d-flex flex-wrap justify-content-start">
+        <div
+          class="col-lg-4 d-flex flex-wrap p-1"
+          v-for="hotel in hotels"
+          :key="hotel.hotelId"
+        >
+          <div class="card">
+            <img
+              :src="getHotelImage(hotel.hotel.image)"
+              alt=""
+              class="card-img-top h-1/2"
+            />
+            <div class="card-body">
+              <p class="">Name: {{ hotel.hotel.hotelName }}</p>
+              <p class="">Address: {{ hotel.hotel.address }}</p>
+              <p class="">Email: {{ hotel.hotel.email }}</p>
+              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
+            </div>
+            <div class="text-end" v-if="hotel.hotel.owner.userId === me.userId">
+              <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
+                <i class="bx bxs-trash text-end p-2 display-6"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="text-end" v-if="hotel.hotel.owner.userId===me.userId">
-        <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
-          <i class="bx bxs-trash text-end p-2 display-6"></i>
-        </button>
-      </div>
-     </div>
-    </div>
-    
-</div>
- 
-      
+
       <!-- hotel -->
     </div>
 
@@ -269,16 +303,15 @@
   </div>
 </template>
 <script>
-
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-import Star from "../component/Star.vue"
+import Star from "../component/Star.vue";
 export default {
   name: "Tag",
   props: ["pid"],
-  components : {
-    Star
+  components: {
+    Star,
   },
 
   data() {
@@ -295,10 +328,10 @@ export default {
     };
   },
   methods: {
-    addMyHotel(){
+    addMyHotel() {
       let nearBy = {
-        hotel: { hotelId: this.myHotel[0].hotelId}
-      }
+        hotel: { hotelId: this.myHotel[0].hotelId },
+      };
       const jsonProduct = JSON.stringify(nearBy);
       const blob = new Blob([jsonProduct], {
         type: "application/json",
@@ -308,8 +341,8 @@ export default {
       this.$store.dispatch("addNearBy", { data: formdata, pid: this.pid });
       window.location.reload();
     },
-    deleteMyHotel(hid){
-      this.$store.dispatch("deleteNearby",{pid: this.pid, hid: hid });
+    deleteMyHotel(hid) {
+      this.$store.dispatch("deleteNearby", { pid: this.pid, hid: hid });
       window.location.reload();
     },
     addReview() {
@@ -328,9 +361,9 @@ export default {
       window.location.reload();
     },
     deleteReview(uid) {
-      if(confirm("Do you really want to remove the product?")){
-      this.$store.dispatch("removeReview", { uid: uid, pid: this.pid });
-      location.reload();
+      if (confirm("Do you really want to remove the product?")) {
+        this.$store.dispatch("removeReview", { uid: uid, pid: this.pid });
+        location.reload();
       }
     },
     editReview(rev) {
@@ -348,46 +381,44 @@ export default {
       this.$store.dispatch("editReview", { data: formdata, pid: this.pid });
       window.location.reload();
     },
-    editSwitch(rating,uid) {
+    editSwitch(rating, uid) {
       this.uRating = rating;
       this.editId = uid;
       this.edit = !this.edit;
     },
-    calStar(rating){
-      let floor= Math.floor(rating);
-      let half = rating-floor;
-      return [floor,Math.ceil(half)];
+    calStar(rating) {
+      let floor = Math.floor(rating);
+      let half = rating - floor;
+      return [floor, Math.ceil(half)];
     },
-    updateStar(value){
+    updateStar(value) {
       this.rating = value;
     },
-    getUserImage(image){
-      return `${this.$store.state.url}image/user/${image}`
+    getUserImage(image) {
+      return `${this.$store.state.url}image/user/${image}`;
     },
-    getHotelImage(image){
-      return `${this.$store.state.url}image/hotel/${image}`
-    }
-    
-    
+    getHotelImage(image) {
+      return `${this.$store.state.url}image/hotel/${image}`;
+    },
   },
   computed: {
     showAddHotel: function () {
       let show = true;
       if (this.hotels && this.myHotel[0]) {
-        for(const h of this.hotels){
-          if(this.myHotel[0].hotelId == h.hotel.hotelId){
-          show = false;
+        for (const h of this.hotels) {
+          if (this.myHotel[0].hotelId == h.hotel.hotelId) {
+            show = false;
           }
         }
       }
       return show;
-    }
+    },
   },
   setup(props) {
     const store = useStore();
     store.dispatch("getPlaceById", props.pid),
-    store.dispatch("getHotelById", props.pid),
-    store.dispatch("listReview", props.pid);
+      store.dispatch("getHotelById", props.pid),
+      store.dispatch("listReview", props.pid);
     store.dispatch("getMyHotel", store.state.user.userId);
     let place = computed(function () {
       return store.state.place;
@@ -405,7 +436,7 @@ export default {
       return store.state.user;
     });
     let placeImage = computed(function () {
-      return store.state.url+'image/place/'+store.state.place.image;
+      return store.state.url + "image/place/" + store.state.place.image;
     });
     return {
       place,
@@ -413,13 +444,13 @@ export default {
       reviews,
       myHotel,
       me,
-      placeImage
+      placeImage,
     };
   },
 };
 </script>
 <style scoped>
-.vid-container{
+.vid-container {
   position: relative;
   overflow: hidden;
   width: 100%;

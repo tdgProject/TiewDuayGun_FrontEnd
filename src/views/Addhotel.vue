@@ -113,7 +113,7 @@
               id="image"
               name="image"
               accept="image/*,"
-              @change="upfile"
+              @change= "upfile"
             />
             <div class="border p-2 mt-3 object-center">
               <p>Preview Here:</p>
@@ -150,9 +150,9 @@
 </template>
 
 <script>
-import axios from "axios";
+
 export default {
-  name: "addhotel",
+  name: "Addhotel",
   data() {
     return {
       name: "",
@@ -173,7 +173,7 @@ export default {
         telNumber: this.tel,
         address: this.address,
         email: this.email,
-        image: this.image,
+        image: "",
         owner: {"userId": 2}
       };
       const jsonProduct = JSON.stringify(newHotel);
@@ -183,8 +183,8 @@ export default {
       let formdata = new FormData();
       formdata.append("newHotel", blob);
       formdata.append("image", this.upfile);
-      axios.post(`${this.resource_uri}hotel/add`, formdata);
-      console.log(newHotel);
+      this.$store.dispatch("addHotel",  formdata );
+      
     },
     upfile(e) {
       let file = e.target.files[0];

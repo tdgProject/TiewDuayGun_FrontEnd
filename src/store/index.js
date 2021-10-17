@@ -56,6 +56,9 @@ export default createStore({
       addNewPlace(state, place) {
         state.places.push(place)
       },
+      addNewHotel(state, hotel) {
+        state.hotels.push(hotel)
+      },
       deleteReview(state,uid){
         state.reviews = state.reviews.filter(r => r.user.userId !== uid)
       },
@@ -149,6 +152,11 @@ export default createStore({
           const response = await axios.post(`${resource_uri}place/add`,formData);
           await axios.get(`${resource_uri}onstart`);
           commit('addNewPlace',response.data);
+        },
+        async addHotel({commit},formData){
+          const response = await axios.post(`${resource_uri}hotel/add`,formData);
+          await axios.get(`${resource_uri}onstart`);
+          commit('addNewHotel',response.data);
         },
         async listPlaceByTag({commit},value){
           const response = await axios.get(`${resource_uri}place/tag/${value}`);
