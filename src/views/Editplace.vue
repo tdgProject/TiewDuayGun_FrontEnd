@@ -8,7 +8,7 @@
               class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"
             ></i>
           </div>
-          <h3 class="text-2xl text-gray-900 font-semibold">Addplace</h3>
+          <h3 class="text-2xl text-gray-900 font-semibold">EditPlace</h3>
           <p class="text-gray-600">เพิ่มสถานที่</p>
           <div class="form-group">
             <input
@@ -133,8 +133,8 @@
               id=""
               placeholder="Insert Your PlaceName"
               class="border p-2 w-full"
-              v-model.trim="enteredplaceName"
               v-model="place.placeName"
+              required
             />
           </div>
           <p class="">Insert Your PlaceName</p>
@@ -145,10 +145,22 @@
             rows="3"
             placeholder="Insert Your PlaceDescription"
             class="border p-2 mt-3 w-full"
-            v-model.trim="enteredplaceDescription"
             v-model="place.placeDescription"
+            required
           ></textarea>
           <p class="">Insert Your PlaceDescription</p>
+          <div class="flex space-x-5 mt-3">
+          <input
+            type="text"
+            name="videoURL"
+            id=""
+            placeholder="Ex. https://www.youtube.com/watch?v=???"
+            class="border p-2 w-full"
+            v-model="place.video"
+            required
+          />
+        </div>
+        <p class="">Insert Your Video URL</p>
           <input
             type="submit"
             value="Submit"
@@ -165,6 +177,16 @@
           />
         </div>
       </form>
+      <div class="al w-full h-screen" v-if="complete">
+      <div class="stk h-screen d-flex align-items-center justify-content-center ">
+        <div class="w-1/5 bg-white d-flex flex-col align-items-center justify-content-center rounded ">
+        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3">Waiting for Process</div>
+        <img class="w-1/12 my-4" src="../assets/hug.gif" />
+        <p class=" text-2xl ">Editing Place...</p>
+        
+        </div>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -182,14 +204,13 @@ export default {
       image: null,
       placename: "",
       placeDescription: "",
-      enteredplaceName: "",
-      enteredplaceDescription: "",
       ptag: "",
       etag: [],
       editId: "",
       isLocal: false,
       isSet: false,
       previewSet: false,
+      complete: false
     };
   },
   methods: {
@@ -260,9 +281,10 @@ export default {
       }
       let newPlace = {
         placeId: 0,
-        placeName: this.enteredplaceName,
-        placeDescription: this.enteredplaceDescription,
+        placeName: this.place.placeName,
+        placeDescription: this.place.placeDescription,
         image: "",
+        video: this.place.video,
         tags: allTag,
       };
       const jsonProduct = JSON.stringify(newPlace);
@@ -273,9 +295,8 @@ export default {
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
       this.$store.dispatch("editPlace", { data: formdata, pid: this.pid });
-      
-      //setTimeout((location.href = "http://localhost:8080/List/All/1"), 3000);
-      
+      this.complete=true;
+      setTimeout( () => window.location.href = '/List/All/1', 2000);
     },
   },
   setup(props) {
@@ -318,5 +339,19 @@ export default {
 input[type="checkbox"]:checked + label {
   background: purple;
   color: white;
+}
+.al{
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.stk{
+  z-index: 6;
+  top: 0;
+  left: 0;
+  position: sticky;
+  background-color:rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 }
 </style>

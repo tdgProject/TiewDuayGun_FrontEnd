@@ -20,6 +20,7 @@
           name="image"
           accept="image/*,"
           @change = "upfile"
+          required
         />
         <div class="border p-2 mt-3 object-center ">
           
@@ -33,7 +34,7 @@
       <div class="container d-flex align-items-center">
         <div class="my-3 w-50 align-items-center">
         <p class="my-auto">Province</p>
-        <select class="form-control select" v-model="ptag">
+        <select class="form-control select" v-model="ptag" required>
             <option class="text-center" value="" disabled>
               Select Province
             </option>
@@ -80,6 +81,7 @@
           placeholder="Insert Your PlaceName"
           class="border p-2 w-full"
           v-model.trim="enteredplaceName"
+          required
         />
       </div>
  <p class="">Insert Your PlaceName</p>
@@ -91,8 +93,21 @@
         placeholder="Insert Your PlaceDescription"
         class="border p-2 mt-3 w-full"
         v-model.trim="enteredplaceDescription"
+        required
       ></textarea>
-<p class="">Insert Your PlaceDescription</p>
+      <p class="">Insert Your PlaceDescription</p>
+      <div class="flex space-x-5 mt-3">
+        <input
+          type="text"
+          name="videoURL"
+          id=""
+          placeholder="Ex. https://www.youtube.com/watch?v=???"
+          class="border p-2 w-full"
+          v-model.trim="enteredURL"
+          required
+        />
+      </div>
+      <p class="">Insert Your Video URL</p>
       <input
         type="submit"
         value="Submit"
@@ -108,8 +123,17 @@
       />
     </div>
   </form>
-   
     </div>
+    <div class="al w-full h-screen" v-if="complete">
+      <div class="stk h-screen d-flex align-items-center justify-content-center ">
+        <div class="w-1/5 bg-white d-flex flex-col align-items-center justify-content-center rounded ">
+        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3">Waiting for Process</div>
+        <img class="w-1/12 my-4" src="../assets/hug.gif" />
+        <p class=" text-2xl ">Adding Place...</p>
+        
+        </div>
+          </div>
+        </div>
   </div>
 
 </template>
@@ -128,11 +152,11 @@ export default {
       placeDescription: "",
       enteredplaceName: "",
       enteredplaceDescription: "",
+      enteredURL: "",
       ptag: "",
       etag: [],
-      resource_uri: "http://localhost:8081",
       editId: "",
-      
+      complete: false
     };
   },
   methods: {
@@ -161,6 +185,7 @@ export default {
         placeName: this.enteredplaceName,
         placeDescription: this.enteredplaceDescription,
         image: "",
+        video: this.enteredURL,
         tags: allTag
       };
       const jsonProduct = JSON.stringify(newPlace);
@@ -170,10 +195,9 @@ export default {
       let formdata = new FormData();
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
-      this.$store.dispatch("addPlace",  formdata );
-      // setTimeout(location.href="http://localhost:8080/List/All/1", 3000);
-      //axios.post(`${this.resource_uri}place/add`, formdata);
-      
+      this.$store.dispatch("addPlace",  formdata )
+      this.complete=true;
+      setTimeout( () => window.location.href = '/List/All/1', 2000);
     },
 
   },
@@ -218,4 +242,19 @@ input[type="checkbox"]:checked + label {
     background: purple;
     color: white;
 }
+.al{
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.stk{
+  z-index: 6;
+  top: 0;
+  left: 0;
+  position: sticky;
+  background-color:rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
 </style>
