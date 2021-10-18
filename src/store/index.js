@@ -128,7 +128,7 @@ export default createStore({
           commit('getPlace',response.data);
         },
         async listType({commit}){
-            const response = await axios.get(`${resource_uri}types`);
+            const response = await axios.get(`${resource_uri}types/count`);
             commit('listType',response.data);
         },
         async listTag({commit}){
@@ -212,6 +212,6 @@ export default createStore({
        async deleteNearby({commit}, value){
         const response = await axios.delete(`${resource_uri}nearby/delete/${value.pid}/${value.hid}`);
         commit('deleteNearByHotel',response.data);
-     },
+        },
 }
 });

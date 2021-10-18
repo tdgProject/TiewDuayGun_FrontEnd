@@ -151,7 +151,6 @@ export default {
       }
     },
     addPlace() {
-      console.log(this.image)
       let allTag = [{ tag: { tagId : this.ptag}}]
       for(let t of this.etag){
         let newTag = { tag: { tagId : t}};
@@ -182,9 +181,6 @@ export default {
     const store = useStore();
     store.dispatch("listProvinceTag");
     store.dispatch("listEtcTag");
-    
-    
-
         let place = computed(function () {
       return store.state.place;
     });

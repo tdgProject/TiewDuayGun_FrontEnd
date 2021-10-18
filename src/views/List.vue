@@ -118,7 +118,7 @@ export default {
 
   setup(props) {
     const store = useStore();
-
+    store.dispatch("onstart");
     switch (props.filter) {
       case "All":
         store.dispatch("listPlace");
