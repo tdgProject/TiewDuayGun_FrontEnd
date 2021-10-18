@@ -19,10 +19,10 @@
               @change="upfile"
               
             />
-            <div class="border p-2 mt-3 object-center">
-              <template v-if="getimage(place.image)">
+            <div v-if="setPreview()" class="border p-2 mt-3 object-center">
+              <template v-if="preview">
                 <div class="h-full w-full">
-                  <img :src="getimage(place.image)" class="img-fluid" />
+                  <img :src="preview" class="img-fluid" />
                 </div>
               </template>
             </div>
@@ -186,10 +186,10 @@ export default {
       enteredplaceDescription: "",
       ptag: "",
       etag: [],
-      resource_uri: "http://localhost:8081/",
       editId: "",
       isLocal: false,
-      isSet: false
+      isSet: false,
+      previewSet: false,
     };
   },
   methods: {
@@ -205,8 +205,12 @@ export default {
         this.isSet = true;
       }
     },
-    getimage(image) {
-      return `${this.$store.state.url}image/place/${image}`;
+    setPreview(){
+      if(this.preview == null){
+        this.preview = this.$store.state.url+"image/place/"+this.place.image;
+      }
+      this.previewSet = true;
+      return this.previewSet
     },
     upfile(e) {
       let file = e.target.files[0];

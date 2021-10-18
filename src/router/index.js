@@ -14,7 +14,7 @@ import Profile from '../views/Profile.vue'
 import Aboutus from '../views/Aboutus.vue'
 import SignIn from '../views/SignIn.vue'
 import Editplace from '../views/Editplace.vue'
-import hotelEdit from '../views/hotelEdit.vue'
+import Edithotel from '../views/Edithotel.vue'
 import Listhotel from '../views/Listhotel.vue'
 
 
@@ -30,10 +30,9 @@ const routes = [{
     component: Tag
   },
   {
-    path: '/hotelEdit',
-    name: 'hotelEdit',
-    component: hotelEdit,
-    props: true
+    path: '/Edithotel',
+    name: 'Edithotel',
+    component: Edithotel
   },
   {
     path: '/Aboutus',
@@ -70,12 +69,6 @@ const routes = [{
     path: '/Edit/:pid',
     name: 'Editplace',
     component: Editplace,
-    props:true
-  },
-  {
-    path: '/hotelEdit/:uid',
-    name: 'hotelEdit',
-    component: hotelEdit,
     props:true
   },
   {

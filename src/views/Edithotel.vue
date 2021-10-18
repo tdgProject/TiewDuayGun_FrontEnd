@@ -108,11 +108,11 @@
           accept="image/*,"
           @change = "upfile"
         />
-        <div class="border p-2 mt-3 object-center ">
+        <div v-if="setPreview()" class="border p-2 mt-3 object-center ">
           
           <template v-if="preview">
             <div class="h-full w-full ">
-              <img :src="getHotelimage(hotels.image)" class="img-fluid" />
+              <img :src="preview" class="img-fluid" />
             </div>
           </template>
         </div>
@@ -147,7 +147,6 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "hotelEdit",
-  props: ["uid"],
   data() {
     return {
       name: "",
@@ -157,10 +156,17 @@ export default {
       preview: null,
       image: null,
       pic: null,
-      resource_uri: "http://localhost:8081/",
+      isSet: false
     };
   },
   methods: {
+    setPreview(){
+      if(this.preview == null){
+        this.preview = this.$store.state.url+"image/hotel/"+this.hotels.image;
+      }
+      this.isSet = true;
+      return this.isSet
+    },
     editHotel() {
       let newHotel = {
         hotelId: this.hotels.hotelId,
@@ -197,13 +203,11 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
-    getHotelImage(image) {
-      return `${this.$store.state.url}image/hotel/${image}`;
-    },
+    
   },
-  setup(props) {
+  setup() {
     const store = useStore();
-    store.dispatch("getMyHotel", props.uid);
+    store.dispatch("getMyHotel", store.state.user.userId);
     let hotels = computed(function () {
       return store.state.myHotel;
     });
