@@ -30,9 +30,10 @@ const routes = [{
     component: Tag
   },
   {
-    path: '/Edithotel',
+    path: '/Edithotel/:uid',
     name: 'Edithotel',
-    component: Edithotel
+    component: Edithotel,
+    props: true
   },
   {
     path: '/Aboutus',

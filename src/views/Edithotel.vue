@@ -1,7 +1,7 @@
 <template>
   <div class="grid min-h-screen place-items-center">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <h1 class="text-xl font-semibold">Register Your Business</h1>
+      <h1 class="text-xl font-semibold">Edit Your Business</h1>
       <form class="mt-6" @submit.prevent="editHotel()">
         <label
           for="hotelname"
