@@ -1,6 +1,6 @@
 <template>
 
-    <div class="border-4 border-red-blue rounded-full bg-white shadow flex">
+    <div class="border-4 border-red-black rounded-full bg-white shadow flex">
       <input
         type="text"
         placeholder="Search Place's Name"
@@ -28,15 +28,29 @@
         </button>
       </a>
     </div>
-  <div class="container-fluid px-1 py-5 mx-auto row justify-content-center">
+  <div class="container-fluid px-1 py-5 mx-auto row justify-content-center" style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')">
     <div class="col-xl-9 col-lg-10 col-sm-11 p-2 " v-for="place in places"
           :key="place.placeId">
-        <div class="card pl-4 pl-md-5 pr-3 grid grid-cols-2 bg-opacity-95">
+        <div class="card pl-4 pl-md-5 pr-3 grid grid-cols-2 shadow">
             <div class="row">
                 <div class="left-side col-md-6">
                     <p class="pt-5 mb-0 flex">สถานที่ท่องเที่ยว</p>
                     <h3 class="pb-3  flex">{{ place.placeName }}</h3> 
-                    <h3 class="pb-3  flex">{{ place.placeRating }}/5</h3> 
+                     <div>
+                       <div class="col-xl-9 col-lg-10 col-sm-11 mr-32 "
+          >
+          
+                      <ul class="d-flex justify-content-start">
+                        <p class="text-xl">Rating:</p>
+                        <li v-for="x in calStar(place.placeRating)[0]" :key="x">
+                          <i class="bx bxs-star text-3xl"></i>
+                        </li>
+                        <li v-for="y in calStar(place.placeRating)[1]" :key="y">
+                          <i class="bx bxs-star-half text-3xl"></i>
+                        </li>
+                      </ul>
+                       </div>
+                  </div>
                     
                           <h2 class=" flex text-xl">
               Tag:
@@ -51,7 +65,8 @@
                 >
               </div>
             </h2>
-                        <button @click="deletePlace(place.placeId)" type="button" class="">
+            <div class="float-left p-2">
+                        <button @click="deletePlace(place.placeId)" type="button" class="p-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -74,9 +89,10 @@
               ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.424 12.282l4.402 4.399-5.826 1.319 1.424-5.718zm15.576-6.748l-9.689 9.804-4.536-4.536 9.689-9.802 4.536 4.534zm-6 8.916v6.55h-16v-12h6.743l1.978-2h-10.721v16h20v-10.573l-2 2.023z"/></svg></router-link
             >
               </button>
-            
+            </div>
                      <router-link
-              class="btn btn-sm btn-danger float-right"
+                     
+              class="btn btn-outline-dark btn-icon-text float-right"
               :to="{
                 name: 'Placeinfo',
                 params: { pid: place.placeId, pImg: place.image },
@@ -105,6 +121,11 @@ export default {
     };
   },
   methods: {
+    calStar(placeRating) {
+      let floor = Math.floor(placeRating);
+      let half = placeRating - floor;
+      return [floor, Math.ceil(half)];
+    },
     getimage(image) {
       return `${this.$store.state.url}image/place/${image}`;
     },
@@ -115,10 +136,12 @@ export default {
       }
     },
   },
-
+  
   setup(props) {
     const store = useStore();
-    store.dispatch("onstart");
+    
+   
+
     switch (props.filter) {
       case "All":
         store.dispatch("listPlace");
@@ -139,6 +162,7 @@ export default {
 
     return {
       places,
+      
     };
   },
 
