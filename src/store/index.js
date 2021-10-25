@@ -1,9 +1,14 @@
 import { createStore } from "vuex";
+import { auth } from "./auth.module";
 import axios from "axios";
 
 const resource_uri = "http://localhost:8081/";
+const user = JSON.parse(localStorage.getItem('user'));
 
 export default createStore({
+  modules: {
+    auth,
+  },
   state: {
     places: [],
     types: [],
@@ -11,13 +16,9 @@ export default createStore({
     reviews: [],
     provinces: [],
     etc: [],
-    user: {
-      userId: 2
-    },
+    user: user == null? {id:0} : user.data,
     myHotel: null,
     url: resource_uri
-
-    
   },
   mutations: {
       setPlace(state, places) {
@@ -82,38 +83,67 @@ export default createStore({
         if(index !== -1){
           state.reviews = state.reviews.splice(index,1,review);
         }
-
-        
-      }
-    // addCartItem(state, item) {
-    //   item.quantity = 1;
-    //   state.cart.push(item);
-    // },
-    // updateCartItem(state, updatedItem) {
-    //   state.cart = state.cart.map((cartItem) => {
-    //     if (cartItem.id == updatedItem.id) {
-    //       return updatedItem;
-    //     }
-
-    //     return cartItem;
-    //   });
-    // },
-    // removeCartItem(state, item) {
-    //   state.cart = state.cart.filter((cartItem) => {
-    //     return cartItem.id != item.id;
-    //   });
-    // }
+      },
+      // loginSuccess(state, user) {
+      //   state.status.loggedIn = true;
+      //   state.user = user;
+      // },
+      // loginFailure(state) {
+      //   state.status.loggedIn = false;
+      //   state.user = null;
+      // },
+      // logout(state) {
+      //   state.status.loggedIn = false;
+      //   state.user = null;
+      // },
+      // registerSuccess(state) {
+      //   state.status.loggedIn = false;
+      // },
+      // registerFailure(state) {
+      //   state.status.loggedIn = false;
+      // }
   },
   actions: {
-    //   addCartItem({commit}, item){
-    //     commit('addCartItem',item)
-    //   },
-    //   updateCartItem({commit}, item){
-    //     commit('updateCartItem',item)
-    //   },
-    //   removeCartItem({commit}, item){
-    //       commit('removeCartItem',item)
-    //   }
+        // async login({ commit }, loginData) {
+        //   return axios.post(`${resource_uri}auth/signin`,{
+        //     email: loginData.email,
+        //     password: loginData.password
+        //   }).then(
+        //     user => {
+        //       if (user.token) {
+        //         localStorage.setItem('user', JSON.stringify(user));
+        //       }
+        //       commit('loginSuccess', user);
+        //       return Promise.resolve(user);
+        //     },
+        //     error => {
+        //       commit('loginFailure', error);
+        //       return Promise.reject(error);
+        //     }
+        //   )
+        // },
+        // async logout({ commit }) {
+        //   localStorage.removeItem('user');
+        //   commit('logout');
+        // },
+        // async register({ commit }, signupData) {
+        //   return axios.post(`${resource_uri}auth/signup`,{
+        //     email : signupData.email,
+        //     password : signupData.password,
+        //     username : signupData.username,
+        //     tel : signupData.tel,
+        //     role : null
+        // }).then(
+        //     response => {
+        //       commit('registerSuccess' , response);
+        //       return Promise.resolve(response.data);
+        //     },
+        //     error => {
+        //       commit('registerFailure', error);
+        //       return Promise.reject(error);
+        //     }
+        //   );
+        // },
         async onstart(){
         await axios.get(`${resource_uri}onstart`);
         },

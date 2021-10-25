@@ -411,6 +411,9 @@ export default {
           }
         }
       }
+      if(!this.$store.state.loggedIn){
+        show = false;
+      }
       return show;
     },
   },
@@ -419,7 +422,7 @@ export default {
     store.dispatch("getPlaceById", props.pid),
       store.dispatch("getHotelById", props.pid),
       store.dispatch("listReview", props.pid);
-    store.dispatch("getMyHotel", store.state.user.userId);
+      store.dispatch("getMyHotel", store.state.user.id);
     let place = computed(function () {
       return store.state.place;
     });
