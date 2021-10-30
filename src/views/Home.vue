@@ -1,7 +1,7 @@
 <template>
 <!-- component -->
 
-<div class="flex items-center justify-center w-screen h-screen bg-gray-800"  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')">
+<div class="flex items-center justify-center w-full h-screen bg-gray-800"  style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')">
 <div class="card-thumbnail w-auto">
           <img
             src="https://www.graphicsprings.com/filestorage/stencils/687abebf7d05bc6f1a807ae8ccf81c63.png?width=500&height=500"
