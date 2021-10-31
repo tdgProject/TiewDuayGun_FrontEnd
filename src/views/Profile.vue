@@ -22,88 +22,64 @@
       "
     >
       <div class="w-sm">
-        <img src="@/assets/suit.jpg" />
+        <img :src="getUserImage(user.image)" />
         <div class="mt-4 text-green-600 text-center">
-          <h1 class="text-xl font-bold">Phopthorn Patcharoen</h1>
+          <h1 class="text-xl font-bold">{{user.username}}</h1>
           <p class="mt-4 text-gray-600">
-            Pretium lectus quam id leo in vitae turpis. Mattis pellentesque id
-            nibh tortor id.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- box-2 -->
-    <div
-      class="
-        mt-16
-        py-4
-        px-4
-        bg-whit
-        w-72
-        bg-white
-        rounded-xl
-        shadow-lg
-        hover:shadow-xl
-        transform
-        hover:scale-110
-        transition
-        duration-500
-        mx-auto
-        md:mx-0
-      "
-    >
-      <div class="w-sm">
-        <img src="@/assets/suit.jpg" />
-        <div class="mt-4 text-green-600 text-center">
-          <h1 class="text-xl font-bold">Somchai Chasa</h1>
-          <p class="mt-4 text-gray-600">
-            Nunc consequat interdum varius sit amet mattis vulputate enim nulla.
-            Risus feugiat.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- box-3 -->
-    <div
-      class="
-        mt-16
-        py-4
-        px-4
-        bg-whit
-        w-72
-        bg-white
-        rounded-xl
-        shadow-lg
-        hover:shadow-xl
-        transform
-        hover:scale-110
-        transition
-        duration-500
-        mx-auto
-        md:mx-0
-      "
-    >
-      <div class="w-sm">
-        <img src="@/assets/suit.jpg" />
-        <div class="mt-4 text-green-600 text-center">
-          <h1 class="text-xl font-bold">Attapon Jeamjumroensuk</h1>
-          <p class="mt-4 text-gray-600">
-            Nisl purus in mollis nunc sed id semper. Rhoncus aenean vel elit
-            scelerisque mauris.
+           Email:  {{user.email}}
+           Tel.:  {{user.telNumber}}
+           Role: {{user.roles}}
+           <button>
+               
+   <router-link
+              class=""
+              :to="{
+                name: 'EditProfile',
+                params: {uid:user.id},
+              }"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.424 12.282l4.402 4.399-5.826 1.319 1.424-5.718zm15.576-6.748l-9.689 9.804-4.536-4.536 9.689-9.802 4.536 4.534zm-6 8.916v6.55h-16v-12h6.743l1.978-2h-10.721v16h20v-10.573l-2 2.023z"/></svg></router-link
+            >
+              </button>
+           
           </p>
         </div>
       </div>
     </div>
   </div>
+
+
 </template>
+
 <script>
-// import { defineComponent } from '@vue/composition-api'
 
-// export default defineComponent({
-//     setup() {
+import { computed } from "vue";
+import { useStore } from "vuex";
 
-//     },
-// })
+export default {
+  props: ["uid"],
+  name: "Profile",
+  data(){
+    
+    return{
+
+    }
+  },
+  methods: {
+        getUserImage(image) {
+      return `${this.$store.state.url}image/user/${image}`;
+    },
+  },
+
+  setup(props) {
+    const store = useStore();
+    store.dispatch("getUserById", props.uid);
+    let user = computed(function () {
+      return store.state.user;
+      
+    });
+    return {
+      user
+    };
+  },
+}
 </script>

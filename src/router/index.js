@@ -16,6 +16,7 @@ import SignIn from '../views/SignIn.vue'
 import Editplace from '../views/Editplace.vue'
 import Edithotel from '../views/Edithotel.vue'
 import Listhotel from '../views/Listhotel.vue'
+import EditProfile from '../views/EditProfile.vue'
 
 
 
@@ -96,9 +97,16 @@ const routes = [{
     component: Placeinfo,
   },
   {
-    path: '/Profile',
+    path: '/Profile/:uid',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    props: true,
+  },
+  {
+    path: '/EditProfile/:uid',
+    name: 'EditProfile',
+    component: EditProfile,
+    props:true,
   },
 
 

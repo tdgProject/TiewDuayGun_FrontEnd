@@ -17,6 +17,7 @@ export default createStore({
     provinces: [],
     etc: [],
     user: user == null? {id:0} : user.data,
+    users: [],
     myHotel: null,
     url: resource_uri
   },
@@ -24,6 +25,9 @@ export default createStore({
       setPlace(state, places) {
           state.places = places
       },
+      getUser(state, users) {
+        state.users = users
+    },
       listType(state, types) {
         state.types = types
       },
@@ -77,6 +81,9 @@ export default createStore({
       },
       editHotel(state, hotel){
         state.hotels.push(hotel)
+      },
+      editUser(state, user){
+        state.users.push(user)
       },
       editReview(state,review){
         const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
@@ -157,6 +164,11 @@ export default createStore({
           await axios.get(`${resource_uri}onstart`);
           commit('getPlace',response.data);
         },
+        async getUserById({commit}, uid){
+          const response = await axios.get(`${resource_uri}user/${uid}`);
+          await axios.get(`${resource_uri}onstart`);
+          commit('getUser',response.data);
+        },
         async listType({commit}){
             const response = await axios.get(`${resource_uri}types/count`);
             commit('listType',response.data);
@@ -226,6 +238,11 @@ export default createStore({
           await axios.get(`${resource_uri}onstart`);
           commit('editPlace',response.data);
         },
+        async editUser({commit}, formData){
+          const response = await axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data);
+          await axios.get(`${resource_uri}onstart`);
+          commit('editUser',response.data);
+        },
         async editHotel({commit}, formData){
           const response = await axios.put(`${resource_uri}hotel/edit/${formData.hid}`,formData.data);
           await axios.get(`${resource_uri}onstart`);
@@ -235,6 +252,7 @@ export default createStore({
           const response = await axios.get(`${resource_uri}hotel/user/${userId}`);
           commit('setMyHotel',response.data);
         },
+
         async addNearBy({commit}, formData){
           const response = await axios.post(`${resource_uri}nearby/add/${formData.pid}`,formData.data);
           commit('addNearByHotel',response.data);

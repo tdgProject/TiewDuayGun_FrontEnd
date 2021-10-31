@@ -25,7 +25,7 @@
                       </a>
 
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" data-offset="flip">
-                        <li><a class="dropdown-item " :href="$router.resolve({name: 'Profile'}).href">Profile</a></li>
+                        <li><a class="dropdown-item " :href="$router.resolve({name: 'Profile', params: { uid:me.id }}).href">Profile</a></li>
                         <!-- <li><a class="dropdown-item" :href="$router.resolve({name: 'Signin'}).href">My Hotel</a></li> -->
                         
                         <li v-if="me.roles[0]== 'business' "><a class="dropdown-item" :href="$router.resolve({name: 'Listhotel'}).href">My Hotel</a></li>
