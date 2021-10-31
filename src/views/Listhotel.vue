@@ -4,7 +4,7 @@
       {{hotel.hotelName}} -->
     <div class="container mt-10 d-flex flex-wrap justify-content-start">
       <div class="col-lg-4 d-flex flex-wrap p-1">
-        <div class="card">
+        <div v-if="hotels !== '' " class="card" >
           <img
             :src="getHotelImage(hotels.image)"
             alt=""
@@ -21,7 +21,7 @@
                 class=""
                 :to="{
                   name: 'Edithotel',
-                  params: { uid: 2, himage: hotels.image },
+                  params: { uid: me.id, himage: hotels.image },
                 }"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,8 @@
         </div>
       </div>
     </div>
-    <div>
+    <div v-if="hotels == '' " >
+      <p>Add Your Hotel</p>
       <button>
         <router-link
         onclick="window.location.reload(true)"
@@ -82,8 +83,11 @@ export default {
 
   setup() {
     const store = useStore();
-
-    store.dispatch("getMyHotel", 2); /* mockup userid=2*/
+    let me = computed(function () {
+      return store.state.user;
+    });
+    console.log(me.value.id);
+    store.dispatch("getMyHotel", me.value.id); 
 
     let hotels = computed(function () {
       return store.state.myHotel;
@@ -91,6 +95,7 @@ export default {
     console.log(hotels);
     return {
       hotels,
+      me
     };
   },
 };

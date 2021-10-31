@@ -175,7 +175,7 @@ export default {
         address: this.hotels.address,
         email: this.hotels.email,
         image: "",
-        owner: { userId: 2 },
+        owner: { userId: this.me.id },
       };
       const jsonProduct = JSON.stringify(newHotel);
       const blob = new Blob([jsonProduct], {
@@ -207,13 +207,18 @@ export default {
   },
   setup() {
     const store = useStore();
-    store.dispatch("getMyHotel", store.state.user.userId);
+    let me = computed(function () {
+      return store.state.user;
+    });
+    //store.dispatch("getMyHotel", store.state.user.userId);
+    store.dispatch("getMyHotel", me.value.id);
     let hotels = computed(function () {
       return store.state.myHotel;
     });
-
+    
     return {
-    hotels
+    hotels,
+    me
     };
   },
 };

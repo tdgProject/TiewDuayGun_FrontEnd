@@ -149,9 +149,11 @@
 </template>
 
 <script>
-
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Addhotel",
+
   data() {
     return {
       name: "",
@@ -173,7 +175,7 @@ export default {
         address: this.address,
         email: this.email,
         image: "",
-        owner: {"userId": 2}
+        owner:{userId: this.me.id}
       };
       const jsonProduct = JSON.stringify(newHotel);
       const blob = new Blob([jsonProduct], {
@@ -200,6 +202,15 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
+  },
+setup() {
+    const store = useStore();
+    let me = computed(function () {
+      return store.state.user;
+    });
+    return{
+      me
+    };
   },
 };
 </script>

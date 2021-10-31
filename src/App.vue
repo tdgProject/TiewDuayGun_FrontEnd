@@ -21,12 +21,14 @@
                           class="rounded-circle mr-3"
                         />
                         {{me.username}}
+                        {{me.role}}
                       </a>
 
                       <ul class="dropdown-menu border-2 " aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item " :href="$router.resolve({name: 'Profile'}).href">Profile</a></li>
                         <!-- <li><a class="dropdown-item" :href="$router.resolve({name: 'Signin'}).href">My Hotel</a></li> -->
-                        <li><a class="dropdown-item" :href="$router.resolve({name: ''}).href">My Hotel</a></li>
+                        
+                        <li v-if="me.roles[0]== 'business' "><a class="dropdown-item" :href="$router.resolve({name: 'Listhotel'}).href">My Hotel</a></li>
                         <li><a class="dropdown-item" :href="$router.resolve({name: ''}).href">My Reviews</a></li>
                         <li><a class="dropdown-item" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
                         <div class="dropdown-divider"></div>
@@ -97,6 +99,7 @@ export default {
     let me = computed(function () {
       return store.state.user;
     });
+    console.log(me.value);
     return {
       me
     };

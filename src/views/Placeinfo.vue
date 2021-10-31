@@ -285,9 +285,9 @@
               <p class="">Name: {{ hotel.hotel.hotelName }}</p>
               <p class="">Address: {{ hotel.hotel.address }}</p>
               <p class="">Email: {{ hotel.hotel.email }}</p>
-              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>
+              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>              
             </div>
-            <div class="text-end" v-if="hotel.hotel.owner.userId === me.userId">
+            <div class="text-end" v-if="hotel.hotel.owner.userId === me.id">
               <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
                 <i class="bx bxs-trash text-end p-2 display-6"></i>
               </button>
@@ -411,13 +411,14 @@ export default {
           }
         }
       }
-      if(!this.$store.state.loggedIn){
+      if(this.me.id == 0){
         show = false;
       }
       return show;
     },
   },
   setup(props) {
+ 
     const store = useStore();
     store.dispatch("getPlaceById", props.pid),
       store.dispatch("getHotelById", props.pid),
@@ -426,6 +427,7 @@ export default {
     let place = computed(function () {
       return store.state.place;
     });
+
     let hotels = computed(function () {
       return store.state.hotels;
     });
