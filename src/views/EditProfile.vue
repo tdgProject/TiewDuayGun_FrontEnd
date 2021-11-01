@@ -53,7 +53,7 @@
       
     </div>
     <div class="border-t mt-6 pt-3">
-      <button class="rounded text-gray-100 px-3 py-1 bg-blue-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300">
+      <button @click="logOut()" class="rounded text-gray-100 px-3 py-1 bg-blue-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300">
         Save
       </button>
     </div>
@@ -64,6 +64,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
+  props: ["uid"],
   
   
 
@@ -82,6 +83,7 @@ export default {
   },
   methods: {
           EditUser(){
+            
         let newUser = {
         userId: 0,
         username: this.user.username,
@@ -101,9 +103,15 @@ export default {
       formdata.append("image", this.image);
       
       this.$store.dispatch("editUser", { data:formdata, uid:this.user.id });
+      
+      
       setTimeout( () => window.location.href = '/List/All/1', 2000);
     
 
+    },
+    logOut(){
+      this.$store.dispatch('auth/logout');
+      setTimeout( () => window.location.href = '/List/All/1', 2000);
     },
       setPreview(){
       if(this.preview == null){

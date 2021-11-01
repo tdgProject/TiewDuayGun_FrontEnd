@@ -85,6 +85,7 @@ export default createStore({
       editUser(state, user){
         state.users.push(user)
       },
+     
       editReview(state,review){
         const index = state.reviews.findIndex(r => r.user.userId == review.user.userId);
         if(index !== -1){
