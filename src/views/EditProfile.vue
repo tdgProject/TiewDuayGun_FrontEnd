@@ -101,17 +101,25 @@ export default {
       let formdata = new FormData();
       formdata.append("newUser", blob);
       formdata.append("image", this.image);
+
       
       this.$store.dispatch("editUser", { data:formdata, uid:this.user.id });
       
       
-      setTimeout( () => window.location.href = '/List/All/1', 2000);
+      setTimeout( () => window.location.href = '/List/All/1');
     
 
     },
     logOut(){
+      Storage.prototype.getObject = function(key) {
+    return JSON.parse(this.getItem(key));
+}
+      //localStorage.getItem('user')
+      // window.location.reload()
+      //localStorage.setItem('user', user);
+      //localStorage.setItem('user', JSON.stringify(user));
       this.$store.dispatch('auth/logout');
-      setTimeout( () => window.location.href = '/List/All/1', 2000);
+      //setTimeout( () => window.location.href = '/List/All/1', 2000);
     },
       setPreview(){
       if(this.preview == null){
