@@ -22,20 +22,21 @@
       "
     >
       <div class="w-sm">
-        <img :src="getUserImage(user.image)" />
+        <img :src="getUserImage(me.image)" />
         <div class="mt-4 text-green-600 text-center">
-          <h1 class="text-xl font-bold">{{user.username}}</h1>
+          <h1 class="text-xl font-bold">{{me.username}}</h1>
           <p class="mt-4 text-gray-600">
-           Email:  {{user.email}}
-           Tel.:  {{user.telNumber}}
-           Role: {{user.roles}}
+           Email:  {{me.email}}
+           Tel.:  {{me.telNumber}}
+           Role: {{me.roles}}
+           
            <button>
                
    <router-link
               class=""
               :to="{
                 name: 'EditProfile',
-                params: {uid:user.id},
+                params: {uid:me.id},
               }"
               ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.424 12.282l4.402 4.399-5.826 1.319 1.424-5.718zm15.576-6.748l-9.689 9.804-4.536-4.536 9.689-9.802 4.536 4.534zm-6 8.916v6.55h-16v-12h6.743l1.978-2h-10.721v16h20v-10.573l-2 2.023z"/></svg></router-link
             >
@@ -56,7 +57,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  props: ["uid"],
+  
   name: "Profile",
   data(){
     
@@ -70,15 +71,16 @@ export default {
     },
   },
 
-  setup(props) {
+  setup() {
     const store = useStore();
-    store.dispatch("getUserById", props.uid);
-    let user = computed(function () {
+        let me = computed(function () {
       return store.state.user;
-      
     });
+    
+
     return {
-      user
+      
+      me
     };
   },
 }

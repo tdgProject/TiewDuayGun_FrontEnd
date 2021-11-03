@@ -83,7 +83,12 @@ export default createStore({
         state.hotels.push(hotel)
       },
       editUser(state, user){
-        state.users.push(user)
+        let u = JSON.parse(localStorage.getItem('user'));
+        u.data.id = user.userId;
+        u.data.username = user.username;
+        u.data.telNumber = user.telNumber;
+        u.data.image = user.image;
+        localStorage.setItem('user', JSON.stringify(u));
       },
      
       editReview(state,review){
@@ -241,7 +246,6 @@ export default createStore({
         },
         async editUser({commit}, formData){
           const response = await axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data);
-          await axios.get(`${resource_uri}onstart`);
           commit('editUser',response.data);
         },
         async editHotel({commit}, formData){

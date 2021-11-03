@@ -1,4 +1,6 @@
+
 <template>
+
 <form @submit.prevent="EditUser()">
     <div class="bg-white shadow rounded-lg p-6 ">
         <div class="form-group">
@@ -30,20 +32,11 @@
           <input id="name" autocomplete="false" tabindex="0" type="text" class="py-1 px-1 text-gray-900 outline-none block h-full w-full" v-model="user.username">
         </p>
       </div>
-      <div class="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1" >
-        <div class="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
-          <p>
-            <label for="lastname" class="bg-white text-gray-600 px-1">Email *</label>
-          </p>
-        </div>
-        <p>
-          <input id="lastname" autocomplete="false" tabindex="0" type="email" class="py-1 px-1 outline-none block h-full w-full" v-model="user.email">
-        </p>
-      </div>
+      
       <div class="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
         <div class="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
           <p>
-            <label for="username" class="bg-white text-gray-600 px-1">Username *</label>
+            <label for="username" class="bg-white text-gray-600 px-1">Tel *</label>
           </p>
         </div>
         <p>
@@ -53,7 +46,7 @@
       
     </div>
     <div class="border-t mt-6 pt-3">
-      <button @click="logOut()" class="rounded text-gray-100 px-3 py-1 bg-blue-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300">
+      <button  class="rounded text-gray-100 px-3 py-1 bg-blue-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300">
         Save
       </button>
     </div>
@@ -101,26 +94,18 @@ export default {
       let formdata = new FormData();
       formdata.append("newUser", blob);
       formdata.append("image", this.image);
+      setTimeout( () => window.location.href = '/Profile/'+this.user.id, 2000);
+       
 
-      
+       
       this.$store.dispatch("editUser", { data:formdata, uid:this.user.id });
       
       
-      setTimeout( () => window.location.href = '/List/All/1');
+      //setTimeout( () => window.location.href = '/List/All/1');
     
 
     },
-    logOut(){
-      Storage.prototype.getObject = function(key) {
-    return JSON.parse(this.getItem(key));
-}
-      //localStorage.getItem('user')
-      // window.location.reload()
-      //localStorage.setItem('user', user);
-      //localStorage.setItem('user', JSON.stringify(user));
-      this.$store.dispatch('auth/logout');
-      //setTimeout( () => window.location.href = '/List/All/1', 2000);
-    },
+
       setPreview(){
       if(this.preview == null){
         this.preview = this.$store.state.url+"image/user/"+this.user.image;
