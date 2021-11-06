@@ -346,8 +346,9 @@ export default {
       window.location.reload();
     },
     addReview() {
+      if(this.me){
       let newReview = {
-        user: { userId: 2 },
+        user: { userId: this.me.id },
         review: this.review,
         rating: this.rating,
       };
@@ -356,9 +357,10 @@ export default {
         type: "application/json",
       });
       const formdata = new FormData();
-      formdata.append("newReview", blob);
+      formdata.append("newReview", blob , { });
       this.$store.dispatch("addReview", { data: formdata, pid: this.pid });
       window.location.reload();
+      }
     },
     deleteReview(uid) {
       if (confirm("Do you really want to remove the product?")) {

@@ -118,7 +118,6 @@ export default {
       let data = new FormData();
       data.append("file", file, file.name);
       this.image = data.get("file");
-      this.user.image = URL.createObjectURL(this.image);
 
       var input = e.target;
       if (input.files) {
