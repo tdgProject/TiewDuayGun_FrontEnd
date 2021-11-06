@@ -23,8 +23,13 @@
       <p class="flex justify-between inline-block mt-4 text-xs text-gray-500 cursor-pointer hover:text-black" a href="/Signin">Already registered?</p>
     </form>
     <div
-        v-if="message"
+        v-if="errorMessage"
         class="alert alert-danger" role="alert"
+      > {{ errorMessage }}
+      </div>
+      <div
+        v-if="message"
+        class="alert alert-success" role="alert"
       > {{ message }}
       </div>
   </div>
@@ -50,6 +55,7 @@ export default {
       username: null,
       tel: null,
       message: null,
+      errorMessage: null,
       complete: false
     };
   },
@@ -61,12 +67,14 @@ export default {
             username : this.username,
             tel : this.tel}).then(
         data => {
+          this.errorMessage = null;
           this.message = data.message;
-          this.complete=true;
+          // this.complete=true;
           setTimeout( () => window.location.href = '/Signin', 2000);
         },
         error => {
-          this.message =
+          this.message=null;
+          this.errorMessage =
             (error.response &&
               error.response.data &&
               error.response.data.message) ||

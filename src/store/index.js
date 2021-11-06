@@ -148,7 +148,7 @@ export default createStore({
           commit('getHotel',response.data);
         },
         async listReview({commit}, pid){
-            const response = await axios.get(`${resource_uri}review/${pid}`,{ headers: authHeader() });
+            const response = await axios.get(`${resource_uri}review/${pid}`);
             commit('listReview', response.data);
         },
         async addReview({commit}, formData){
