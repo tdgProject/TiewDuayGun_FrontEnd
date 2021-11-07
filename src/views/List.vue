@@ -1,3 +1,4 @@
+
 <template>
 
     <div class="border-4 border-red-black rounded-full bg-white shadow flex">
@@ -28,19 +29,16 @@
         </button>
       </a>
     </div>
-  <div class="container-fluid px-1 py-5 mx-auto row justify-content-center" style="background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')">
-    <div class="col-xl-9 col-lg-10 col-sm-11 p-2 " v-for="place in places"
-          :key="place.placeId">
-        <div class="card pl-4 pl-md-5 pr-3 grid grid-cols-2 shadow">
-            <div class="row">
-                <div class="left-side col-md-6">
-                    <p class="pt-5 mb-0 flex">สถานที่ท่องเที่ยว</p>
-                    <h3 class="pb-3  flex">{{ place.placeName }}</h3> 
-                     <div>
-                       <div class="col-xl-9 col-lg-10 col-sm-11 mr-32 "
-          >
-          
-                      <ul class="d-flex justify-content-start">
+<div class="containers eiei">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2 shadow" v-for="place in places" :key="place.placeId">
+            <div class="image"> <img class="shoe-img pl-5 pl-md-0" :src="getimage(place.image)">
+                <div class="overlay">
+                    <p class="amount">{{place.placeName}}</p>
+                    <p class="h4">{{place.placeName}}</p>
+                 
+              
+                    <ul class="d-flex justify-content-start mt-10">
                         <p class="text-xl">Rating:</p>
                         <li v-for="x in calStar(place.placeRating)[0]" :key="x">
                           <i class="bx bxs-star text-3xl"></i>
@@ -48,11 +46,9 @@
                         <li v-for="y in calStar(place.placeRating)[1]" :key="y">
                           <i class="bx bxs-star-half text-3xl"></i>
                         </li>
+                        
                       </ul>
-                       </div>
-                  </div>
-                    
-                          <h2 class=" flex text-xl">
+                      <h2 class=" flex text-xl ml-8">
               Tag:
               <div v-for="tag in place.tags" :key="tag.tag.tagid" class="">
                 <router-link
@@ -63,9 +59,20 @@
                   }"
                   >{{ tag.tag.tagName }},</router-link
                 >
-              </div>
+              </div>         
             </h2>
-            <div class="float-left p-2">
+            <div class ="float-left ml-8">
+             <router-link
+                     
+              class="btn btn-outline-dark btn-icon-text float-right"
+              :to="{
+                name: 'Placeinfo',
+                params: { pid: place.placeId, pImg: place.image },
+              }"
+              >Read mores</router-link
+            >
+            </div>
+             <div class="float-right p-2">
                         <button @click="deletePlace(place.placeId)" type="button" class="p-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,21 +97,12 @@
             >
               </button>
             </div>
-                     <router-link
-                     
-              class="btn btn-outline-dark btn-icon-text float-right"
-              :to="{
-                name: 'Placeinfo',
-                params: { pid: place.placeId, pImg: place.image },
-              }"
-              >Read mores</router-link
-            >
                 </div>
-                <div class="right-side col-md-6"> <img class="shoe-img pl-5 pl-md-0" :src="getimage(place.image)"> </div>
+                
             </div>
         </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>

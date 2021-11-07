@@ -29,7 +29,7 @@
               </template>
             </div>
           </div>
-          
+          <p class="mt-2">EditYourname</p>
           <div class="flex space-x-5 mt-3">
             <input
               type="text"
@@ -41,8 +41,8 @@
               required
             />
           </div>
-          <p class="">EditYourname</p>
-          <textarea
+          <p class="mt-2">EditTelnum</p>
+          <input
             name="telNumber"
             id=""
             cols="10"
@@ -51,7 +51,7 @@
             class="border p-2 mt-3 w-full"
             v-model="user.telNumber"
             required
-          ></textarea>
+          />
     
         <p class=""></p>
           <input
@@ -195,10 +195,7 @@ export default {
   top: 0;
 }
 
-input[type="checkbox"]:checked + label {
-  background: purple;
-  color: white;
-}
+
 .al{
   z-index: 5;
   position: fixed;

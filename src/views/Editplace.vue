@@ -295,6 +295,7 @@ export default {
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
       this.$store.dispatch("editPlace", { data: formdata, pid: this.pid });
+      setTimeout( () => window.location.href = '/List/All/1', 2000);
       this.complete=true;
       
     },
