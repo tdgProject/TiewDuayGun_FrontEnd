@@ -296,7 +296,7 @@ export default {
       formdata.append("image", this.image);
       this.$store.dispatch("editPlace", { data: formdata, pid: this.pid });
       this.complete=true;
-      setTimeout( () => window.location.href = '/List/All/1', 2000);
+      
     },
   },
   setup(props) {

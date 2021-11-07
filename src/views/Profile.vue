@@ -28,7 +28,7 @@
           <p class="mt-4 text-gray-600">
            Email:  {{me.email}}
            Tel.:  {{me.telNumber}}
-           Role: {{me.roles}}
+           Role: {{me.roles[0]}}
            
            <button>
                

@@ -1,9 +1,18 @@
 
 <template>
 
-<form @submit.prevent="EditUser()">
-    <div class="bg-white shadow rounded-lg p-6 ">
-        <div class="form-group">
+<div class="grid min-h-screen place-items-center mr-48">
+    <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+      <form @submit.prevent="EditUser()">
+        <div class="mx-20 w-100 h-3/4">
+          <div class="" style="left: -40px">
+            <i
+              class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"
+            ></i>
+          </div>
+          <h3 class="text-2xl text-gray-900 font-semibold">EditPlace</h3>
+          <p class="text-gray-600">เพิ่มสถานที่</p>
+          <div class="form-group">
             <input
               type="file"
               id="image"
@@ -20,38 +29,59 @@
               </template>
             </div>
           </div>
-    <div class="grid lg:grid-cols-2 gap-6">
-      <div class="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
           
-        <div class="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
-          <p>
-            <label for="name" class="bg-white text-gray-600 px-1 " >Username *</label>
-          </p>
+          <div class="flex space-x-5 mt-3">
+            <input
+              type="text"
+              name="username"
+              id=""
+              placeholder="Insert Your Username"
+              class="border p-2 w-full"
+              v-model="user.username"
+              required
+            />
+          </div>
+          <p class="">EditYourname</p>
+          <textarea
+            name="telNumber"
+            id=""
+            cols="10"
+            rows="3"
+            placeholder="Insert Your PlaceDescription"
+            class="border p-2 mt-3 w-full"
+            v-model="user.telNumber"
+            required
+          ></textarea>
+    
+        <p class=""></p>
+          <input
+            type="submit"
+            value="Submit"
+            class="
+              w-full
+              mt-6
+              bg-blue-600
+              hover:bg-blue-500
+              text-white
+              font-semibold
+              p-3
+            "
+            
+          />
         </div>
-        <p>
-          <input id="name" autocomplete="false" tabindex="0" type="text" class="py-1 px-1 text-gray-900 outline-none block h-full w-full" v-model="user.username">
-        </p>
-      </div>
-      
-      <div class="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
-        <div class="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
-          <p>
-            <label for="username" class="bg-white text-gray-600 px-1">Tel *</label>
-          </p>
+      </form>
+      <div class="al w-full h-screen" v-if="complete">
+      <div class="stk h-screen d-flex align-items-center justify-content-center ">
+        <div class="w-1/5 bg-white d-flex flex-col align-items-center justify-content-center rounded ">
+        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3">Waiting for Process</div>
+        <img class="w-1/12 my-4" src="../assets/hug.gif" />
+        <p class=" text-2xl ">Editing Profile...</p>
+        
         </div>
-        <p>
-          <input id="username" autocomplete="false" tabindex="0" type="text" class="py-1 px-1 outline-none block h-full w-full" v-model="user.telNumber">
-        </p>
-      </div>
-      
-    </div>
-    <div class="border-t mt-6 pt-3">
-      <button  class="rounded text-gray-100 px-3 py-1 bg-blue-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300">
-        Save
-      </button>
+          </div>
+        </div>
     </div>
   </div>
-</form>
 </template>
 <script>
 import { computed } from "vue";
@@ -72,6 +102,7 @@ export default {
       editId: "",
       isSet: false,
       previewSet: false,
+      complete: false
     };
   },
   methods: {
@@ -99,7 +130,7 @@ export default {
 
        
       this.$store.dispatch("editUser", { data:formdata, uid:this.user.id });
-      
+      this.complete=true;
       
       //setTimeout( () => window.location.href = '/List/All/1');
     
@@ -153,3 +184,35 @@ export default {
 
 
 </script>
+<style>
+.icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-top: 23px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 12px solid #3182ce;
+  left: 100%;
+  top: 0;
+}
+
+input[type="checkbox"]:checked + label {
+  background: purple;
+  color: white;
+}
+.al{
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.stk{
+  z-index: 6;
+  top: 0;
+  left: 0;
+  position: sticky;
+  background-color:rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+</style>
+
