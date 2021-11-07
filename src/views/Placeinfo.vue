@@ -61,30 +61,47 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="h-100 p-5 bg-light border rounded-3">
-            <form @submit.prevent="addReview()">
-              <h3>Your Review and Rating</h3>
-              <Star :rating="rating" @selected="updateStar" />
+          <div v-if="isLoggedIn()" class="h-100 p-5 bg-light border rounded-3">
+            <div  class="d-flex row h-full align-items-center">
+              <div v-if="isReviewed()">
+                <i class='bx bx-list-check display-1'></i>
+                <h1>You have already Reviewed!</h1>
+                <a :href="getId()" class="text-decoration-none link-info"> <h4 >See Your Review</h4> </a>
+              </div>
+              <div v-else>
+              <form @submit.prevent="addReview()">
+                <h3>Your Review and Rating</h3>
+                <Star :rating="rating" @selected="updateStar" />
 
-              <div class="form-group">
-                <textarea
-                  name="review"
-                  class="form-control"
-                  placeholder="Your Review*"
-                  v-model="review"
-                  style="width: 100%; height: 150px"
-                ></textarea>
-              </div>
-              <div class="form-group mt-3 d-flex justify-content-end">
-                <input
-                  type="submit"
-                  name="submit"
-                  class="py-1 px-2 rounded-xl bg-secondary text-white"
-                  value="Submit"
-                />
-              </div>
+                <div class="form-group">
+                  <textarea
+                    name="review"
+                    class="form-control"
+                    placeholder="Your Review*"
+                    v-model="review"
+                    style="width: 100%; height: 150px"
+                  ></textarea>
+                </div>
+                <div class="form-group mt-3 d-flex justify-content-end">
+                  <input
+                    type="submit"
+                    name="submit"
+                    class="py-1 px-2 rounded-xl bg-secondary text-white"
+                    value="Submit"
+                  />
+                </div>
             </form>
+            </div>
+            </div>
           </div>
+           <div v-else class="h-100 p-5 bg-dark text-white rounded-3">
+                <div class="d-flex row h-full align-items-center">
+                  <span>
+                    <h1>You have not logged in yet!</h1>
+                    <h4>Please<a :href="$router.resolve({name: 'Signin'}).href" class="text-decoration-none link-info"> login</a> before reviewing.</h4>
+                  </span>
+                </div>
+            </div>
         </div>
       </div>
 
@@ -114,10 +131,11 @@
               <div
                 class="comment-text w-200 border-8 bg-white shadow-2xl"
                 v-for="review in reviews"
-                :key="review.userId"
+                :key="review.user.userId"
+                :id="setId(review.user.userId)"
               >
                 <div v-if="edit == true && review.user.userId == editId">
-                  <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
+                  <div  class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="d-flex">
                       <img
                         :src="getUserImage(review.user.image)"
@@ -199,7 +217,7 @@
                     class="m-auto w-5/6 d-block text-left ml-28 mb-10 text-lg"
                     >{{ review.review }}</span
                   >
-                  <div class="comment-footer text-right mr-12">
+                  <div v-if="review.user.userId == me.id" class="comment-footer text-right mr-12">
                     <button
                       type="button"
                       class="mr-2"
@@ -362,6 +380,12 @@ export default {
       window.location.reload();
       }
     },
+    setId(id){
+      return 'review'+id
+    },
+    getId(){
+      return '#review'+this.me.id
+    },
     deleteReview(uid) {
       if (confirm("Do you really want to remove the product?")) {
         this.$store.dispatch("removeReview", { uid: uid, pid: this.pid });
@@ -402,6 +426,23 @@ export default {
     getHotelImage(image) {
       return `${this.$store.state.url}image/hotel/${image}`;
     },
+    isReviewed(){
+      if(this.me){
+        for(let rv of this.reviews){
+          if(rv.user.userId == this.me.id){
+            return true
+          }
+        }
+      }
+      return false
+    },
+    isLoggedIn(){
+      if(this.me.id != 0){
+        console.log(this.me.id)
+        return true
+      }
+      return false
+    }
   },
   computed: {
     showAddHotel: function () {
@@ -420,7 +461,6 @@ export default {
     },
   },
   setup(props) {
- 
     const store = useStore();
     store.dispatch("getPlaceById", props.pid),
       store.dispatch("getHotelById", props.pid),
