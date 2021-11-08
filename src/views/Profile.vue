@@ -1,6 +1,6 @@
 <template>
   <!-- Box -->
-  <div class="md:flex md:justify-center md:space-x-8 md:px-14">
+  <div class="md:flex md:justify-center md:space-x-8 md:px-14 mb-11 mb-14">
     <!-- box-1 -->
     <div
       class="
