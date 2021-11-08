@@ -29,7 +29,7 @@
         </button>
       </a>
     </div>
-<div class="containers eiei ">
+<div class="containers eiei fade-in">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2  " v-for="place in places" :key="place.placeId">
             <div class="image "> <img class="shoe-img pl-5 pl-md-0 " :src="getimage(place.image)">
