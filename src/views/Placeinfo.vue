@@ -303,7 +303,7 @@
               <p class="">Name: {{ hotel.hotel.hotelName }}</p>
               <p class="">Address: {{ hotel.hotel.address }}</p>
               <p class="">Email: {{ hotel.hotel.email }}</p>
-              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>              
+              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>                    
             </div>
             <div class="text-end" v-if="hotel.hotel.owner.userId === me.id">
               <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
@@ -455,6 +455,9 @@ export default {
         }
       }
       if(this.me.id == 0){
+        show = false;
+      }
+      if(this.me.roles[0] !=='business'){
         show = false;
       }
       return show;

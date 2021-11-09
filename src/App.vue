@@ -30,7 +30,7 @@
                         
                         <li v-if="me.roles[0]== 'business' "><a class="dropdown-item" :href="$router.resolve({name: 'Listhotel'}).href">My Hotel</a></li>
                         <li><a class="dropdown-item" :href="$router.resolve({name: ''}).href">My Reviews</a></li>
-                        <li><a class="dropdown-item" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
+                        <li v-if="me.roles[0] !== 'business' "><a class="dropdown-item" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
                         <div class="dropdown-divider"></div>
                         <li><button class="dropdown-item" @click="logOut()" >Log Out</button></li>
                       </ul>
