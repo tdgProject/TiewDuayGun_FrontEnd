@@ -117,11 +117,9 @@ export default {
         image: "",
       };
       const jsonProduct = JSON.stringify(newUser);
-      console.log(jsonProduct)
       const blob = new Blob([jsonProduct], {
         type: "application/json",
       });
-      console.log(Blob)
       let formdata = new FormData();
       formdata.append("newUser", blob);
       formdata.append("image", this.image);

@@ -86,13 +86,11 @@ export default {
     let me = computed(function () {
       return store.state.user;
     });
-    console.log(me.value.id);
     store.dispatch("getMyHotel", me.value.id); 
 
     let hotels = computed(function () {
       return store.state.myHotel;
     });
-    console.log(hotels);
     return {
       hotels,
       me

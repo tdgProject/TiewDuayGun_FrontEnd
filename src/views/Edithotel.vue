@@ -185,9 +185,7 @@ export default {
       formdata.append("newHotel", blob);
       formdata.append("image", this.image);
       this.$store.dispatch("editHotel", { data: formdata, hid: this.hotels.hotelId});
-      console.log(newHotel);
       alert("successfully Edited!");
-      // axios.post(`${this.resource_uri}hotel/edit`, formdata);
     },
     upfile(e) {
       let file = e.target.files[0];
