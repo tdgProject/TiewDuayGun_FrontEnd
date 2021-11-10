@@ -457,8 +457,10 @@ export default {
       if(this.me.id == 0){
         show = false;
       }
-      if(this.me.roles[0] !=='business'){
+      if(this.me.roles){
+        if(this.me.roles[0] !=='business'){
         show = false;
+      }
       }
       return show;
     },
@@ -468,7 +470,9 @@ export default {
     store.dispatch("getPlaceById", props.pid),
       store.dispatch("getHotelById", props.pid),
       store.dispatch("listReview", props.pid);
-      store.dispatch("getMyHotel", store.state.user.id);
+      if(store.state.user.roles && store.state.user.roles[0] == 'business'){
+        store.dispatch("getMyHotel", store.state.user.id);
+      }
     let place = computed(function () {
       return store.state.place;
     });
@@ -480,7 +484,7 @@ export default {
       return store.state.reviews;
     });
     let myHotel = computed(function () {
-      return store.state.myHotel;
+      return store.state.myHotel != null ?store.state.myHotel : null;
     });
     let me = computed(function () {
       return store.state.user;

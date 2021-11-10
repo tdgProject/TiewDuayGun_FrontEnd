@@ -4,7 +4,7 @@
       {{hotel.hotelName}} -->
     <div class="container mt-10 d-flex flex-wrap justify-content-start">
       <div class="col-lg-4 d-flex flex-wrap p-1">
-        <div v-if="hotels !== '' " class="card" >
+        <div v-if="hotels" class="card" >
           <img
             :src="getHotelImage(hotels.image)"
             alt=""

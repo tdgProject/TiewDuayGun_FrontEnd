@@ -69,7 +69,7 @@ export default {
         data => {
           this.errorMessage = null;
           this.message = data.message;
-          this.complete=true;
+          // this.complete=true;
           setTimeout( () => window.location.href = '/Signin', 2000);
         },
         error => {
