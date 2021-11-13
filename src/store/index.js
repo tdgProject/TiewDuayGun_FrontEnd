@@ -152,20 +152,32 @@ export default createStore({
             commit('listReview', response.data);
         },
         async addReview({commit}, formData){
-          console.log({ headers: authHeader() });
           const response = await axios.post(`${resource_uri}review/add/${formData.pid}`,formData.data,{ headers: authHeader() });
           await axios.get(`${resource_uri}onstart`);
           commit('addNewReview',response.data);
         },
         async addPlace({commit},formData){
-          const response = await axios.post(`${resource_uri}place/add`,formData,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('addNewPlace',response.data);
+          return axios.post(`${resource_uri}place/add`,formData,{ headers: authHeader() }).then(
+            place => {
+              axios.get(`${resource_uri}onstart`);
+              commit('addNewPlace', place.data);
+              return Promise.resolve(place);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async addHotel({commit},formData){
-          const response = await axios.post(`${resource_uri}hotel/add`,formData,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('addNewHotel',response.data);
+          return axios.post(`${resource_uri}hotel/add`,formData,{ headers: authHeader() }).then(
+            hotel => {
+              commit('addNewHotel', hotel.data);
+              return Promise.resolve(hotel);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async listPlaceByTag({commit},value){
           const response = await axios.get(`${resource_uri}place/tag/${value}`);
@@ -193,18 +205,40 @@ export default createStore({
           commit('editReview',response.data);
         },
         async editPlace({commit}, formData){
-          const response = await axios.put(`${resource_uri}place/edit/${formData.pid}`,formData.data,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('editPlace',response.data);
+          return axios.put(`${resource_uri}place/edit/${formData.pid}`,formData.data,{ headers: authHeader() }).then(
+            place => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editPlace', place.data);
+              return Promise.resolve(place);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async editUser({commit}, formData){
-          const response = await axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data,{ headers: authHeader() });
-          commit('editUser',response.data);
+          return axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data,{ headers: authHeader() }).then(
+            user => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editUser', user.data);
+              return Promise.resolve(user);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async editHotel({commit}, formData){
-          const response = await axios.put(`${resource_uri}hotel/edit/${formData.hid}`,formData.data,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('editHotel',response.data);
+          return axios.put(`${resource_uri}hotel/edit/${formData.hid}`,formData.data,{ headers: authHeader() }).then(
+            hotel => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editHotel', hotel.data);
+              return Promise.resolve(hotel);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async getMyHotel({commit}, userId){
           const response = await axios.get(`${resource_uri}hotel/user/${userId}`,{ headers: authHeader() });

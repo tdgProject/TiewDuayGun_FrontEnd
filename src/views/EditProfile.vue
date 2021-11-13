@@ -68,6 +68,11 @@
             "
             
           />
+          <div
+        v-if="errorMessage"
+        class="alert alert-danger" role="alert"
+      > {{ errorMessage }}
+      </div>
         </div>
       </form>
       <div class="al w-full h-screen" v-if="complete">
@@ -123,6 +128,8 @@ export default {
       editId: "",
       isSet: false,
       previewSet: false,
+      message: null,
+      errorMessage: null,
       complete: false
     };
   },
@@ -145,14 +152,25 @@ export default {
       let formdata = new FormData();
       formdata.append("newUser", blob);
       formdata.append("image", this.image);
-      setTimeout( () => window.location.href = '/Profile/'+this.user.id, 2000);
-       
-
-       
-      this.$store.dispatch("editUser", { data:formdata, uid:this.user.id });
-      this.complete=true;
+      this.$store.dispatch("editUser", { data:formdata, uid:this.user.id }).then(
+        data => {
+          this.errorMessage = null;
+          this.message = data.message;
+          this.complete=true;
+          setTimeout( () => window.location.href = '/Profile/'+this.user.id, 2000);
+        },
+        error => {
+          this.message=null;
+          this.errorMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+            this.complete=false;
+        }
+      )
       
-      //setTimeout( () => window.location.href = '/List/All/1');
     
 
     },
@@ -222,7 +240,7 @@ computed: {
 
 
 </script>
-<style>
+<style scoped>
 .icon::after {
   content: "";
   display: block;

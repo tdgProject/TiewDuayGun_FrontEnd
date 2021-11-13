@@ -118,10 +118,16 @@
           hover:bg-blue-500
           text-white
           font-semibold
-          p-3
+          p-3 mb-2
         "
       />
+      <div
+        v-if="errorMessage"
+        class="alert alert-danger" role="alert"
+      > {{ errorMessage }}
+      </div>
     </div>
+    
   </form>
     </div>
     <div class="al w-full h-screen" v-if="complete">
@@ -175,7 +181,8 @@ export default {
       enteredURL: "",
       ptag: "",
       etag: [],
-      editId: "",
+      message: null,
+      errorMessage: null,
       complete: false
     };
   },
@@ -215,9 +222,26 @@ export default {
       let formdata = new FormData();
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
-      this.$store.dispatch("addPlace",  formdata )
-      this.complete=true;
-      setTimeout( () => window.location.href = '/List/All/1', 2000);
+      this.$store.dispatch("addPlace",  formdata ).then(
+        data => {
+          this.errorMessage = null;
+          this.message = data.message;
+          this.complete=true;
+          setTimeout( () => window.location.href = '/List/All/1', 2000);
+        },
+        error => {
+          this.message=null;
+          this.errorMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+            this.complete=false;
+        }
+      );
+      
+      
     },
 
   },
@@ -274,7 +298,7 @@ export default {
   },
 };
 </script>
-  <style>
+  <style scoped>
 .icon::after {
   content: "";
   display: block;
