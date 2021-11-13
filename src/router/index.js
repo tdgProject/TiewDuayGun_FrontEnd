@@ -17,6 +17,7 @@ import Editplace from '../views/Editplace.vue'
 import Edithotel from '../views/Edithotel.vue'
 import Listhotel from '../views/Listhotel.vue'
 import EditProfile from '../views/EditProfile.vue'
+import Accesdenied from '../views/Accesdenied.vue'
 
 
 
@@ -29,6 +30,11 @@ const routes = [{
     path: '/Tag',
     name: 'Tag',
     component: Tag
+  },
+  {
+    path: '/Accesdenied',
+    name: 'Accesdenied',
+    component: Accesdenied
   },
   {
     path: '/Edithotel/:uid',

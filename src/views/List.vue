@@ -61,10 +61,10 @@
                 >
               </div>         
             </h2>
-            <div class ="float-left ml-8">
+            <div class ="float-left ml-8"  >
              <router-link
                      
-              class="btn btn-outline-dark btn-icon-text float-right"
+              class="btn btn-outline-dark btn-icon-text float-right" 
               :to="{
                 name: 'Placeinfo',
                 params: { pid: place.placeId, pImg: place.image },
@@ -72,8 +72,9 @@
               >Read mores</router-link
             >
             </div>
-             <div class="float-right p-2">
-                        <button @click="deletePlace(place.placeId)" type="button" class="p-2">
+            
+             <div class="float-right p-2" >
+                        <button @click="deletePlace(place.placeId)" type="button" class="p-2" v-if="showedit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -88,7 +89,7 @@
              <button>
                
    <router-link
-              class=""
+              class="" v-if="showedit"
               :to="{
                 name: 'Editplace',
                 params: {pid:place.placeId,pimage:place.image},
@@ -96,7 +97,8 @@
               ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.424 12.282l4.402 4.399-5.826 1.319 1.424-5.718zm15.576-6.748l-9.689 9.804-4.536-4.536 9.689-9.802 4.536 4.534zm-6 8.916v6.55h-16v-12h6.743l1.978-2h-10.721v16h20v-10.573l-2 2.023z"/></svg></router-link
             >
               </button>
-            </div>
+             </div>
+            
                 </div>
                 
             </div>
@@ -134,6 +136,21 @@ export default {
       }
     },
   },
+  computed: {
+
+    showedit: function () {
+      let show = true;
+          if(this.me.roles){
+        if(this.me.roles[0] !=='admin'){
+        show = false;
+      }
+      }
+      if(this.me.id == 0){
+        show = false;
+      }
+      return show;
+    },
+  },
   
   setup(props) {
     const store = useStore();
@@ -157,9 +174,13 @@ export default {
     let places = computed(function () {
       return store.state.places;
     });
+            let me = computed(function () {
+      return store.state.user;
+    });
 
     return {
       places,
+      me
       
     };
   },
