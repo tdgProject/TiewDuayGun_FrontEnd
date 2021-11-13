@@ -52,7 +52,7 @@
             <div class="vid-container">
               <iframe
                 class="responsive-iframe"
-                :src="place.video.replace('watch?v=','embed/')+'?autoplay=1'"
+                :src="place.video.replace(/youtu\.be\//,'www.youtube.com/embed/').replace(/watch\?v=/,'embed/').replace(/\?t=.*/i,'').replace(/&list=.*/i,'')+'?autoplay=1'"
                 title="YouTube video player"
                 frameborder="0"
                 allowfullscreen
