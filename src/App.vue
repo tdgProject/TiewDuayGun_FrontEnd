@@ -100,7 +100,6 @@ export default {
     let me = computed(function () {
       return store.state.user;
     });
-    console.log(me.value);
     return {
       me
     };

@@ -3,7 +3,7 @@
   <div class="grid min-h-screen place-items-center" >
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12" >
       <h1 class="text-xl font-semibold">Edit Your Business</h1>
-      <form class="mt-6" @submit.prevent="editHotel()">
+      <form class="mt-6" @submit.prevent="editHotel()" v-if="hotels">
         <label
           for="hotelname"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
@@ -125,6 +125,7 @@
             w-full
             py-3
             mt-6
+            mb-2
             font-medium
             tracking-widest
             text-white
@@ -137,7 +138,22 @@
         >
           Submit
         </button>
+        <div
+        v-if="errorMessage"
+        class="alert alert-danger" role="alert"
+      > {{ errorMessage }}
+      </div>
       </form>
+      <div class="al w-full h-screen" v-if="complete">
+      <div class="stk h-screen d-flex align-items-center justify-content-center ">
+        <div class="w-1/5 bg-white d-flex flex-col align-items-center justify-content-center rounded ">
+        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3">Waiting for Process</div>
+        <img class="w-1/12 my-4" src="../assets/hug.gif" />
+        <p class=" text-2xl ">Editing Hotel...</p>
+        
+        </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>
@@ -179,7 +195,10 @@ export default {
       preview: null,
       image: null,
       pic: null,
-      isSet: false
+      isSet: false,
+      message: null,
+      errorMessage: null,
+      complete: false
     };
   },
   computed: {
@@ -236,8 +255,24 @@ export default {
       let formdata = new FormData();
       formdata.append("newHotel", blob);
       formdata.append("image", this.image);
-      this.$store.dispatch("editHotel", { data: formdata, hid: this.hotels.hotelId});
-      alert("successfully Edited!");
+      this.$store.dispatch("editHotel", { data: formdata, hid: this.hotels.hotelId}).then(
+        data => {
+          this.errorMessage = null;
+          this.message = data.message;
+          this.complete=true;
+          setTimeout( () => window.location.href = '/Listhotel', 2000);
+        },
+        error => {
+          this.message=null;
+          this.errorMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+            this.complete=false;
+        }
+      );
     },
     upfile(e) {
       let file = e.target.files[0];
@@ -274,3 +309,32 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-top: 23px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 12px solid #3182ce;
+  left: 100%;
+  top: 0;
+}
+
+
+.al{
+  z-index: 5;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.stk{
+  z-index: 6;
+  top: 0;
+  left: 0;
+  position: sticky;
+  background-color:rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+</style>

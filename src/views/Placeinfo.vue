@@ -12,9 +12,8 @@
         </a>
       </header>
       <div
-        class="p-5 pb-1 mb-4 bg-light rounded-3"
-        v-bind:style="{ backgroundImage: 'url(' + placeImage + ')' }"
-      >
+        class="p-5 pb-1 mb-4 rounded-3"
+        v-bind:style="{ backgroundImage: 'url(\'' + placeImage + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }">
         <div class="container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
           <div
@@ -438,7 +437,6 @@ export default {
     },
     isLoggedIn(){
       if(this.me.id != 0){
-        console.log(this.me.id)
         return true
       }
       return false
