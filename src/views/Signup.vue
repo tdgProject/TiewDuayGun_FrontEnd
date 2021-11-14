@@ -1,22 +1,30 @@
 <template>
 <div class="grid min-h-screen place-items-center">
-  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-    <h1 class="text-xl font-semibold">Hello there 👋, <span class="font-normal">please fill in your information to continue</span></h1>
+  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12 "> 
+    <h1 class="text-xl font-semibold">Hello there 👋, <span class="font-normal">please fill in your information to register</span></h1>
     <form class="mt-6" @submit.prevent="register">
       <div class="flex justify-between gap-3">
+       
         <span class="w-1/2">
-          <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">Email</label>
-          <input id="email" type="Email" v-model="email" placeholder="Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+       
+          <label for="email" class="block text-xs font-semibold text-gray-600 uppercase"> Email <span class="text-red-600 text-sm">*</span></label>
+          <input id="email" type="Email" v-model="email" placeholder="Enter Your Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="16" maxlength="100" />
+          
         </span>
         <span class="w-1/2">
-          <label for="password" class="block text-xs font-semibold text-gray-600 uppercase">Password</label>
-        <input id="password" type="password" v-model="password" placeholder="password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      
+          <label for="password" class="block text-xs font-semibold text-gray-600 uppercase"> Password <span class="text-red-500">*</span><span class="text-gray-400 text-sm">(atleast 8 character)</span></label>
+        <input id="password" type="password" v-model="password" placeholder="Enter Your Password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="8"/>
+       
         </span>
       </div>
-      <label for="username" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Username</label>
-      <input id="username" type="text" v-model="username" placeholder="Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-      <label for="tel" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Tel.</label>
-      <input id="tel" type="text" v-model="tel" placeholder="Your Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      
+      <label for="username" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Username <span class="text-red-500">*</span></label>
+      <input id="username" type="text" v-model="username" placeholder="Enter Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="10" maxlength="100"/>
+      
+      <label for="tel" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Tel. <span class="text-red-600 text-sm">*</span><span class="text-gray-400 text-sm">TH(66)xx-xxx-xxxx</span></label>
+      <input id="tel" type="text" v-model="tel" placeholder="Enter Your Telephone Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="11" pattern="[6][6][0-9]{9}"/>
+      
       <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
         Sign up
       </button>
