@@ -104,6 +104,17 @@ export default {
       me
     };
   },
+  mounted(){
+    if(this.$store.state.user.id != 0){
+      let exp = this.$store.state.user.exp.replace(/\..*/,'').replace('T',' ')
+      let expMs = new Date(exp).getTime(); 
+      let now = new Date(Date.now()).toLocaleString('en-CA').replace(', ',' ').replace(/a.m.|p.m./,'');
+      let nowMs = new Date(now).getTime();
+      if(nowMs>expMs){
+        this.$store.dispatch('auth/logout');
+      }
+    }
+  },
   computed: {
     loggedIn: function () {
       let show = false;
