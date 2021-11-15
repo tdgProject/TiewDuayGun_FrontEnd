@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const resource_uri = "http://localhost:8081/";
+//const resource_uri = "http://localhost:8081/";
+const resource_uri = "https://www.tiewduaygun.team/api/";
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { status: { loggedIn: true }, user } : { status: { loggedIn: false }, user: null };
 
@@ -9,11 +10,6 @@ const initialState = user ? { status: { loggedIn: true }, user } : { status: { l
 export const auth = {
   namespaced: true,
   state: initialState,
-  computed: {
-    tokenExpirationCheck(){
-      console.log(user.data);
-    }
-  },
   actions: {
     login({ commit }, loginData) {
       return axios.post(`${resource_uri}auth/signin`,{
