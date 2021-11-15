@@ -386,7 +386,7 @@ export default {
       return '#review'+this.me.id
     },
     deleteReview(uid) {
-      if (confirm("Do you really want to remove the product?")) {
+      if (confirm("Do you really want to remove your review?")) {
         this.$store.dispatch("removeReview", { uid: uid, pid: this.pid });
         location.reload();
       }
