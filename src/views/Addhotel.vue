@@ -12,7 +12,7 @@
           id="text"
           type="text"
           name="text"
-          placeholder="enter name"
+          placeholder="Enter hotel's name"
           v-model="name"
           class="
             block
@@ -26,6 +26,8 @@
             focus:bg-gray-300
             focus:shadow-inner
           "
+          maxlength="100"
+          title="Enter hotel name."
           required
         />
 
@@ -38,7 +40,7 @@
           id="text"
           type="text"
           name="text"
-          placeholder=""
+          placeholder="Enter hotel's address"
           v-model="address"
           class="
             block
@@ -52,19 +54,21 @@
             focus:bg-gray-300
             focus:shadow-inner
           "
+          maxlength="400"
+          title="Enter hotel address."
           required
         />
 
         <label
           for="email"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-          >Email</label
+          >Email<span class="text-red-600 text-sm">*</span></label
         >
         <input
           id="Email"
           type="Email"
           name="Email"
-          placeholder=""
+          placeholder="Enter hotel's email address."
           v-model="email"
           class="
             block
@@ -78,19 +82,21 @@
             focus:bg-gray-300
             focus:shadow-inner
           "
-          
+          minlength="10" maxlength="100"
+          title="Enter hotel email address."
+          required
         />
 
         <label
           for="tel"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-          >Tel. <span class="text-red-600 text-sm">*</span> <span class="text-gray-400 text-sm">TH(66)xx-xxx-xxxx</span></label
+          >Tel. <span class="text-red-600 text-sm">*</span></label
         >
         <input
           id="text"
-          type="text"
+          type="tel"
           name="text"
-          placeholder=""
+          placeholder="Enter hotel's telephone number"
           v-model="tel"
           class="
             block
@@ -104,6 +110,11 @@
             focus:bg-gray-300
             focus:shadow-inner
           "
+          minlength="9" 
+          maxlength="10" 
+          pattern="\d{9,10}" 
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');"  
+          title="Telephone number must be 9-10 characters"
           required
         />
         

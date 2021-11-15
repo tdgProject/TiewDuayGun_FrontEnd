@@ -13,7 +13,7 @@
       </header>
       <div
         class="p-5 pb-1 mb-4 rounded-3"
-        v-bind:style="{ backgroundImage: 'url(\'' + placeImage + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }">
+        v-bind:style="{ backgroundImage: 'url(\'' + placeImage.replace('\'','\\\'') + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }">
         <div class="container-fluid py-5">
           <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
           <div
@@ -70,8 +70,12 @@
               <div v-else>
               <form @submit.prevent="addReview()">
                 <h3>Your Review and Rating</h3>
+                <div>
                 <Star :rating="rating" @selected="updateStar" />
-
+                </div>
+                <div v-if="ratingValidate">
+                  <p class="text-red-400">Please select rating before submit!</p>
+                </div>
                 <div class="form-group">
                   <textarea
                     name="review"
@@ -340,8 +344,7 @@ export default {
       ErrorRating: false,
       edit: false,
       editId: 0,
-      // showAddHotel: this.checkHotel(),
-      resource_uri: "http://localhost:8081/",
+      ratingValidate: false,
     };
   },
   methods: {
@@ -363,20 +366,26 @@ export default {
       window.location.reload();
     },
     addReview() {
-      if(this.me){
-      let newReview = {
-        user: { userId: this.me.id },
-        review: this.review,
-        rating: this.rating,
-      };
-      const jsonProduct = JSON.stringify(newReview);
-      const blob = new Blob([jsonProduct], {
-        type: "application/json",
-      });
-      const formdata = new FormData();
-      formdata.append("newReview", blob , { });
-      this.$store.dispatch("addReview", { data: formdata, pid: this.pid });
-      window.location.reload();
+      if(this.rating == 0){
+        this.ratingValidate = true;
+      }
+      else{
+        if(this.me){
+        let newReview = {
+          user: { userId: this.me.id },
+          review: this.review,
+          rating: this.rating,
+        };
+        const jsonProduct = JSON.stringify(newReview);
+        const blob = new Blob([jsonProduct], {
+          type: "application/json",
+        });
+        const formdata = new FormData();
+        formdata.append("newReview", blob , { });
+        this.$store.dispatch("addReview", { data: formdata, pid: this.pid });
+        this.ratingValidate = false;
+        window.location.reload();
+        }
       }
     },
     setId(id){

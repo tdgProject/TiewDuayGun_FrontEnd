@@ -29,27 +29,36 @@
               </template>
             </div>
           </div>
-          <p class="mt-2">EditYourname</p>
-          <div class="flex space-x-5 mt-3">
+          <p class="mt-2">Username.</p>
+          <div class="flex space-x-5 mt-1">
             <input
               type="text"
               name="username"
               id=""
               placeholder="Insert Your Username"
               class="border p-2 w-full"
-              v-model="user.username"
-              required
-              minlength="10" maxlength="100"
+              v-model="username"
+              required 
+              title="Username must be at least 3 or more characters"
+              oninput="this.value = this.value.replace(/[^0-9(a-z)(A-Z)]/g, '').replace(/(\..*)\./g, '$1');"
+              minlength="3" 
+              maxlength="100"
             />
           </div>
-          <p class="mt-2">EditTelnum</p>
+          <p class="mt-2">Tel.</p>
           <input
             name="telNumber"
+            type="tel"
             id=""
             cols="10"
             rows="3"
-            placeholder="Insert Your PlaceDescription"
-            class="border p-2 mt-3 w-full"
+            placeholder="Insert Your Telephone Number"
+            class="border p-2 mt-1 w-full"
+            minlength="9" 
+            maxlength="10" 
+            pattern="\d{9,10}" 
+            oninput="this.value = this.value.replace(/[^0-9]/g, '');"  
+            title="Telephone number must be 9-10 characters"
             v-model="user.telNumber"
             required
           />
@@ -123,7 +132,7 @@ export default {
     return {
       preview: null,
       image: null,
-      username: "",
+      username: this.user.username,
       telNumber: "",
       email: "",
       editId: "",
@@ -140,8 +149,7 @@ export default {
             
         let newUser = {
         userId: 0,
-        username: this.user.username,
-        password: this.user.password,
+        username: this.username,
         telNumber: this.user.telNumber,
         email: this.user.email,
         image: "",
@@ -206,7 +214,6 @@ computed: {
         if(this.user.id !== 0){
         show = false;
       }
-      
       return show;
     },
 

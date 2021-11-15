@@ -14,12 +14,11 @@
                   <div v-else class="mx-4">
                     <div class="dropdown">
                       <a class="d-flex align-items-center my-0 p-2 rounded-pill text-decoration-none text-black border-2" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img
-                          :src="getUserImage(me.image)"
-                          alt="user"
-                          width="35"
-                          class="rounded-circle mr-3"
-                        />
+                        <div
+                          class="rounded-circle mr-3 w-10 h-10"
+                          v-bind:style="{ backgroundImage: 'url(\'' + userImage.replace('\'','\\\'') + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }"
+                        >
+                        </div>
                         {{me.username}}
                         {{me.role}}
                       </a>
@@ -28,9 +27,10 @@
                         <li><a class="dropdown-item " :href="$router.resolve({name: 'Profile', params: { uid:me.id }}).href">Profile</a></li>
                         <!-- <li><a class="dropdown-item" :href="$router.resolve({name: 'Signin'}).href">My Hotel</a></li> -->
                         
-                        <li v-if="me.roles[0]!= 'member' "><a class="dropdown-item" :href="$router.resolve({name: 'Listhotel'}).href">My Hotel</a></li>
+                        <li v-if="me.roles[0]!= 'member' "><a class="dropdown-item" :href="$router.resolve({name: 'Myhotel'}).href">My Hotel</a></li>
                         <li><a class="dropdown-item" :href="$router.resolve({name: ''}).href">My Reviews</a></li>
                         <li v-if="me.roles[0] == 'member' "><a class="dropdown-item" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
+                        <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" :href="$router.resolve({name: 'Addplace'}).href">Addplace</a></li>
                         <div class="dropdown-divider"></div>
                         <li><button class="dropdown-item" @click="logOut()" >Log Out</button></li>
                       </ul>
@@ -100,12 +100,17 @@ export default {
     let me = computed(function () {
       return store.state.user;
     });
+    let userImage = computed(function () {
+      return store.state.url + "image/user/" + store.state.user.image;
+    });
     return {
-      me
+      me,
+      userImage
     };
   },
   mounted(){
     if(this.$store.state.user.id != 0){
+      console.log(this.userImage);
       if(Date.now()>this.$store.state.user.exp){
         this.$store.dispatch('auth/logout');
       }

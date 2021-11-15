@@ -81,6 +81,7 @@
           placeholder="Insert Your PlaceName"
           class="border p-2 w-full"
           v-model.trim="enteredplaceName"
+          maxlength="100"
           required
         />
       </div>
@@ -93,6 +94,7 @@
         placeholder="Insert Your PlaceDescription"
         class="border p-2 mt-3 w-full"
         v-model.trim="enteredplaceDescription"
+        maxlength="5000"
         required
       ></textarea>
       <p class="">Insert Your PlaceDescription</p>
@@ -104,6 +106,7 @@
           placeholder="Ex. https://www.youtube.com/watch?v=???"
           class="border p-2 w-full"
           v-model.trim="enteredURL"
+          maxlength="500"
           required
         />
       </div>

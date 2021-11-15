@@ -15,7 +15,7 @@ import Aboutus from '../views/Aboutus.vue'
 import SignIn from '../views/SignIn.vue'
 import Editplace from '../views/Editplace.vue'
 import Edithotel from '../views/Edithotel.vue'
-import Listhotel from '../views/Listhotel.vue'
+import Myhotel from '../views/Myhotel.vue'
 import EditProfile from '../views/EditProfile.vue'
 import Accesdenied from '../views/Accesdenied.vue'
 
@@ -86,9 +86,9 @@ const routes = [{
     component: List,
   },
   {
-    path: '/Listhotel',
-    name: 'Listhotel',
-    component: Listhotel,
+    path: '/Myhotel',
+    name: 'Myhotel',
+    component: Myhotel,
   },
   {
     path: '/List/:filter/:var',
