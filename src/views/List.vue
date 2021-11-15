@@ -32,6 +32,7 @@
 <div class="containers eiei fade-in">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2  " v-for="place in places" :key="place.placeId">
+          
             <div class="image "> <img class="shoe-img pl-5 pl-md-0 " :src="getimage(place.image)">
                 <div class="overlay ">
                     <p class="amount">{{place.placeName}}</p>
@@ -40,6 +41,9 @@
               
                     <ul class="d-flex justify-content-start mt-10">
                         <p class="text-xl">Rating:</p>
+                      
+             <div v-if="place.placeRating == '0'">No review</div>
+                    
                         <li v-for="x in calStar(place.placeRating)[0]" :key="x">
                           <i class="bx bxs-star text-3xl"></i>
                         </li>
@@ -137,6 +141,7 @@ export default {
     },
   },
   computed: {
+  
 
     showedit: function () {
       let show = true;
@@ -151,6 +156,8 @@ export default {
       return show;
     },
   },
+
+ 
   
   setup(props) {
     const store = useStore();

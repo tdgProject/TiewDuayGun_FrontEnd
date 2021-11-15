@@ -11,7 +11,7 @@
             ></i>
           </div>
           <h3 class="text-2xl text-gray-900 font-semibold">EditProfile</h3>
-          <p class="text-gray-600">เพิ่มสถานที่</p>
+          
           <div class="form-group">
             <input
               type="file"
@@ -39,6 +39,7 @@
               class="border p-2 w-full"
               v-model="user.username"
               required
+              minlength="10" maxlength="100"
             />
           </div>
           <p class="mt-2">EditTelnum</p>

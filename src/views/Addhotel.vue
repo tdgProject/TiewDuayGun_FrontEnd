@@ -6,7 +6,7 @@
         <label
           for="hotelname"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-          >Hotel Name</label
+          >Hotel Name <span class="text-red-600 text-sm">*</span></label
         >
         <input
           id="text"
@@ -32,7 +32,7 @@
         <label
           for="address"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-          >Address</label
+          >Address <span class="text-red-600 text-sm">*</span></label
         >
         <input
           id="text"
@@ -78,13 +78,13 @@
             focus:bg-gray-300
             focus:shadow-inner
           "
-          required
+          
         />
 
         <label
           for="tel"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
-          >Tel.</label
+          >Tel. <span class="text-red-600 text-sm">*</span> <span class="text-gray-400 text-sm">TH(66)xx-xxx-xxxx</span></label
         >
         <input
           id="text"
@@ -106,6 +106,7 @@
           "
           required
         />
+        
         <div class="d-flex flex-column mt-2">
           <div class="form-group">
             <input
