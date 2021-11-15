@@ -8,22 +8,22 @@
         <span class="w-1/2">
        
           <label for="email" class="block text-xs font-semibold text-gray-600 uppercase"> Email <span class="text-red-600 text-sm">*</span></label>
-          <input id="email" type="Email" v-model="email" placeholder="Enter Your Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="16" maxlength="100" />
+          <input id="email" type="Email" v-model="email" placeholder="Enter Your Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="10" maxlength="100" title="Enter your email address."/>
           
         </span>
         <span class="w-1/2">
       
-          <label for="password" class="block text-xs font-semibold text-gray-600 uppercase"> Password <span class="text-red-500">*</span><span class="text-gray-400 text-sm">(atleast 8 character)</span></label>
-        <input id="password" type="password" v-model="password" placeholder="Enter Your Password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="8"/>
+          <label for="password" class="block text-xs font-semibold text-gray-600 uppercase"> Password <span class="text-red-500">*</span><span class="text-gray-400 text-sm">(atleast 10 character)</span></label>
+        <input id="password" type="password" v-model="password" placeholder="Enter Your Password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="8" maxlength="64" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}" title="Must contain at least one numeric and one UPPERCASE and lowercase letter, and at least 8 or more characters" />
        
         </span>
       </div>
       
       <label for="username" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Username <span class="text-red-500">*</span></label>
-      <input id="username" type="text" v-model="username" placeholder="Enter Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="10" maxlength="100"/>
+      <input id="username" type="text" v-model="username" placeholder="Enter Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="3" maxlength="100" title="Username must be at least 3 or more characters"/>
       
-      <label for="tel" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Tel. <span class="text-red-600 text-sm">*</span><span class="text-gray-400 text-sm">TH(66)xx-xxx-xxxx</span></label>
-      <input id="tel" type="text" v-model="tel" placeholder="Enter Your Telephone Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="11" pattern="[6][6][0-9]{9}"/>
+      <label for="tel" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Tel. <span class="text-red-600 text-sm">*</span></label>
+      <input id="tel" type="tel" v-model="tel" placeholder="Enter Your Telephone Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="9" maxlength="10" pattern="\d{9,10}" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  title="Telephone number must be 9-10 characters"/>
       
       <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
         Sign up

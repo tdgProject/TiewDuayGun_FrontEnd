@@ -14,7 +14,7 @@
           id="text"
           type="text"
           name="text"
-          placeholder=""
+          placeholder="Enter hotel's name"
           v-model="hotels.hotelName"
           class="
             block
@@ -26,6 +26,8 @@
             appearance-none
             focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
+          maxlength="100"
+          title="Enter hotel name."
           required
         />
 
@@ -38,7 +40,7 @@
           id="text"
           type="text"
           name="text"
-          placeholder=""
+          placeholder="Enter hotel's address"
           v-model="hotels.address"
           class="
             block
@@ -50,6 +52,8 @@
             appearance-none
             focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
+          maxlength="400"
+          title="Enter hotel address."
           required
         />
 
@@ -62,7 +66,7 @@
           id="Email"
           type="Email"
           name="Email"
-          placeholder=""
+          placeholder="Enter hotel's email address."
           v-model="hotels.email"
           class="
             block
@@ -74,6 +78,8 @@
             appearance-none
             focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
+          minlength="10" maxlength="100"
+          title="Enter hotel email address."
           required
         />
 
@@ -98,6 +104,11 @@
             appearance-none
             focus:outline-none focus:bg-gray-300 focus:shadow-inner
           "
+          minlength="9" 
+          maxlength="10" 
+          pattern="\d{9,10}" 
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');"  
+          title="Telephone number must be 9-10 characters"
           required
         />
         <div class="d-flex flex-column mt-2">
@@ -260,7 +271,7 @@ export default {
           this.errorMessage = null;
           this.message = data.message;
           this.complete=true;
-          setTimeout( () => window.location.href = '/Listhotel', 2000);
+          setTimeout( () => window.location.href = '/Myhotel', 2000);
         },
         error => {
           this.message=null;
