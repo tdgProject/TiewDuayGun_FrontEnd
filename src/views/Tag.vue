@@ -9,7 +9,7 @@
             <li v-for="tag in type.tag" :key="tag.tagId">
               <div v-if="tag.count">
                 <router-link :to="{ name: 'List', params: { filter: 'Tag',var: tag.tagId } }">
-                  <button class="w-32 h-12 mx-3 my-2 justify-content-center border border-secondary rounded-pill shadow-sm bg-white opacity-75">{{ tag.tagName }} ({{tag.count}})</button>
+                  <button class="w-36 h-12 mx-3 my-2 justify-content-center border border-secondary rounded-pill shadow-sm bg-white opacity-75">{{ tag.tagName }} ({{tag.count}})</button>
                 </router-link>
               </div>
               <div v-else>
