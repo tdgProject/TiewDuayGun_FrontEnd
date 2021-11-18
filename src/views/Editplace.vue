@@ -336,6 +336,7 @@ export default {
           this.message = data.message;
           this.complete=true;
           setTimeout( () => window.location.href = '/List/All/1', 2000);
+          
         },
         error => {
           this.message=null;

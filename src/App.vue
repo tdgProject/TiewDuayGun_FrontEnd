@@ -1,6 +1,6 @@
 <template>
 <div class="containers bg-white">
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
+    <nav class="navbar fixed-top h-20 navbar-expand-md navbar-light bg-white">
         <div class="container-fluid p-0"> <a class="navbar-brand text-uppercase fw-800" href="/"><span class="border-red pe-2 ml-5">Tiew</span>DuayGun</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
             <div class="collapse navbar-collapse " id="myNav">
                 <div class="navbar-nav ms-auto align-items-center">
@@ -28,7 +28,7 @@
                         <!-- <li><a class="dropdown-item" :href="$router.resolve({name: 'Signin'}).href">My Hotel</a></li> -->
                         
                         <li v-if="me.roles[0]!= 'member' "><a class="dropdown-item" :href="$router.resolve({name: 'Myhotel'}).href">My Hotel</a></li>
-                        <li><a class="dropdown-item" :href="$router.resolve({name: ''}).href">My Reviews</a></li>
+                        <li><a class="dropdown-item" :href="$router.resolve({name: 'Myreview'}).href">My Reviews</a></li>
                         <li v-if="me.roles[0] == 'member' "><a class="dropdown-item" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
                         <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" :href="$router.resolve({name: 'Addplace'}).href">Addplace</a></li>
                         <div class="dropdown-divider"></div>
@@ -43,6 +43,8 @@
             </div>
         </div>
     </nav>
+    <div class="h-5">
+    </div>
 </div>
 <router-view />
       <div class="footer-dark">
@@ -110,7 +112,6 @@ export default {
   },
   mounted(){
     if(this.$store.state.user.id != 0){
-      console.log(this.userImage);
       if(Date.now()>this.$store.state.user.exp){
         this.$store.dispatch('auth/logout');
       }
