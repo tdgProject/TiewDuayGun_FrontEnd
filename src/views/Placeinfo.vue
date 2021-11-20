@@ -407,13 +407,15 @@ export default {
         rating: this.uRating,
       };
       const jsonProduct = JSON.stringify(newReview);
+      console.log(jsonProduct)
       const blob = new Blob([jsonProduct], {
         type: "application/json",
       });
       const formdata = new FormData();
       formdata.append("newReview", blob);
       this.$store.dispatch("editReview", { data: formdata, pid: this.pid });
-      window.location.reload();
+      
+     // window.location.reload();
     },
     editSwitch(rating, uid) {
       this.uRating = rating;
