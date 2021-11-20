@@ -51,11 +51,10 @@
 
           sdasd
         </option> -->
-        <select class="border-2 " v-model=user.role v-if="edit == true && user.userId == editId">
+        <select class="border-2 " v-model="user.role" v-if="edit == true && user.userId == editId">
   <option v-for="role in rolesx" :key="role.id">
     {{role}}
   </option>
-  
 </select>
 
       </div>
@@ -79,7 +78,7 @@
                                    <button v-if="edit == true && user.userId == editId"
                       type="button"
                       class="mr-2 float-right mb-2"
-                      @click="editRole(user.userId,user.username,user.role,user.telNumber,user.email)"
+                      @click="editRole(user.userId,user.role)"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0v24h24v-24h-24zm11 17l-5-5.299 1.399-1.43 3.574 3.736 6.572-7.007 1.455 1.403-8 8.597z"/></svg>
                     </button>
@@ -111,14 +110,14 @@ export default {
     };
   },
   methods: {
-        editRole(uid,username,role,tel,email) {
+        editRole(uid,role) {
       let newUser = {
         userId: uid,
-        username: username,
+        // username: username,
         role:role,
         // role: [],
-        telNumber: tel,
-        email:email
+        // telNumber: tel,
+        // email:email
 
         
       };

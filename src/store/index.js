@@ -246,7 +246,7 @@ export default createStore({
           )
         },
         async editRole({commit}, formData){
-          return axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data,{ headers: authHeader() }).then(
+          return axios.put(`${resource_uri}user/role/${formData.uid}`,formData.data,{ headers: authHeader() }).then(
             user => {
               axios.get(`${resource_uri}onstart`);
               commit('editRole', user.data);
