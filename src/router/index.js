@@ -18,6 +18,8 @@ import Edithotel from '../views/Edithotel.vue'
 import Myhotel from '../views/Myhotel.vue'
 import EditProfile from '../views/EditProfile.vue'
 import Accesdenied from '../views/Accesdenied.vue'
+import UserManagement from '../views/UserManagement.vue'
+
 
 
 
@@ -30,6 +32,11 @@ const routes = [{
     path: '/Tag',
     name: 'Tag',
     component: Tag
+  },
+  {
+    path: '/UserManagement',
+    name: 'UserManagement',
+    component: UserManagement
   },
   {
     path: '/Accesdenied',

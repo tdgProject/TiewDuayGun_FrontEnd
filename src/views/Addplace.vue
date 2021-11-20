@@ -219,9 +219,11 @@ export default {
         tags: allTag
       };
       const jsonProduct = JSON.stringify(newPlace);
+      console.log(jsonProduct)
       const blob = new Blob([jsonProduct], {
         type: "application/json",
       });
+      
       let formdata = new FormData();
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
@@ -230,7 +232,7 @@ export default {
           this.errorMessage = null;
           this.message = data.message;
           this.complete=true;
-          setTimeout( () => window.location.href = '/List/All/1', 2000);
+          //setTimeout( () => window.location.href = '/List/All/1', 2000);
         },
         error => {
           this.message=null;
