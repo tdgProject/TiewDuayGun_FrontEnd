@@ -13,37 +13,19 @@
                         class="rounded-circle"
                       />
       
-      {{user}}
+      
          <div class="ml-32 mt-2">
-           <input
-           type="text"
-           id=""
-           v-if="edit == true && user.userId == editId"
-              placeholder="Insert Your Username"
-              class="border p-2 w-full"
-              v-model="user.username"/>
-        <p class="" v-if=" user.userId !== editId">{{user.username}}</p>
+      
+        <p class="" >{{user.username}}</p>
 
       </div>
       <div class="mt-2 ">
-         <input
-           type="text"
-           id=""
-           v-if="edit == true && user.userId == editId"
-              placeholder="Insert Your Username"
-              class="border p-2 w-full"
-              v-model="user.email"/>
-        <p  v-if=" user.userId !== editId">{{user.email}}</p>
+   
+        <p  >{{user.email}}</p>
       </div>
       <div class=" mt-2">
-        <input
-           type="text"
-           id=""
-           v-if="edit == true && user.userId == editId"
-              placeholder="Insert Your Username"
-              class="border p-2 w-full"
-              v-model="user.telNumber"/>
-        <p v-if=" user.userId !== editId">{{user.telNumber}}</p>
+        
+        <p >{{user.telNumber}}</p>
       </div>
        <div class="mt-2" >
          <p class="" v-if=" user.userId !== editId">{{user.role}}</p>
@@ -52,7 +34,7 @@
           sdasd
         </option> -->
         <select class="border-2 " v-model="user.role" v-if="edit == true && user.userId == editId">
-  <option v-for="role in rolesx" :key="role.id">
+  <option v-for="role in rolesx" :key="role">
     {{role}}
   </option>
 </select>
@@ -104,7 +86,7 @@ export default {
       editId: 0,
       edit: false,
       role:[],
-      rolesx:['admin','member','business'],
+      rolesx:["member","business","admin"]
       
 
     };
@@ -135,7 +117,7 @@ export default {
       const formdata = new FormData();
       formdata.append("newUser", blob);
       this.$store.dispatch("editRole", { data:formdata, uid:this.editId });
-      //window.location.reload();
+      window.location.reload();
     },
     getUserImage(image) {
       return `${this.$store.state.url}image/user/${image}`;
