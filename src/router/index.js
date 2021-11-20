@@ -16,6 +16,7 @@ import SignIn from '../views/SignIn.vue'
 import Editplace from '../views/Editplace.vue'
 import Edithotel from '../views/Edithotel.vue'
 import Myhotel from '../views/Myhotel.vue'
+import Myreview from '../views/Myreview.vue'
 import EditProfile from '../views/EditProfile.vue'
 import Accesdenied from '../views/Accesdenied.vue'
 import UserManagement from '../views/UserManagement.vue'
@@ -120,6 +121,11 @@ const routes = [{
     name: 'EditProfile',
     component: EditProfile,
     props:true,
+  },
+  {
+    path: '/Myreview',
+    name: 'Myreview',
+    component: Myreview,
   },
 
 

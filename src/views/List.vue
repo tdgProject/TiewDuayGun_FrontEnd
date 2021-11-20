@@ -30,7 +30,7 @@
       </a>
     </div>
 <div class="containers eiei fade-in">
-    <div class="row">
+    <div class="row" v-if="places">
         <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2  " v-for="place in places" :key="place.placeId">
           
             <div class="image "> <img class="shoe-img pl-5 pl-md-0 " :src="getimage(place.image)">
@@ -67,11 +67,10 @@
             </h2>
             <div class ="float-left ml-8"  >
              <router-link
-                     
               class="btn btn-outline-dark btn-icon-text float-right" 
               :to="{
                 name: 'Placeinfo',
-                params: { pid: place.placeId, pImg: place.image },
+                params: { pid: place.placeId },
               }"
               >Read mores</router-link
             >
@@ -184,7 +183,6 @@ export default {
             let me = computed(function () {
       return store.state.user;
     });
-
     return {
       places,
       me

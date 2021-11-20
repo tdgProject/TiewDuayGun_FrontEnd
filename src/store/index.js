@@ -19,6 +19,7 @@ export default createStore({
     provinces: [],
     users: [],
     etc: [],
+    myReviews: [],
     user: user == null? {id:0} : user.data,
     myHotel: null,
     url: resource_uri
@@ -101,6 +102,9 @@ export default createStore({
         if(index !== -1){
           state.reviews = state.reviews.splice(index,1,review);
         }
+      },
+      listMyReviews(state,myReview){
+        state.myReviews = myReview;
       },
       // loginSuccess(state, user) {
       //   state.status.loggedIn = true;
@@ -282,5 +286,10 @@ export default createStore({
         const response = await axios.delete(`${resource_uri}nearby/delete/${value.pid}/${value.hid}`,{ headers: authHeader() });
         commit('deleteNearByHotel',response.data);
         },
+        async getMyReviews({commit}, userId){
+          const response = await axios.get(`${resource_uri}review/user/${userId}`,{ headers: authHeader() });
+          commit('listMyReviews',response.data);
+          },
+
 }
 });
