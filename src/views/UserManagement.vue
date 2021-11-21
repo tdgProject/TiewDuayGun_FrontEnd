@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container fkex d-wrap " v-for="user in users" :key="user.userId">
+    <div class="container fkex d-wrap " v-for="user in users" :key="user.userId" >
       <div class="" >
       <div class=" border-2 p-10 mb-2 ">
 
@@ -71,6 +71,7 @@
       </div>
       
     </div>
+    
 </template>
 <script>
 import { computed } from "vue";
@@ -91,6 +92,7 @@ export default {
 
     };
   },
+
   methods: {
         editRole(uid,role) {
       let newUser = {
@@ -129,7 +131,28 @@ export default {
   },
   
   computed: {
+      show404: function () {
+      let show = true;
+          if(this.me.roles){
+        if(this.me.roles[0] =='admin'){
+        show = false;
+      }
+      }
+      return show;
+    },
 
+    showdata: function () {
+      let show = true;
+          if(this.me.roles){
+        if(this.me.roles[0] !=='admin'){
+        show = false;
+      }
+      }
+      if(this.me.id == 0){
+        show = false;
+      }
+      return show;
+    },
   },
   setup() {
     const store = useStore();
@@ -139,10 +162,14 @@ export default {
     let users = computed(function () {
       return store.state.users;
     });
+             let me = computed(function () {
+      return store.state.user;
+    });
 
     return {
 
       users,
+      me
    
     };
   },
