@@ -31,6 +31,7 @@
                         <li><a class="dropdown-item" :href="$router.resolve({name: 'Myreview'}).href">My Reviews</a></li>
                         <li v-if="me.roles[0] == 'member' "><a class="dropdown-item" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
                         <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" :href="$router.resolve({name: 'Addplace'}).href">Addplace</a></li>
+                        <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" :href="$router.resolve({name: 'UserManagement'}).href">UserManagement</a></li>
                         <div class="dropdown-divider"></div>
                         <li><button class="dropdown-item" @click="logOut()" >Log Out</button></li>
                       </ul>
