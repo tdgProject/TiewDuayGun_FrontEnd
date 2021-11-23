@@ -1,5 +1,14 @@
 <template>
+
   <div v-if="showdata">
+       <div class="bbb_viewed_title_container mb-2 container">
+                    <h3 class="bbb_viewed_title ">MYHOTEL</h3>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+      
     <!-- <div v-for="hotel in hotels" :key="hotel.hotelId">
       {{hotel.hotelName}} -->
     <div class="container mt-10 d-flex flex-wrap justify-content-start">
