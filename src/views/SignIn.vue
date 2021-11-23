@@ -1,5 +1,5 @@
 <template>
-<div class="grid mt-5 place-items-center" v-if="showdata">
+<div class="grid mt-20 place-items-center mb-56 mb-64 " v-if="showdata">
   <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
    <span class="font-normal">Sign In</span>
     <form class="" @submit.prevent="login">
@@ -25,6 +25,7 @@
         </div>
           </div>
         </div>
+        
 </div>
 
 <div class="flex items-center justify-center min-h-screen bg-indigo-500  bg-fixed bg-cover bg-bottom error-bg" v-if="show404"

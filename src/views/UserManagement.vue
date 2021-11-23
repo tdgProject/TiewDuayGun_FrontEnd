@@ -1,10 +1,19 @@
 <template>
-
-    <div class="container fkex d-wrap " v-for="user in users" :key="user.userId" >
-      <div class="" >
+                <div class="bbb_viewed_title_container mb-2 container">
+                    <h3 class="bbb_viewed_title ">UserManage</h3>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+      
+      
+    <div class="container" v-for="user in users" :key="user.userId" >
+      
       <div class=" border-2 p-10 mb-2 ">
-
-        <div class="flex-wrap flex gap-5 ">
+        <div class="flex-wrap flex justify-between ">
+          <div class="">
+            
                    <img
                         :src="getUserImage(user.image)"
                         alt="user"
@@ -13,21 +22,22 @@
                         class="rounded-circle"
                       />
       
-      
-         <div class="ml-32 mt-2">
-      
+        </div>
+         <div class=" mt-2">
+        <p class="" >Name</p>
         <p class="" >{{user.username}}</p>
 
       </div>
       <div class="mt-2 ">
-   
+   <p class="" >Email</p>
         <p  >{{user.email}}</p>
       </div>
       <div class=" mt-2">
-        
+        <p class="" >telNumber</p>
         <p >{{user.telNumber}}</p>
       </div>
        <div class="mt-2" >
+         <p class="" >Role</p>
          <p class="" v-if=" user.userId !== editId">{{user.role}}</p>
         <!-- <option class="" v-if="edit == true && user.userId == editId">
 
@@ -40,10 +50,10 @@
 </select>
 
       </div>
-
+<div class="">
                <button v-if="edit == false"
                       type="button"
-                      class="mr-2 float-right"
+                      class="mr-2 mt-8"
                       @click="editSwitch(user.userId)"
                     >
                       <svg
@@ -59,18 +69,18 @@
                     </button>
                                    <button v-if="edit == true && user.userId == editId"
                       type="button"
-                      class="mr-2 float-right mb-2"
+                      class="mr-2  mb-2"
                       @click="editRole(user.userId,user.role)"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0v24h24v-24h-24zm11 17l-5-5.299 1.399-1.43 3.574 3.736 6.572-7.007 1.455 1.403-8 8.597z"/></svg>
                     </button>
-           
+</div>
       </div>
       </div>
       
       </div>
       
-    </div>
+    
     
 </template>
 <script>
@@ -175,3 +185,31 @@ export default {
   },
 };
 </script>
+<style scoped>
+ .bbb_viewed_title_container {
+     border-bottom: solid 1px #dadada
+ }
+  .bbb_viewed_title {
+     margin-bottom: 14px
+ }
+  .bbb_viewed_nav_container {
+     position: absolute;
+     right: -5px;
+     bottom: 14px
+ }
+  .bbb_viewed_nav {
+     display: inline-block;
+     cursor: pointer
+ }
+  .bbb_viewed_nav i {
+     color: #dadada;
+     font-size: 18px;
+     padding: 5px;
+     -webkit-transition: all 200ms ease;
+     -moz-transition: all 200ms ease;
+     -ms-transition: all 200ms ease;
+     -o-transition: all 200ms ease;
+     transition: all 200ms ease
+ }
+ 
+</style>>
