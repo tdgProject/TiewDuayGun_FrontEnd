@@ -2,16 +2,17 @@
 <div class="" v-if="showdata">
   <div class="grid min-h-screen place-items-center" >
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12" >
-      <h1 class="text-xl font-semibold">Edit Your Business</h1>
+      <h1 class="text-xl font-semibold" id="texttest">Edit Your Business</h1>
       <form class="mt-6" @submit.prevent="editHotel()" v-if="hotels">
         <label
+        id="texttest"
           for="hotelname"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Hotel Name</label
         >
         
         <input
-          id="text"
+          id="texttest"
           type="text"
           name="text"
           placeholder="Enter hotel's name"
@@ -37,7 +38,7 @@
           >Address</label
         >
         <input
-          id="text"
+          id="texttest"
           type="text"
           name="text"
           placeholder="Enter hotel's address"
@@ -58,12 +59,13 @@
         />
 
         <label
+        id="texttest"
           for="email"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Email</label
         >
         <input
-          id="Email"
+          id="texttest"
           type="Email"
           name="Email"
           placeholder="Enter hotel's email address."
@@ -89,7 +91,7 @@
           >Tel.</label
         >
         <input
-          id="text"
+          id="texttest"
           type="text"
           name="text"
           placeholder=""
@@ -115,7 +117,7 @@
            <div class="form-group">
         <input
           type="file"
-          id="image"
+          id="texttest"
           name="image"
           accept="image/*,"
           @change = "upfile"

@@ -12,6 +12,7 @@
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between mr-5">
         <div class="border-8 border-red-blue rounded-full bg-white shadow flex w-full fade-in">
              <input
+             id="texttest"
       type="text"
       placeholder="Search Place's Name"
       class="w-full rounded-tl-full rounded-bl-full py-2 px-4 "
@@ -26,7 +27,7 @@
         py-2
         px-4
       ">
-      <p class="font-semibold text-base uppercase text-white">Search</p>
+      <p class="font-semibold text-base uppercase text-white" >Search</p>
     </button>
     </a>
         </div>

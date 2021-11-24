@@ -136,4 +136,11 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to) => {
+  if (to.path == '/List/Name/null'){
+    router.push('/List/All/1')
+  }
+  
+})
+
 export default router

@@ -8,21 +8,22 @@
           class="d-flex align-items-center text-dark text-decoration-none"
         >
           <i class="bx bxs-been-here display-6 mr-2"></i>
-          <span class="fs-4">{{ place.placeName }}</span>
+          <span class="fs-4" id="texttest">{{ place.placeName }}</span>
         </a>
       </header>
       <div
         class="p-5 pb-1 mb-4 rounded-3"
         v-bind:style="{ backgroundImage: 'url(\'' + placeImage.replace('\'','\\\'') + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }">
         <div class="container-fluid py-5">
-          <h1 class="display-1 fw-bold text-end">{{ place.placeName }}</h1>
+          <h1 class="display-1 fw-bold text-end" id="texttest" >{{ place.placeName }}</h1>
           <div
             class="col-md-8 bg-black bg-opacity-50 p-4 rounded-lg text-white"
           >
-            <p class="fs-4">{{ place.placeDescription }}</p>
+            <p class="fs-4" id="texttest">{{ place.placeDescription }}</p>
           </div>
           <div class="d-flex flex-row flex-wrap mt-2">
             <button
+            id="texttest"
               class="
                 mx-2
                 px-4
@@ -45,8 +46,8 @@
         <div class="col-md-6">
           <div class="h-100 p-4 text-white bg-dark rounded-3">
             <h2 class="mb-3">
-              <i class="bx bxs-star text-3xl"></i> Rating :
-              {{ place.placeRating }}
+              <i class="bx bxs-star text-3xl" id="texttest">Rating </i>
+              <div id="texttest">{{ place.placeRating }}</div>
             </h2>
             <div class="vid-container">
               <iframe
@@ -64,20 +65,21 @@
             <div  class="d-flex row h-full align-items-center">
               <div v-if="isReviewed()">
                 <i class='bx bx-list-check display-1'></i>
-                <h1>You have already Reviewed!</h1>
-                <a :href="getId()" class="text-decoration-none link-info"> <h4 >See Your Review</h4> </a>
+                <h1 id="texttest">You have already Reviewed!</h1>
+                <a :href="getId()" class="text-decoration-none link-info"> <h4 id="texttest">See Your Review</h4> </a>
               </div>
               <div v-else>
               <form @submit.prevent="addReview()">
-                <h3>Your Review and Rating</h3>
+                <h3 id="texttest">Your Review and Rating</h3>
                 <div>
                 <Star :rating="rating" @selected="updateStar" />
                 </div>
                 <div v-if="ratingValidate">
-                  <p class="text-red-400">Please select rating before submit!</p>
+                  <p class="text-red-400" id="texttest">Please select rating before submit!</p>
                 </div>
                 <div class="form-group">
                   <textarea
+                  id="texttest"
                     name="review"
                     class="form-control"
                     placeholder="Your Review*"
@@ -87,6 +89,7 @@
                 </div>
                 <div class="form-group mt-3 d-flex justify-content-end">
                   <input
+                  id="texttest"
                     type="submit"
                     name="submit"
                     class="py-1 px-2 rounded-xl bg-secondary text-white"
@@ -100,8 +103,8 @@
            <div v-else class="h-100 p-5 bg-dark text-white rounded-3">
                 <div class="d-flex row h-full align-items-center">
                   <span>
-                    <h1>You have not logged in yet!</h1>
-                    <h4>Please<a :href="$router.resolve({name: 'Signin'}).href" class="text-decoration-none link-info"> login</a> before reviewing.</h4>
+                    <h1 id="texttest">You have not logged in yet!</h1>
+                    <h4 id="texttest">Please<a :href="$router.resolve({name: 'Signin'}).href" id="texttest" class="text-decoration-none link-info"> login</a> before reviewing.</h4>
                   </span>
                 </div>
             </div>
@@ -122,7 +125,7 @@
               d="M20 9.999v-2h4v12.001h-3v4l-5.333-4h-7.667v-4h12v-6.001zm-2 4.001h-9.667l-5.333 4v-4h-3v-14.001h18v14.001z"
             />
           </svg>
-          <span class="fs-4 p-2">Reviews</span>
+          <span class="fs-4 p-2" id="texttest">Reviews</span>
         </a>
       </header>
       <!-- list review -->
@@ -136,6 +139,7 @@
                 v-for="review in reviews"
                 :key="review.user.userId"
                 :id="setId(review.user.userId)"
+                
               >
                 <div v-if="edit == true && review.user.userId == editId">
                   <div  class="d-flex pt-4 pb-3 px-5 justify-content-between">
@@ -147,7 +151,7 @@
                         class="rounded-circle"
                       />
 
-                      <h6 class="font-medium font-bold mt-4 ml-4">
+                      <h6 class="font-medium font-bold mt-4 ml-4" id="texttest">
                         {{ review.user.username }}
                       </h6>
                     </div>
@@ -276,7 +280,7 @@
         >
           <div class="d-flex align-items-center">
             <i class="bx bxs-hotel display-6 mr-2"></i>
-            <span class="fs-4">Hotel</span>
+            <span class="fs-4" id="texttest">Hotel</span>
           </div>
           <div>
             <button
@@ -285,7 +289,7 @@
               @click="addMyHotel"
             >
               <i class="bx bxs-add-to-queue text-4xl"></i
-              ><span class="text-lg">Add Your Hotel</span>
+              ><span class="text-lg" id="texttest">Add Your Hotel</span>
             </button>
           </div>
         </a>
@@ -303,10 +307,10 @@
               class="card-img-top h-1/2"
             />
             <div class="card-body">
-              <p class="">Name: {{ hotel.hotel.hotelName }}</p>
-              <p class="">Address: {{ hotel.hotel.address }}</p>
-              <p class="">Email: {{ hotel.hotel.email }}</p>
-              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>                    
+              <p class="" id="texttest">Name: {{ hotel.hotel.hotelName }}</p>
+              <p class="" id="texttest">Address: {{ hotel.hotel.address }}</p>
+              <p class="" id="texttest">Email: {{ hotel.hotel.email }}</p>
+              <p class="" id="texttest">Tel: {{ hotel.hotel.telNumber }}</p>                    
             </div>
             <div class="text-end" v-if="hotel.hotel.owner.userId === me.id">
               <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">

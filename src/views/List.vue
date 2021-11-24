@@ -3,6 +3,7 @@
 
     <div class="border-4 border-red-black rounded-full bg-white shadow flex">
       <input
+      id="texttest"
         type="text"
         placeholder="Search Place's Name"
         class="w-full rounded-tl-full rounded-bl-full py-2 px-4"
@@ -25,32 +26,32 @@
             px-4
           "
         >
-          <p class="font-semibold text-base uppercase">Search</p>
+          <p class="font-semibold text-base uppercase" id="texttest">Search</p>
         </button>
       </a>
     </div>
        <div class="bbb_viewed_title_container mb-2 container mt-11">
-                    <h3 class="bbb_viewed_title">PLACELIST</h3>
+                    <h3 class="bbb_viewed_title " id="texttest">PLACELIST</h3>
                     <div class="bbb_viewed_nav_container">
                         <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
       
-<div class="containers eiei fade-in">
+<div class="p-10 eiei fade-in ">
     <div class="row" v-if="places">
         <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2  " v-for="place in places" :key="place.placeId">
           
             <div class="image "> <img class="shoe-img pl-5 pl-md-0 " :src="getimage(place.image)">
                 <div class="overlay ">
-                    <p class="amount">{{place.placeName}}</p>
-                    <p class="h4">{{place.placeName}}</p>
+                    <p class="amount"  id="texttest">{{place.placeName}}</p>
+                    <p class="h4"  id="texttest">{{place.placeName}}</p>
                  
               
-                    <ul class="d-flex justify-content-start mt-10">
-                        <p class="text-xl">Rating:</p>
+                    <ul class="d-flex justify-content-start mt-10" >
+                        <p class="text-xl" id="texttest" >Rating:</p>
                       
-             <div v-if="place.placeRating == '0'">No review</div>
+             <div v-if="place.placeRating == '0'"  id="texttest">No review</div>
                     
                         <li v-for="x in calStar(place.placeRating)[0]" :key="x">
                           <i class="bx bxs-star text-3xl"></i>
@@ -61,15 +62,16 @@
                         
                       </ul>
                       <h2 class=" flex text-xl ml-8">
-              Tag:
-              <div v-for="tag in place.tags" :key="tag.tag.tagid" class="">
+              <p id="texttest">Tag:</p>
+              <div v-for="tag in place.tags" :key="tag.tag.tagid" class="" >
                 <router-link
                   onclick="window.location.reload(true)"
                   :to="{
                     name: 'List',
                     params: { filter: 'Tag', var: tag.tag.tagId },
+                    
                   }"
-                  >{{ tag.tag.tagName }},</router-link
+                  ><p id="texttest">{{ tag.tag.tagName }},</p></router-link
                 >
               </div>         
             </h2>
@@ -80,7 +82,7 @@
                 name: 'Placeinfo',
                 params: { pid: place.placeId },
               }"
-              >Read mores</router-link
+              ><div id="texttest">Read mores</div></router-link
             >
             </div>
             

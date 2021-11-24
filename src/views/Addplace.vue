@@ -11,8 +11,8 @@
       >
         <i class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"></i>
       </div>
-      <h3 class="text-2xl text-gray-900 font-semibold">Addplace</h3>
-      <p class="text-gray-600">เพิ่มสถานที่</p>
+      <h3 class="text-2xl text-gray-900 font-semibold" id="texttest">Addplace</h3>
+      <p class="text-gray-600" id="texttest">เพิ่มสถานที่</p>
       <div class="form-group">
         <input
           type="file"
@@ -33,9 +33,9 @@
       </div>
       <div class="container d-flex align-items-center">
         <div class="my-3 w-50 align-items-center">
-        <p class="my-auto">Province</p>
+        <p class="my-auto" id="texttest">Province</p>
         <select class="form-control select" v-model="ptag" required>
-            <option class="text-center" value="" disabled>
+            <option class="text-center" value="" disabled id="texttest">
               Select Province
             </option>
             <option class="text-center" v-for="tagp in provinces" :key="tagp.tagId" :value="tagp.tagId">
@@ -44,8 +44,8 @@
           </select>
           </div>
           <div class="my-3 px-2 w-50">
-            <p class="my-auto">Tags</p>
-            <button type="button" class="w-full btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <p class="my-auto" id="texttest">Tags</p>
+            <button type="button" class="w-full btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="texttest">
               Select Tag
             </button>
 
@@ -57,10 +57,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <h3>Selecting Tags</h3>
+                    <h3 id="texttest">Selecting Tags</h3>
                     <div class="container d-flex flex-wrap">
                       <div class="w-1/2 justify-content-between" v-for="tage in etc" :key="tage.tagId">
-                        <input class="invisible" :id="tage.tagName" type="checkbox" :value="tage.tagId" v-model="etag">
+                        <input class="invisible" :id="tage.tagName" type="checkbox" :value="tage.tagId" v-model="etag" >
                         <label class="my-2 w-11/12 border-3 border-warning p-2 rounded-full text-center" :for="tage.tagName"> {{tage.tagName}}</label>
                       </div>
                     </div>
@@ -75,9 +75,10 @@
       </div>
       <div class="flex space-x-5 mt-3">
         <input
+        
           type="text"
           name="placeName"
-          id=""
+          id="texttest"
           placeholder="Insert Your PlaceName"
           class="border p-2 w-full"
           v-model.trim="enteredplaceName"
@@ -85,7 +86,7 @@
           required
         />
       </div>
- <p class="">Insert Your PlaceName</p>
+ <p class="" id="texttest">Insert Your PlaceName</p>
       <textarea
         name="placeDescription"
         id=""
@@ -97,12 +98,12 @@
         maxlength="5000"
         required
       ></textarea>
-      <p class="">Insert Your PlaceDescription</p>
+      <p class="" id="texttest">Insert Your PlaceDescription</p>
       <div class="flex space-x-5 mt-3">
         <input
           type="text"
           name="videoURL"
-          id=""
+          id="texttest"
           placeholder="Ex. https://www.youtube.com/watch?v=???"
           class="border p-2 w-full"
           v-model.trim="enteredURL"
@@ -110,7 +111,7 @@
           required
         />
       </div>
-      <p class="">Insert Your Video URL</p>
+      <p class="" id="texttest">Insert Your Video URL</p>
       <input
         type="submit"
         value="Submit"
