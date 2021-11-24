@@ -1,6 +1,6 @@
 <template>
    <div class="bbb_viewed_title_container mb-2 container">
-                    <h3 class="bbb_viewed_title ">PROFILE</h3>
+                    <h3 class="bbb_viewed_title " id="texttest">PROFILE</h3>
                     <div class="bbb_viewed_nav_container">
                         <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -32,8 +32,8 @@
       <div class="w-sm">
         <img :src="getUserImage(me.image)" />
         <div class="mt-4 text-green-600 text-center">
-          <h1 class="text-xl font-bold">{{me.username}}</h1>
-          <p class="mt-4 text-gray-600">
+          <h1 class="text-xl font-bold" id="texttest">{{me.username}}</h1>
+          <p class="mt-4 text-gray-600" id="texttest">
            Email:  {{me.email}}
            Tel.:  {{me.telNumber}}
            Role: {{me.roles[0]}}

@@ -1,6 +1,6 @@
 <template>
                 <div class="bbb_viewed_title_container mb-2 container">
-                    <h3 class="bbb_viewed_title ">UserManage</h3>
+                    <h3 class="bbb_viewed_title " id="texttest">UserManage</h3>
                     <div class="bbb_viewed_nav_container">
                         <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -10,7 +10,7 @@
       
     <div class="container" v-for="user in users" :key="user.userId" >
       
-      <div class=" border-2 p-10 mb-2 ">
+      <div class=" border-2 p-10 mb-2  ">
         <div class="flex-wrap flex justify-between ">
           <div class="">
             
@@ -24,28 +24,28 @@
       
         </div>
          <div class=" mt-2">
-        <p class="" >Name</p>
-        <p class="" >{{user.username}}</p>
+        <p class="" id="texttest">Name</p>
+        <p class="" id="texttest">{{user.username}}</p>
 
       </div>
       <div class="mt-2 ">
-   <p class="" >Email</p>
-        <p  >{{user.email}}</p>
+   <p class="" id="texttest">Email</p>
+        <p id="texttest" >{{user.email}}</p>
       </div>
       <div class=" mt-2">
-        <p class="" >telNumber</p>
-        <p >{{user.telNumber}}</p>
+        <p class="" id="texttest">telNumber</p>
+        <p id="texttest">{{user.telNumber}}</p>
       </div>
        <div class="mt-2" >
-         <p class="" >Role</p>
-         <p class="" v-if=" user.userId !== editId">{{user.role}}</p>
+         <p class="" id="texttest" >Role</p>
+         <p class="" id="texttest"  v-if=" user.userId !== editId">{{user.role}}</p>
         <!-- <option class="" v-if="edit == true && user.userId == editId">
 
           sdasd
         </option> -->
-        <select class="border-2 " v-model="user.role" v-if="edit == true && user.userId == editId">
+        <select class="border-2 " v-model="user.role" v-if="edit == true && user.userId == editId" id="texttest">
   <option v-for="role in rolesx" :key="role">
-    {{role}}
+    <p id="texttest">{{role}}</p>
   </option>
 </select>
 

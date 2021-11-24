@@ -2,7 +2,7 @@
     <div class="container" v-if="!show404">
     <div class="row d-flex justify-content-center">
         <div class="col-md">
-            <h2 class="text-start mx-4 mb-4 text-gray-600">My Reviews</h2>
+            <h2 class="text-start mx-4 mb-4 text-gray-600" id="texttest">My Reviews</h2>
             <div class="card mb-4 " v-for="review in myReviews" :key="review.userId">
                 <div class="d-flex">
                 <div class="col-2"><div class="mr-3 h-full w-full" v-bind:style="{ backgroundImage: 'url(\'' + getPlaceImage(review.place.image).replace('\'','\\\'') + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }"></div></div>
@@ -17,15 +17,15 @@
                                             name: 'Placeinfo',
                                             params: { pid: review.place.placeId },
                                         }"
-                                        ><h3 class="font-weight-bold m-0 p-0">{{review.place.placeName}}</h3></router-link >
+                                        ><h3 class="font-weight-bold m-0 p-0" id="texttest">{{review.place.placeName}}</h3></router-link >
                                     
-                                    <small>Time</small>
+                                    <small  id="texttest">Time</small>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3 align-items-center">
                             <div class="text-wrap text-start w-full pr-8">
-                                <div class="text-lg">{{review.review}}</div>
+                                <div class="text-lg" id="texttest">{{review.review}}</div>
                             </div>
                         </div>
                         <div class="text-end">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div v-if="myReviews.length == 0" class="h-36 d-flex align-items-center justify-content-center border-2 rounded-lg mb-4">
-                <h4 class="text-gray-400">You haven't reviewed any place yet.</h4>
+                <h4 class="text-gray-400" id="texttest">You haven't reviewed any place yet.</h4>
             </div>
         </div>
     </div>
