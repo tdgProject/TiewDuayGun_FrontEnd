@@ -3,7 +3,7 @@
   <div class="grid min-h-screen place-items-center" >
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12" >
       <h1 class="text-xl font-semibold" id="texttest">Edit Your Business</h1>
-      <form class="mt-6" @submit.prevent="editHotel()" v-if="hotels">
+      <form class="mt-6 border p-10" @submit.prevent="editHotel()" v-if="hotels">
         <label
         id="texttest"
           for="hotelname"

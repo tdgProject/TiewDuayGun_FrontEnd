@@ -6,10 +6,10 @@
                 <div class="navbar-nav ms-auto align-items-center">
                   <a class="nav-link " id="texttest" :href="$router.resolve({name: 'List', params: { filter: 'All',var: 1}}).href">List</a> 
                   <a class="nav-link" id="texttest" :href="$router.resolve({name: 'Tag'}).href">Tag</a> 
-                  <a class="nav-link mr-3" id="texttest" :href="$router.resolve({name: 'Aboutus'}).href">AboutUs</a>
+                  <a class="nav-link mr-3" id="texttest" :href="$router.resolve({name: 'Aboutus'}).href">About Us</a>
                   <div v-if="!loggedIn" class="d-flex" id="texttest">
                     <a class="nav-link mr-3" id="texttest" :href="$router.resolve({name: 'Signin'}).href">Login</a>
-                    <a class="nav-link mr-3"  id="texttest" :href="$router.resolve({name: 'Signup'}).href">Signup</a>
+                    <a class="nav-link mr-3"  id="texttest" :href="$router.resolve({name: 'Signup'}).href">Sign up</a>
                   </div>
                   <div v-else class="mx-4">
                     <div class="dropdown">
@@ -24,13 +24,13 @@
                       </a>
 
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" data-offset="flip">
-                        <li><a class="dropdown-item " id="texttest" :href="$router.resolve({name: 'Profile', params: { uid:me.id }}).href">Profile</a></li>
+                        <li><a class="dropdown-item " id="texttest" :href="$router.resolve({name: 'Profile', params: { uid:me.id }}).href">Profile </a></li>
                         <!-- <li><a class="dropdown-item" :href="$router.resolve({name: 'Signin'}).href">My Hotel</a></li> -->
                         
                         <li v-if="me.roles[0]!= 'member' "><a class="dropdown-item" id="texttest" :href="$router.resolve({name: 'Myhotel'}).href">My Hotel</a></li>
                         <li><a class="dropdown-item" id="texttest" :href="$router.resolve({name: 'Myreview'}).href">My Reviews</a></li>
                         <li v-if="me.roles[0] == 'member' "><a class="dropdown-item" id="texttest" :href="$router.resolve({name: 'Business'}).href">Business Request</a></li>
-                        <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" id="texttest" :href="$router.resolve({name: 'Addplace'}).href">Addplace</a></li>
+                        <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" id="texttest" :href="$router.resolve({name: 'Addplace'}).href">Add place</a></li>
                         <li v-if="me.roles[0] == 'admin' "><a class="dropdown-item" id="texttest" :href="$router.resolve({name: 'UserManagement'}).href">UserManagement</a></li>
                         <div class="dropdown-divider"></div>
                         <li><button class="dropdown-item" id="texttest" @click="logOut()" >Log Out</button></li>

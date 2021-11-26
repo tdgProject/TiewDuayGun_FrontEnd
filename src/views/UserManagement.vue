@@ -8,7 +8,7 @@
                 </div>
       
       
-    <div class="container" v-for="user in users" :key="user.userId" >
+    <div class="grid-container" v-for="user in users" :key="user.userId" >
       
       <div class=" border-2 p-10 mb-2  ">
         <div class="flex-wrap flex justify-between ">
