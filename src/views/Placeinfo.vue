@@ -280,7 +280,7 @@
         >
           <div class="d-flex align-items-center">
             <i class="bx bxs-hotel display-6 mr-2"></i>
-            <span class="fs-4" id="texttest">Hotel</span>
+            <span class="fs-4" id="texttest">Nearby Hotels</span>
           </div>
           <div>
             <button
@@ -419,7 +419,7 @@ export default {
       formdata.append("newReview", blob);
       this.$store.dispatch("editReview", { data: formdata, pid: this.pid });
       
-     // window.location.reload();
+      window.location.reload();
     },
     editSwitch(rating, uid) {
       this.uRating = rating;

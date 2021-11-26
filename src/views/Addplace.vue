@@ -2,7 +2,7 @@
   <div class="grid min-h-screen place-items-center mr-48 " v-if="showdata">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
   <form @submit.prevent="addPlace()">
-    <div class="mx-20 w-100 h-3/4">
+    <div class="mx-20 w-100 h-3/4 border px-10 pb-10 pl-10 pr-10">
       <div
         class="
        

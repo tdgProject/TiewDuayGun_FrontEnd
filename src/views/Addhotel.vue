@@ -1,15 +1,17 @@
 <template>
   <div class="grid min-h-screen place-items-center" v-if="showdata">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <h1 class="text-xl font-semibold">Register Your Business</h1>
-      <form class="mt-6" @submit.prevent="addHotel()">
+      <h1 class="text-xl font-semibold" id="texttest">Register Your Business</h1>
+      <form class="mt-6 border px-10 pb-10 pt-10" @submit.prevent="addHotel()">
         <label
           for="hotelname"
+          id="texttest"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Hotel Name <span class="text-red-600 text-sm">*</span></label
         >
         <input
-          id="text"
+        
+          id="texttest"
           type="text"
           name="text"
           placeholder="Enter hotel's name"
@@ -33,11 +35,12 @@
 
         <label
           for="address"
+          id="texttest"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Address <span class="text-red-600 text-sm">*</span></label
         >
         <input
-          id="text"
+          id="texttest"
           type="text"
           name="text"
           placeholder="Enter hotel's address"
@@ -61,11 +64,12 @@
 
         <label
           for="email"
+          id="texttest"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Email<span class="text-red-600 text-sm">*</span></label
         >
         <input
-          id="Email"
+          id="texttest"
           type="Email"
           name="Email"
           placeholder="Enter hotel's email address."
@@ -88,12 +92,13 @@
         />
 
         <label
+        id="texttest"
           for="tel"
           class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
           >Tel. <span class="text-red-600 text-sm">*</span></label
         >
         <input
-          id="text"
+          id="texttest"
           type="tel"
           name="text"
           placeholder="Enter hotel's telephone number"
@@ -137,6 +142,7 @@
           </div>
         </div>
         <button
+        id="texttest"
           type="submit"
           class="
             w-full
@@ -165,9 +171,9 @@
       <div class="al w-full h-screen" v-if="complete">
       <div class="stk h-screen d-flex align-items-center justify-content-center ">
         <div class="w-1/5 bg-white d-flex flex-col align-items-center justify-content-center rounded ">
-        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3">Waiting for Process</div>
+        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3" id="texttest">Waiting for Process</div>
         <img class="w-1/12 my-4" src="../assets/hug.gif" />
-        <p class=" text-2xl ">Adding Hotel...</p>
+        <p class=" text-2xl " id="texttest">Adding Hotel...</p>
         
         </div>
           </div>
@@ -240,7 +246,7 @@ export default {
           this.errorMessage = null;
           this.message = data.message;
           this.complete=true;
-          setTimeout( () => window.location.href = '/Listhotel', 2000);
+          setTimeout( () => window.location.href = '/Myhotel', 2000);
         },
         error => {
           this.message=null;
