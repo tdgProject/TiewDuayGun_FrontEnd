@@ -29,6 +29,14 @@
         </button>
       </a>
     </div>
+       <div class="bbb_viewed_title_container mb-2 container mt-11">
+                    <h3 class="bbb_viewed_title">PLACELIST</h3>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+      
 <div class="containers eiei fade-in">
     <div class="row" v-if="places">
         <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2  " v-for="place in places" :key="place.placeId">

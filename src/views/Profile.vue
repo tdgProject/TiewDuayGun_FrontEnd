@@ -1,4 +1,12 @@
 <template>
+   <div class="bbb_viewed_title_container mb-2 container">
+                    <h3 class="bbb_viewed_title ">PROFILE</h3>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+     
   <!-- Box -->
   <div class="md:flex md:justify-center md:space-x-8 md:px-14 mb-11 mb-14" v-if="showdata">
     <!-- box-1 -->
@@ -29,6 +37,7 @@
            Email:  {{me.email}}
            Tel.:  {{me.telNumber}}
            Role: {{me.roles[0]}}
+          
            
            <button>
                
