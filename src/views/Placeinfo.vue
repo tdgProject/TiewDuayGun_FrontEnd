@@ -202,8 +202,7 @@
                       <img
                         :src="getUserImage(review.user.image)"
                         alt="user"
-                        width="50"
-                        class="rounded-circle"
+                        class="w-14 h-14 rounded-circle border-1"
                       />
                       <h6 class="font-medium font-bold mt-4 ml-4">
                         {{ review.user.username }}
@@ -221,10 +220,10 @@
                     </div>
                   </div>
                   <span
-                    class="m-auto w-5/6 d-block text-left ml-28 mb-10 text-lg"
+                    class="m-auto w-5/6 d-block text-left text-lg"
                     >{{ review.review }}</span
                   >
-                  <div v-if="review.user.userId == me.id" class="comment-footer text-right mr-12">
+                  <div v-if="review.user.userId == me.id" class="comment-footer text-right mr-6">
                     <button
                       type="button"
                       class="mr-2"
@@ -258,6 +257,7 @@
                       </svg>
                     </button>
                   </div>
+                  <div v-else class="py-3 m-0"></div>
                 </div>
               </div>
             </div>
