@@ -36,8 +36,8 @@
 </div>
       
 <div class=" eiei fade-in px-10  ">
-    <div class="row gap-2" >
-        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2 div-1 " v-for="place in places" :key="place.placeId">
+    <div class="row pl-3" >
+        <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2 " v-for="place in places" :key="place.placeId">
           
             <div class="image "> <img class="shoe-img  rounded-md p-2" :src="getimage(place.image)">
                 <div class=" overlay pr-8 pb-7">

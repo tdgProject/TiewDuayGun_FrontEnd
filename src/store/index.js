@@ -4,11 +4,8 @@ import authHeader from './auth.header';
 import axios from "axios";
 
 const resource_uri = "http://localhost:8081/";
-<<<<<<< HEAD
 //const resource_uri = "https://www.tiewduaygun.team/api/";
-=======
-// const resource_uri = "https://www.tiewduaygun.team/api/";
->>>>>>> fbf8ce82b8668b2e98562ad971c1caca29863b06
+
 const user = JSON.parse(localStorage.getItem('user'));
 
 export default createStore({
