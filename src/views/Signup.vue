@@ -28,7 +28,9 @@
       <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
         Sign up
       </button>
-      <router-link class="float-left text-black mt-2" :to="'SignIn'">Already registered ?</router-link>
+      <div class="text-left p-2">
+      <router-link class="text-black mt-2" :to="'SignIn'">Already registered ?</router-link>
+      </div>  
     </form>
     <div
         v-if="errorMessage"
