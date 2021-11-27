@@ -83,8 +83,8 @@
  }
 
  .container {
-     margin-top: 150px;
-     margin-left: 330px;
+    
+     margin-left: 300px;
      margin-bottom: 170px;
  }
 

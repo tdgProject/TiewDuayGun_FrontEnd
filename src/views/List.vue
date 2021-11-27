@@ -1,7 +1,7 @@
 
 <template>
 
-    <div class="border-4 border-red-black rounded-full bg-white shadow flex">
+    <div class="border-4 border-red-black rounded-full bg-white shadow flex ">
       <input
       id="texttest"
         type="text"
@@ -26,27 +26,23 @@
             px-4
           "
         >
+        
           <p class="font-semibold text-base uppercase mt-2" id="texttest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23.111 20.058l-4.977-4.977c.965-1.52 1.523-3.322 1.523-5.251 0-5.42-4.409-9.83-9.829-9.83-5.42 0-9.828 4.41-9.828 9.83s4.408 9.83 9.829 9.83c1.834 0 3.552-.505 5.022-1.383l5.021 5.021c2.144 2.141 5.384-1.096 3.239-3.24zm-20.064-10.228c0-3.739 3.043-6.782 6.782-6.782s6.782 3.042 6.782 6.782-3.043 6.782-6.782 6.782-6.782-3.043-6.782-6.782zm2.01-1.764c1.984-4.599 8.664-4.066 9.922.749-2.534-2.974-6.993-3.294-9.922-.749z"/></svg></p>
         </button>
       </a>
     </div>
-       <div class=" mb-2 container mt-11 div-1"> 
-         
-                    <h3 class="  p-2" id="texttest">PLACELIST </h3>
-                    <div></div>
-                  
-                    
-              
-                </div>
+   <div class="nine mt-5">
+  <h1>PlaceList<span>สถานที่ท่องเที่ยว</span></h1>
+</div>
       
-<div class=" eiei fade-in p-10  ">
+<div class=" eiei fade-in px-10  ">
     <div class="row gap-2" >
         <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 p-2 div-1 " v-for="place in places" :key="place.placeId">
           
             <div class="image "> <img class="shoe-img  rounded-md p-2" :src="getimage(place.image)">
-                <div class=" overlay pr-8">
-                    <p class="amount"  id="texttest">{{place.placeName}}</p>
-                    <p class="h4"  id="texttest">{{place.placeName}}</p>
+                <div class=" overlay pr-8 pb-7">
+                    
+                    <p class="thirteen"  id="texttest">{{place.placeName}}</p>
                  
               
                     <ul class="d-flex justify-content-start mt-10" >
