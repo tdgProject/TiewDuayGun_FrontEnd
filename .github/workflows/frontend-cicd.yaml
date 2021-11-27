@@ -1,5 +1,8 @@
 name: Auto build and deploy
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -34,5 +37,6 @@ jobs:
           script: |
             cd /tdgProject/frontEnd
             git pull origin main
+            cd ..
 
   
