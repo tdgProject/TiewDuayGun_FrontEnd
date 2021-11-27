@@ -38,7 +38,6 @@
          <p class="" id="texttest" >Role</p>
          <p class="" id="texttest"  v-if=" user.userId !== editId">{{user.role}}</p>
         <!-- <option class="" v-if="edit == true && user.userId == editId">
-
           sdasd
         </option> -->
         <select class="border-2 " v-model="user.role" v-if="edit == true && user.userId == editId" id="texttest">
@@ -84,12 +83,8 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
-
-
 export default {
   name: "UserManagement",
-
-
   data() {
     return {
       editId: 0,
@@ -97,10 +92,8 @@ export default {
       role:[],
       rolesx:["member","business","admin"]
       
-
     };
   },
-
   methods: {
         editRole(uid,role) {
       let newUser = {
@@ -110,14 +103,11 @@ export default {
         // role: [],
         // telNumber: tel,
         // email:email
-
         
       };
-
         //   for (const role of this.role) {
         //    newUser.role.push(role);
         //  }
-
       const jsonProduct = JSON.stringify(newUser);
       console.log(jsonProduct)
       const blob = new Blob([jsonProduct], {
@@ -148,7 +138,6 @@ export default {
       }
       return show;
     },
-
     showdata: function () {
       let show = true;
           if(this.me.roles){
@@ -165,17 +154,13 @@ export default {
   setup() {
     const store = useStore();
     store.dispatch("listUser");
-
-
     let users = computed(function () {
       return store.state.users;
     });
              let me = computed(function () {
       return store.state.user;
     });
-
     return {
-
       users,
       me
    
