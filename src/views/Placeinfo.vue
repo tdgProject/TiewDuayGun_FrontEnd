@@ -1,4 +1,5 @@
 <template>
+
   <div class="bg-gray-400">
     <div class="container py-4" v-if="place">
       <div class="pt-4 mt-4 text-muted border-top"></div>
