@@ -23,7 +23,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2      
+        uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}      
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
@@ -36,7 +42,6 @@ jobs:
             git pull origin main
             cd ..
             docker pull ghcr.io/tdgproject/tdg-frontend:latest
-            docker pull ghcr.io/tdgproject/tdg-backend:latest
             docker-compose down
             docker-compose up -d
 
