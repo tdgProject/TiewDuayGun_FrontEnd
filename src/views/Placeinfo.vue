@@ -137,7 +137,7 @@
             <div>
               <div
                 class="comment-text w-200 border-8 bg-white shadow-2xl"
-                v-for="review in reviews"
+                v-for="review in reviews "
                 :key="review.user.userId"
                 :id="setId(review.user.userId)"
                 

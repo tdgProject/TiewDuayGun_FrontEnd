@@ -20,6 +20,7 @@ import Myreview from '../views/Myreview.vue'
 import EditProfile from '../views/EditProfile.vue'
 import Accesdenied from '../views/Accesdenied.vue'
 import UserManagement from '../views/UserManagement.vue'
+import test from '../views/test.vue'
 
 
 
@@ -33,6 +34,11 @@ const routes = [{
     path: '/Tag',
     name: 'Tag',
     component: Tag
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   },
   {
     path: '/UserManagement',
