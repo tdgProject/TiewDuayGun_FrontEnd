@@ -13,9 +13,16 @@
       </header>
       <div
         class="p-5 pb-1 mb-4 rounded-3"
-        v-bind:style="{ backgroundImage: 'url(\'' + placeImage.replace('\'','\\\'') + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }">
+        v-bind:style="{
+          backgroundImage: 'url(\'' + placeImage.replace('\'', '\\\'') + '\')',
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+        }"
+      >
         <div class="container-fluid py-5">
-          <h1 class="display-1 fw-bold text-end" id="texttest" >{{ place.placeName }}</h1>
+          <h1 class="display-1 fw-bold text-end" id="texttest">
+            {{ place.placeName }}
+          </h1>
           <div
             class="col-md-8 bg-black bg-opacity-50 p-4 rounded-lg text-white"
           >
@@ -23,7 +30,7 @@
           </div>
           <div class="d-flex flex-row flex-wrap mt-2">
             <button
-            id="texttest"
+              id="texttest"
               class="
                 mx-2
                 px-4
@@ -52,7 +59,13 @@
             <div class="vid-container">
               <iframe
                 class="responsive-iframe"
-                :src="place.video.replace(/youtu\.be\//,'www.youtube.com/embed/').replace(/watch\?v=/,'embed/').replace(/\?t=.*/i,'').replace(/&list=.*/i,'')+'?autoplay=1'"
+                :src="
+                  place.video
+                    .replace(/youtu\.be\//, 'www.youtube.com/embed/')
+                    .replace(/watch\?v=/, 'embed/')
+                    .replace(/\?t=.*/i, '')
+                    .replace(/&list=.*/i, '') + '?autoplay=1'
+                "
                 title="YouTube video player"
                 frameborder="0"
                 allowfullscreen
@@ -62,52 +75,65 @@
         </div>
         <div class="col-md-6">
           <div v-if="isLoggedIn()" class="h-100 p-5 bg-light border rounded-3">
-            <div  class="d-flex row h-full align-items-center">
+            <div class="d-flex row h-full align-items-center">
               <div v-if="isReviewed()">
-                <i class='bx bx-list-check display-1'></i>
+                <i class="bx bx-list-check display-1"></i>
                 <h1 id="texttest">You have already Reviewed!</h1>
-                <a :href="getId()" class="text-decoration-none link-info"> <h4 id="texttest">See Your Review</h4> </a>
+                <a :href="getId()" class="text-decoration-none link-info">
+                  <h4 id="texttest">See Your Review</h4>
+                </a>
               </div>
               <div v-else>
-              <form @submit.prevent="addReview()">
-                <h3 id="texttest">Your Review and Rating</h3>
-                <div>
-                <Star :rating="rating" @selected="updateStar" />
-                </div>
-                <div v-if="ratingValidate">
-                  <p class="text-red-400" id="texttest">Please select rating before submit!</p>
-                </div>
-                <div class="form-group">
-                  <textarea
-                  id="texttest"
-                    name="review"
-                    class="form-control"
-                    placeholder="Your Review*"
-                    v-model="review"
-                    style="width: 100%; height: 150px"
-                  ></textarea>
-                </div>
-                <div class="form-group mt-3 d-flex justify-content-end">
-                  <input
-                  id="texttest"
-                    type="submit"
-                    name="submit"
-                    class="py-1 px-2 rounded-xl bg-secondary text-white"
-                    value="Submit"
-                  />
-                </div>
-            </form>
-            </div>
+                <form @submit.prevent="addReview()">
+                  <h3 id="texttest">Your Review and Rating</h3>
+                  <div>
+                    <Star :rating="rating" @selected="updateStar" />
+                  </div>
+                  <div v-if="ratingValidate">
+                    <p class="text-red-400" id="texttest">
+                      Please select rating before submit!
+                    </p>
+                  </div>
+                  <div class="form-group">
+                    <textarea
+                      id="texttest"
+                      name="review"
+                      class="form-control"
+                      placeholder="Your Review*"
+                      v-model="review"
+                      style="width: 100%; height: 150px"
+                    ></textarea>
+                  </div>
+                  <div class="form-group mt-3 d-flex justify-content-end">
+                    <input
+                      id="texttest"
+                      type="submit"
+                      name="submit"
+                      class="py-1 px-2 rounded-xl bg-secondary text-white"
+                      value="Submit"
+                    />
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-           <div v-else class="h-100 p-5 bg-dark text-white rounded-3">
-                <div class="d-flex row h-full align-items-center">
-                  <span>
-                    <h1 id="texttest">You have not logged in yet!</h1>
-                    <h4 id="texttest">Please<a :href="$router.resolve({name: 'Signin'}).href" id="texttest" class="text-decoration-none link-info"> login</a> before reviewing.</h4>
-                  </span>
-                </div>
+          <div v-else class="h-100 p-5 bg-dark text-white rounded-3">
+            <div class="d-flex row h-full align-items-center">
+              <span>
+                <h1 id="texttest">You have not logged in yet!</h1>
+                <h4 id="texttest">
+                  Please<a
+                    :href="$router.resolve({ name: 'Signin' }).href"
+                    id="texttest"
+                    class="text-decoration-none link-info"
+                  >
+                    login</a
+                  >
+                  before reviewing.
+                </h4>
+              </span>
             </div>
+          </div>
         </div>
       </div>
 
@@ -139,10 +165,9 @@
                 v-for="review in reviews"
                 :key="review.user.userId"
                 :id="setId(review.user.userId)"
-                
               >
                 <div v-if="edit == true && review.user.userId == editId">
-                  <div  class="d-flex pt-4 pb-3 px-5 justify-content-between">
+                  <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
                     <div class="d-flex">
                       <img
                         :src="getUserImage(review.user.image)"
@@ -219,11 +244,13 @@
                       </ul>
                     </div>
                   </div>
-                  <span
-                    class="m-auto w-5/6 d-block text-left text-lg"
-                    >{{ review.review }}</span
+                  <span class="m-auto w-5/6 d-block text-left text-lg">{{
+                    review.review
+                  }}</span>
+                  <div
+                    v-if="review.user.userId == me.id"
+                    class="comment-footer text-right mr-6"
                   >
-                  <div v-if="review.user.userId == me.id" class="comment-footer text-right mr-6">
                     <button
                       type="button"
                       class="mr-2"
@@ -294,33 +321,60 @@
           </div>
         </a>
       </header>
-      <div class="container mt-10 d-flex flex-wrap justify-content-start">
-        <div
-          class="col-lg-4 d-flex flex-wrap p-1"
-          v-for="hotel in hotels"
-          :key="hotel.hotelId"
-        >
-          <div class="card">
-            <img
-              :src="getHotelImage(hotel.hotel.image)"
-              alt=""
-              class="card-img-top h-1/2"
-            />
-            <div class="card-body">
-              <p class="" id="texttest">Name: {{ hotel.hotel.hotelName }}</p>
-              <p class="" id="texttest">Address: {{ hotel.hotel.address }}</p>
-              <p class="" id="texttest">Email: {{ hotel.hotel.email }}</p>
-              <p class="" id="texttest">Tel: {{ hotel.hotel.telNumber }}</p>                    
-            </div>
-            <div class="text-end" v-if="hotel.hotel.owner.userId === me.id">
-              <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
-                <i class="bx bxs-trash text-end p-2 display-6"></i>
-              </button>
+      <div
+        id="myCarousel"
+        class="carousel slide "
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner" role="listbox">
+          <div
+            :class="{ 'carousel-item': true, active: index === active }"
+            v-for="(hotel, index) in hotels"
+            :key="hotel.hotel.hotelId"
+          >
+            <div class="card">
+              <img
+                :src="getHotelImage(hotel.hotel.image)"
+                alt=""
+                class="card-img-top h-1/2"
+              />
+              <div class="card-body">
+                <p class="" id="texttest">Name: {{ hotel.hotel.hotelName }}</p>
+                <p class="" id="texttest">Address: {{ hotel.hotel.address }}</p>
+                <p class="" id="texttest">Email: {{ hotel.hotel.email }}</p>
+                <p class="" id="texttest">Tel: {{ hotel.hotel.telNumber }}</p>
+              </div>
+              <div class="text-end" v-if="hotel.hotel.owner.userId === me.id">
+                <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
+                  <i class="bx bxs-trash text-end p-2 display-6"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
+        <a
+          @click="setActive(active - 1)"
+          class="carousel-control-prev"
+          href="#myCarousel"
+          role="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a
+          @click="setActive(active + 1)"
+          class="carousel-control-next"
+          href="#myCarousel"
+          role="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
       </div>
-
       <!-- hotel -->
     </div>
 
@@ -349,9 +403,27 @@ export default {
       edit: false,
       editId: 0,
       ratingValidate: false,
+      newHotels: [],
+      active: 0,
     };
   },
   methods: {
+    setActive(index) {
+      let active = index;
+
+      if (index === this.pictures.length) active = 0;
+      else if (index === -1) active = this.pictures.length - 1;
+
+      this.active = active;
+    },
+    slice() {
+      if (this.hotels) {
+        let arr = this.hotels;
+        this.newHotels = arr.slice(1);
+      }
+
+      return true;
+    },
     addMyHotel() {
       let nearBy = {
         hotel: { hotelId: this.myHotel.hotelId },
@@ -370,33 +442,32 @@ export default {
       window.location.reload();
     },
     addReview() {
-      if(this.rating == 0){
+      if (this.rating == 0) {
         this.ratingValidate = true;
-      }
-      else{
-        if(this.me){
-        let newReview = {
-          user: { userId: this.me.id },
-          review: this.review,
-          rating: this.rating,
-        };
-        const jsonProduct = JSON.stringify(newReview);
-        const blob = new Blob([jsonProduct], {
-          type: "application/json",
-        });
-        const formdata = new FormData();
-        formdata.append("newReview", blob , { });
-        this.$store.dispatch("addReview", { data: formdata, pid: this.pid });
-        this.ratingValidate = false;
-        window.location.reload();
+      } else {
+        if (this.me) {
+          let newReview = {
+            user: { userId: this.me.id },
+            review: this.review,
+            rating: this.rating,
+          };
+          const jsonProduct = JSON.stringify(newReview);
+          const blob = new Blob([jsonProduct], {
+            type: "application/json",
+          });
+          const formdata = new FormData();
+          formdata.append("newReview", blob, {});
+          this.$store.dispatch("addReview", { data: formdata, pid: this.pid });
+          this.ratingValidate = false;
+          window.location.reload();
         }
       }
     },
-    setId(id){
-      return 'review'+id
+    setId(id) {
+      return "review" + id;
     },
-    getId(){
-      return '#review'+this.me.id
+    getId() {
+      return "#review" + this.me.id;
     },
     deleteReview(uid) {
       if (confirm("Do you really want to remove your review?")) {
@@ -411,14 +482,14 @@ export default {
         rating: this.uRating,
       };
       const jsonProduct = JSON.stringify(newReview);
-      console.log(jsonProduct)
+      console.log(jsonProduct);
       const blob = new Blob([jsonProduct], {
         type: "application/json",
       });
       const formdata = new FormData();
       formdata.append("newReview", blob);
       this.$store.dispatch("editReview", { data: formdata, pid: this.pid });
-      
+
       window.location.reload();
     },
     editSwitch(rating, uid) {
@@ -440,22 +511,22 @@ export default {
     getHotelImage(image) {
       return `${this.$store.state.url}image/hotel/${image}`;
     },
-    isReviewed(){
-      if(this.me){
-        for(let rv of this.reviews){
-          if(rv.user.userId == this.me.id){
-            return true
+    isReviewed() {
+      if (this.me) {
+        for (let rv of this.reviews) {
+          if (rv.user.userId == this.me.id) {
+            return true;
           }
         }
       }
-      return false
+      return false;
     },
-    isLoggedIn(){
-      if(this.me.id != 0){
-        return true
+    isLoggedIn() {
+      if (this.me.id != 0) {
+        return true;
       }
-      return false
-    }
+      return false;
+    },
   },
   computed: {
     showAddHotel: function () {
@@ -467,13 +538,13 @@ export default {
           }
         }
       }
-      if(this.me.id == 0){
+      if (this.me.id == 0) {
         show = false;
       }
-      if(this.me.roles){
-        if(this.me.roles[0] !=='business'){
-        show = false;
-      }
+      if (this.me.roles) {
+        if (this.me.roles[0] !== "business") {
+          show = false;
+        }
       }
       return show;
     },
@@ -483,9 +554,9 @@ export default {
     store.dispatch("getPlaceById", props.pid),
       store.dispatch("getHotelById", props.pid),
       store.dispatch("listReview", props.pid);
-      if(store.state.user.roles && store.state.user.roles[0] == 'business'){
-        store.dispatch("getMyHotel", store.state.user.id);
-      }
+    if (store.state.user.roles && store.state.user.roles[0] == "business") {
+      store.dispatch("getMyHotel", store.state.user.id);
+    }
     let place = computed(function () {
       return store.state.place;
     });
@@ -497,7 +568,7 @@ export default {
       return store.state.reviews;
     });
     let myHotel = computed(function () {
-      return store.state.myHotel != null ?store.state.myHotel : null;
+      return store.state.myHotel != null ? store.state.myHotel : null;
     });
     let me = computed(function () {
       return store.state.user;
@@ -516,6 +587,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .vid-container {
   position: relative;
