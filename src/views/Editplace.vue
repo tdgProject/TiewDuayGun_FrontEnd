@@ -3,8 +3,8 @@
 <div class="" v-if="showdata">
   <div class="grid min-h-screen place-items-center mr-48">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <form @submit.prevent="EditPlace()" v-if="place">
-        <div class="mx-20 w-100 h-3/4">
+      <form @submit.prevent="EditPlace()" v-if="place" class="">
+        <div class="mx-20 w-100 h-3/4 p-10 border">
           <div class="" style="left: -40px">
             <i
               class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"

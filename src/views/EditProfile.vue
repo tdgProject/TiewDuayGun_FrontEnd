@@ -10,7 +10,13 @@
               class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"
             ></i>
           </div>
-          <h3 class="text-2xl text-gray-900 font-semibold">EditProfile</h3>
+           <div class="bbb_viewed_title_container mb-2 container mt-11">
+                    <h3 class="bbb_viewed_title " id="texttest">EditProfile</h3>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
           
           <div class="form-group">
             <input
@@ -29,12 +35,12 @@
               </template>
             </div>
           </div>
-          <p class="mt-2">Username.</p>
+          <p class="mt-2" id="texttest">Username.</p>
           <div class="flex space-x-5 mt-1">
             <input
               type="text"
               name="username"
-              id=""
+              id="texttest"
               placeholder="Insert Your Username"
               class="border p-2 w-full"
               v-model="username"
@@ -49,7 +55,7 @@
           <input
             name="telNumber"
             type="tel"
-            id=""
+            id="texttest"
             cols="10"
             rows="3"
             placeholder="Insert Your Telephone Number"
@@ -65,6 +71,7 @@
     
         <p class=""></p>
           <input
+          id="texttest"
             type="submit"
             value="Submit"
             class="
@@ -88,9 +95,9 @@
       <div class="al w-full h-screen" v-if="complete">
       <div class="stk h-screen d-flex align-items-center justify-content-center ">
         <div class="w-1/5 bg-white d-flex flex-col align-items-center justify-content-center rounded ">
-        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3">Waiting for Process</div>
+        <div class="bg-dark w-full h-1/6 rounded-top text-start text-white p-1 px-3" id="texttest">Waiting for Process</div>
         <img class="w-1/12 my-4" src="../assets/hug.gif" />
-        <p class=" text-2xl ">Editing Profile...</p>
+        <p class=" text-2xl " id="texttest">Editing Profile...</p>
         
         </div>
           </div>

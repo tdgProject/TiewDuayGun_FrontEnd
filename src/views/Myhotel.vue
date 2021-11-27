@@ -2,7 +2,7 @@
 
   <div v-if="showdata">
        <div class="bbb_viewed_title_container mb-2 container">
-                    <h3 class="bbb_viewed_title ">MYHOTEL</h3>
+                    <h3 class="bbb_viewed_title " id="texttest">MYHOTEL</h3>
                     <div class="bbb_viewed_nav_container">
                         <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -11,7 +11,7 @@
       
     <!-- <div v-for="hotel in hotels" :key="hotel.hotelId">
       {{hotel.hotelName}} -->
-    <div class="container mt-10 d-flex flex-wrap justify-content-start">
+    <div class="container mt-10 d-flex flex-wrap justify-content-start mb-10 mb-52">
       <div class="col-lg-4 d-flex flex-wrap p-1">
         <div v-if="hotels" class="card" >
           <img
@@ -20,12 +20,13 @@
             class="card-img-top h-1/2"
           />
           <div class="card-body">
-            <p class="">Name: {{ hotels.hotelName }}</p>
-            <p class="">Address: {{ hotels.address }}</p>
-            <p class="">Email: {{ hotels.email }}</p>
-            <p class="">Tel: {{ hotels.telNumber }}</p>
+            <p class="" id="texttest">Name: {{ hotels.hotelName }}</p>
+            <p class="" id="texttest">Address: {{ hotels.address }}</p>
+            <p class="" id="texttest">Email: {{ hotels.email }}</p>
+            <p class="" id="texttest">Tel: {{ hotels.telNumber }}</p>
             <button>
               <router-link
+              id="texttest"
                 onclick="window.location.reload(true)"
                 class=""
                 :to="{

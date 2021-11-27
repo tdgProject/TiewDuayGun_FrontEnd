@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="icon" href="<%= BASE_URL %>tdgicon.ico">
+    <title>TiewDuayGun</title>
     <style>.card-box {
       border: 1px solid #ddd;
       padding: 20px;
@@ -26,6 +26,15 @@
     color: #f0f9ff;
     background-color: #282d32
 }
+.div-1 {
+
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45);
+  border-radius: 10px;
+  width: 33%;
+  gap: 10px;
+  
+
+ }
 .bbb_viewed_title_container {
      border-bottom: solid 1px #dadada
  }
@@ -56,6 +65,9 @@
     margin-bottom: 12px;
     font-weight: bold;
     font-size: 16px
+}
+#texttest {
+    font-family: 'Poppins', sans-serif
 }
 
 .footer-dark ul {
@@ -552,6 +564,29 @@
 	.text-shadow {
 		text-shadow: -8px 0 0 rgb(102 123 242);
 	}
+    .triangle-menu {
+        position: relative;
+    }
+
+    .triangle-menu::after,
+    .triangle-menu::before {
+        content: '';
+        height: 0;
+        width: 0;
+        border-style: solid;
+        border-width: 16px;
+        position: absolute;
+    }
+
+    .triangle-menu::after {
+        left: 100%;
+        border-color: transparent transparent transparent #ef4444;
+    }
+
+    .triangle-menu::before {
+        right: 100%;
+        border-color: transparent #ef4444 transparent transparent;
+    }
 
   </style>
   </head>
