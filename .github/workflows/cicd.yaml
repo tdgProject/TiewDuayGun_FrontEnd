@@ -29,7 +29,7 @@ jobs:
         with:
           host: "13.76.86.65"
           username: project222
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.PRIVATE_KEY }}
           port: "22"
           script: |
             docker ps -a
