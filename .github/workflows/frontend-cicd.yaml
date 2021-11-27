@@ -36,5 +36,7 @@ jobs:
             git pull origin main
             cd ..
             docker pull ghcr.io/tdgproject/tdg-frontend:latest
+            docker-compose down
+            docker-compose up -d
 
   
