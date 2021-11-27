@@ -1,6 +1,6 @@
 <template>
 <div class="containers bg-white">
-    <nav class="navbar fixed-top h-20 navbar-expand-md navbar-light bg-secondary">
+    <nav class="navbar fixed-top h-20 navbar-expand-md navbar-light bg-white">
         <div class="container-fluid p-0"> <a class="navbar-brand text-uppercase fw-800" href="/"><span class="border-red pe-2 ml-5">Tiew</span>DuayGun</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
             <div class="collapse navbar-collapse " id="myNav">
                 <div class="navbar-nav ms-auto align-items-center">
