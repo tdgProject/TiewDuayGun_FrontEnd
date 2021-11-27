@@ -19,8 +19,7 @@
                           v-bind:style="{ backgroundImage: 'url(\'' + userImage.replace('\'','\\\'') + '\')',backgroundPosition: 'center center',backgroundSize: 'cover' }"
                         >
                         </div>
-                        <p id="texttest" class="mt-2">{{me.username}}</p>
-                        {{me.role}}
+                        <div id="texttest">{{me.username}}</div>
                       </a>
 
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" data-offset="flip">

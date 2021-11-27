@@ -17,9 +17,7 @@
                    <img
                         :src="getUserImage(user.image)"
                         alt="user"
-                        width="50"
-                        
-                        class="rounded-circle"
+                        class="w-20 h-20 border-1 rounded-circle"
                       />
       
         </div>
