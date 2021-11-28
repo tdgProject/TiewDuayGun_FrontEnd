@@ -15,8 +15,7 @@
         mt-16
         py-4
         px-4
-        bg-whit
-        w-72
+        w-96
         bg-white
         rounded-xl
         shadow-lg
@@ -30,11 +29,11 @@
       "
     >
       <div class="w-sm ">
-        <img class="ml-11 border-1  border-black" :src="getUserImage(me.image)" />
+        <img class="ml-16 mt-2 border-1  border-black h-52 w-52" :src="getUserImage(me.image)" />
         <div class="mt-4 text-green-600 text-center">
           <h1 class="text-xl font-bold" id="texttest">{{me.username}}</h1>
           <p class=" text-gray-600" id="texttest">
-           Email: {{me.email}}
+           Email: {{me.email}}<br>
            Tel:  {{me.telNumber}}<br>
            Role: {{me.roles[0]}}<br>
           
