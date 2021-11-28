@@ -1,32 +1,11 @@
 import { createStore } from "vuex";
-import { createResource } from 'vuex-pagination'
 import { auth } from "./auth.module";
 import authHeader from './auth.header';
 import axios from "axios";
 
-
-createResource('reviews', listReview, {
-  prefetch: true
-  })
-  async function listReview (opts) {
-    let reviews = window.fetch(`/reviews?page=${opts.page}&limit=${opts.pageSize}`)
-      .then((response) => response.json())
-      .catch((error) => {
-          this.dispatch('SHOW_GLOBAL_ERROR_MESSAGE', error.response.data.message);
-          return {
-              total: 0,
-              data: [],
-          };
-      });
-    
-    return {
-      total: reviews.total,
-      data: reviews.items
-    }
-    }
-
 const resource_uri = "http://localhost:8081/";
-//const resource_uri = "https://www.tiewduaygun.team/api/";
+// const resource_uri = "https://www.tiewduaygun.team/api/";
+
 const user = JSON.parse(localStorage.getItem('user'));
 
 export default createStore({

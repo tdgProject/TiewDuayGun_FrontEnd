@@ -15,8 +15,7 @@
         mt-16
         py-4
         px-4
-        bg-whit
-        w-72
+        w-96
         bg-white
         rounded-xl
         shadow-lg
@@ -29,14 +28,14 @@
         md:mx-0
       "
     >
-      <div class="w-sm">
-        <img :src="getUserImage(me.image)" />
+      <div class="w-sm ">
+        <img class="ml-16 mt-2 border-1  border-black h-52 w-52" :src="getUserImage(me.image)" />
         <div class="mt-4 text-green-600 text-center">
           <h1 class="text-xl font-bold" id="texttest">{{me.username}}</h1>
-          <p class="mt-4 text-gray-600" id="texttest">
-           Email:  {{me.email}}
-           Tel.:  {{me.telNumber}}
-           Role: {{me.roles[0]}}
+          <p class=" text-gray-600" id="texttest">
+           Email: {{me.email}}<br>
+           Tel:  {{me.telNumber}}<br>
+           Role: {{me.roles[0]}}<br>
           
            
            <button>
@@ -81,17 +80,14 @@
 </template>
 
 <script>
-
 import { computed } from "vue";
 import { useStore } from "vuex";
-
 export default {
   
   name: "Profile",
   data(){
     
     return{
-
     }
   },
   methods: {
@@ -108,24 +104,20 @@ export default {
       
       return show;
     },
-
     showdata: function () {
       let show = true;
-
       if(this.me.id == 0){
         show = false;
       }
       return show;
     },
   },
-
   setup() {
     const store = useStore();
         let me = computed(function () {
       return store.state.user;
     });
     
-
     return {
       
       me
