@@ -3,7 +3,9 @@ import { auth } from "./auth.module";
 import authHeader from './auth.header';
 import axios from "axios";
 
-const resource_uri = "http://localhost:8081/";
+//const resource_uri = "http://localhost:8081/";
+
+ const resource_uri = "https://www.tiewduaygun.team/api/";
 const user = JSON.parse(localStorage.getItem('user'));
 
 export default createStore({
@@ -16,7 +18,9 @@ export default createStore({
     hotels: [],
     reviews: [],
     provinces: [],
+    users: [],
     etc: [],
+    myReviews: [],
     user: user == null? {id:0} : user.data,
     myHotel: null,
     url: resource_uri
@@ -25,6 +29,9 @@ export default createStore({
       setPlace(state, places) {
           state.places = places
       },
+      setUser(state, users) {
+        state.users = users
+    },
       listType(state, types) {
         state.types = types
       },
@@ -79,6 +86,9 @@ export default createStore({
       editHotel(state, hotel){
         state.hotels.push(hotel)
       },
+      editRole(state, user){
+       state.users.push(user)
+      },
       editUser(state, user){
         let u = JSON.parse(localStorage.getItem('user'));
         u.data.id = user.userId;
@@ -93,6 +103,9 @@ export default createStore({
         if(index !== -1){
           state.reviews = state.reviews.splice(index,1,review);
         }
+      },
+      listMyReviews(state,myReview){
+        state.myReviews = myReview;
       },
       // loginSuccess(state, user) {
       //   state.status.loggedIn = true;
@@ -117,6 +130,11 @@ export default createStore({
         async onstart(){
         await axios.get(`${resource_uri}onstart`);
         },
+        async listUser({commit}){
+          const response = await axios.get(`${resource_uri}users`,{ headers: authHeader() });
+          await axios.get(`${resource_uri}onstart`);
+          commit('setUser',response.data);
+      },
         async listPlace({commit}){
             const response = await axios.get(`${resource_uri}places`);
             await axios.get(`${resource_uri}onstart`);
@@ -152,20 +170,32 @@ export default createStore({
             commit('listReview', response.data);
         },
         async addReview({commit}, formData){
-          console.log({ headers: authHeader() });
           const response = await axios.post(`${resource_uri}review/add/${formData.pid}`,formData.data,{ headers: authHeader() });
           await axios.get(`${resource_uri}onstart`);
           commit('addNewReview',response.data);
         },
         async addPlace({commit},formData){
-          const response = await axios.post(`${resource_uri}place/add`,formData,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('addNewPlace',response.data);
+          return axios.post(`${resource_uri}place/add`,formData,{ headers: authHeader() }).then(
+            place => {
+              axios.get(`${resource_uri}onstart`);
+              commit('addNewPlace', place.data);
+              return Promise.resolve(place);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async addHotel({commit},formData){
-          const response = await axios.post(`${resource_uri}hotel/add`,formData,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('addNewHotel',response.data);
+          return axios.post(`${resource_uri}hotel/add`,formData,{ headers: authHeader() }).then(
+            hotel => {
+              commit('addNewHotel', hotel.data);
+              return Promise.resolve(hotel);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async listPlaceByTag({commit},value){
           const response = await axios.get(`${resource_uri}place/tag/${value}`);
@@ -193,18 +223,57 @@ export default createStore({
           commit('editReview',response.data);
         },
         async editPlace({commit}, formData){
-          const response = await axios.put(`${resource_uri}place/edit/${formData.pid}`,formData.data,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('editPlace',response.data);
+          return axios.put(`${resource_uri}place/edit/${formData.pid}`,formData.data,{ headers: authHeader() }).then(
+            place => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editPlace', place.data);
+              return Promise.resolve(place);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async editUser({commit}, formData){
-          const response = await axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data,{ headers: authHeader() });
-          commit('editUser',response.data);
+          return axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data,{ headers: authHeader() }).then(
+            user => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editUser', user.data);
+              return Promise.resolve(user);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
+        async editRole({commit}, formData){
+          return axios.put(`${resource_uri}user/role/${formData.uid}`,formData.data,{ headers: authHeader() }).then(
+            user => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editRole', user.data);
+              return Promise.resolve(user);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
+        },
+        // async editRole({commit}, formData){
+        //   const response = await axios.put(`${resource_uri}user/edit/${formData.uid}`,formData.data,{ headers: authHeader() });
+        //   await axios.get(`${resource_uri}onstart`);
+        //   commit('editRole',response.data);
+        // },
         async editHotel({commit}, formData){
-          const response = await axios.put(`${resource_uri}hotel/edit/${formData.hid}`,formData.data,{ headers: authHeader() });
-          await axios.get(`${resource_uri}onstart`);
-          commit('editHotel',response.data);
+          return axios.put(`${resource_uri}hotel/edit/${formData.hid}`,formData.data,{ headers: authHeader() }).then(
+            hotel => {
+              axios.get(`${resource_uri}onstart`);
+              commit('editHotel', hotel.data);
+              return Promise.resolve(hotel);
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
         },
         async getMyHotel({commit}, userId){
           const response = await axios.get(`${resource_uri}hotel/user/${userId}`,{ headers: authHeader() });
@@ -218,5 +287,10 @@ export default createStore({
         const response = await axios.delete(`${resource_uri}nearby/delete/${value.pid}/${value.hid}`,{ headers: authHeader() });
         commit('deleteNearByHotel',response.data);
         },
+        async getMyReviews({commit}, userId){
+          const response = await axios.get(`${resource_uri}review/user/${userId}`,{ headers: authHeader() });
+          commit('listMyReviews',response.data);
+          },
+
 }
 });

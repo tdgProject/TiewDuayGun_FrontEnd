@@ -1,26 +1,36 @@
 <template>
 <div class="grid min-h-screen place-items-center">
-  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-    <h1 class="text-xl font-semibold">Hello there 👋, <span class="font-normal">please fill in your information to continue</span></h1>
+  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12 "> 
+    <h1 class="text-xl font-semibold">Hello there 👋, <span class="font-normal">please fill in your information to register</span></h1>
     <form class="mt-6" @submit.prevent="register">
       <div class="flex justify-between gap-3">
+       
         <span class="w-1/2">
-          <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">Email</label>
-          <input id="email" type="Email" v-model="email" placeholder="Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+       
+          <label for="email" class="block text-xs font-semibold text-gray-600 uppercase"> Email <span class="text-red-600 text-sm">*</span></label>
+          <input id="email" type="Email" v-model="email" placeholder="Enter Your Email" autocomplete="given-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="10" maxlength="100" title="Enter your email address."/>
+          
         </span>
         <span class="w-1/2">
-          <label for="password" class="block text-xs font-semibold text-gray-600 uppercase">Password</label>
-        <input id="password" type="password" v-model="password" placeholder="password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      
+          <label for="password" class="block text-xs font-semibold text-gray-600 uppercase"> Password <span class="text-red-500">*</span><span class="text-gray-400 text-sm">(atleast 8 character)</span></label>
+        <input id="password" type="password" v-model="password" placeholder="Enter Your Password" autocomplete="family-name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="8" maxlength="64" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}" title="Must contain at least one numeric and one UPPERCASE and lowercase letter, and at least 8 or more characters" />
+       
         </span>
       </div>
-      <label for="username" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Username</label>
-      <input id="username" type="text" v-model="username" placeholder="Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-      <label for="tel" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Tel.</label>
-      <input id="tel" type="text" v-model="tel" placeholder="Your Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+      
+      <label for="username" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Username <span class="text-red-500">*</span></label>
+      <input id="username" type="text" v-model="username" placeholder="Enter Your Name" autocomplete="Name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="3" maxlength="100" title="Username must be at least 3 or more characters"/>
+      
+      <label for="tel" class="block mt-2 text-xs font-semibold text-gray-600 uppercase"> Tel. <span class="text-red-600 text-sm">*</span></label>
+      <input id="tel" type="tel" v-model="tel" placeholder="Enter Your Telephone Number" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required minlength="9" maxlength="10" pattern="\d{9,10}" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  title="Telephone number must be 9-10 characters"/>
+      
       <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
         Sign up
       </button>
-      <p class="flex justify-between inline-block mt-4 text-xs text-gray-500 cursor-pointer hover:text-black" a href="/Signin">Already registered?</p>
+      <div class="text-left p-2">
+      <router-link class="text-black mt-2" :to="'SignIn'">Already registered ?</router-link>
+      </div>  
     </form>
     <div
         v-if="errorMessage"
@@ -69,7 +79,7 @@ export default {
         data => {
           this.errorMessage = null;
           this.message = data.message;
-          // this.complete=true;
+          this.complete=true;
           setTimeout( () => window.location.href = '/Signin', 2000);
         },
         error => {

@@ -1,6 +1,13 @@
 <template>
-  <div class="container">
-    <div class="row ">
+    <div class="bbb_viewed_title_container  container">
+                    <h3 class="bbb_viewed_title " id="texttest">AboutUs</h3>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+  <div class="container mb-32">
+    <div class="row">
         <div class="col-lg-4">
             <div class="card p-0 ">
                 <div class="card-image"> <img
@@ -76,7 +83,7 @@
  }
 
  .container {
-     margin-top: 100px;
+    
      margin-left: 300px;
      margin-bottom: 170px;
  }

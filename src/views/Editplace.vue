@@ -3,8 +3,8 @@
 <div class="" v-if="showdata">
   <div class="grid min-h-screen place-items-center mr-48">
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <form @submit.prevent="EditPlace()">
-        <div class="mx-20 w-100 h-3/4">
+      <form @submit.prevent="EditPlace()" v-if="place" class="">
+        <div class="mx-20 w-100 h-3/4 p-10 border">
           <div class="" style="left: -40px">
             <i
               class="fal fa-phone-volume fa-fw text-2xl transform -rotate-45"
@@ -136,6 +136,7 @@
               placeholder="Insert Your PlaceName"
               class="border p-2 w-full"
               v-model="place.placeName"
+              maxlength="100"
               required
             />
           </div>
@@ -148,6 +149,7 @@
             placeholder="Insert Your PlaceDescription"
             class="border p-2 mt-3 w-full"
             v-model="place.placeDescription"
+            maxlength="5000"
             required
           ></textarea>
           <p class="">Insert Your PlaceDescription</p>
@@ -159,6 +161,7 @@
             placeholder="Ex. https://www.youtube.com/watch?v=???"
             class="border p-2 w-full"
             v-model="place.video"
+            maxlength="500"
             required
           />
         </div>
@@ -174,9 +177,15 @@
               text-white
               font-semibold
               p-3
+              mb-2
             "
             
           />
+          <div
+        v-if="errorMessage"
+        class="alert alert-danger" role="alert"
+      > {{ errorMessage }}
+      </div>
         </div>
       </form>
       <div class="al w-full h-screen" v-if="complete">
@@ -234,6 +243,8 @@ export default {
       isLocal: false,
       isSet: false,
       previewSet: false,
+      message: null,
+      errorMessage: null,
       complete: false
     };
   },
@@ -252,7 +263,7 @@ export default {
       }
     },
     setPreview(){
-      if(this.preview == null){
+      if(this.preview == null && this.place){
         this.preview = this.$store.state.url+"image/place/"+this.place.image;
       }
       this.previewSet = true;
@@ -319,10 +330,25 @@ export default {
       let formdata = new FormData();
       formdata.append("newPlace", blob);
       formdata.append("image", this.image);
-      this.$store.dispatch("editPlace", { data: formdata, pid: this.pid });
-      setTimeout( () => window.location.href = '/List/All/1', 2000);
-      this.complete=true;
-      
+      this.$store.dispatch("editPlace", { data: formdata, pid: this.pid }).then(
+        data => {
+          this.errorMessage = null;
+          this.message = data.message;
+          this.complete=true;
+          setTimeout( () => window.location.href = '/List/All/1', 2000);
+          
+        },
+        error => {
+          this.message=null;
+          this.errorMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+            this.complete=false;
+        }
+      )
     },
   },
   computed: {
@@ -397,7 +423,7 @@ export default {
   },
 };
 </script>
-  <style>
+  <style scoped>
 .icon::after {
   content: "";
   display: block;

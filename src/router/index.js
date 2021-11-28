@@ -15,9 +15,13 @@ import Aboutus from '../views/Aboutus.vue'
 import SignIn from '../views/SignIn.vue'
 import Editplace from '../views/Editplace.vue'
 import Edithotel from '../views/Edithotel.vue'
-import Listhotel from '../views/Listhotel.vue'
+import Myhotel from '../views/Myhotel.vue'
+import Myreview from '../views/Myreview.vue'
 import EditProfile from '../views/EditProfile.vue'
 import Accesdenied from '../views/Accesdenied.vue'
+import UserManagement from '../views/UserManagement.vue'
+import TransactionsPaginated from '../views/TransactionsPaginated.vue'
+
 
 
 
@@ -30,6 +34,16 @@ const routes = [{
     path: '/Tag',
     name: 'Tag',
     component: Tag
+  },
+  {
+    path: '/TransactionsPaginated',
+    name: 'TransactionsPaginated',
+    component: TransactionsPaginated
+  },
+  {
+    path: '/UserManagement',
+    name: 'UserManagement',
+    component: UserManagement
   },
   {
     path: '/Accesdenied',
@@ -86,9 +100,9 @@ const routes = [{
     component: List,
   },
   {
-    path: '/Listhotel',
-    name: 'Listhotel',
-    component: Listhotel,
+    path: '/Myhotel',
+    name: 'Myhotel',
+    component: Myhotel,
   },
   {
     path: '/List/:filter/:var',
@@ -114,6 +128,11 @@ const routes = [{
     component: EditProfile,
     props:true,
   },
+  {
+    path: '/Myreview',
+    name: 'Myreview',
+    component: Myreview,
+  },
 
 
 ]
@@ -121,6 +140,13 @@ const routes = [{
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to) => {
+  if (to.path == '/List/Name/null'){
+    router.push('/List/All/1')
+  }
+  
 })
 
 export default router
