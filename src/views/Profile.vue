@@ -29,14 +29,14 @@
         md:mx-0
       "
     >
-      <div class="w-sm">
-        <img :src="getUserImage(me.image)" />
+      <div class="w-sm ">
+        <img class="ml-11 border-1  border-black" :src="getUserImage(me.image)" />
         <div class="mt-4 text-green-600 text-center">
           <h1 class="text-xl font-bold" id="texttest">{{me.username}}</h1>
-          <p class="mt-4 text-gray-600" id="texttest">
-           Email:  {{me.email}}
-           Tel.:  {{me.telNumber}}
-           Role: {{me.roles[0]}}
+          <p class=" text-gray-600" id="texttest">
+           Email: {{me.email}}
+           Tel:  {{me.telNumber}}<br>
+           Role: {{me.roles[0]}}<br>
           
            
            <button>
