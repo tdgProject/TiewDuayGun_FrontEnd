@@ -1,5 +1,4 @@
 <template>
-
   <div class="bg-gray-400">
     <div class="container py-4" v-if="place">
       <div class="pt-4 mt-4 text-muted border-top"></div>
@@ -319,64 +318,131 @@
               <i class="bx bxs-add-to-queue text-4xl"></i
               ><span class="text-lg" id="texttest">Add Your Hotel</span>
             </button>
+            <button
+              class="d-flex align-items-center"
+              v-else-if="myHotel !== null"
+              @click="deleteMyHotel(myHotel.hotelId)"
+            >
+              <i class='bx bx-checkbox-minus text-4xl'></i>
+              <span class="text-lg" id="texttest">Remove Your Hotel</span>
+            </button>
           </div>
         </a>
       </header>
-      <div
-        id="myCarousel"
-        class="carousel slide "
-        data-bs-ride="carousel"
-      >
-        <div class="carousel-inner" role="listbox">
-          <div
-            :class="{ 'carousel-item': true, active: index === active }"
-            v-for="(hotel, index) in hotels"
-            :key="hotel.hotel.hotelId"
-          >
-            <div class="card">
-              <img
-                :src="getHotelImage(hotel.hotel.image)"
-                alt=""
-                class="card-img-top h-1/2"
-              />
-              <div class="card-body">
-                <p class="" id="texttest">Name: {{ hotel.hotel.hotelName }}</p>
-                <p class="" id="texttest">Address: {{ hotel.hotel.address }}</p>
-                <p class="" id="texttest">Email: {{ hotel.hotel.email }}</p>
-                <p class="" id="texttest">Tel: {{ hotel.hotel.telNumber }}</p>
-              </div>
-              <div class="text-end" v-if="hotel.hotel.owner.userId === me.id">
-                <button class="" @click="deleteMyHotel(hotel.hotel.hotelId)">
-                  <i class="bx bxs-trash text-end p-2 display-6"></i>
-                </button>
-              </div>
+      <div v-if="hotels.length <= 3">
+        <div class="container mt-10 d-flex flex-wrap justify-content-start">
+        <div
+          class="col-lg-4 d-flex flex-wrap p-1"
+          v-for="hotel in hotels"
+          :key="hotel.hotel.hotelId"
+        >
+          <div class="card">
+            <img
+              :src="getHotelImage(hotel.hotel.image)"
+              alt=""
+              class="card-img-top h-1/2"
+            />
+            <div class="card-body">
+              <p class="">Name: {{ hotel.hotel.hotelName }}</p>
+              <p class="">Address: {{ hotel.hotel.address }}</p>
+              <p class="">Email: {{ hotel.hotel.email }}</p>
+              <p class="">Tel: {{ hotel.hotel.telNumber }}</p>                    
             </div>
           </div>
         </div>
-        <a
-          @click="setActive(active - 1)"
-          class="carousel-control-prev"
-          href="#myCarousel"
-          role="button"
-          data-bs-target="#myCarousel"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </a>
-        <a
-          @click="setActive(active + 1)"
-          class="carousel-control-next"
-          href="#myCarousel"
-          role="button"
-          data-bs-target="#myCarousel"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </a>
+        </div>
       </div>
-      <!-- hotel -->
+      <div v-else>
+        <div v-if="slice()" class="container text-center my-3">
+          <div class="row mx-auto my-auto justify-content-center ">
+            <div
+              id="recipeCarousel"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner " role="listbox">
+                <div class="carousel-item active">
+                  <div class="col-lg-4 p-1">
+                    <div class="card ">
+                      <div class="overflow-hidden w-full h-56"><img
+                        :src="getHotelImage(hotels[0].hotel.image)"
+                        alt=""
+                        class="card-img-top w-full"
+                      /></div>
+                      <div class="card-body h-72">
+                        <p class="" id="texttest">
+                          Name: {{ hotels[0].hotel.hotelName }}
+                        </p>
+                        <p class="" id="texttest">
+                          Address: {{ hotels[0].hotel.address }}
+                        </p>
+                        <p class="" id="texttest">
+                          Email: {{ hotels[0].hotel.email }}
+                        </p>
+                        <p class="" id="texttest">
+                          Tel: {{ hotels[0].hotel.telNumber }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="carousel-item"
+                  v-for="hotel in newHotels"
+                  :key="hotel.hotel.hotelId"
+                >
+                  <div class="col-lg-4 p-1">
+                    <div class="card">
+                      <div class="overflow-hidden w-full h-56"><img
+                        :src="getHotelImage(hotel.hotel.image)"
+                        alt=""
+                        class="card-img-top w-full"
+                      /></div>
+                      
+                      <div class="card-body h-72">
+                        <p class="" id="texttest">
+                          Name: {{ hotel.hotel.hotelName }}
+                        </p>
+                        <p class="" id="texttest">
+                          Address: {{ hotel.hotel.address }}
+                        </p>
+                        <p class="" id="texttest">
+                          Email: {{ hotel.hotel.email }}
+                        </p>
+                        <p class="" id="texttest">
+                          Tel: {{ hotel.hotel.telNumber }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a
+                class="carousel-control-prev bg-transparent w-aut"
+                href="#recipeCarousel"
+                role="button"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+              </a>
+              <a
+                class="carousel-control-next bg-transparent w-aut"
+                href="#recipeCarousel"
+                role="button"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer class="pt-4 mt-4 text-muted border-top"></footer>
@@ -393,7 +459,22 @@ export default {
   components: {
     Star,
   },
-
+  updated() {
+    let items = document.querySelectorAll(".carousel .carousel-item");
+    items.forEach((el) => {
+      const minPerSlide = 3;
+      let next = el.nextElementSibling;
+      for (var i = 1; i < minPerSlide; i++) {
+        if (!next) {
+          // wrap carousel by using first child
+          next = items[0];
+        }
+        let cloneChild = next.cloneNode(true);
+        el.appendChild(cloneChild.children[0]);
+        next = next.nextElementSibling;
+      }
+    });
+  },
   data() {
     return {
       rating: 0,
@@ -405,7 +486,6 @@ export default {
       editId: 0,
       ratingValidate: false,
       newHotels: [],
-      active: 0,
     };
   },
   methods: {
@@ -530,7 +610,7 @@ export default {
     },
   },
   computed: {
-    showAddHotel: function () {
+    showAddHotel: function() {
       let show = true;
       if (this.hotels && this.myHotel) {
         for (const h of this.hotels) {
@@ -543,7 +623,7 @@ export default {
         show = false;
       }
       if (this.me.roles) {
-        if (this.me.roles[0] !== "business") {
+        if (this.me.roles[0] == "member") {
           show = false;
         }
       }
@@ -555,26 +635,26 @@ export default {
     store.dispatch("getPlaceById", props.pid),
       store.dispatch("getHotelById", props.pid),
       store.dispatch("listReview", props.pid);
-    if (store.state.user.roles && store.state.user.roles[0] == "business") {
+    if (store.state.user.roles && store.state.user.roles[0] !== "member") {
       store.dispatch("getMyHotel", store.state.user.id);
     }
-    let place = computed(function () {
+    let place = computed(function() {
       return store.state.place;
     });
 
-    let hotels = computed(function () {
+    let hotels = computed(function() {
       return store.state.hotels;
     });
-    let reviews = computed(function () {
+    let reviews = computed(function() {
       return store.state.reviews;
     });
-    let myHotel = computed(function () {
+    let myHotel = computed(function() {
       return store.state.myHotel != null ? store.state.myHotel : null;
     });
-    let me = computed(function () {
+    let me = computed(function() {
       return store.state.user;
     });
-    let placeImage = computed(function () {
+    let placeImage = computed(function() {
       return store.state.url + "image/place/" + store.state.place.image;
     });
     return {
@@ -604,5 +684,37 @@ export default {
   right: 0;
   width: 100%;
   height: 100%;
+}
+@media (max-width: 767px) {
+  .carousel-inner .carousel-item > div {
+    display: none;
+  }
+  .carousel-inner .carousel-item > div:first-child {
+    display: block;
+  }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+  .carousel-inner .carousel-item-end.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(33.34%);
+  }
+
+  .carousel-inner .carousel-item-start.active,
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-33.34%);
+  }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start {
+  transform: translateX(0);
 }
 </style>
