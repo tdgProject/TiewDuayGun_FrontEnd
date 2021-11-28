@@ -18,8 +18,6 @@
                                             params: { pid: review.place.placeId },
                                         }"
                                         ><h3 class="font-weight-bold m-0 p-0" id="texttest">{{review.place.placeName}}</h3></router-link >
-                                    
-                                    <small  id="texttest">Time</small>
                                 </div>
                             </div>
                         </div>
