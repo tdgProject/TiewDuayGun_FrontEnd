@@ -93,11 +93,13 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 
+
 export default {
+  components: {  },
   name: "App",
   data(){
     return{
-
+currentPage: 1,
     }
   },
   setup() {
@@ -119,7 +121,9 @@ export default {
         this.$store.dispatch('auth/logout');
       }
     }
+
   },
+  
   computed: {
     loggedIn: function () {
       let show = false;
@@ -128,8 +132,8 @@ export default {
       }
       return show;
     },
+
   },
-  methods: {
     getUserImage(image) {
       return `${this.$store.state.url}image/user/${image}`;
     },
@@ -138,7 +142,7 @@ export default {
       this.$router.go()
     }
   }
-}
+
 </script>
 <style>
 #app {

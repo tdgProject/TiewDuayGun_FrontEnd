@@ -1,5 +1,4 @@
 <template>
-
   <div class="bg-gray-400">
     <div class="container py-4" v-if="place">
       <div class="pt-4 mt-4 text-muted border-top"></div>
@@ -134,10 +133,10 @@
         <div class="comment-widgets text-left">
           <!-- Comment Row -->
           <div class="flex-row comment-row m-t-0">
-            <div>
+            <div v-if="true">
               <div
                 class="comment-text w-200 border-8 bg-white shadow-2xl"
-                v-for="review in reviews "
+                v-for="review in reviews.slice(0,3)"
                 :key="review.user.userId"
                 :id="setId(review.user.userId)"
                 
@@ -262,6 +261,144 @@
                 </div>
               </div>
             </div>
+          
+          </div>
+          <!-- Card -->
+        </div>
+      </div>
+            <div class="card bg">
+        <div class="comment-widgets text-left">
+          <!-- Comment Row -->
+          <div class="flex-row comment-row m-t-0">
+            <div v-if="reviews.length >= 6">
+              <div
+                class="comment-text w-200 border-8 bg-white shadow-2xl"
+                v-for="review in reviews.slice(3,6)"
+                :key="review.user.userId"
+                :id="setId(review.user.userId)"
+                
+              >
+                <div v-if="edit == true && review.user.userId == editId" >
+                  <div  class="d-flex pt-4 pb-3 px-5 justify-content-between">
+                    <div class="d-flex">
+                      <img
+                        :src="getUserImage(review.user.image)"
+                        alt="user"
+                        width="50"
+                        class="rounded-circle"
+                      />
+
+                      <h6 class="font-medium font-bold mt-4 ml-4" id="texttest">
+                        {{ review.user.username }}
+                      </h6>
+                    </div>
+                    <div class="w-1/6">
+                      <label
+                        for="StarRange"
+                        class="container text-center font-bold"
+                        >Your Rating : {{ uRating }}</label
+                      >
+                      <input
+                        type="range"
+                        class="form-range"
+                        min="0"
+                        max="5"
+                        step="0.5"
+                        v-model="uRating"
+                        id="StarRange"
+                      />
+                    </div>
+                  </div>
+                  <div class="m-auto w-5/6">
+                    <textarea
+                      class="w-full d-block text-left text-lg border-2 p-2"
+                      rows="2"
+                      v-model="review.review"
+                    ></textarea>
+                    <div class="comment-footer text-right">
+                      <button
+                        class="
+                          w-20
+                          h-8
+                          rounded-lg
+                          bg-secondary
+                          text-white
+                          border-3
+                          my-2
+                        "
+                        @click="editReview(review.review)"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div v-else-if="review.user.userId !== editId">
+                  <div class="d-flex pt-4 pb-3 px-5 justify-content-between">
+                    <div class="flex">
+                      <img
+                        :src="getUserImage(review.user.image)"
+                        alt="user"
+                        class="w-14 h-14 rounded-circle border-1"
+                      />
+                      <h6 class="font-medium font-bold mt-4 ml-4">
+                        {{ review.user.username }}
+                      </h6>
+                    </div>
+                    <div>
+                      <ul class="d-flex justify-content-start">
+                        <li v-for="x in calStar(review.rating)[0]" :key="x">
+                          <i class="bx bxs-star text-3xl"></i>
+                        </li>
+                        <li v-for="y in calStar(review.rating)[1]" :key="y">
+                          <i class="bx bxs-star-half text-3xl"></i>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <span
+                    class="m-auto w-5/6 d-block text-left text-lg"
+                    >{{ review.review }}</span
+                  >
+                  <div v-if="review.user.userId == me.id" class="comment-footer text-right mr-6">
+                    <button
+                      type="button"
+                      class="mr-2"
+                      @click="editSwitch(review.rating, review.user.userId)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M13.473 7.196c-.425-.439-.401-1.127.035-1.552l4.461-4.326c.218-.211.498-.318.775-.318.282 0 .563.11.776.331l-6.047 5.865zm-7.334 11.021c-.092.089-.139.208-.139.327 0 .25.204.456.456.456.114 0 .229-.042.317-.128l.749-.729-.633-.654-.75.728zm6.33-8.425l-2.564 2.485c-1.378 1.336-2.081 2.63-2.73 4.437l1.132 1.169c1.825-.593 3.14-1.255 4.518-2.591l2.563-2.486-2.919-3.014zm7.477-7.659l-6.604 6.405 3.326 3.434 6.604-6.403c.485-.469.728-1.093.728-1.718 0-2.088-2.53-3.196-4.054-1.718zm-1.946 11.333v7.534h-16v-12h8.013l2.058-2h-12.071v16h20v-11.473l-2 1.939z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      @click="deleteReview(review.user.userId)"
+                      type="button"
+                      class=""
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div v-else class="py-3 m-0"></div>
+                </div>
+              </div>
+            </div>
+          
           </div>
           <!-- Card -->
         </div>
@@ -342,6 +479,7 @@ export default {
 
   data() {
     return {
+      paginate: ["reviews"],
       rating: 0,
       uRating: 0,
       review: "",

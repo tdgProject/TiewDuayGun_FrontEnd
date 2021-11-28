@@ -9,7 +9,9 @@
         Sign in
       </button>
     </form>
-    <router-link class="float-left text-black mt-2" :to="'Signup'">Don't have any Id?</router-link>
+    <div class="text-left p-2">
+      <router-link class="text-black mt-2" :to="'Signup'">Don't have any Id?</router-link>
+    </div>
     <div
         v-if="message"
         class="alert alert-danger" role="alert"

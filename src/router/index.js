@@ -20,7 +20,7 @@ import Myreview from '../views/Myreview.vue'
 import EditProfile from '../views/EditProfile.vue'
 import Accesdenied from '../views/Accesdenied.vue'
 import UserManagement from '../views/UserManagement.vue'
-import test from '../views/test.vue'
+import TransactionsPaginated from '../views/TransactionsPaginated.vue'
 
 
 
@@ -36,9 +36,9 @@ const routes = [{
     component: Tag
   },
   {
-    path: '/test',
-    name: 'test',
-    component: test
+    path: '/TransactionsPaginated',
+    name: 'TransactionsPaginated',
+    component: TransactionsPaginated
   },
   {
     path: '/UserManagement',
