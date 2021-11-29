@@ -1,5 +1,6 @@
 <template>
   <div class="grid min-h-screen place-items-center" v-if="showdata">
+    
     <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
       <h1 class="text-xl font-semibold" id="texttest">Register Your Business</h1>
       <form class="mt-6 border px-10 pb-10 pt-10" @submit.prevent="addHotel()">

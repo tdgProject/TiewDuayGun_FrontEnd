@@ -157,6 +157,9 @@
       
       <!-- list review -->
       <div class="card bg">
+              <div v-if="reviews.length == 0" class="h-36 d-flex align-items-center justify-content-center border-2 rounded-lg mb-4">
+                <h4 class="text-gray-400" id="texttest">You haven't reviewed any place yet.</h4>
+            </div>
         <div class="comment-widgets text-left">
           <!-- Comment Row -->
           <div class="flex-row comment-row m-t-0">
@@ -434,7 +437,7 @@
         <div class="comment-widgets text-left">
           <!-- Comment Row -->
           <div class="flex-row comment-row m-t-0">
-            <div v-if="p2==true">
+            <div v-if="p3==true">
               <div
                 class="comment-text w-200 border-8 bg-white shadow-2xl"
                 v-for="review in reviews.slice(6,9)"
@@ -701,6 +704,7 @@
               </div>
             </div>
           </div>
+    
           <!-- Card -->
         </div>
       </div>

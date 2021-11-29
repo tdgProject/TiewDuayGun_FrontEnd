@@ -1,6 +1,6 @@
 import axios from "axios";
 
- const resource_uri = "https://www.tiewduaygun.team/api/";
+const resource_uri = "https://www.tiewduaygun.team/api/";
 //const resource_uri = "http://localhost:8081/";
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { status: { loggedIn: true }, user } : { status: { loggedIn: false }, user: null };
@@ -63,6 +63,7 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false;
       state.user = null;
+      
     },
     registerSuccess(state) {
       state.status.loggedIn = false;

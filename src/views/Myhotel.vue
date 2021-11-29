@@ -11,9 +11,9 @@
       
     <!-- <div v-for="hotel in hotels" :key="hotel.hotelId">
       {{hotel.hotelName}} -->
-    <div class="container d-flex flex-wrap justify-content-md-center mb-10 ">
+    <div class="container d-flex flex-wrap justify-content-md-center mb-32 mt-5 ">
       <div class="col-lg-4 d-flex flex-wrap p-1">
-        <div v-if="hotels" class="card" >
+        <div v-if="hotels" class="card pt-2" >
           <img
             :src="getHotelImage(hotels.image)"
             alt=""

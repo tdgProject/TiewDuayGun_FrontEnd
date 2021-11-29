@@ -32,7 +32,7 @@
       </a>
     </div>
    <div class="nine mt-5">
-  <h1>PlaceList<span>สถานที่ท่องเที่ยว</span></h1>
+  <h1 class="texttest">PlaceList<span>สถานที่ท่องเที่ยว</span></h1>
 </div>
       
 <div class=" eiei fade-in px-10  ">

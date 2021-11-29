@@ -48,40 +48,37 @@
 </div>
 <router-view />
       <div class="footer-dark">
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 item">
-                    <h3>Services</h3>
+                    <h3>Phopthorn Patcharoen</h3>
                     <ul>
-                        <li><a href="#">Web design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Hosting</a></li>
+                        <li><a href="#">Deverloper</a></li>
+              
                     </ul>
                 </div>
                 <div class="col-md-3 item">
-                    <h3>Services</h3>
+                    <h3>Somchai chasae</h3>
                     <ul>
-                        <li><a href="#">Web design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Hosting</a></li>
+                        <li><a href="#">Deverloper</a></li>
+                  
                     </ul>
                 </div>
                 <div class="col-md-3 item">
-                    <h3>About</h3>
+                    <h3>Attapon Jeamjumroensuk</h3>
                     <ul>
-                        <li><a href="#">Company</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Deverloper</a></li>
+    
                     </ul>
                 </div>
                 <div class="col-md-3 item text">
-                    <h3>BBBootstrap.com</h3>
-                    <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus.</p>
+                    <h3>TiewDuaygun.com © 2021</h3>
+                    <p>This Website pround by Intregrated Project[int222]</p>
                 </div>
                 
             </div>
-            <p class="copyright">BBBootstrap.com © 2020</p>
+            <p class="copyright">TiewDuaygun.com © 2021</p>
         </div>
     </footer>
 </div>
@@ -114,6 +111,7 @@ export default {
     if(this.$store.state.user.id != 0){
       if(Date.now()>this.$store.state.user.exp){
         this.$store.dispatch('auth/logout');
+        
       }
     }
   },
@@ -132,12 +130,15 @@ export default {
     },
     logOut(){
       this.$store.dispatch('auth/logout');
-      this.$router.go()
+      window.location.href = '/';
     }
   }
 }
 </script>
 <style>
+.footer {
+ bottom: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

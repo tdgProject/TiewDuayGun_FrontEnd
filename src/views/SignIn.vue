@@ -2,7 +2,7 @@
 
 <div class="grid mt-5 place-items-center" v-if="showdata">
 
-  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+  <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12 mb-56">
    <span class="font-normal">Sign In</span>
     <form class="" @submit.prevent="login">
       <input id="email" type="email" v-model="email" placeholder="Email" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
