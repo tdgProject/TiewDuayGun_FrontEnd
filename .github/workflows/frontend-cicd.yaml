@@ -34,6 +34,6 @@ jobs:
           script: |
             cd ./tdgProject
             docker pull ghcr.io/tdgproject/tdg-frontend:latest
-            docker-compose up
+            docker-compose up -d
 
   
