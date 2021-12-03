@@ -54,31 +54,31 @@
                 <div class="col-md-3 item">
                     <h3>Phopthorn Patcharoen</h3>
                     <ul>
-                        <li><a href="#">Deverloper</a></li>
+                        <li><a href="#">Developer</a></li>
               
                     </ul>
                 </div>
                 <div class="col-md-3 item">
                     <h3>Somchai chasae</h3>
                     <ul>
-                        <li><a href="#">Deverloper</a></li>
+                        <li><a href="#">Developer</a></li>
                   
                     </ul>
                 </div>
                 <div class="col-md-3 item">
                     <h3>Attapon Jeamjumroensuk</h3>
                     <ul>
-                        <li><a href="#">Deverloper</a></li>
+                        <li><a href="#">Developer</a></li>
     
                     </ul>
                 </div>
                 <div class="col-md-3 item text">
-                    <h3>TiewDuaygun.com © 2021</h3>
+                    <h3>TiewDuayGun.com © 2021</h3>
                     <p>This Website pround by Intregrated Project[int222]</p>
                 </div>
                 
             </div>
-            <p class="copyright">TiewDuaygun.com © 2021</p>
+            <p class="copyright">TiewDuayGun.team © 2021</p>
         </div>
     </footer>
 </div>
