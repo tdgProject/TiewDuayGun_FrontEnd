@@ -3,7 +3,7 @@
     <nav class="navbar fixed-top h-20 navbar-expand-md navbar-light bg-white">
         <div class="container-fluid p-0"> <a class="navbar-brand text-uppercase fw-800" href="/"><span class="border-red pe-2 ml-5">Tiew</span>DuayGun</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
             <div class="collapse navbar-collapse " id="myNav">
-                <div class="navbar-nav ms-auto align-items-center">
+                <div class="navbar-nav bg-white ms-auto align-items-center pb-1">
                   <a class="nav-link " id="texttest" :href="$router.resolve({name: 'List', params: { filter: 'All',var: 1}}).href">List</a> 
                   <a class="nav-link" id="texttest" :href="$router.resolve({name: 'Tag'}).href">Tag</a> 
                   <a class="nav-link mr-3" id="texttest" :href="$router.resolve({name: 'Aboutus'}).href">About Us</a>
