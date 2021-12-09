@@ -1,9 +1,9 @@
 <template>
 <div class="containers bg-white">
     <nav class="navbar fixed-top h-20 navbar-expand-md navbar-light bg-white">
-        <div class="container-fluid p-0"> <a class="navbar-brand text-uppercase fw-800" href="/"><span class="border-red pe-2 ml-5">Tiew</span>DuayGun</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
-            <div class="collapse navbar-collapse " id="myNav">
-                <div class="navbar-nav bg-white ms-auto align-items-center pb-1">
+        <div class="container-fluid p-0"> <a class="navbar-brand text-uppercase fw-800" href="/"><span class="border-red pe-2 ml-5">Tiew</span>DuayGun</a> <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation"> <i class='bx bx-menu display-5'></i></button>
+            <div class="collapse navbar-collapse" id="myNav">
+                <div class="navbar-nav ms-auto align-items-center bg-white pb-1">
                   <a class="nav-link " id="texttest" :href="$router.resolve({name: 'List', params: { filter: 'All',var: 1}}).href">List</a> 
                   <a class="nav-link" id="texttest" :href="$router.resolve({name: 'Tag'}).href">Tag</a> 
                   <a class="nav-link mr-3" id="texttest" :href="$router.resolve({name: 'Aboutus'}).href">About Us</a>
@@ -54,31 +54,31 @@
                 <div class="col-md-3 item">
                     <h3>Phopthorn Patcharoen</h3>
                     <ul>
-                        <li><a href="#">Developer</a></li>
+                        <li><a href="#">Deverloper</a></li>
               
                     </ul>
                 </div>
                 <div class="col-md-3 item">
                     <h3>Somchai chasae</h3>
                     <ul>
-                        <li><a href="#">Developer</a></li>
+                        <li><a href="#">Deverloper</a></li>
                   
                     </ul>
                 </div>
                 <div class="col-md-3 item">
                     <h3>Attapon Jeamjumroensuk</h3>
                     <ul>
-                        <li><a href="#">Developer</a></li>
+                        <li><a href="#">Deverloper</a></li>
     
                     </ul>
                 </div>
                 <div class="col-md-3 item text">
-                    <h3>TiewDuayGun.com © 2021</h3>
+                    <h3>TiewDuaygun.com © 2021</h3>
                     <p>This Website pround by Intregrated Project[int222]</p>
                 </div>
                 
             </div>
-            <p class="copyright">TiewDuayGun.team © 2021</p>
+            <p class="copyright">TiewDuaygun.com © 2021</p>
         </div>
     </footer>
 </div>
